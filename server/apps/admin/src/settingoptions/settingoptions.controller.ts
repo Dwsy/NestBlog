@@ -6,13 +6,9 @@ import { SettingOptions } from 'libs/db/models/settingoptions.model';
 
 
 @Crud({
-    // model:Comments,
-    // model:Contents,
-    // model:Fields,
+
     model:SettingOptions,
-    // model:Tag,
-    // model:UpFile,
-    // model:User
+
   
 })
 @Controller('settingoptions')

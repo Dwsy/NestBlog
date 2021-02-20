@@ -5,14 +5,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Fields } from 'libs/db/models/fields.model';
 
 @Crud({
-    // model:Comments,
-    // model:Contents,
     model:Fields,
-    // model:SettingOptions,
-    // model:Tag,
-    // model:UpFile,
-    // model:User
-  
+
 })
 
 @Controller('fields')

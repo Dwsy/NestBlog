@@ -5,14 +5,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { UpFile } from 'libs/db/models/upfile.model';
 
 @Crud({
-    // model:Comments,
-    // model:Contents,
-    // model:Fields,
-    // model:SettingOptions,
-    // model:Tag,
-    model:UpFile,
-    // model:User
-  
+    model: UpFile,
+
 })
 @Controller('upfile')
 @ApiTags('上传文件')

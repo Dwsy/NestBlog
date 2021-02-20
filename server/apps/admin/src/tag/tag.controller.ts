@@ -5,14 +5,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Tag } from 'libs/db/models/tag.model';
 
 @Crud({
-    // model:Comments,
-    // model:Contents,
-    // model:Fields,
-    // model:SettingOptions,
     model:Tag,
-    // model:UpFile,
-    // model:User
-  
+
 })
 @Controller('tag')
 @ApiTags('标签')

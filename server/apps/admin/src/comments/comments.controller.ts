@@ -6,13 +6,7 @@ import { Comments } from 'libs/db/models/comments.model';
 
 @Crud({
     model:Comments,
-    // model:Contents,
-    // model:Fields,
-    // model:SettingOptions,
-    // model:Tag,
-    // model:UpFile,
-    // model:User
-  
+
 })
 
 @Controller('comments')
