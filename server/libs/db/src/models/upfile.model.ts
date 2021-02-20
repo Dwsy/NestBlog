@@ -8,7 +8,7 @@ import { ApiProperty } from "@nestjs/swagger";
         timestamps: true
     }
 })
-export class File {
+export class UpFile {
     @ApiProperty({ description: '文件名', example: 'xx-xxx-xxx' })
     @prop()
     fileName: string

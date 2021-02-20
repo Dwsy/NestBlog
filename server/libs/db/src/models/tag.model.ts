@@ -8,7 +8,7 @@ import { ApiProperty } from "@nestjs/swagger";
         timestamps:true
     }
 })
-export class User{
+export class Tag{
     @ApiProperty({description:'标签名',example:'设计模式'})
     @prop()
     name:string

@@ -9,7 +9,7 @@ import { ApiProperty } from "@nestjs/swagger";
     }
 })
 //后台设置 
-export class User{
+export class SettingOptions{
 
 
 }

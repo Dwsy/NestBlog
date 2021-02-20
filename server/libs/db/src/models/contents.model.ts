@@ -26,7 +26,7 @@ export class Contents{
     // @prop()
     // type:string
 
-    @ApiProperty({description:'内容状态',example:'是否公开'})
+    @ApiProperty({description:'内容状态',example:true})
     @prop()
     // status:password
     isPublish:boolean
@@ -35,13 +35,13 @@ export class Contents{
     @prop()
     commentsNum:Number
 
-    @ApiProperty({description:'是否允许评论',example:'是否'})
+    @ApiProperty({description:'是否允许评论',example:true})
     @prop()
     allowComment:boolean
 
     // allowPing
 
-    @ApiProperty({description:'允许出现在聚合中',example:'是否'})
+    @ApiProperty({description:'允许出现在聚合中',example:true})
     @prop()
     allowFeed:boolean
 
