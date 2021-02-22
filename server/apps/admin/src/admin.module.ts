@@ -9,9 +9,11 @@ import { FieldsModule } from './fields/fields.module';
 import { SettingoptionsModule } from './settingoptions/settingoptions.module';
 import { TagModule } from './tag/tag.module';
 import { UpfileModule } from './upfile/upfile.module';
+import { ClassificationModule } from './classification/classification.module';
 
 @Module({
   imports: [
+    ClassificationModule,
     DbModule,
     UsersModule,
     CommentsModule,

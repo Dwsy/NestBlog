@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DbService } from './db.service';
-import { TypegooseModule } from 'nestjs-typegoose'
+import { TypegooseModule } from 'nestjs-typegoose';
 import { Global } from '@nestjs/common';
 import { User } from './models/user.model';
 import { Contents } from './models/contents.model';
@@ -9,20 +9,18 @@ import { UpFile } from './models/upfile.model';
 import { Tag } from './models/tag.model';
 import { SettingOptions } from './models/settingoptions.model';
 import { Comments } from './models/comments.model';
-
-
+import { Classification } from './models/classification.model';
 
 const models = TypegooseModule.forFeature([
+  Classification,
   Comments,
   Contents,
   Fields,
   SettingOptions,
   Tag,
   UpFile,
-  User
-
-])
-
+  User,
+]);
 
 @Global()
 @Module({
@@ -33,9 +31,9 @@ const models = TypegooseModule.forFeature([
       useCreateIndex: true,
       useFindAndModify: false,
     }),
-    models
+    models,
   ],
   providers: [DbService],
   exports: [DbService, models],
 })
-export class DbModule { }
+export class DbModule {}
