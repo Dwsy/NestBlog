@@ -76,18 +76,13 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
+
     <!-- v-app-bar -->
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
       color="blue darken-3"
       dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
@@ -102,7 +97,6 @@
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-switch v-model="$vuetify.theme.dark" hide-details></v-switch>
       <v-btn icon>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
@@ -158,8 +152,7 @@
 <script>
 export default {
   created() {
-    // this.$vuetify.theme.dark = false;
-    this.$vuetify.theme.dark = true;
+    this.$vuetify.theme.dark = false;
   },
   data() {
     return {

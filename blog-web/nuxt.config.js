@@ -31,7 +31,9 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+
+
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -39,9 +41,28 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    // Simple Usage
+    // 'nuxt-highlightjs',
+    '@nuxtjs/markdownit',
+    // With Options
+    // ['nuxt-highlightjs', {
+    //   style: 'obsidian'
+    //   // Module Options
+    // }]
   ],
 
+  // [optional] markdownit options
+  // See https://github.com/markdown-it/markdown-it
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs'
+    ]
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
@@ -73,5 +94,38 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+
+     babel: {
+            plugins: [
+                [
+                    'prismjs',
+                    {
+                        languages: [
+                            'html',
+                            'css',
+                            'javascript',
+                            'php',
+                            'dart',
+                            'bash',
+                            'nginx',
+                            'sql',
+                            'c',
+                            'cpp',
+                            'python',
+                            'go',
+                            'java',
+
+                        ],
+                        plugins: [
+                            'line-numbers',
+                            'show-language',
+                            'copy-to-clipboard'
+                        ],
+                        theme: 'okaidia',
+                        css: true
+                    }
+                ]
+            ]
+        }
   }
 }

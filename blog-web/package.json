@@ -13,9 +13,15 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "highlight": "^0.2.4",
+    "html-loader": "^2.1.0",
+    "markdown-it": "^12.0.4",
+    "markdown-loader": "^6.0.0",
+    "nuxt": "^2.14.12",
+    "vditor": "^3.8.1"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",
