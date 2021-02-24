@@ -1,15 +1,15 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        Dwsy
-      </div>
+      <ArticleList />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import ArticleList from "../components/article/ArticleList";
+
 export default {
-  components: {}
-}
+  components: { ArticleList }
+};
 </script>

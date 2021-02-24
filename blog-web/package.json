@@ -15,12 +15,16 @@
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/pwa": "^3.3.5",
+    "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.8.3",
     "highlight": "^0.2.4",
     "html-loader": "^2.1.0",
     "markdown-it": "^12.0.4",
+    "markdown-it-attrs": "^4.0.0",
+    "markdown-it-div": "^1.1.0",
     "markdown-loader": "^6.0.0",
     "nuxt": "^2.14.12",
+    "prismjs": "^1.23.0",
     "vditor": "^3.8.1"
   },
   "devDependencies": {

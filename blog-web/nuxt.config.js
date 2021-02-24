@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-
+import { resolve } from 'path'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -80,52 +80,81 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          primary: '#21CFF3',
+          accent: '#FF4081',
+          secondary: '#ffe18d',
+          success: '#4CAF50',
+          info: '#2196F3',
+          warning: '#FB8C00',
+          error: '#FF5252'
+        },
+        light: {
+          primary: '#1976D2',
+          accent: '#e91e63',
+          secondary: '#30b1dc',
+          success: '#4CAF50',
+          info: '#2196F3',
+          warning: '#FB8C00',
+          error: '#FF5252'
         }
       }
     }
+    // theme: {
+    //   dark: true,
+    //   themes: {
+    //     dark: {
+    //       primary: colors.blue.darken2,
+    //       accent: colors.grey.darken3,
+    //       secondary: colors.amber.darken3,
+    //       info: colors.teal.lighten1,
+    //       warning: colors.amber.base,
+    //       error: colors.deepOrange.accent4,
+    //       success: colors.green.accent3
+    //     }
+    //   }
+    // }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
 
-     babel: {
-            plugins: [
-                [
-                    'prismjs',
-                    {
-                        languages: [
-                            'html',
-                            'css',
-                            'javascript',
-                            'php',
-                            'dart',
-                            'bash',
-                            'nginx',
-                            'sql',
-                            'c',
-                            'cpp',
-                            'python',
-                            'go',
-                            'java',
+    babel: {
+      plugins: [
+        [
+          'prismjs',
+          {
+            languages: [
+              'html',
+              'css',
+              'javascript',
+              'php',
+              'dart',
+              'bash',
+              'nginx',
+              'sql',
+              'c',
+              'cpp',
+              'python',
+              'go',
+              'java',
 
-                        ],
-                        plugins: [
-                            'line-numbers',
-                            'show-language',
-                            'copy-to-clipboard'
-                        ],
-                        theme: 'okaidia',
-                        css: true
-                    }
-                ]
-            ]
-        }
+            ],
+            plugins: [
+              'line-numbers',
+              'show-language',
+              'copy-to-clipboard'
+            ],
+            theme: 'mac',
+            css: true
+          }
+        ]
+      ]
+    }
+  },
+  alias: {
+    'cs': resolve(__dirname, './components'),
+    'style': resolve(__dirname, './assets/style'),
+    'data': resolve(__dirname, './assets/other/data')
   }
+
 }

@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "babel-plugin-prismjs": "^2.0.1",
-    "markdown-it-attrs": "^4.0.0",
-    "markdown-it-div": "^1.1.0",
-    "nuxt-highlightjs": "^1.0.1",
-    "prismjs": "^1.23.0"
-  }
-}
