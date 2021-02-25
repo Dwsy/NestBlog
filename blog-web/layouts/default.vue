@@ -6,6 +6,7 @@
       app
       dark
       :src="navigationsrc"
+      
     >
       <!-- <v-list dense> -->
       <v-list>
@@ -23,7 +24,7 @@
           <v-img src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"></v-img>
         </v-list-item-avatar> -->
 
-        <template v-for="item in items">
+        <template v-for="item in items" >
           <v-row v-if="item.heading" :key="item.heading" align="center">
             <v-col cols="7">
               <v-subheader v-if="item.heading">
@@ -96,21 +97,23 @@
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down">Dwsy-blog</span>
       </v-toolbar-title>
-      <v-row align="center" style="max-width: 30vw;">
+      <v-spacer></v-spacer>
+      <v-row align="center" style="max-width: 30vw">
         <v-text-field
           placeholder="搜索..."
+          append-icon="mdi-magnify"
           single-line
           filled
           rounded
           dense
-          append-icon="mdi-magnify"
+          
           color="white"
           hide-details
         />
       </v-row>
-      <v-spacer></v-spacer>
+      
       <!-- <v-switch v-model="$vuetify.theme.dark" ></v-switch><p>明暗切换</p> -->
-      <v-btn elevation="0" @click="handleChangeTheme" text small>
+      <v-btn elevation="0" @click="handleChangeTheme" text  transition="fade-transition">
         <v-icon v-if="$vuetify.theme.dark">mdi-white-balance-sunny</v-icon>
         <v-icon v-if="!$vuetify.theme.dark">mdi-weather-night</v-icon>
       </v-btn>
@@ -120,14 +123,7 @@
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" item>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          ></v-img
-        ></v-avatar>
-      </v-btn>
+
     </v-app-bar>
 
     <!-- v-main -->
