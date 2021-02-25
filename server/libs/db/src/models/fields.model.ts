@@ -1,6 +1,7 @@
 import { prop, modelOptions, Ref } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Tag } from './tag.model';
+import {  Classification} from './classification.model';
 
 @modelOptions({
   schemaOptions: {
@@ -32,10 +33,10 @@ export class Fields {
   //   tag: Ref<Tag>[];
   @ApiProperty({ description: '文章标签', example: '标签id数组' })
   @prop()
-  tag: Array<string>;
+  tag:Array<Ref<Classification>>
 
   // 一个
   @ApiProperty({ description: '文章分类 ', example: '分类id' })
   @prop()
-  classification: string;
+  classification: Ref<Tag>;
 }

@@ -41,7 +41,7 @@ export class Contents {
 
   // allowPing
 
-  @ApiProperty({ description: '允许出现在聚合中', example: true })
-  @prop()
-  allowFeed: boolean;
+  // @ApiProperty({ description: '允许出现在聚合中', example: true })
+  // @prop()
+  // allowFeed: boolean;
 }

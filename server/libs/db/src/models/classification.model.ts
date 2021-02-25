@@ -14,7 +14,7 @@ export class Classification {
 
   @ApiProperty({ description: '分类描述', example: 'nest.js学习笔记' })
   @prop()
-  password: string;
+  description: string;
 
   @ApiProperty({ description: '当前分类文章数目', example: '文章数' })
   @prop()

@@ -12,7 +12,7 @@ export class User {
   @prop()
   userName: string;
 
-  @ApiProperty({ description: 'RESTFUL风格id', example: 'RESTFUL风格id' })
+  @ApiProperty({ description: 'RESTFUL风格', example: 'RESTFUL风格id' })
   @prop()
   restfulId: number;
 }
