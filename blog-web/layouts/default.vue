@@ -6,7 +6,6 @@
       app
       dark
       :src="navigationsrc"
-      
     >
       <!-- <v-list dense> -->
       <v-list>
@@ -17,14 +16,14 @@
               src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"
             />
           </v-avatar>
-          <sub>{{greetings}}</sub>
+          <sub>{{ greetings }}</sub>
           <v-subheader>Dwsy</v-subheader>
         </v-col>
         <!-- <v-list-item-avatar>
           <v-img src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"></v-img>
         </v-list-item-avatar> -->
 
-        <template v-for="item in items" >
+        <template v-for="item in items">
           <v-row v-if="item.heading" :key="item.heading" align="center">
             <v-col cols="7">
               <v-subheader v-if="item.heading">
@@ -106,14 +105,18 @@
           filled
           rounded
           dense
-          
           color="white"
           hide-details
         />
       </v-row>
-      
+
       <!-- <v-switch v-model="$vuetify.theme.dark" ></v-switch><p>明暗切换</p> -->
-      <v-btn elevation="0" @click="handleChangeTheme" text  transition="fade-transition">
+      <v-btn
+        elevation="0"
+        @click="handleChangeTheme"
+        text
+        transition="fade-transition"
+      >
         <v-icon v-if="$vuetify.theme.dark">mdi-white-balance-sunny</v-icon>
         <v-icon v-if="!$vuetify.theme.dark">mdi-weather-night</v-icon>
       </v-btn>
@@ -123,7 +126,6 @@
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-
     </v-app-bar>
 
     <!-- v-main -->
@@ -142,24 +144,24 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn> -->
 
-    <v-footer color="primary lighten-1" padless>
+    <v-footer color=" lighten-1" padless>
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
           :key="link"
-          color="white"
+
           text
           rounded
           class="my-2"
         >
           {{ link }}
         </v-btn>
-        <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
+        <v-col class=" lighten-2 py-4 text-center " cols="12">
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
         </v-col>
       </v-row>
-      <ScrollToTop />
     </v-footer>
+    <ScrollToTop />
   </v-app>
 </template>
 
@@ -250,12 +252,12 @@ export default {
     // }else if(h > 19 && h <= 24 ){
     //   this.greetings="晚上好！"
     // }else if(h > 24 && h <= 8 ){
-      // this.greetings="好耶！"
+    // this.greetings="好耶！"
     // }
     let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
     this.timer = setInterval(() => {
       _this.date = new Date(); // 修改数据date
-    }, 1000)
+    }, 1000);
     if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
       this.navigationsrc =
         "http://tva1.sinaimg.cn/large/005NWBIgly1gnz3zb8v92j308p0kan2h.jpg";

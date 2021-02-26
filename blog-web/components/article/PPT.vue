@@ -1,43 +1,52 @@
 <template>
-<div>
-  <div>
-    <v-card to="detail">
-      <v-img
-        src="http://fp1.fghrsh.net/2021/01/31/4b9c5de00bd0979bafd4260c26b32049.png"
-        gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
-        aspect-ratio="16 / 9"
-        height="300"
-        dark
+  <v-carousel
+    cycle
+    height="250"
+    hide-delimiter-background
+    show-arrows-on-hover
+
+    hide-delimiters
+
+  >
+    <v-carousel-item
+      v-for="(slide, i) in slides"
+      :key="i"
+    >
+      <v-sheet
+        :color="colors[i]"
+        height="100%"
       >
-        <v-card-text class="fill-height d-flex align-end">
-          <v-row class="flex-column">
-            <v-col>
-              <v-btn color="accent" to="category">Travel</v-btn>
-            </v-col>
-            <v-col cols="12" md="10" lg="8" xl="7">
-              <h2 class="text-h3 py-3" style="line-height: 1.2">
-                Great Travel Blogs From Around The World To Inspire You
-              </h2>
-            </v-col>
-            <v-col class="d-flex align-center">
-              <v-avatar class="elevation-4" color="accent">
-                <v-icon large color>mdi-feather</v-icon>
-              </v-avatar>
-
-              <div class="text-h6 pl-2">Yan Lee · 22 July 2019</div>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-img>
-    </v-card>
-  </div>
-
-</div>
-
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+          <div class="display-3">{{ slide }} Slide</div>
+        </v-row>
+      </v-sheet>
+    </v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
-export default {};
+  export default {
+    data () {
+      return {
+        colors: [
+          'indigo',
+          'warning',
+          'pink darken-2',
+          'red lighten-1',
+          'deep-purple accent-4',
+        ],
+        slides: [
+          'First',
+          'Second',
+          'Third',
+          'Fourth',
+          'Fifth',
+        ],
+      }
+    },
+  }
 </script>
-
-<style></style>
