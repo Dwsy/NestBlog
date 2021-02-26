@@ -1,6 +1,6 @@
 <template>
   <v-row justify="space-around">
-    <v-col cols="12" sm="6" md="4" lg="3">
+    <v-col >
       <v-sheet elevation="10" class="pa-4">
         <v-chip-group
           column
