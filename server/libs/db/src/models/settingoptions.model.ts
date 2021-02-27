@@ -7,5 +7,12 @@ import { ApiProperty } from '@nestjs/swagger';
     timestamps: true,
   },
 })
-//后台设置
-export class SettingOptions {}
+//博客设置
+export class SettingOptions {
+  @ApiProperty({ description: '首页轮播图', example: '' })
+  @prop()
+  pptImage: String;
+  @ApiProperty({ description: '首页轮播图链接', example: '' })
+  @prop()
+  pptlink: String;
+}

@@ -1,16 +1,21 @@
 <template>
-  <div v-html="hello" class="Language"></div>
+<v-row>
+  <v-col cols="12" xl="10" lg="10" md="10">
+  <div v-html="markdown" class="Language"></div>
+  </v-col>
+</v-row>
+  
 </template>
 
 <script>
-import hello from "../../static/第03章 栈和队列.md";
+import markdown  from "../../static/第03章 栈和队列.md";
 import Prism from "prismjs";
 
 export default {
   name: "Content",
   computed: {
-    hello() {
-      return hello;
+    markdown() {
+      return markdown;
     }
   },
   mounted() {

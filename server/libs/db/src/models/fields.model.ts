@@ -14,7 +14,9 @@ export class Fields {
   @ApiProperty({ description: '文章id', example: 'id' })
   @prop()
   contentsId: string;
-
+  @ApiProperty({ description: '标题', example: '标题' })
+  @prop()
+  title: string;
   @ApiProperty({ description: '文章封面大url', example: '文章封面大' })
   @prop()
   cover: string;

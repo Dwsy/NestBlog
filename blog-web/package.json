@@ -13,10 +13,12 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/pwa": "^3.3.5",
     "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.8.3",
+    "dotenv": "^8.2.0",
     "highlight": "^0.2.4",
     "html-loader": "^2.1.0",
     "markdown-it": "^12.0.4",
@@ -41,7 +43,7 @@
   "config": {
     "nuxt": {
       "host": "0.0.0.0",
-      "port": 3000
+      "port": 3001
     }
   }
 }

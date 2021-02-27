@@ -1,5 +1,7 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 import { resolve } from 'path'
+import dotenv from 'dotenv'
+dotenv.config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -42,6 +44,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
     // Simple Usage
     // 'nuxt-highlightjs',
     '@nuxtjs/markdownit',
@@ -144,7 +148,7 @@ export default {
               'show-language',
               'copy-to-clipboard'
             ],
-            theme: 'mac',
+            theme: 'tomorrow',
             css: true
           }
         ]

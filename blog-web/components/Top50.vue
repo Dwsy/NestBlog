@@ -5,7 +5,7 @@
       <iframe
         src="https://cloud.mokeyjay.com/pixiv"
         frameborder="0"
-        style="width:240px; height:380px;"
+        style="width:100%; height:400px;"
       ></iframe>
     </section>
   </div>
