@@ -166,7 +166,7 @@ export default {
     ScrollToTop
   },
   created() {
-    this.$vuetify.theme.dark = false;
+    this.$vuetify.theme.dark = true;
     // this.$vuetify.theme.dark = true;
   },
   data() {
@@ -197,7 +197,7 @@ export default {
           children: [
             { icon: "mdi-language-java", text: "Java",link: "/classification/6039284a2684e22ec8291c64" },
             { icon: "mdi-language-python", text: "Python",link: "/classification/603928522684e22ec8291c65" },
-            { icon: "mdi-language-c", text: "C",link: "/classification/6603928552684e22ec8291c66" },
+            { icon: "mdi-language-c", text: "C",link: "/classification/603928552684e22ec8291c66" },
             { icon: "mdi-language-javascript", text: "Javascript",link: "/classification/603928572684e22ec8291c67" },
             { icon: "mdi-translate", text: "Other" ,link: "/classification/1"}
           ]

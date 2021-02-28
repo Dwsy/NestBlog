@@ -8,7 +8,7 @@
               <div>
                 <v-card-title
                   class="headline"
-                  v-text="titles[i].title"
+                  v-text="item.title"
                 ></v-card-title>
 
                 <v-card-subtitle v-text="item.updatedAt"></v-card-subtitle>
@@ -38,7 +38,7 @@ export default {
   // name:ArticleList,
   props: {
     fields:{},
-    titles:{}
+    // titles:{}
   }
 };
 </script>

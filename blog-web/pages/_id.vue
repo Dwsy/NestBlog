@@ -10,7 +10,8 @@
           <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
           <v-row>
             <v-col>
-              <ArticleList v-bind:fields="fields" v-bind:titles="titleData" />
+              <ArticleList v-bind:fields="fields" />
+              <!-- <ArticleList v-bind:fields="fields" v-bind:titles="titleData" /> -->
               <!-- <Paging /> -->
               <!-- <Paging :nowpage="page" :length="lastPage" /> -->
               <!-- <Paging  :length="lastPage" /> -->
@@ -58,14 +59,20 @@ export default {
         }
       }
     });
-    const titleData = await $axios.$get(`/fields/title/${id}`);
+    // const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
-    const tagData = await $axios.$get("tag");
+    const tagData = await $axios.$get("tag", {
+      params: {
+        query: {
+          sort: "-contentsNum"
+        }
+      }
+    });
     const pptData = await $axios.$get("settingoptions");
 
     return {
       fields: fieldsData.data,
-      titleData: titleData,
+      // titleData: titleData,
       ppt: pptData.data,
       recently: recentlyData,
       tag: tagData.data,

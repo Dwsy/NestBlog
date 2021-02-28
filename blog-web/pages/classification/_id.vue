@@ -1,7 +1,6 @@
 <template>
   <div>
-    <ArticleList :fields="fields" />
-    <p>{{ fields }}</p>
+    <ArticleList :fields="fields"  />
   </div>
 </template>
 
@@ -12,6 +11,7 @@ export default {
     const id = params.id;
     console.log(id);
     const fields = await $axios.$get(`classification/article/${id}`);
+
     return { fields };
   },
   components: { ArticleList }
