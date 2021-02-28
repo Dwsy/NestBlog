@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <v-container grid-list-xs class="main">
     <div>
       <PPT v-bind:ppts="ppt" />
     </div>
     <v-row>
       <v-col cols="12" xl="8" lg="8" md="8">
         <div>
-          <h2 class="text-h4 font-weight-bold pb-4">文章列表</h2>
+          <br />
+          <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
           <v-row>
             <v-col>
               <ArticleList v-bind:fields="fields" />
@@ -17,15 +18,18 @@
 
       <v-col>
         <div cols="12" md="1" lg="1" xl="1">
-          <Top-50 />
-
+          <br />
+          <!-- <br />
+          <br />
+          <br /> -->
           <Recently v-bind:recently="recently" />
+          <Top-50 />
           <p class="text-h6 pb-4">标签</p>
           <Tag v-bind:tags="tag" />
         </div>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -65,3 +69,8 @@ export default {
   }
 };
 </script>
+<style >
+/* .v-main__wrap {
+  background-image: url("http://tvax4.sinaimg.cn/large/005NWBIgly1gnjk42z6j5j31uo1rwhdt.jpg");
+} */
+</style>

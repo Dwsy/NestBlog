@@ -1,9 +1,9 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" elevation="0">
     <v-container>
-      <v-row dense>
-        <v-col v-for="(item, i) in fields" :key="i" cols="12">
-          <v-card to="article">
+      <v-row dense >
+        <v-col v-for="(item, i) in fields" :key="i" cols="12" >
+          <v-card to="article" elevation="1">
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
                 <v-card-title
@@ -13,7 +13,7 @@
 
                 <v-card-subtitle v-text="item.updatedAt"></v-card-subtitle>
                 <v-card-subtitle align-content-end
-                  >创建时间{{ item.createdAt }}
+                  >创建时间:{{ item.createdAt }}
                 </v-card-subtitle>
               </div>
 
@@ -36,7 +36,7 @@
 export default {
   // name:ArticleList,
   props: {
-    fields:[]
+    fields:{}
   }
 };
 </script>

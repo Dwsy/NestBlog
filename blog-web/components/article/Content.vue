@@ -24,7 +24,5 @@ export default {
 };
 </script>
 <style scoped>
-.theme--dark.v-application code {
-  background-color: rgba(0, 255, 213, 0.1);
-}
+
 </style>

@@ -1,12 +1,11 @@
 <template>
 
   <v-card max-width="450">
-    {{comment}}
     <v-list three-line>
       <v-subheader>{{ header }}</v-subheader>
       <template v-for="(item, index) in recently">
-        <v-divider :key="index" ></v-divider>
-        <v-list-item :key="item.authorName">
+        <v-divider :key="item._id" ></v-divider>
+        <v-list-item :key="item._id+1">
           <v-list-item-avatar>
             <v-img :src="avatar[index]"></v-img>
           </v-list-item-avatar>
@@ -24,7 +23,7 @@
 <script>
 export default {
   props: {
-    recently: []
+    recently: {}
   },
   data: () => ({
     avatar: [

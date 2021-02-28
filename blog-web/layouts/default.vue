@@ -17,7 +17,7 @@
             />
           </v-avatar>
           <sub>{{ greetings }}</sub>
-          <v-subheader>Dwsy</v-subheader>
+          <!-- <v-subheader>Dwsy</v-subheader> -->
         </v-col>
         <!-- <v-list-item-avatar>
           <v-img src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"></v-img>
@@ -121,24 +121,23 @@
         <v-icon v-if="!$vuetify.theme.dark">mdi-weather-night</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-apps</v-icon>
+        <v-icon>mdi-bell-circle</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
+        <v-icon>mdi-account-key</v-icon>
       </v-btn>
     </v-app-bar>
 
     <!-- v-main -->
-    <v-main>
+    <!-- <v-main>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-tooltip right>
-            <!-- <template v-slot:activator="{ on }"> </template> -->
-            <span>Source</span>
+
           </v-tooltip>
         </v-row>
       </v-container>
-    </v-main>
+    </v-main> -->
 
     <!-- <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
         <v-icon>mdi-plus</v-icon>
@@ -146,14 +145,7 @@
 
     <v-footer color=" lighten-1" padless>
       <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-
-          text
-          rounded
-          class="my-2"
-        >
+        <v-btn v-for="link in links" :key="link" text rounded class="my-2">
           {{ link }}
         </v-btn>
         <v-col class=" lighten-2 py-4 text-center " cols="12">
@@ -183,7 +175,8 @@ export default {
       islight: true,
       navigationsrc: "",
       appbarsrc: "",
-      greetings: new Date(),
+      // greetings: new Date(),
+      greetings: "",
       items: [
         { icon: "mdi-home-outline", text: "博客首页", link: "/" },
         {
@@ -220,19 +213,6 @@ export default {
           link: "/article"
         },
         { icon: "mdi-information-variant", text: "关于", link: "/about" }
-        // {
-        //   icon: "mdi-chevron-up",
-        //   "icon-alt": "mdi-chevron-down",
-        //   text: "Labels",
-        //   model: true,
-        //   children: [{ icon: "mdi-plus", text: "Create label" }]
-        // },
-
-        // { icon: "mdi-cog", text: "Settings" },
-        // { icon: "mdi-message", text: "Send feedback" },
-        // { icon: "mdi-help-circle", text: "Help" },
-        // { icon: "mdi-cellphone-link", text: "App downloads" },
-        // { icon: "mdi-keyboard", text: "Go to the old version" }
       ],
       links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
       miniVariant: false,
@@ -243,21 +223,21 @@ export default {
   mounted() {
     const h = new Date().getHours();
     this.$vuetify.theme.dark = (h >= 19 && h <= 24) || (h >= 0 && h <= 7);
-    // if (h >= 6 && h <= 10) {
-    //   this.greetings="早上好！"
-    // }else if(h > 10 && h <= 14 ){
-    //   this.greetings="中午好！"
-    // }else if(h > 14 && h <= 19 ){
-    //   this.greetings="下午好"
-    // }else if(h > 19 && h <= 24 ){
-    //   this.greetings="晚上好！"
-    // }else if(h > 24 && h <= 8 ){
-    // this.greetings="好耶！"
-    // }
-    let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
-    this.timer = setInterval(() => {
-      _this.date = new Date(); // 修改数据date
-    }, 1000);
+    if (h >= 6 && h <= 10) {
+      this.greetings = "早上好！👾👾";
+    } else if (h > 10 && h <= 14) {
+      this.greetings = "中午好！(❁´◡`❁)";
+    } else if (h > 14 && h <= 19) {
+      this.greetings = "下午好ヾ(≧ ▽ ≦)ゝ";
+    } else if (h > 19 && h <= 24) {
+      this.greetings = "晚上好！( ఠൠఠ )ﾉ";
+    } else if (h > 24 && h <= 8) {
+      this.greetings = "好耶！○( ＾皿＾)っHiahiahia…";
+    }
+    // let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
+    // this.timer = setInterval(() => {
+    //   _this.date = new Date(); // 修改数据date
+    // }, 1000);
     if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
       this.navigationsrc =
         "http://tva1.sinaimg.cn/large/005NWBIgly1gnz3zb8v92j308p0kan2h.jpg";
@@ -268,6 +248,8 @@ export default {
       this.navigationsrc =
         "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
       this.appbarsrc = "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
+      // this.navigationsrc = "";
+      // this.appbarsrc = "";
       this.islight = true;
     }
 
@@ -282,32 +264,17 @@ export default {
         this.appbarsrc =
           "http://tva1.sinaimg.cn/large/005NWBIgly1gnz3upue5sj31ea07ctkm.jpg";
         this.islight = !this.islight;
-        console.log(0);
+        console.log("夜间");
       } else {
         this.navigationsrc =
           "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
         this.appbarsrc =
           "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
-        console.log(1);
+        // this.navigationsrc = "";
+        // this.appbarsrc = "";
+        console.log("日间");
         this.islight = !this.islight;
       }
-
-      // this.navigationsrc ="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
-      // if (
-      //   this.navigationsrc ===
-      //   "http://tva1.sinaimg.cn/large/005NWBIgly1gnz3zb8v92j308p0kan2h.jpg"
-      // ) {
-      //   this.navigationsrc =
-      //     "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
-      // }
-      // if (
-      //   this.navigationsrc ===
-      //   "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-      // ) {
-      //   this.navigationsrc =
-      //     "http://tva1.sinaimg.cn/large/005NWBIgly1gnz3zb8v92j308p0kan2h.jpg";
-      // }
-      // this.navigationsrc="http://tva1.sinaimg.cn/large/005NWBIgly1gnz3zb8v92j308p0kan2h.jpg"
     },
     handleShowSide() {
       this.$store.commit("SET_SIDE_STATUS", true);

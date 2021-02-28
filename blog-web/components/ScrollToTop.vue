@@ -1,7 +1,7 @@
 <template>
   <div class="ScrollToTop" v-show="isShow" v-scroll="onScroll">
-    <v-btn color="error" small fab @click="handleTo">
-      <v-icon dark>mdi-chevron-up</v-icon>
+    <v-btn color="blue lighten-1" small fab @click="handleTo">
+      <v-icon color="white">mdi-arrow-up-thick</v-icon>
     </v-btn>
   </div>
 </template>
@@ -31,8 +31,9 @@ export default {
 .ScrollToTop {
   position: fixed;
   z-index: 99;
-  right: 100px;
+  right: 50px;
   bottom: 100px;
+
   @media (max-width: 600px) {
     right: 30px;
   }

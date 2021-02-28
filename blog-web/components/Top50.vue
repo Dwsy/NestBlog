@@ -1,13 +1,13 @@
 <template>
   <div>
-    <section id="a_d_sidebar" class="widget widget_categories wrapper-md clear">
-      <p>&nbsp;&nbsp;&nbsp;Pixiv每日排行榜Top50</p>
+    <p>&nbsp;&nbsp;&nbsp;Pixiv每日排行榜Top50</p>
+    <v-container>
       <iframe
         src="https://cloud.mokeyjay.com/pixiv"
         frameborder="0"
-        style="width:100%; height:400px;"
+        style="width:88%; height:400px;"
       ></iframe>
-    </section>
+    </v-container>
   </div>
 </template>
 

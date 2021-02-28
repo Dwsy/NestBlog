@@ -7,8 +7,8 @@
     hide-delimiters
   >
     <v-carousel-item
-      v-for="(ppt, i) in ppts"
-      :key="i"
+      v-for="ppt in ppts"
+      :key="ppt._id"
       :href="ppt.pptlink"
       :src="ppt.pptImage"
     >
@@ -26,7 +26,7 @@
 <script>
 export default {
   props: {
-    ppts: []
+    ppts: {}
   }
   // data() {
   //   return {
