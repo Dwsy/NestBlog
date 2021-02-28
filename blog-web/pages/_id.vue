@@ -10,7 +10,7 @@
           <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
           <v-row>
             <v-col>
-              <ArticleList v-bind:fields="fields" />
+              <ArticleList v-bind:fields="fields" v-bind:titles="titleData" />
               <!-- <Paging /> -->
               <!-- <Paging :nowpage="page" :length="lastPage" /> -->
               <!-- <Paging  :length="lastPage" /> -->
@@ -48,32 +48,26 @@ import Paging from "../components/article/Paging";
 export default {
   async asyncData({ $axios, params }) {
     const id = params.id;
-
+    // /users?query={"where":{"username":"user1","age":{"$gt":18}},"sort":"-_id","limit":10,"page":2,"populate":"friends"}
     const fieldsData = await $axios.$get("fields", {
       params: {
         query: {
-          limit: 5,
-          page: id
+          limit: 8,
+          page: id,
+          sort: "-_id"
         }
       }
     });
-    // const recentlyData = await $axios.$get("comments/recently", {
-    //   params: {
-    //     query: {
-    //       limit: 5,
-    //       page: 1
-    //     }
-    //   }
-    // });
+    const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
     const tagData = await $axios.$get("tag");
     const pptData = await $axios.$get("settingoptions");
 
     return {
       fields: fieldsData.data,
+      titleData: titleData,
       ppt: pptData.data,
       recently: recentlyData,
-      // recently: {},
       tag: tagData.data,
       total: parseInt(fieldsData.total),
       lastPage: parseInt(fieldsData.lastPage),

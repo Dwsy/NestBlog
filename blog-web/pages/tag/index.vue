@@ -1,10 +1,21 @@
 <template>
-  <v-card max-width="450">
+  <v-card max-width="900" class="mx-auto">
     <v-row justify="space-around">
       <v-col>
+
         <v-sheet elevation="0" class="pa-10">
-          <v-chip-group column>
-            <v-chip v-for="tag in tags" :key="tag._id" :color="tag.colours">
+                  <h2 class="title mb-2">
+          文章筛选
+        </h2>
+          <v-chip-group column multiple>
+            <v-chip
+              v-for="tag in tags"
+              :key="tag._id"
+              :color="tag.colours"
+              filter
+              label
+              
+            >
               {{ tag.name }} <b>{{ tag.contentsNum }}</b>
             </v-chip>
           </v-chip-group>

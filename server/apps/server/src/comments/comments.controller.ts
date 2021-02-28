@@ -26,7 +26,7 @@ export class CommentsController {
   async get (@Param('id') id: string) {
 
     // return this.CommentsModel.find(contentsId:id);
-    return this.CommentsModel.find({contentsId: id}).sort({'_id':-1})
+    return this.CommentsModel.find({contentsId: id}).sort({'_id': -1});
   }
 
 
