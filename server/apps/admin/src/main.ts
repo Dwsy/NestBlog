@@ -1,8 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AdminModule } from './admin.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+// import * as mongoose from 'mongoose';
 async function bootstrap() {
+  // mongoose.connect('mogodb://localhost:27017')
   const app = await NestFactory.create(AdminModule);
 
   const options = new DocumentBuilder()

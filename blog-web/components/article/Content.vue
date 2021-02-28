@@ -1,18 +1,21 @@
-<template>
-<v-row>
-  <v-col cols="12" xl="10" lg="10" md="10">
-  <div v-html="markdown" class="Language"></div>
-  </v-col>
-</v-row>
-  
+<template lang="md">
+  <v-row>
+    <v-col cols="12" xl="10" lg="10" md="10">
+      <h2>{{content.title}}</h2>
+      <p>{{content.createdAt}}</p>
+      <div v-html="$md.render(content.text)" class="Language"></div>
+<!-- mdit支持感人后期换成handsome的 -->
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-import markdown  from "../../static/第03章 栈和队列.md";
 import Prism from "prismjs";
 
 export default {
-  name: "Content",
+  props: {
+    content: {}
+  },
   computed: {
     markdown() {
       return markdown;
@@ -23,6 +26,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

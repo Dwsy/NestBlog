@@ -25,7 +25,7 @@ const models = TypegooseModule.forFeature([
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost/myblog', {
+    TypegooseModule.forRoot('mongodb://localhost:27017/myblog', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

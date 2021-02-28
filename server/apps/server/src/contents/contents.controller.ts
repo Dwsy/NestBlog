@@ -5,7 +5,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { Contents } from 'libs/db/models/contents.model';
 
 @Crud({
-
     model: Contents,
     routes: {
         create: false,

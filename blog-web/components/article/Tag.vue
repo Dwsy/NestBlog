@@ -4,7 +4,7 @@
       <v-col>
         <v-sheet elevation="0" class="pa-4">
           <v-chip-group column active-class="primary--text">
-            <v-chip v-for="tag in tags" :key="tag" :color="tag.colours">
+            <v-chip v-for="tag in tags" :key="tag.name" :color="tag.colours">
               {{ tag.name }} {{ tag.contentsNum }}
             </v-chip>
           </v-chip-group>
@@ -17,7 +17,7 @@
 <script>
 export default {
   props: {
-    tags:[]
+    tags:{}
   }
   // async asyncData({ $axios }) {
   //   const data = await $axios.$get("tag");

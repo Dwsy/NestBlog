@@ -11,6 +11,7 @@
           <v-row>
             <v-col>
               <ArticleList v-bind:fields="fields" />
+              <Paging />
             </v-col>
           </v-row>
         </div>
@@ -27,6 +28,7 @@
           <p class="text-h6 pb-4">标签</p>
           <Tag v-bind:tags="tag" />
         </div>
+
       </v-col>
     </v-row>
   </v-container>
@@ -38,17 +40,26 @@ import Tag from "../components/article/Tag";
 import Recently from "../components/Comment/Recently";
 import Top50 from "../components/Top50";
 import ArticleList from "../components/article/ArticleList";
+import Paging from '../components/article/paging.vue';
 export default {
   async asyncData({ $axios }) {
-    const fieldsData = await $axios.$get("fields");
-    const recentlyData = await $axios.$get("comments", {
+    const fieldsData = await $axios.$get("fields" ,{
       params: {
         query: {
-          limit: 5,
+          limit: 10,
           page: 1
         }
       }
     });
+    // const recentlyData = await $axios.$get("comments/recently", {
+    //   params: {
+    //     query: {
+    //       limit: 5,
+    //       page: 1
+    //     }
+    //   }
+    // });
+    const recentlyData = await $axios.$get("comments/recently");
     console.log("commentscommentscommentscomments");
     const tagData = await $axios.$get("tag");
     const pptData = await $axios.$get("settingoptions");
@@ -56,7 +67,8 @@ export default {
     return {
       fields: fieldsData.data,
       ppt: pptData.data,
-      recently: recentlyData.data,
+      recently: recentlyData,
+      // recently: {},
       tag: tagData.data
     };
   },
@@ -65,7 +77,8 @@ export default {
     Tag,
     Recently,
     Top50,
-    ArticleList
+    ArticleList,
+    Paging
   }
 };
 </script>

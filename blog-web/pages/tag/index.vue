@@ -4,7 +4,7 @@
       <v-col>
         <v-sheet elevation="0" class="pa-10">
           <v-chip-group column>
-            <v-chip v-for="tag in tags" :key="tag" :color="tag.colours">
+            <v-chip v-for="tag in tags" :key="tag._id" :color="tag.colours">
               {{ tag.name }} <b>{{ tag.contentsNum }}</b>
             </v-chip>
           </v-chip-group>

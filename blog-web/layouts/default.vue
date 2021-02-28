@@ -51,7 +51,7 @@
               </v-list-item-content>
             </template>
 
-            <v-list-item v-for="(child, i) in item.children" :key="i" link>
+            <v-list-item v-for="(child, i) in item.children" :key="i" link nuxt :to="child.link">
               <v-list-item-content>
                 <v-list-item-title>
                   {{ child.text }}
@@ -77,6 +77,7 @@
             </v-list-item-content>
           </v-list-item>
         </template>
+        
       </v-list>
     </v-navigation-drawer>
     <v-main>
@@ -194,11 +195,11 @@ export default {
           text: "文章分类",
           model: false,
           children: [
-            { icon: "mdi-language-java", text: "Java" },
-            { icon: "mdi-language-python", text: "Python" },
-            { icon: "mdi-language-c", text: "C" },
-            { icon: "mdi-language-javascript", text: "Javascript" },
-            { icon: "mdi-translate", text: "Other" }
+            { icon: "mdi-language-java", text: "Java",link: "/classification/6039284a2684e22ec8291c64" },
+            { icon: "mdi-language-python", text: "Python",link: "/classification/603928522684e22ec8291c65" },
+            { icon: "mdi-language-c", text: "C",link: "/classification/6603928552684e22ec8291c66" },
+            { icon: "mdi-language-javascript", text: "Javascript",link: "/classification/603928572684e22ec8291c67" },
+            { icon: "mdi-translate", text: "Other" ,link: "/classification/1"}
           ]
         },
 
