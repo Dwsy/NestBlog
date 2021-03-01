@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SettingoptionsController } from './settingoptions.controller';
+import { PptController } from './ppt.controller';
 
 @Module({
-  controllers: [SettingoptionsController]
+  controllers: [PptController]
 })
-export class SettingoptionsModule {}
+export class PptModule {}

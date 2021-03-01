@@ -27,5 +27,9 @@ export class Tag {
   @ApiProperty({ description: '标签权重', example: '整数型，越高越靠前' })
   @prop()
   order: number;
-  
+
+  @ApiProperty({ description: '标签icon', example: 'https://material.iconhelper.cn/' })
+  @prop()
+  icon: String;
+
 }

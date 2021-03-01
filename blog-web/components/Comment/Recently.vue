@@ -5,11 +5,10 @@
       <v-subheader>{{ header }}</v-subheader>
       <template v-for="(item, index) in recently">
         <v-divider :key="item._id" ></v-divider>
-        <v-list-item :key="item._id+1">
+        <v-list-item :key="item._id+1" :to="'article/'+item.contentsId">
           <v-list-item-avatar>
             <v-img :src="avatar[index]"></v-img>
           </v-list-item-avatar>
-
           <v-list-item-content>
             <v-list-item-title v-html="item.authorName"></v-list-item-title>
             <v-list-item-subtitle v-html="item.text"></v-list-item-subtitle>

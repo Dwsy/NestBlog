@@ -7,7 +7,7 @@ import { UsersModule } from './users/users.module';
 import { CommentsModule } from './comments/comments.module';
 import { ContentsModule } from './contents/contents.module';
 import { FieldsModule } from './fields/fields.module';
-import { SettingoptionsModule } from './settingoptions/settingoptions.module';
+import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
 import { UpfileModule } from './upfile/upfile.module';
 import { ClassificationModule } from './classification/classification.module';
@@ -20,7 +20,7 @@ import { ClassificationModule } from './classification/classification.module';
     CommentsModule,
     ContentsModule,
     FieldsModule,
-    SettingoptionsModule,
+    PptModule,
     TagModule,
     UpfileModule
   ],

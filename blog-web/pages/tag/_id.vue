@@ -12,10 +12,12 @@
                 v-for="tag in tags"
                 :key="tag._id"
                 :color="tag.colours"
-                filter
                 label
               >
                 {{ tag.name }} <b>{{ tag.contentsNum }}</b>
+                <v-avatar v-show="tag.icon">
+                  <v-icon>{{ tag.icon }}</v-icon>
+                </v-avatar>
               </v-chip>
             </v-chip-group>
           </v-sheet>
@@ -44,6 +46,7 @@ export default {
     const data = await $axios.$get("tag", {
       params: {
         query: {
+          limit: 777,
           sort: "-contentsNum"
         }
       }
@@ -53,8 +56,8 @@ export default {
   },
   data() {
     return {
-      selects:[]
-    }
+      selects: []
+    };
   },
   watch: {
     selects: {

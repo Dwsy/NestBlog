@@ -5,7 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   // mongoose.connect('mogodb://localhost:27017')
   const app = await NestFactory.create(AdminModule);
-
+app.enableCors();
   const options = new DocumentBuilder()
     .setTitle('NestJs博客API')
     .setDescription('博客后台管理API')
@@ -13,7 +13,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
-
   app.enableCors();
   await app.listen(3000);
   console.log('http://localhost:3000/api-docs');

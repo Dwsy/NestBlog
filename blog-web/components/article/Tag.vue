@@ -4,8 +4,16 @@
       <v-col>
         <v-sheet elevation="0" class="pa-4">
           <v-chip-group column active-class="primary--text">
-            <v-chip v-for="tag in tags" :key="tag.name" :color="tag.colours" :to="`/tag/${tag._id}`" >
+            <v-chip
+              v-for="tag in tags"
+              :key="tag.name"
+              :color="tag.colours"
+              :to="`/tag/${tag._id}`"
+            >
               {{ tag.name }} {{ tag.contentsNum }}
+              <v-avatar v-show="tag.icon">
+                <v-icon>{{tag.icon}}</v-icon>
+              </v-avatar>
             </v-chip>
           </v-chip-group>
         </v-sheet>
@@ -17,7 +25,7 @@
 <script>
 export default {
   props: {
-    tags:{}
+    tags: {}
   }
 };
 </script>

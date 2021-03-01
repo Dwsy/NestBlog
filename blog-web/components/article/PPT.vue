@@ -9,7 +9,7 @@
     <v-carousel-item
       v-for="ppt in ppts"
       :key="ppt._id"
-      :href="ppt.pptlink"
+      :to="ppt.pptLink"
       :src="ppt.pptImage"
     >
         <v-row
@@ -17,7 +17,7 @@
           align="center"
           justify="center"
         >
-          <div class="display-3" style="color:red;">{{ ppt._id }} Slide</div>
+          <div class="display-3" style="color:red;">{{ ppt.pptTitle }} </div>
         </v-row>
     </v-carousel-item>
   </v-carousel>

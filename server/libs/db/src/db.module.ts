@@ -7,7 +7,7 @@ import { Contents } from './models/contents.model';
 import { Fields } from './models/fields.model';
 import { UpFile } from './models/upfile.model';
 import { Tag } from './models/tag.model';
-import { SettingOptions } from './models/settingoptions.model';
+import { PptOptions } from './models/ppt.model';
 import { Comments } from './models/comments.model';
 import { Classification } from './models/classification.model';
 
@@ -16,7 +16,7 @@ const models = TypegooseModule.forFeature([
   Comments,
   Contents,
   Fields,
-  SettingOptions,
+  PptOptions,
   Tag,
   UpFile,
   User,

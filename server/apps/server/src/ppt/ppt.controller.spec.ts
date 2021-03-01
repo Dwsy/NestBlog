@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SettingoptionsController } from './ppt.controller';
+import { PptController } from './ppt.controller';
 
-describe('SettingoptionsController', () => {
-  let controller: SettingoptionsController;
+describe('PptController', () => {
+  let controller: PptController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [SettingoptionsController],
+      controllers: [PptController],
     }).compile();
 
-    controller = module.get<SettingoptionsController>(SettingoptionsController);
+    controller = module.get<PptController>(PptController);
   });
 
   it('should be defined', () => {

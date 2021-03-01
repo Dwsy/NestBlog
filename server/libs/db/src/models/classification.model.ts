@@ -19,5 +19,12 @@ export class Classification {
   @ApiProperty({ description: '当前分类文章数目', example: '文章数' })
   @prop()
   contentsNum: number;
+
+  @ApiProperty({ description: '分类icon', example: 'https://material.iconhelper.cn/' })
+  @prop()
+  icon: String;
+  @ApiProperty({ description: '分类排序', example: '' })
+  @prop()
+  rank: number;
 }
 

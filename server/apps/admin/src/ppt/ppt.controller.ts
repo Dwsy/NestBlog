@@ -2,17 +2,17 @@ import { Controller } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 import { ApiTags } from '@nestjs/swagger';
-import { SettingOptions } from 'libs/db/models/settingoptions.model';
+import { PptOptions } from 'libs/db/models/ppt.model';
 
 
 @Crud({
 
-    model:SettingOptions,
+    model:PptOptions,
 
-  
+
 })
-@Controller('settingoptions')
-@ApiTags('博客设置')
-export class SettingoptionsController {
-    constructor(@InjectModel(SettingOptions) private readonly model) { }
+@Controller('ppt')
+@ApiTags('博客首页轮播图设置')
+export class PptController {
+    constructor(@InjectModel(PptOptions) private readonly model) { }
 }

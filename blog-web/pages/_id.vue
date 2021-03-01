@@ -64,11 +64,18 @@ export default {
     const tagData = await $axios.$get("tag", {
       params: {
         query: {
+          limit: 777,
           sort: "-contentsNum"
         }
       }
     });
-    const pptData = await $axios.$get("settingoptions");
+    const pptData = await $axios.$get("ppt", {
+      params: {
+        query: {
+          sort: "rank"
+        }
+      }
+    });
 
     return {
       fields: fieldsData.data,

@@ -8,11 +8,17 @@ import { ApiProperty } from '@nestjs/swagger';
   },
 })
 //博客设置
-export class SettingOptions {
+export class PptOptions {
   @ApiProperty({ description: '首页轮播图', example: '' })
   @prop()
   pptImage: String;
   @ApiProperty({ description: '首页轮播图链接', example: '' })
   @prop()
-  pptlink: String;
+  pptLink: String;
+  @ApiProperty({ description: '首页轮播图标题', example: '' })
+  @prop()
+  pptTitle: String;
+  @ApiProperty({ description: '轮播图排序', example: '' })
+  @prop()
+  rank: number;
 }
