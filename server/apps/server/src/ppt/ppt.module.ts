@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SettingoptionsController } from './settingoptions.controller';
+import { SettingoptionsController } from './ppt.controller';
 
 @Module({
   controllers: [SettingoptionsController]

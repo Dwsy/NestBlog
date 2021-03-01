@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SettingoptionsController } from './settingoptions.controller';
+import { SettingoptionsController } from './ppt.controller';
 
 describe('SettingoptionsController', () => {
   let controller: SettingoptionsController;
