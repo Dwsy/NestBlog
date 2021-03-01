@@ -15,7 +15,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
-    script: [{ src: '//unpkg.com/valine/dist/Valine.min.js' }],
+    script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js"' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css  script src="//unpkg.com/valine/dist/Valine.min.js

@@ -1,7 +1,7 @@
 <template>
   <v-card >
     <v-list three-line>
-      <v-subheader>{{ header }}</v-subheader>
+      <v-subheader> 评论列表 </v-subheader>
       <template v-for="item in comments">
         <v-divider :key="item._id"></v-divider>
         <v-list-item :key="item._id + 1">

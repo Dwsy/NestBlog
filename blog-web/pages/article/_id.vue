@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <Content :content="content" />
-      <CommentList v-bind:comments="comments" />
+      <CommentList :comments="comments" />
       <SendComment :id="id" :IP="IP" />
     </v-container>
   </div>
@@ -36,9 +36,7 @@ console.log(ipData.query);
 
 <style>
 
-body pre{
-  background-color: #ffffff00 !important;
-}
+
 img {
   height: 100%;
   width: 100%;
