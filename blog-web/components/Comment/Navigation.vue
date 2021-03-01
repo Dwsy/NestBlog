@@ -7,7 +7,7 @@
       dark
       :src="navigationsrc"
     >
-      <v-list>
+      <v-list >
         <v-col cols="10">
           <v-avatar size="50px">
             <img
@@ -28,7 +28,7 @@
             append-icon=""
           >
             <template v-slot:activator>
-              <v-list-item-content>
+              <v-list-item-content >
                 <v-list-item-title>
                   {{ item.text }}
                 </v-list-item-title>
@@ -39,7 +39,8 @@
               v-for="(child, i) in item.children"
               :key="i"
               link
-              nuxt
+              
+              
               :to="'/classification/'+child._id"
             >
               <v-list-item-content>

@@ -29,6 +29,7 @@
     "@nestjs/swagger": "^4.7.13",
     "@typegoose/typegoose": "^7.4.8",
     "@types/mongoose": "^5.10.3",
+    "md5": "^2.3.0",
     "mongoose": "^5.11.17",
     "nestjs-mongoose-crud": "^2.0.0",
     "nestjs-typegoose": "^7.1.38",

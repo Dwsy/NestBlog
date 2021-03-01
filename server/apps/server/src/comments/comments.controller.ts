@@ -1,39 +1,82 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { InjectModel } from 'nestjs-typegoose';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Comments } from 'libs/db/models/comments.model';
+import {Body, Controller, Get, Post} from '@nestjs/common';
+import {InjectModel} from 'nestjs-typegoose';
+import {ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
+import {Comments} from 'libs/db/models/comments.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
-import { ReturnModelType } from '@typegoose/typegoose';
-import { Param } from '@nestjs/common';
+import {prop, ReturnModelType} from '@typegoose/typegoose';
+import {Param} from '@nestjs/common';
+
+// import {md5} from ''
 
 
+class sendCommentDto {
+    @ApiProperty({description: '评论文章id', example: '评论文章id'})
+    contentsId: string
+    @ApiProperty({description: '评论所属内容作者id',example: '评论所属内容作者id',})
+    authorId: string
+    @ApiProperty({description: '评论作者名称', example: 'Dwsy'})
+    authorName: string
+    @ApiProperty({ description: '评论文字', example: '评论内容' })
+    text: string
+    @ApiProperty({ description: '评论者ip地址', example: '233.233.233.233' })
+    ip: string
+    @ApiProperty({ description: '评论者网址', example: 'dwsy.link:88' })
+    url: string
+    @ApiProperty({ description: '评论者邮件（加密）', example: 'md5' })
+    MD5email: string
+    @ApiProperty({ description: '评论者邮件', example: '1@1.c' })
+    email: string
+    @ApiProperty({ description: '父级评论id', example: '父级评论id' })
+    parentId: string
+    @ApiProperty({
+        description: '评论者客户端',
+        example:
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36',
+    })
+    @prop()
+    agent: string
+    @ApiProperty({ description: '子评论个数', example: '3' })
+    @prop()
+    childNum: number;
+
+}
 
 @Controller('comments')
 @ApiTags('评论')
 export class CommentsController {
-  constructor(@InjectModel(Comments) private readonly CommentsModel: ReturnModelType<typeof Comments>) {}
+    constructor(@InjectModel(Comments) private readonly CommentsModel: ReturnModelType<typeof Comments>) {
+    }
 
 
-
-  @Get('recently')
-  @ApiOperation({ summary: '请求最近5条评论' })
-  getRecentlyComments() {
-    // this.CommentsModel.
-    return this.CommentsModel.find().limit(5).sort({'_id':-1})
-  }
-
-  @Get(':id')
-  async get (@Param('id') id: string) {
-
-    // return this.CommentsModel.find(contentsId:id);
-    return this.CommentsModel.find({contentsId: id}).sort({'_id': -1});
-  }
+    @Get('recently')
+    @ApiOperation({summary: '请求最近5条评论'})
+    async getRecentlyComments() {
+        // this.CommentsModel.
+        return this.CommentsModel.find().limit(5).sort({'_id': -1});
+    }
 
 
-  // @Post()
-  // // @UseGuards(AuthGuard('jwt'))
-  // async create(@Body() dto) {
-  //   // dto.user = user._id;
-  //   return await this.commentModel.create(dto);
-  // }
+    @Post()
+    @ApiOperation({summary: '发送评论'})
+    async send(@Body() dto: sendCommentDto) {
+
+        return this.CommentsModel.create(dto);
+        // return await this.CommentsModel.create()
+    }
+
+    @Get(':id')
+    async get(@Param('id') id: string) {
+        let a = this.CommentsModel.find({contentsId: id}).sort({'_id': -1});
+        console.log(a);
+        // return this.CommentsModel.find(contentsId:id);
+        return a;
+    }
+
+
+    // @Post()
+    // // @UseGuards(AuthGuard('jwt'))
+    // async create(@Body() dto) {
+    //   // dto.user = user._id;
+    //   return await this.commentModel.create(dto);
+    // }
 }

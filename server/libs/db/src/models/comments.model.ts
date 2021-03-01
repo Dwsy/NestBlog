@@ -28,8 +28,10 @@ export class Comments {
 
   @ApiProperty({ description: '评论者邮件', example: '123@qq.com' })
   @prop()
-  mail: string;
-
+  email: string;
+  @ApiProperty({ description: '评论者邮件（加密）', example: 'md5' })
+  @prop()
+  MD5email: string;
   @ApiProperty({ description: '评论者网址', example: 'dwsy.link:88' })
   @prop()
   url: string;
@@ -54,7 +56,7 @@ export class Comments {
     description: '评论状态',
     example: 'approved（通过）|spam（垃圾箱）|waiting（审核中）',
   })
-  @prop({ enum: ['approved', 'spam', 'waiting'] })
+  @prop({ enum: ['approved', 'spam', 'waiting',''] })
   // status:'approved'|'spam'|'waiting'
   status: string;
 

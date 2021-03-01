@@ -18,7 +18,7 @@
               </div>
 
               <v-avatar class="ma-3" size="150" tile>
-                <v-img :src="item.coverSmall"></v-img>
+                <v-img :src="item.coverSmall" lazy-src></v-img>
               </v-avatar>
             </div>
 

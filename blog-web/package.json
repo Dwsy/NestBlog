@@ -27,6 +27,7 @@
     "markdown-loader": "^6.0.0",
     "nuxt": "^2.14.12",
     "prismjs": "^1.23.0",
+    "valine": "^1.4.14",
     "vditor": "^3.8.1"
   },
   "devDependencies": {
@@ -42,7 +43,7 @@
   },
   "config": {
     "nuxt": {
-      "host": "0.0.0.0",
+      "host": "192.168.5.18",
       "port": 3001
     }
   }

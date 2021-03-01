@@ -11,6 +11,7 @@
       :key="ppt._id"
       :to="ppt.pptLink"
       :src="ppt.pptImage"
+      lazy-src
     >
         <v-row
           class="fill-height"

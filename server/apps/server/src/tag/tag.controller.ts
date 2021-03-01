@@ -29,7 +29,7 @@ export class TagController {
     @Get('article/:ids')
     async get(@Param('ids') ids: Array<String>) {
         let a = this.fieldsModel.find({tag: {$all: ["603befa8b139000093003432", "603befa8b139000093003433"]}})
-        console.log(a);
+        // console.log(a);
         return this.fieldsModel.find({tag: { $all: ids}}).sort({'_id': -1})
     }
 }
