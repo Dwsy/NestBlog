@@ -9,6 +9,7 @@ import { FieldsModule } from './fields/fields.module';
 import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
 import { ClassificationModule } from './classification/classification.module';
+import {NavigationModule} from "./navigation/navigation.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ClassificationModule } from './classification/classification.module';
     FieldsModule,
     PptModule,
     TagModule,
+    NavigationModule
     ],
   controllers: [AppController],
   providers: [AppService],

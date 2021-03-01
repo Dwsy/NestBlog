@@ -10,6 +10,7 @@ import { Tag } from './models/tag.model';
 import { PptOptions } from './models/ppt.model';
 import { Comments } from './models/comments.model';
 import { Classification } from './models/classification.model';
+import { Navigation } from './models/navigation.model';
 
 const models = TypegooseModule.forFeature([
   Classification,
@@ -20,6 +21,7 @@ const models = TypegooseModule.forFeature([
   Tag,
   UpFile,
   User,
+  Navigation
 ]);
 
 @Global()

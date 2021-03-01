@@ -7,7 +7,6 @@
       dark
       :src="navigationsrc"
     >
-      <!-- <v-list dense> -->
       <v-list>
         <v-col cols="10">
           <v-avatar size="50px">
@@ -17,27 +16,12 @@
             />
           </v-avatar>
           <sub>{{ greetings }}</sub>
-          <!-- <v-subheader>Dwsy</v-subheader> -->
         </v-col>
-        <!-- <v-list-item-avatar>
-          <v-img src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"></v-img>
-        </v-list-item-avatar> -->
 
         <template v-for="item in items">
-          <v-row v-if="item.heading" :key="item.heading" align="center">
-            <v-col cols="7">
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-col>
-            <v-col cols="6" class="text-center">
-              <a href="#!" class="body-2 black--text">EDIT</a>
-            </v-col>
-          </v-row>
           <v-list-group
             :to="item.link"
-            link
-            v-else-if="item.children"
+            v-if="item.children"
             :key="item.text"
             v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
@@ -51,10 +35,16 @@
               </v-list-item-content>
             </template>
 
-            <v-list-item v-for="(child, i) in item.children" :key="i" link nuxt :to="child.link">
+            <v-list-item
+              v-for="(child, i) in item.children"
+              :key="i"
+              link
+              nuxt
+              :to="'/classification/' + child._id"
+            >
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ child.text }}
+                  {{ child.name }}
                   <v-divider></v-divider>
                 </v-list-item-title>
               </v-list-item-content>
@@ -73,19 +63,21 @@
             <v-list-item-content>
               <v-list-item-title>
                 {{ item.text }}
+                <v-divider></v-divider>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </template>
-        
       </v-list>
     </v-navigation-drawer>
+
+    <!-- <Navigation  :navigationsrc="navigationsrc"/> -->
     <v-main>
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <!-- v-app-bar -->
+
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
@@ -129,21 +121,6 @@
       </v-btn>
     </v-app-bar>
 
-    <!-- v-main -->
-    <!-- <v-main>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-tooltip right>
-
-          </v-tooltip>
-        </v-row>
-      </v-container>
-    </v-main> -->
-
-    <!-- <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn> -->
-
     <v-footer color=" lighten-1" padless>
       <v-row justify="center" no-gutters>
         <v-btn v-for="link in links" :key="link" text rounded class="my-2">
@@ -160,10 +137,12 @@
 
 <script>
 import ScrollToTop from "@/components/ScrollToTop.vue";
+import Navigation from "../components/Comment/Navigation";
 
 export default {
   components: {
-    ScrollToTop
+    ScrollToTop,
+    Navigation
   },
   created() {
     this.$vuetify.theme.dark = true;
@@ -191,18 +170,10 @@ export default {
         {
           icon: "mdi-chevron-up",
           "icon-alt": "mdi-chevron-down",
-
           text: "文章分类",
           model: false,
-          children: [
-            { icon: "mdi-language-java", text: "Java",link: "/classification/6039284a2684e22ec8291c64" },
-            { icon: "mdi-language-python", text: "Python",link: "/classification/603928522684e22ec8291c65" },
-            { icon: "mdi-language-c", text: "C",link: "/classification/603928552684e22ec8291c66" },
-            { icon: "mdi-language-javascript", text: "Javascript",link: "/classification/603928572684e22ec8291c67" },
-            { icon: "mdi-translate", text: "Other" ,link: "/classification/1"}
-          ]
+          children: []
         },
-
         {
           icon: "mdi-account-multiple-outline",
           text: "友情链接",
@@ -222,16 +193,21 @@ export default {
     };
   },
   mounted() {
+    let classification = JSON.parse(localStorage.getItem("classifications"));
+    console.log(classification);
+    console.log(this.items[5]);
+    this.items[5].children = classification;
+    console.log(this.items[5]);
     const h = new Date().getHours();
     this.$vuetify.theme.dark = (h >= 19 && h <= 24) || (h >= 0 && h <= 7);
     if (h >= 6 && h <= 10) {
       this.greetings = "早上好！👾👾";
     } else if (h > 10 && h <= 14) {
-      this.greetings = "中午好！(❁´◡`❁)";
+      this.greetings = "中午好！(❁´◡`❁)🙂";
     } else if (h > 14 && h <= 19) {
-      this.greetings = "下午好ヾ(≧ ▽ ≦)ゝ";
+      this.greetings = "下午好ヾ(≧ ▽ ≦)ゝ🤯";
     } else if (h > 19 && h <= 24) {
-      this.greetings = "晚上好！( ఠൠఠ )ﾉ";
+      this.greetings = "晚上好！( ఠൠఠ )ﾉ👻";
     } else if (h > 24 && h <= 8) {
       this.greetings = "好耶！○( ＾皿＾)っHiahiahia…";
     }

@@ -47,6 +47,14 @@ import Top50 from "../components/Top50";
 import ArticleList from "../components/article/ArticleList";
 import Paging from "../components/article/Paging";
 export default {
+  components: {
+    PPT,
+    Tag,
+    Recently,
+    Top50,
+    ArticleList,
+    Paging
+  },
   async asyncData({ $axios, params }) {
     const id = params.id;
     // /users?query={"where":{"username":"user1","age":{"$gt":18}},"sort":"-_id","limit":10,"page":2,"populate":"friends"}
@@ -61,6 +69,8 @@ export default {
     });
     // const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
+    const classificationData = await $axios.$get("classification");
+
     const tagData = await $axios.$get("tag", {
       params: {
         query: {
@@ -76,10 +86,13 @@ export default {
         }
       }
     });
+    // localStorage.setItem
 
+    // localStorage.setItem("classifications", JSON.stringify(this.classificationData));
     return {
       fields: fieldsData.data,
       // titleData: titleData,
+      classification: classificationData.data,
       ppt: pptData.data,
       recently: recentlyData,
       tag: tagData.data,
@@ -88,14 +101,13 @@ export default {
       page: parseInt(fieldsData.page)
     };
   },
-  components: {
-    PPT,
-    Tag,
-    Recently,
-    Top50,
-    ArticleList,
-    Paging
+  mounted() {
+    localStorage.setItem(
+      "classifications",
+      JSON.stringify(this.classification)
+    );
   },
+
   watch: {
     page: {
       handler(val) {

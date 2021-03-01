@@ -1,7 +1,7 @@
 import { prop, modelOptions, Ref } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Tag } from './tag.model';
-import {  Classification} from './classification.model';
+import { Classification} from './classification.model';
 
 @modelOptions({
   schemaOptions: {

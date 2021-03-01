@@ -11,6 +11,7 @@ import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
 import { UpfileModule } from './upfile/upfile.module';
 import { ClassificationModule } from './classification/classification.module';
+import { NavigationModule } from './navigation/navigation.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { ClassificationModule } from './classification/classification.module';
     FieldsModule,
     PptModule,
     TagModule,
-    UpfileModule
+    UpfileModule,
+    NavigationModule
   ],
   controllers: [AdminController],
   providers: [AdminService],

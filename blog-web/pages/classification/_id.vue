@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <ArticleList :fields="fields"  />
-  </div>
+  <v-container grid-list-xs>
+    <h1>当前分类：</h1>
+    <v-divider></v-divider>
+    <ArticleList :fields="fields" />
+  </v-container>
 </template>
 
 <script>
