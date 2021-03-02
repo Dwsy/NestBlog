@@ -22,7 +22,7 @@ export default {
     const content = await $axios.$get(`contents/${id}`);
     const comments = await $axios.$get(`comments/${id}`);
     const ipData = await $axios.$get(`http://ip-api.com/json/`);
-console.log(ipData.query);
+// console.log(ipData.query);
     return { comments: comments, content: content, id: id ,IP:ipData.query};
   },
   components: {

@@ -42,7 +42,7 @@ export default {
     //   id = "603befa8b139000093003433";
     // }
 
-    console.log(id);
+    // console.log(id);
     const data = await $axios.$get("tag", {
       params: {
         query: {
@@ -62,9 +62,9 @@ export default {
   watch: {
     selects: {
       handler(val) {
-        console.log(this.selects);
+        // console.log(this.selects);
         // console.log(this.tags);
-        console.log(this.tags[this.selects]._id);
+        // console.log(this.tags[this.selects]._id);
         this.$router.push(`/tag/${this.tags[this.selects]._id}`);
       },
       deep: true

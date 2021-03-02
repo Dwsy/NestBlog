@@ -121,10 +121,10 @@ export default {
   },
   mounted() {
     let classification = JSON.parse(localStorage.getItem("classifications"));
-    console.log(classification);
-    console.log(this.items[5]);
+    // console.log(classification);
+    // console.log(this.items[5]);
     this.items[5].children = classification;
-    console.log(this.items[5]);
+    // console.log(this.items[5]);
     const h = new Date().getHours();
 
     if (h >= 6 && h <= 10) {

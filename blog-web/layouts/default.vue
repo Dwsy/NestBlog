@@ -194,10 +194,10 @@ export default {
   },
   mounted() {
     let classification = JSON.parse(localStorage.getItem("classifications"));
-    console.log(classification);
-    console.log(this.items[5]);
+    // console.log(classification);
+    // console.log(this.items[5]);
     this.items[5].children = classification;
-    console.log(this.items[5]);
+    // console.log(this.items[5]);
     const h = new Date().getHours();
     this.$vuetify.theme.dark = (h >= 19 && h <= 24) || (h >= 0 && h <= 7);
     if (h >= 6 && h <= 10) {

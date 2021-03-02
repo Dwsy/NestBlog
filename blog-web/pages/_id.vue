@@ -111,7 +111,7 @@ export default {
   watch: {
     page: {
       handler(val) {
-        console.log(`当前为第${this.page}页`);
+        // console.log(`当前为第${this.page}页`);
         this.$router.push(`${this.page}`);
         // this.page=this.nowpage
       },

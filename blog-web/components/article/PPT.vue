@@ -13,13 +13,9 @@
       :src="ppt.pptImage"
       lazy-src
     >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
-          <div class="display-3" style="color:red;">{{ ppt.pptTitle }} </div>
-        </v-row>
+      <v-row class="fill-height" align="center" justify="center">
+        <div class="display-3" style="color:red;">{{ ppt.pptTitle }}</div>
+      </v-row>
     </v-carousel-item>
   </v-carousel>
 </template>

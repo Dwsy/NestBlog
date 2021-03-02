@@ -5,8 +5,8 @@
 <script>
 export default {
   asyncData({ route, params }) {
-    console.log(route);
-    console.log(params);
+    // console.log(route);
+    // console.log(params);
   }
 };
 </script>

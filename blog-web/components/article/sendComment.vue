@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async send() {
-      console.log(this.IP);
+      // console.log(this.IP);
       await this.$axios.$post("comments", {
         contentsId: this.id,
         authorId: "",
