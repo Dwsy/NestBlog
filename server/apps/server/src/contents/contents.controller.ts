@@ -7,7 +7,7 @@ import { Contents } from 'libs/db/models/contents.model';
 @Crud({
     model: Contents,
     routes: {
-        create: false,
+
         update: false,
         delete: false
     }

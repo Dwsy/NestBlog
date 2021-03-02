@@ -8,6 +8,7 @@
         <v-list-item :key="item._id+1" :to="'article/'+item.contentsId">
           <v-list-item-avatar>
             <v-img :src="'https://gravatar.helingqi.com/wavatar/'+item.MD5email+'?s=220&r=X&d=mm'"></v-img>
+            <!-- <v-img :src="'https://sdn.geekzu.org/avatar/'+item.MD5email+'?s=220&r=X&d=mm'"></v-img> -->
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title v-html="item.authorName"></v-list-item-title>

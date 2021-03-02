@@ -22,7 +22,7 @@ export class Classification {
 
   @ApiProperty({ description: '分类icon', example: 'https://material.iconhelper.cn/' })
   @prop()
-  icon: String;
+  icon: string;
   @ApiProperty({ description: '分类排序', example: '' })
   @prop()
   rank: number;

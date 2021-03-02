@@ -5,8 +5,7 @@ import {ApiTags} from '@nestjs/swagger';
 import {Tag} from 'libs/db/models/tag.model';
 import {ReturnModelType} from "@typegoose/typegoose";
 import {Fields} from "libs/db/models/fields.model";
-import {Contents} from "libs/db/models/contents.model";
-import {Comments} from "libs/db/models/comments.model";
+
 
 @Crud({
     model: Tag,

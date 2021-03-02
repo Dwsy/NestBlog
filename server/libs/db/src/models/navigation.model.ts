@@ -1,6 +1,7 @@
 import {prop, modelOptions} from '@typegoose/typegoose';
 import {ApiProperty} from '@nestjs/swagger';
-
+import {Types, ObjectId, Schema as MongooseSchema} from "mongoose";
+import {Classification} from "libs/db/models/classification.model";
 
 @modelOptions({
     schemaOptions: {
@@ -27,13 +28,17 @@ export class Navigation {
     @prop()
     haveChildren: boolean;
 
-    @ApiProperty({description: 'childrenId', example: '["6039284a2684e22ec8291c64","603928522684e22ec8291c65","603928552684e22ec8291c66","603928572684e22ec8291c67"]'})
-    @prop()
-        // 分类子导航
-    childrenId: Array<any>;
+    @ApiProperty({description: '文章分类 id'})
+    @prop({type: MongooseSchema.Types.ObjectId, ref: Classification})
+        // @prop()
+    classification: MongooseSchema.Types.ObjectId;
+
+
 
     @ApiProperty({description: 'rank', example: '1'})
     @prop()
     rank: number;
+
+
 }
 

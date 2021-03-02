@@ -1,5 +1,7 @@
 import { prop, modelOptions } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
+import {ObjectId} from "mongoose";
+import {Fields} from "./fields.model";
 
 @modelOptions({
   schemaOptions: {
@@ -12,7 +14,7 @@ export class Comments {
 
   @ApiProperty({ description: '评论文章id', example: '评论文章id' })
   @prop()
-  contentsId: string;
+  contentsId: ObjectId;
 
   //  无注册
   @ApiProperty({ description: '评论作者名称', example: 'Dwsy' })
@@ -66,5 +68,5 @@ export class Comments {
 
   @ApiProperty({ description: '父级评论id', example: '父级评论id' })
   @prop()
-  parentId: string;
+  parentId: ObjectId;
 }

@@ -1,5 +1,7 @@
 import { prop, modelOptions } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
+import { Schema as MongooseSchema } from "mongoose";
+import { Fields } from "./fields.model";
 
 @modelOptions({
   schemaOptions: {
@@ -9,10 +11,15 @@ import { ApiProperty } from '@nestjs/swagger';
 })
 export class Contents {
   // 文章id自动生成
+  // @ApiProperty({ description: '文章自定义字段id', example: 'id' })
+  // @prop({type: MongooseSchema.Types.ObjectId, ref: Fields})
+  // // @prop()
+  // contentsId: MongooseSchema.Types.ObjectId;
 
-  @ApiProperty({ description: '标题', example: '标题' })
+
+  @ApiProperty({ description: '文章自定义字段id', example: '' })
   @prop()
-  title: string;
+  fieldsId: string;
 
   // @ApiProperty({description:'文章类型',example:'文章|独立页面'})
   // @prop()

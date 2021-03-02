@@ -56,17 +56,19 @@ export default {
     Paging
   },
   async asyncData({ $axios, params }) {
-    const id = params.id;
-    // /users?query={"where":{"username":"user1","age":{"$gt":18}},"sort":"-_id","limit":10,"page":2,"populate":"friends"}
+    let id = params.id;
     const fieldsData = await $axios.$get("fields", {
       params: {
         query: {
           limit: 8,
           page: id,
-          sort: "-_id"
+          sort: "-_id",
+          populate:"tag classification"
         }
       }
     });
+    // /users?query={"where":{"username":"user1","age":{"$gt":18}},"sort":"-_id","limit":10,"page":2,"populate":"friends"}
+    // const fieldsData = await $axios.$get(`fields/all/${id}`);
     // const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
     const classificationData = await $axios.$get("classification");

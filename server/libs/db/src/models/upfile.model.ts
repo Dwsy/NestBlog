@@ -1,6 +1,6 @@
 import { prop, modelOptions } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
-
+import {Types,ObjectId} from "mongoose";
 @modelOptions({
   schemaOptions: {
     //自动生成创建更新时间戳
@@ -14,7 +14,7 @@ export class UpFile {
 
   @ApiProperty({ description: '文件所属文章id', example: '文章id' })
   @prop()
-  contentsId: string;
+  contentsId: ObjectId;
 
   @ApiProperty({
     description: '文件url',
