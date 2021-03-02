@@ -143,7 +143,10 @@ export default {
               'python',
               'go',
               'java',
-
+              'sql',
+              'typescript',
+              'go',
+              'shell-session'
             ],
             plugins: [
               'line-numbers',
