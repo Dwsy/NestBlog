@@ -1,10 +1,8 @@
 <template>
   <v-row>
     <v-dialog v-model="dialog" persistent max-width="500px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="red lighten-2"  v-bind="attrs" v-on="on" @click="emptyFatherID" >
-          关闭
-        </v-btn>
+      <template >
+
       </template>
       <v-card>
         <v-form @submit.prevent="send" :disabled="disabledBtn">

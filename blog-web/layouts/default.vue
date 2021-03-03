@@ -208,7 +208,7 @@ export default {
       this.greetings = "下午好ヾ(≧ ▽ ≦)ゝ🤯";
     } else if (h > 19 && h <= 24) {
       this.greetings = "晚上好！( ఠൠఠ )ﾉ👻";
-    } else if (h > 24 && h <= 8) {
+    } else if (h > 0 && h <= 8) {
       this.greetings = "好耶！○( ＾皿＾)っHiahiahia…";
     }
     // let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致

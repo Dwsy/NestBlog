@@ -17,7 +17,7 @@
               <ContentTag :tags="field.tag" />
               <CommentList :comments="comments" :id="id" :IP="IP" />
               <SendComment :id="id" :IP="IP" />
-              <Ccomment :id="id" :IP="IP"/>
+              <!-- <Ccomment :id="id" :IP="IP"/> -->
 
             </v-col>
           </v-row>
@@ -41,7 +41,7 @@ import SendComment from "../../components/article/sendComment.vue";
 import HeadImage from "../../components/article/HeadImage";
 import ContentTag from "../../components/article/ContentTag";
 import Catalogue from "../../components/article/Catalogue";
-import Ccomment from '../../components/article/Ccomment';
+// import Ccomment from '../../components/article/Ccomment';
 
 export default {
   async asyncData({ $axios, params }) {
@@ -79,7 +79,7 @@ export default {
     HeadImage,
     ContentTag,
     Catalogue,
-    Ccomment
+    // Ccomment
   }
 };
 // console.log(this.id);

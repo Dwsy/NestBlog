@@ -17,9 +17,9 @@
                   lazy-src
                 ></v-img>
 
-                <v-chip-group column>
+                
                   <v-chip
-                    class="ma-2"
+                    class="ma-1"
                     color="light-blue darken-1"
                     text-color="white"
                     label
@@ -41,7 +41,7 @@
                       <v-icon>{{ t.icon }}</v-icon>
                     </v-avatar>
                   </v-chip>
-                </v-chip-group>
+                
 
                 <v-col>
 

@@ -3,23 +3,24 @@
     <v-card max-width="mx-auto" class="mx-auto">
       <v-row justify="space-around">
         <v-col>
-          <v-sheet elevation="0" class="pa-10">
+          <v-sheet elevation="0" class="pa-10 ma-2" >
             <h2 class="title mb-2">
               文章筛选
             </h2>
-            <v-chip-group column v-model="selects">
+
               <v-chip
                 v-for="tag in tags"
                 :key="tag._id"
                 :color="tag.colours"
                 label
+                class="ma-1"
               >
                 {{ tag.name }} <b>{{ tag.contentsNum }}</b>
                 <v-avatar v-show="tag.icon">
                   <v-icon>{{ tag.icon }}</v-icon>
                 </v-avatar>
               </v-chip>
-            </v-chip-group>
+
           </v-sheet>
         </v-col>
       </v-row>
@@ -53,8 +54,8 @@ export default {
       }
     });
     const fields = await $axios.$get(`tag/article/${id}`);
-    console.log(data);
-    console.log(fields);
+    // console.log(data);
+    // console.log(fields);
     return { tags: data.data, fields: fields };
   },
   data() {
