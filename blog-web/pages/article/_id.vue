@@ -1,6 +1,7 @@
 <template>
   <v-container >
     <div>
+      
       <HeadImage :cover="field.coverSmall"/>
     </div>
     <v-row>
@@ -11,9 +12,12 @@
           <v-row>
             <v-col xl="11" lg="11" md="11">
               <Content :content="content" :field="field" />
+
+              
               <ContentTag :tags="field.tag" />
-              <CommentList :comments="comments" />
+              <CommentList :comments="comments" :id="id" :IP="IP" />
               <SendComment :id="id" :IP="IP" />
+              <Ccomment :id="id" :IP="IP"/>
 
             </v-col>
           </v-row>
@@ -37,6 +41,7 @@ import SendComment from "../../components/article/sendComment.vue";
 import HeadImage from "../../components/article/HeadImage";
 import ContentTag from "../../components/article/ContentTag";
 import Catalogue from "../../components/article/Catalogue";
+import Ccomment from '../../components/article/Ccomment';
 
 export default {
   async asyncData({ $axios, params }) {
@@ -73,7 +78,8 @@ export default {
     SendComment,
     HeadImage,
     ContentTag,
-    Catalogue
+    Catalogue,
+    Ccomment
   }
 };
 // console.log(this.id);

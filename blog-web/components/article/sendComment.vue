@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col >
+    <v-col>
       <v-card>
         <v-form @submit.prevent="send" :disabled="disabledBtn">
           <v-text-field
@@ -8,7 +8,6 @@
             required
             :append-icon="icon"
             @click:append="send"
-            
             v-model="content"
           ></v-text-field>
         </v-form>
@@ -57,15 +56,6 @@
 <script>
 import md5 from "md5";
 export default {
-  //   props: {
-  //     type: {
-  //       type: String,
-  //       required: true
-  //     },
-  //     object: {
-  //       type: String,
-  //       required: true
-  //     }
   props: {
     id: "",
     IP: ""
@@ -95,11 +85,8 @@ export default {
   },
   methods: {
     async send() {
-      // console.log(this.IP);
       await this.$axios.$post("comments", {
-
         contentsId: this.id,
-        // contentsId: this.Object.Parse(this.id),
         authorId: "",
         authorName: this.name,
         ip: this.IP,
@@ -107,9 +94,8 @@ export default {
         text: this.content,
         MD5email: md5(this.email),
         email: this.email,
-        parentId: "603d6253c2ec3627c8b57996",
         agent: navigator.userAgent,
-        childNum: 0
+        isChild: false
       });
       this.icon = "mdi-send-lock";
       this.disabledBtn = true;

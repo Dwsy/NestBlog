@@ -13,19 +13,19 @@ import {Schema as MongooseSchema} from "mongoose";
 class sendCommentDto {
     @ApiProperty({description: '评论文章id', example: '评论文章id'})
     contentsId: string
-    @ApiProperty({description: '评论所属内容作者id',example: '评论所属内容作者id',})
+    @ApiProperty({description: '评论所属内容作者id', example: '评论所属内容作者id',})
     authorId: string
     @ApiProperty({description: '评论作者名称', example: 'Dwsy'})
     authorName: string
-    @ApiProperty({ description: '评论文字', example: '评论内容' })
+    @ApiProperty({description: '评论文字', example: '评论内容'})
     text: string
-    @ApiProperty({ description: '评论者ip地址', example: '233.233.233.233' })
+    @ApiProperty({description: '评论者ip地址', example: '233.233.233.233'})
     ip: string
-    @ApiProperty({ description: '评论者网址', example: 'dwsy.link:88' })
+    @ApiProperty({description: '评论者网址', example: 'dwsy.link:88'})
     url: string
-    @ApiProperty({ description: '评论者邮件（加密）', example: 'md5' })
+    @ApiProperty({description: '评论者邮件（加密）', example: 'md5'})
     MD5email: string
-    @ApiProperty({ description: '评论者邮件', example: '1@1.c' })
+    @ApiProperty({description: '评论者邮件', example: '1@1.c'})
     email: string
     @ApiProperty({
         description: '评论者客户端',
@@ -37,10 +37,44 @@ class sendCommentDto {
     @ApiProperty({description: 'isChild', example: false})
     @prop()
     isChild: boolean;
-    @ApiProperty({ description: 'childId', example: 'childId' })
+    @ApiProperty({description: 'childId', example: 'childId'})
+    @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
+    childId: Array<MongooseSchema.Types.ObjectId>
+}
+
+class sendChildCommentDto {
+    @ApiProperty({description: '评论文章id', example: '评论文章id'})
+    contentsId: string
+    @ApiProperty({description: '评论所属内容作者id', example: '评论所属内容作者id',})
+    authorId: string
+    @ApiProperty({description: '评论作者名称', example: 'Dwsy'})
+    authorName: string
+    @ApiProperty({description: '评论文字', example: '评论内容'})
+    text: string
+    @ApiProperty({description: '评论者ip地址', example: '233.233.233.233'})
+    ip: string
+    @ApiProperty({description: '评论者网址', example: 'dwsy.link:88'})
+    url: string
+    @ApiProperty({description: '评论者邮件（加密）', example: 'md5'})
+    MD5email: string
+    @ApiProperty({description: '评论者邮件', example: '1@1.c'})
+    email: string
+    @ApiProperty({
+        description: '评论者客户端',
+        example:
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36',
+    })
+    @prop()
+    agent: string
+    @ApiProperty({description: 'isChild', example: false})
+    @prop()
+    isChild: boolean;
+    @ApiProperty({description: 'childId', example: 'childId'})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
     childId: Array<MongooseSchema.Types.ObjectId>
 
+    @ApiProperty({description: '父评论id'})
+    fatherId: string
 }
 
 @Controller('comments')
@@ -66,9 +100,22 @@ export class CommentsController {
         // return await this.CommentsModel.create()
     }
 
+    @Post('child')
+    @ApiOperation({summary: '发送子评论'})
+    async sendChild(@Body() dto: sendChildCommentDto) {
+
+        let a = this.CommentsModel.create(dto);
+        console.log((await a)._id)
+        console.log(dto.fatherId);
+        let b= this.CommentsModel.findByIdAndUpdate(dto.fatherId,{$push:{childId:(await a)._id}})
+
+        return b;
+        // return await this.CommentsModel.create()
+    }
+
     @Get(':id')
     async get(@Param('id') id: string) {
-        let a = this.CommentsModel.find({contentsId: id,isChild:false}).populate('childId').sort({'_id': -1});
+        let a = this.CommentsModel.find({contentsId: id, isChild: false}).populate('childId').sort({'_id': -1});
         // return this.CommentsModel.find(contentsId:id);
         return a;
     }
