@@ -91,7 +91,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-row align="center" style="max-width: 30vw">
-        <v-text-field
+        <!-- <v-text-field
           placeholder="搜索..."
           append-icon="mdi-magnify"
           single-line
@@ -100,7 +100,7 @@
           dense
           color="white"
           hide-details
-        />
+        /> -->
       </v-row>
 
       <!-- <v-switch v-model="$vuetify.theme.dark" ></v-switch><p>明暗切换</p> -->

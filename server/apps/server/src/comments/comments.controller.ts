@@ -5,6 +5,7 @@ import {Comments} from 'libs/db/models/comments.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
 import {prop, ReturnModelType} from '@typegoose/typegoose';
 import {Param} from '@nestjs/common';
+import {Schema as MongooseSchema} from "mongoose";
 
 // import {md5} from ''
 
@@ -26,8 +27,6 @@ class sendCommentDto {
     MD5email: string
     @ApiProperty({ description: '评论者邮件', example: '1@1.c' })
     email: string
-    @ApiProperty({ description: '父级评论id', example: '父级评论id' })
-    parentId: string
     @ApiProperty({
         description: '评论者客户端',
         example:
@@ -35,9 +34,12 @@ class sendCommentDto {
     })
     @prop()
     agent: string
-    @ApiProperty({ description: '子评论个数', example: '3' })
+    @ApiProperty({description: 'isChild', example: false})
     @prop()
-    childNum: number;
+    isChild: boolean;
+    @ApiProperty({ description: 'childId', example: 'childId' })
+    @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
+    childId: Array<MongooseSchema.Types.ObjectId>
 
 }
 
@@ -66,7 +68,7 @@ export class CommentsController {
 
     @Get(':id')
     async get(@Param('id') id: string) {
-        let a = this.CommentsModel.find({contentsId: id}).sort({'_id': -1});
+        let a = this.CommentsModel.find({contentsId: id,isChild:false}).populate('childId').sort({'_id': -1});
         // return this.CommentsModel.find(contentsId:id);
         return a;
     }

@@ -1,13 +1,17 @@
 <template>
-  <v-row>
-    <v-col cols="12" xl="10" lg="10" md="10">
-
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-card>
+      <v-img max-height="400" :src="cover"></v-img>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-export default {};
+export default {
+  props:{
+    cover:''
+  }
+};
 </script>
 
 <style></style>

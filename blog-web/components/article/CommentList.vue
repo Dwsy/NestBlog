@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" xl="10" lg="10" md="10">
+    <v-col>
       <v-card>
         <v-list three-line>
           <v-subheader> 评论列表 </v-subheader>
@@ -17,21 +17,40 @@
                 ></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
+                
                 <v-list-item-title v-html="item.authorName"></v-list-item-title>
+                
                 <v-list-item-subtitle v-html="item.text"></v-list-item-subtitle>
-                <b
-                  ><v-list-item-subtitle
+                
+                <b><v-list-item-subtitle
                     v-html="item.createdAt"
-                  ></v-list-item-subtitle
-                ></b>
+                  ></v-list-item-subtitle></b>
+                
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <v-img
+                      src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"
+                    ></v-img>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title>子评论</v-list-item-title>
+                    <v-list-item-subtitle>子评论</v-list-item-subtitle>
+                    <b><v-list-item-subtitle>子评论</v-list-item-subtitle></b>
+                  </v-list-item-content>
+
+
+                </v-list-item>
+
+                
               </v-list-item-content>
+
+              <v-btn small  rounded  color="success" ><v-icon>mdi-reply</v-icon></v-btn>
             </v-list-item>
           </template>
         </v-list>
       </v-card>
     </v-col>
   </v-row>
-
 </template>
 
 <script>
