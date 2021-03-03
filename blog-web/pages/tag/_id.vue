@@ -38,20 +38,23 @@ export default {
   // }
   async asyncData({ $axios, params }) {
     let id = params.id;
-    // if (id === undefined) {
-    //   id = "603befa8b139000093003433";
-    // }
+    if (id === undefined) {
+      id = "603befa8b139000093003433";
+    }
 
     // console.log(id);
     const data = await $axios.$get("tag", {
       params: {
         query: {
           limit: 777,
-          sort: "-contentsNum"
+          sort: "-contentsNum",
+          
         }
       }
     });
     const fields = await $axios.$get(`tag/article/${id}`);
+    console.log(data);
+    console.log(fields);
     return { tags: data.data, fields: fields };
   },
   data() {

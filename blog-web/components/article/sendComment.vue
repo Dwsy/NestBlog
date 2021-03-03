@@ -97,7 +97,9 @@ export default {
     async send() {
       // console.log(this.IP);
       await this.$axios.$post("comments", {
+
         contentsId: this.id,
+        // contentsId: this.Object.Parse(this.id),
         authorId: "",
         authorName: this.name,
         ip: this.IP,
@@ -105,7 +107,7 @@ export default {
         text: this.content,
         MD5email: md5(this.email),
         email: this.email,
-        parentId: "",
+        parentId: "603d6253c2ec3627c8b57996",
         agent: navigator.userAgent,
         childNum: 0
       });

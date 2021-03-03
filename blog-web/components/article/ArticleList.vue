@@ -2,48 +2,57 @@
   <v-card class="mx-auto" elevation="0">
     <v-container>
       <v-row dense>
-        <v-col v-for="(item, i) in fields" :key="i" cols="12">
-          <v-card nuxt :to="'/article/' + item.contentsId" elevation="1">
+        <v-col v-for="item in fields" :key="item._id" cols="12">
+          <v-card :to="'/article/' + item.contentsId" elevation="1">
             <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
+              <v-container>
                 <v-card-title
                   class="headline"
                   v-text="item.title"
                 ></v-card-title>
-
+                  <v-img
+                    :src="item.coverSmall"
+                    max-height="400"
+                    :aspect-ratio="16 / 9"
+                    lazy-src
+                  ></v-img>
+                  
                 <v-chip-group column>
-                  <v-chip class="ma-2" color="light-blue darken-1" text-color="white" label>
-                    <v-avatar left>
+
+                  <v-chip
+                    class="ma-2"
+                    color="light-blue darken-1"
+                    text-color="white"
+                    label
+                  >
+                    <v-avatar center>
                       <v-icon>mdi-tag-multiple</v-icon>
                     </v-avatar>
-                    Tag:
                   </v-chip>
                   <v-chip
-                  
-                  class="ma-2"
-                    v-for="tag in item.tag"
-                    :key="tag.name"
-                    :to="`/tag/${tag._id}`"
+                    class="ma-2"
+                    v-for="(t, l) in item.tag"
+                    :key="l"
                     outlined
+                    :to="`/tag/${t._id}`"
                   >
-                    {{ tag.name }}
-                    <v-avatar v-show="tag.icon">
-                      <v-icon>{{ tag.icon }}</v-icon>
+                    <!-- :to="`/tag/${t._id}`" -->
+                    {{ t.name }}
+                    <v-avatar v-show="t.icon">
+                      <v-icon>{{ t.icon }}</v-icon>
                     </v-avatar>
                   </v-chip>
                 </v-chip-group>
 
-                <small align-content-end>创建时间:{{ item.createdAt }} </small>
-              </div>
-
-              <v-avatar class="ma-3" size="150" tile>
-                <v-img :src="item.coverSmall" lazy-src></v-img>
-              </v-avatar>
+                <v-col>
+                  <small align-content-end >{{item.createdAt|formatDate('yyyy年MM月dd日')}}</small>
+                  <v-spacer></v-spacer>
+                  <small align-content-end
+                    >分类:{{ item.classification.name }}</small
+                  >
+                </v-col>
+              </v-container>
             </div>
-
-            <!-- <v-card-actions>
-              <v-btn text>Listen Now</v-btn>
-            </v-card-actions> -->
           </v-card>
         </v-col>
       </v-row>
@@ -52,20 +61,17 @@
 </template>
 
 <script>
-import Tag from "./Tag";
+// import Tag from "./Tag";
 
 export default {
-  components: { Tag },
-  comments: {
-    Tag
-  },
+  // components: { Tag },
   props: {
     fields: {}
   },
-
   mounted() {
-
-  }
+    // let a=  new Date("2021-02-28T11:35:46.277Z")
+    // console.log(a);
+  },
 };
 </script>
 

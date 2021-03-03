@@ -10,7 +10,7 @@
               <v-list-item-avatar>
                 <v-img
                   :src="
-                    'https://sdn.geekzu.org/avatar/' +
+                    'https://gravatar.helingqi.com/wavatar/' +
                       item.MD5email +
                       '?s=220&r=X&d=mm'
                   "

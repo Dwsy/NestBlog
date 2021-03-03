@@ -180,9 +180,9 @@ export default {
           link: "/firend"
         },
         {
-          icon: "mdi-information-variant",
-          text: "md文章test",
-          link: "/article"
+          icon: "mdi-infinity",
+          text: "infinitynewtab",
+          link: "/infinitynewtab"
         },
         { icon: "mdi-information-variant", text: "关于", link: "/about" }
       ],

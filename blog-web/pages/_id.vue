@@ -11,10 +11,7 @@
           <v-row>
             <v-col>
               <ArticleList v-bind:fields="fields" />
-              <!-- <ArticleList v-bind:fields="fields" v-bind:titles="titleData" /> -->
-              <!-- <Paging /> -->
-              <!-- <Paging :nowpage="page" :length="lastPage" /> -->
-              <!-- <Paging  :length="lastPage" /> -->
+
               <div class="text-center">
                 <v-pagination v-model="page" :length="lastPage"></v-pagination>
               </div>
@@ -26,9 +23,7 @@
       <v-col>
         <div cols="12" md="1" lg="1" xl="1">
           <br />
-          <!-- <br />
-          <br />
-          <br /> -->
+
           <Recently v-bind:recently="recently" />
           <Top-50 />
           <p class="text-h6 pb-4">标签</p>
@@ -113,11 +108,11 @@ export default {
   watch: {
     page: {
       handler(val) {
-        // console.log(`当前为第${this.page}页`);
+
         this.$router.push(`${this.page}`);
-        // this.page=this.nowpage
+
       },
-      deep: true
+      // deep: true
     }
   }
 };
