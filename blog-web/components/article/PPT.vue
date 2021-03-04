@@ -13,7 +13,11 @@
       :src="ppt.pptImage"
     >
       <v-row class="fill-height" align="center" justify="center">
-        <div class="display-3" style="color:red;">{{ ppt.pptTitle }}</div>
+
+      <v-col class="text-center" cols="12">
+        <h1 class="display-1 font-weight-thin mb-4">{{ ppt.pptTitle }}</h1>
+        <h4 class="subheading">{{ ppt.pptTitle }}</h4>
+      </v-col>
       </v-row>
     </v-carousel-item>
   </v-carousel>

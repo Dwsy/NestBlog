@@ -1,130 +1,114 @@
-<template>
-  <div>
-    <v-row>
-      <!-- <v-card>
+<template lang="md">
+  <v-row>
+    <!-- <v-card>
       <v-img max-height="400"
         :src="field.cover"></v-img>
     </v-card> -->
-      <v-col>
-        <h2>{{ field.title }}</h2>
-        <br />
-        <span>创建时间：{{content.createdAt | formatDate("yyyy年MM月dd日")}} {{k}}{{field.classification.name}}</span>
-        <div class="Language" v-html="markdownString"></div>
-      </v-col>
-    </v-row>
-    <p class="caption">
-      最后修改时间：{{ content.createdAt | formatDate("yyyy年MM月dd日") }}
-    </p>
-  </div>
+    <v-col>
+      <h2>{{field.title}}</h2>
+      <br>
+      <span>创建时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp分类：{{field.classification.name}}</span>
+      <div v-html="$md.render(content.text)" class="Language"></div>
+      <p class="caption">最后修改时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}</p>
+    </v-col>
+
+
+
+  </v-row>
+  
 </template>
 
 <script>
 import Prism from "prismjs";
 
-import marked from "marked";
-
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  highlight: false,
-  pedantic: false,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
-});
-
 export default {
-
+  // components: {
+  //   ContentTag
+  // },
   props: {
     content: {},
     field: {}
   },
-  data() {
-    return {
-      markdownString: "",
-      k:'分类：'
-    };
-  },
   mounted() {
     Prism.highlightAll();
-    this.markdownString = marked(this.content.text);
   }
 };
 </script>
-<style scoped>
-h1,
-p {
-  font-size: 30px;
+
+<style >
+/* 列表 */
+li > ol,
+li > ul {
+  margin: 0 0;
 }
-h2 {
-  position: relative;
-  margin: 20px 0 32px !important;
-  font-size: 1.55em;
+
+li p.first {
+  display: inline-block;
 }
-h3 {
-  font-size: 20px;
+
+ul,
+ol {
+  padding-left: 2rem;
 }
-h4 {
-  font-size: 15px;
+
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
 }
-h2::after {
-  transition: all 0.35s;
-  content: "";
-  position: absolute;
-  background: linear-gradient(#3c67bd8c 30%, #3c67bd 70%);
-  width: 1em;
-  left: 0;
-  box-shadow: 0 3px 3px rgba(32, 160, 255, 0.4);
-  height: 3px;
-  bottom: -8px;
+
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
 }
-h2::before {
-  content: "";
-  width: 100%;
-  border-bottom: 1px solid #eee;
-  bottom: -7px;
-  position: absolute;
+
+#write ol li,
+ul li {
+  padding-left: 0.1rem;
 }
-h2:hover::after {
-  width: 2.5em;
+
+/* 无序列表，显示为空心圆 */
+/* ul {
+  list-style-type: circle;
+} */
+
+/* 引用 */
+blockquote {
+  /* margin-left: 1rem; */
+  border-left: 0.3rem solid var(--purple-light-4);
+  border-radius: 0.4rem;
+  padding: 10px 15px;
+  color: #777;
+  background-color: var(--purple-light-1);
+  box-shadow: var(--purple-light-2);
+  font-family: var(--quota-font);
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #666;
-  line-height: 1.4;
-  font-weight: 700;
-  margin: 30px 0 10px 0;
+
+/* Table Head */
+thead th {
+  background-color: rgb(81, 130, 187);
+  color: #fff;
+  border-bottom-width: 0;
 }
-</style>
-<!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
-table {
-  font-family: verdana, arial, sans-serif;
-  font-size: 11px;
-  color: #333333;
-  border-width: 1px;
-  border-color: #666666;
-  border-collapse: collapse;
+
+/* Column Style */
+td {
+  background-color: rgba(243, 248, 255, 0.986);
+  color: #000;
 }
+/* Heading and Column Style */
+tr,
 th {
   border-width: 1px;
-  padding: 8px;
   border-style: solid;
-  border-color: #666666;
-  background-color: #dedede;
+  border-color: rgb(81, 130, 187);
 }
-td {
-  border-width: 1px;
-  padding: 8px;
-  border-style: solid;
-  border-color: #666666;
-  background-color: #ffffff;
+
+/* Padding and font style */
+td,
+th {
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: Verdana;
+  font-weight: bold;
 }
 </style>
