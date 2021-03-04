@@ -11,7 +11,6 @@
       :key="ppt._id"
       :to="ppt.pptLink"
       :src="ppt.pptImage"
-      lazy-src
     >
       <v-row class="fill-height" align="center" justify="center">
         <div class="display-3" style="color:red;">{{ ppt.pptTitle }}</div>

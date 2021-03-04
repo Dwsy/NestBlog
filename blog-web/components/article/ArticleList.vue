@@ -2,22 +2,26 @@
   <v-card elevation="0">
     <v-container>
       <v-row dense>
-        <v-col v-for="item in fields" :key="item._id" cols="12">
-          <v-card :to="'/article/' + item.contentsId" elevation="1">
+        <v-col v-for="item in fields" :key="item._id" cols="12" >
+          <v-card :to="'/article/' + item.contentsId" elevation="1"  >
             <div class="d-flex flex-no-wrap justify-space-between">
-              <v-container>
+              <v-container >
                 <v-card-title
                   class="headline"
                   v-text="item.title"
                 ></v-card-title>
+                <div>
+
                 <v-img
                   :src="item.coverSmall"
                   max-height="400"
-                  :aspect-ratio="16 / 9"
+                  :aspect-ratio="8 / 5"
                   lazy-src
+                  transition="slide-y-reverse-transition"
+                  class="d-lg-none"
                 ></v-img>
+                </div>
 
-                
                   <v-chip
                     class="ma-1"
                     color="light-blue darken-1"
@@ -29,10 +33,11 @@
                     </v-avatar>
                   </v-chip>
                   <v-chip
-                    class="ma-2"
+                    class="ma-1"
                     v-for="(t, l) in item.tag"
                     :key="l"
                     outlined
+                    label
                     :to="`/tag/${t._id}`"
                   >
                     <!-- :to="`/tag/${t._id}`" -->
@@ -53,7 +58,13 @@
                     <v-spacer></v-spacer>
                 </v-col>
               </v-container>
+              
+               <v-avatar class="ma-3 d-none d-lg-block" size="150" tile >
+                <v-img :src="item.coverSmall" lazy-src transition="slide-y-reverse-transition"></v-img>
+              </v-avatar>
+
             </div>
+            
           </v-card>
         </v-col>
       </v-row>

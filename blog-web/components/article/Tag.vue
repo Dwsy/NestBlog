@@ -2,9 +2,10 @@
   <v-card max-width="450">
     <v-row justify="space-around">
       <v-col>
-        <v-sheet elevation="0" class="ma-2">
+        <v-sheet class="ma-1">
 
             <v-chip
+            class="ma-1"
               v-for="tag in tags"
               :key="tag.name"
               :color="tag.colours"
@@ -14,6 +15,7 @@
               <v-avatar v-show="tag.icon">
                 <v-icon>{{tag.icon}}</v-icon>
               </v-avatar>
+
             </v-chip>
 
         </v-sheet>

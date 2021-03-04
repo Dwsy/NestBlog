@@ -4,7 +4,7 @@
       <PPT v-bind:ppts="ppt" />
     </div>
     <v-row>
-      <v-col cols="12" xl="9" lg="9" md="9" 	sm="9" xs="12">
+      <v-col cols="12" xl="9" lg="9" md="12" 	sm="12" xs="12">
         <div>
           <br />
           <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
@@ -21,7 +21,7 @@
       </v-col>
 
       <v-col>
-        <div cols="12" md="1" lg="1" xl="1" sm="12" xs="12">
+        <div cols="12" md="3" lg="3" xl="3" sm="12" xs="12">
           <br />
 
           <Recently v-bind:recently="recently" />
@@ -35,6 +35,9 @@
 </template>
 
 <script>
+
+
+
 import PPT from "../components/article/PPT";
 import Tag from "../components/article/Tag";
 import Recently from "../components/Comment/Recently";
