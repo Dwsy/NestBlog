@@ -4,6 +4,7 @@
       <v-row dense>
         <v-col v-for="item in fields" :key="item._id" cols="12">
           <v-hover v-slot:default="{ hover }" close-delay="50">
+            
             <v-card
               :to="'/article/' + item.contentsId"
               :elevation="hover ? 4 : 1"
@@ -11,6 +12,7 @@
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-container>
                   <v-card-title
+                   
                     class="headline"
                     v-text="item.title"
                   ></v-card-title>
@@ -31,6 +33,7 @@
                     </v-avatar>
                     Tag
                   </v-chip>
+
                   <v-chip
                     class="ma-1"
                     v-for="(t, l) in item.tag"
@@ -88,7 +91,4 @@ export default {
 };
 </script>
 
-<style>
-
-
-</style>
+<style></style>

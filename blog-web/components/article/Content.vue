@@ -8,7 +8,11 @@
       <h2>{{field.title}}</h2>
       <br>
       <span>创建时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp分类：{{field.classification.name}}</span>
-      <div v-html="$md.render(content.text)" class="Language"></div>
+      
+      <div id="vditor" class="Language"></div>
+      
+      <!-- <div v-html="$md.render(content.text)" class="Language"></div> -->
+      
       <p class="caption">最后修改时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}</p>
     </v-col>
 
@@ -21,6 +25,9 @@
 <script>
 import Prism from "prismjs";
 
+import Vditor from "vditor";
+import "vditor/dist/index.css";
+
 export default {
   // components: {
   //   ContentTag
@@ -31,6 +38,34 @@ export default {
   },
   mounted() {
     Prism.highlightAll();
+
+        this.contentEditor = new Vditor("vditor", {
+            // theme: "dark",
+            preview: {
+                theme: {
+                    // current: "dark"
+                },
+                hljs: {
+                  // lineNumber:true,
+                  // style:"monokai"
+                    // enable: false
+                }
+            },
+            mode: "ir",
+            icon: "material",
+
+            toolbarConfig: {
+                pin: false,
+                hide: true
+            },
+            cache: {
+                enable: false
+            },
+            after: () => {
+                this.contentEditor.setValue(this.content.text);
+            }
+        });
+
   }
 };
 </script>

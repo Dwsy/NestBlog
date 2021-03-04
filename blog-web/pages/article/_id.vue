@@ -2,7 +2,7 @@
   <v-container >
     <div>
       
-      <HeadImage :cover="field.coverSmall"/>
+      <HeadImage :cover="field.cover"/>
     </div>
     <v-row>
       <v-col cols="12" xl="11" lg="11" md="11" 	sm="12" xs="12">

@@ -14,6 +14,7 @@
                 :color="tag.colours"
                 label
                 class="ma-1"
+                :to="`/tag/${tag._id}`"
               >
                 {{ tag.name }} <b>{{ tag.contentsNum }}</b>
                 <v-avatar v-show="tag.icon">
@@ -58,21 +59,21 @@ export default {
     // console.log(fields);
     return { tags: data.data, fields: fields };
   },
-  data() {
-    return {
-      selects: []
-    };
-  },
-  watch: {
-    selects: {
-      handler(val) {
-        // console.log(this.selects);
-        // console.log(this.tags);
-        // console.log(this.tags[this.selects]._id);
-        this.$router.push(`/tag/${this.tags[this.selects]._id}`);
-      },
-      deep: true
-    }
-  }
+  // data() {
+  //   return {
+  //     // selects: []
+  //   };
+  // },
+  // watch: {
+  //   selects: {
+  //     handler(val) {
+  //       // console.log(this.selects);
+  //       // console.log(this.tags);
+  //       // console.log(this.tags[this.selects]._id);
+  //       this.$router.push(`/tag/${this.tags[this.selects]._id}`);
+  //     },
+  //     deep: true
+  //   }
+  // }
 };
 </script>
