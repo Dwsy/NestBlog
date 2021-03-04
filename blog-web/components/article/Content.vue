@@ -1,34 +1,26 @@
 <template>
-  <v-row>
-    <!-- <v-card>
+  <div>
+    <v-row>
+      <!-- <v-card>
       <v-img max-height="400"
         :src="field.cover"></v-img>
     </v-card> -->
-    <v-col>
-      <h2>{{ field.title }}</h2>
-      <br />
-      <span
-        >创建时间：{{
-          content.createdAt | formatDate("yyyy年MM月dd日")
-        }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp分类：{{
-          field.classification.name
-        }}</span
-      >
-
-      <div class="Language" v-html="markdownString"></div>
-    </v-col>
-
+      <v-col>
+        <h2>{{ field.title }}</h2>
+        <br />
+        <span>创建时间：{{content.createdAt | formatDate("yyyy年MM月dd日")}} {{k}}{{field.classification.name}}</span>
+        <div class="Language" v-html="markdownString"></div>
+      </v-col>
+    </v-row>
     <p class="caption">
       最后修改时间：{{ content.createdAt | formatDate("yyyy年MM月dd日") }}
     </p>
-  </v-row>
+  </div>
 </template>
 
 <script>
 import Prism from "prismjs";
 
-// import Vditor from "vditor";
-// import "vditor/dist/index.css";
 import marked from "marked";
 
 marked.setOptions({
@@ -45,51 +37,20 @@ marked.setOptions({
 });
 
 export default {
-  // components: {
-  //   ContentTag
-  // },
+
   props: {
     content: {},
     field: {}
   },
   data() {
     return {
-      markdownString: ""
+      markdownString: "",
+      k:'分类：'
     };
   },
   mounted() {
     Prism.highlightAll();
-    console.log("123");
-    // this.contentEditor = new Vditor("vditor", {
-    //     // theme: "dark",
-    //     preview: {
-    //         theme: {
-    //             // current: "dark"
-    //         },
-    //         hljs: {
-    //           // lineNumber:true,
-    //           // style:"monokai"
-    //             // enable: false
-    //         }
-    //     },
-    //     mode: "ir",
-    //     icon: "material",
-
-    //     toolbarConfig: {
-    //         pin: false,
-    //         hide: true
-    //     },
-    //     cache: {
-    //         enable: false
-    //     },
-    //     after: () => {
-    //         this.contentEditor.setValue(this.content.text);
-    //     }
-    // });
-
     this.markdownString = marked(this.content.text);
-    document.getElementsByClassName("mdmd").innerHTML = "this.markdownString";
-    console.log(this.markdownString);
   }
 };
 </script>
