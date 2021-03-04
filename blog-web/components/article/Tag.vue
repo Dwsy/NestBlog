@@ -1,11 +1,11 @@
 <template>
-  <v-card max-width="450">
+  <v-card max-width="1200">
     <v-row justify="space-around">
       <v-col>
-        <v-sheet class="ma-1">
+        <v-sheet class="ma-1" >
 
             <v-chip
-            class="ma-1"
+            class="ma-1 imgbig"
               v-for="tag in tags"
               :key="tag.name"
               :color="tag.colours"

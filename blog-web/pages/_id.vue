@@ -20,8 +20,8 @@
         </div>
       </v-col>
 
-      <v-col>
-        <div cols="12" md="3" lg="3" xl="3" sm="12" xs="12">
+      <v-col cols="12" xl="3"  lg="3" md="12"   sm="12" xs="12">
+        <div >
           <br />
 
           <Recently v-bind:recently="recently" />

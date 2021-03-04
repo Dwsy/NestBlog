@@ -34,4 +34,13 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+ h1,p {font-size: 30px}
+ h2 {position: relative;margin: 20px 0 32px!important;font-size: 1.55em;}
+ h3 {font-size: 20px}
+ h4 {font-size: 15px}
+ h2::after {transition:all .35s;content:"";position:absolute;background:linear-gradient(#3c67bd8c 30%,#3c67bd 70%);width:1em;left:0;box-shadow:0 3px 3px rgba(32,160,255,.4);height:3px;bottom:-8px;}
+ h2::before {content:"";width:100%;border-bottom:1px solid #eee;bottom:-7px;position:absolute}
+ h2:hover::after {width: 2.5em;}
+ h1, h2, h3, h4, h5, h6 {color:#666;line-height:1.4;font-weight:700;margin:30px 0 10px 0}
+</style>

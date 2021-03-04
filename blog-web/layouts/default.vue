@@ -9,8 +9,9 @@
     >
       <v-list>
         <v-col cols="10">
-          <v-avatar size="50px">
+          <v-avatar size="50px" class="img-full">
             <img
+              
               alt="Avatar"
               src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"
             />
@@ -258,10 +259,29 @@ export default {
     }
   }
 };
+
 </script>
 <style>
 .theme--dark.v-application code {
   background-color: rgb(0 0 0 / 0%);
   color: currentColor;
 }
+
+
+.img-full {
+    width: 100px;
+    border-radius: 50%;
+    /* animation: light 8s ease-in-out infinite; */
+    transition: 0.5s;
+}
+.img-full:hover {
+    transform: scale(1.15) rotate(720deg);
+}
+
+.imgbig:hover {
+  transform: scale(1.25);
+  cursor: pointer;
+  transition: all 0.8s;
+}
+
 </style>
