@@ -21,7 +21,7 @@ export default {
       { rel: "stylesheet", type: "text/css", href: "http://www.bootcdn.cn/animate.css" }
     ],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
-    script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
+    // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css  script src="//unpkg.com/valine/dist/Valine.min.js

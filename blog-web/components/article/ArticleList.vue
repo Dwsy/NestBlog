@@ -8,6 +8,7 @@
             <v-card
               :to="'/article/' + item.contentsId"
               :elevation="hover ? 4 : 1"
+              class="animate__animated animate__bounce"
             >
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-container>

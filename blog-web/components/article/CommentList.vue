@@ -60,6 +60,8 @@
       </div>
     </v-dialog>
 
+
+
     <v-snackbar
       v-model="snackbar"
       color="light-blue lighten-4 lighten-5 accent-4"
@@ -78,9 +80,9 @@
       <v-card>
         <v-list three-line>
           <v-subheader> 评论列表 </v-subheader>
-          <template v-for="item in comments">
+          <template v-for="item in comments" > 
             <v-divider :key="item._id"></v-divider>
-            <v-list-item :key="item._id + 1">
+            <v-list-item :key="item._id + 1" >
               <v-list-item-avatar>
                 <v-img
                   class="img-full"
