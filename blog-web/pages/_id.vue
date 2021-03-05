@@ -13,7 +13,7 @@
               <ArticleList v-bind:fields="fields" />
 
               <div class="text-center">
-                <v-pagination v-model="page" :length="lastPage"></v-pagination>
+                <v-pagination v-model="page" v-bind:length="lastPage"></v-pagination>
               </div>
             </v-col>
           </v-row>
@@ -53,6 +53,7 @@ export default {
     ArticleList,
     Paging
   },
+  // (tag)
   async asyncData({ $axios, params }) {
     let id = params.id;
     const fieldsData = await $axios.$get("fields", {
@@ -61,7 +62,7 @@ export default {
           limit: 8,
           page: id,
           sort: "-_id",
-          populate:"tag classification"
+          populate:'tag classification'
         }
       }
     });

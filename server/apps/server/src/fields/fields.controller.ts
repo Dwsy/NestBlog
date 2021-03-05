@@ -35,9 +35,10 @@ export class FieldsController {
 
     @Get('tag/:id')
     async getTag(@Param('id') id: string){
-        let a = this.model.find().populate('tag.name');
+        let a = this.model.find().populate('tag','name');
         return a;
     }
+
     @Get('all/:page')
     async getAll(@Param('page') page: string){
         return this.model.find().populate('tag').populate('classification').limit(8).skip(parseInt(page) * 8 - 8).sort({'_id': -1});

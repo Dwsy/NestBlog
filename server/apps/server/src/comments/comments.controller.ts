@@ -88,7 +88,7 @@ export class CommentsController {
     @ApiOperation({summary: '请求最近5条评论'})
     async getRecentlyComments() {
         // this.CommentsModel.
-        return this.CommentsModel.find().limit(5).sort({'_id': -1});
+        return this.CommentsModel.find({},'-email').limit(5).sort({'_id': -1});
     }
 
 
