@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
+
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
@@ -11,7 +12,6 @@
         <v-col cols="10">
           <v-avatar size="50px" class="img-full">
             <img
-              
               alt="Avatar"
               src="https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100"
             />
@@ -82,8 +82,10 @@
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
-      color="blue darken-3"
+
       dark
+
+      
       :src="appbarsrc"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -145,8 +147,11 @@ export default {
     ScrollToTop,
     Navigation
   },
-  created() {
+  async created() {
     this.$vuetify.theme.dark = true;
+    const classificationData = await this.$axios.$get("classification");
+    this.items[5].children = classificationData.data;
+    console.log(classificationData);
     // this.$vuetify.theme.dark = true;
   },
   data() {
@@ -194,10 +199,11 @@ export default {
     };
   },
   mounted() {
-    let classification = JSON.parse(localStorage.getItem("classifications"));
+    // console.log(classificationData);
+    // let classification = JSON.parse(localStorage.getItem("classifications"));
     // console.log(classification);
     // console.log(this.items[5]);
-    this.items[5].children = classification;
+    // this.items[5].children = classificationData.data;
     // console.log(this.items[5]);
     const h = new Date().getHours();
     this.$vuetify.theme.dark = (h >= 19 && h <= 24) || (h >= 0 && h <= 7);
@@ -259,7 +265,6 @@ export default {
     }
   }
 };
-
 </script>
 <style>
 .theme--dark.v-application code {
@@ -267,15 +272,14 @@ export default {
   color: currentColor;
 }
 
-
 .img-full {
-    width: 100px;
-    border-radius: 50%;
-    /* animation: light 8s ease-in-out infinite; */
-    transition: 0.5s;
+  width: 100px;
+  border-radius: 50%;
+  /* animation: light 8s ease-in-out infinite; */
+  transition: 0.5s;
 }
 .img-full:hover {
-    transform: scale(1.15) rotate(720deg);
+  transform: scale(1.15) rotate(720deg);
 }
 
 .imgbig:hover {
@@ -283,5 +287,4 @@ export default {
   cursor: pointer;
   transition: all 0.8s;
 }
-
 </style>

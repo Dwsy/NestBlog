@@ -70,7 +70,7 @@ export default {
     // const fieldsData = await $axios.$get(`fields/all/${id}`);
     // const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
-    const classificationData = await $axios.$get("classification");
+    // const classificationData = await $axios.$get("classification");
 
     const tagData = await $axios.$get("tag", {
       params: {
@@ -93,7 +93,7 @@ export default {
     return {
       fields: fieldsData.data,
       // titleData: titleData,
-      classification: classificationData.data,
+      // classification: classificationData.data,
       ppt: pptData.data,
       recently: recentlyData,
       tag: tagData.data,
@@ -102,12 +102,12 @@ export default {
       page: parseInt(fieldsData.page)
     };
   },
-  mounted() {
-    localStorage.setItem(
-      "classifications",
-      JSON.stringify(this.classification)
-    );
-  },
+  // mounted() {
+  //   localStorage.setItem(
+  //     "classifications",
+  //     JSON.stringify(this.classification)
+  //   );
+  // },
 
   watch: {
     page: {
@@ -121,4 +121,6 @@ export default {
   }
 };
 </script>
-<style></style>
+<style scoped>
+
+</style>

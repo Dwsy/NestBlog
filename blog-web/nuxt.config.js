@@ -7,15 +7,21 @@ export default {
   head: {
     titleTemplate: '%s - myblog',
     title: 'myblog',
+    htmlAttrs: {
+      lang: 'zh-CN',
+      amp: true
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "stylesheet", type: "text/css", href: "http://www.bootcdn.cn/animate.css" }
     ],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
+    script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css  script src="//unpkg.com/valine/dist/Valine.min.js

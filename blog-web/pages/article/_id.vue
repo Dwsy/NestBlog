@@ -62,13 +62,13 @@ export default {
     });
     const comments = await $axios.$get(`comments/${id}`);
 
-    // const ipData = await $axios.$get(`http://ip-api.com/json/`);
+    const ipData = await $axios.$get(`http://ip-api.com/json/`);
     // console.log(ipData.query);
     return {
       comments: comments,
       content: content,
       id: id,
-      IP: '0.0.0.0',
+      IP: ipData.query,
       field: field
     };
   },

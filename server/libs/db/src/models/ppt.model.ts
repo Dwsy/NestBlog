@@ -18,6 +18,9 @@ export class PptOptions {
   @ApiProperty({ description: '首页轮播图标题', example: '' })
   @prop()
   pptTitle: String;
+  @ApiProperty({ description: '首页轮播图副标题', example: '' })
+  @prop()
+  pptSubTitle: String;
   @ApiProperty({ description: '轮播图排序', example: '' })
   @prop()
   rank: number;

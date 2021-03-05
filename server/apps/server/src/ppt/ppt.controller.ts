@@ -9,7 +9,7 @@ import { PptOptions } from 'libs/db/models/ppt.model';
 
     model:PptOptions,
     routes: {
-        create: false,
+        // create: false,
         update: false,
         delete: false
     }
