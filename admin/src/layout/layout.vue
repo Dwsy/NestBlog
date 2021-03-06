@@ -73,7 +73,7 @@
 								</v-list-item-avatar>
 								<v-list-item-content>
 									<v-list-item-title>{{
-										child.meta.title
+										$t('header.' + child.meta.title)
 									}}</v-list-item-title>
 								</v-list-item-content>
 							</v-list-item>

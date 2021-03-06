@@ -1,7 +1,7 @@
 <template>
   <div class="login_container" :class="{login_mlmlh: mlmlh}">
     <v-img
-      src="https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-4.jpg"
+      src="http://fp1.fghrsh.net/2020/11/10/1a0144878d0702b4624abac576177812.png"
       gradient="rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)"
     />
     <v-toolbar absolute flat dark color="transparent" min-width="100%">
@@ -14,7 +14,7 @@
         <v-icon style="margin-right: 10px">mdi-fingerprint</v-icon>Login
       </v-btn>
       <v-btn text target="_blank" href="https://github.com/Groundhog-Chen/vue-material-admin">
-        <v-icon style="margin-right: 10px">mdi-github-circle</v-icon>github
+        <v-icon style="margin-right: 10px">mdi-github</v-icon>github
       </v-btn>
     </v-toolbar>
     <div class="wrap">

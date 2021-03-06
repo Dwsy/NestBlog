@@ -7,7 +7,7 @@ const messages = {
     en_US: require('./en.js')
 };
 const i18n = new VueI18n({
-    locale: 'en_US',
+    locale: 'zh_CN',
     messages: messages
 });
 export default i18n;

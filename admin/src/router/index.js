@@ -43,131 +43,181 @@ const router = new Router({
                 },
             ]
         },
-        // 任务
+        //撰写
         {
-            path: '/tasks',
+            path: '/write',
             visible: true,
             component: layout,
-            redirect: '/tasks/list',
+            redirect: '/write/article',
             meta: {
-                title: 'task',
-                icon: 'mdi-checkbox-multiple-marked-circle',
+                title: 'write',
+                icon: 'mdi-note-plus',
                 keepAlive: false
             },
             children: [
                 {
-                    path: ':label',
-                    name: 'myTask',
+                    path: 'article',
+                    name: 'article',
                     meta: {
-                        title: 'Tasks',
-                        icon: 'mdi-alpha-t',
+                        title: 'article',
+                        icon: 'mdi-note-plus',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "myTask" */ '@/views/task/list.vue')
+                    component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/article.vue')
+                }, 
+                {
+                    path: 'draft',
+                    name: 'draft',
+                    meta: {
+                        title: 'draft',
+                        icon: 'mdi-file',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/draft.vue')
                 }
             ]
         },
-        // 组件
+        // 管理
         {
-            path: '/components',
+            path: '/manage',
             visible: true,
-            redirect: '/components/table',
+            redirect: '/manage/articles',
             component: layout,
             meta: {
-                title: 'components',
-                icon: 'mdi-view-comfy',
+                title: 'manage',
+                icon: ' mdi-post-outline',
                 keepAlive: false
             },
             children: [
                 {
-                    path: 'widgets',
-                    name: 'widget',
+                    path: 'articles',
+                    name: 'article',
                     meta: {
-                        title: 'widgets',
-                        icon: 'mdi-alpha-w',
+                        title: 'article',
+                        icon: 'mdi-note-text',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "table" */ '@/views/components/widget.vue')
+                    component: () => import(/* webpackChunkName: "table" */ '@/views/manage/articles.vue')
                 },
                 {
-                    path: 'sparklines',
-                    name: 'sparklines',
+                    path: 'comments',
+                    name: 'comment',
                     meta: {
-                        title: 'Sparklines',
-                        icon: 'mdi-alpha-s',
+                        title: 'comment',
+                        icon: 'mdi-comment-processing',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "charts" */ '@/views/components/sparklines.vue')
+                    component: () => import(/* webpackChunkName: "charts" */ '@/views/manage/comments.vue')
                 },
                 {
-                    path: 'form',
-                    name: 'form',
+                    path: 'classifications',
+                    name: 'classification',
                     meta: {
-                        title: 'form',
-                        icon: 'mdi-alpha-f',
+                        title: 'classification',
+                        icon: 'mdi-bookshelf',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "charts" */ '@/views/components/form.vue')
+                    component: () => import(/* webpackChunkName: "charts" */ '@/views/manage/classifications.vue')
                 },
                 {
-                    path: 'table',
-                    name: 'starTask',
+                    path: 'tags',
+                    name: 'tag',
                     meta: {
-                        title: 'table',
-                        icon: 'mdi-alpha-t',
+                        title: 'tag',
+                        icon: 'mdi-tag-multiple',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/components/table.vue')
-                }
+                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/tags.vue')
+                },
+                {
+                    path: 'users',
+                    name: 'user',
+                    meta: {
+                        title: 'user',
+                        icon: 'mdi-account-group',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/users.vue')
+                },
+                {
+                    path: 'files',
+                    name: 'file',
+                    meta: {
+                        title: 'file',
+                        icon: 'mdi-file-multiple',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/files.vue')
+                },
+                {
+                    path: 'links',
+                    name: 'link',
+                    meta: {
+                        title: 'link',
+                        icon: 'mdi-link-variant',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/links.vue')
+                },
             ]
         },
-        // 地图
+        // 设置
         {
-            path: '/map',
+            path: '/setting',
             visible: true,
-            redirect: '/map',
+            // redirect: '/setting/ppt',
             component: layout,
             meta: {
-                title: 'map',
-                icon: 'mdi-map-marker-radius',
+                title: 'setting',
+                icon: 'mdi-cogs',
                 keepAlive: false
             },
             children: [
                 {
-                    path: '/map',
-                    name: 'map',
+                    path: '/ppt',
+                    name: 'ppt',
                     meta: {
-                        title: 'map',
-                        icon: 'mdi-map-marker-radius',
+                        title: 'ppt',
+                        icon: 'mdi-image-size-select-actual',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "map" */ '@/views/map/index.vue')
+                    component: () => import(/* webpackChunkName: "map" */ '@/views/setting/ppt.vue')
+                },
+                {
+                    path: '/theme',
+                    name: 'theme',
+                    meta: {
+                        title: 'theme',
+                        icon: 'mdi-theme-light-dark',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "map" */ '@/views/setting/theme.vue')
                 },
             ]
         },
         // 流程图
-        {
-            path: '/flow-editor',
-            visible: true,
-            component: layout,
-            meta: {
-                title: 'flowEditor',
-                icon: 'mdi-vector-triangle',
-                keepAlive: false
-            },
-            children: [
-                {
-                    path: '/flow-editor',
-                    name: 'FlowEditor',
-                    meta: {
-                        title: 'Flow Editor',
-                        icon: 'mdi-vector-triangle',
-                        keepAlive: false
-                    },
-                    component: () => import(/* webpackChunkName: "flowchart" */ '@/views/flowchart/index.vue')
-                }
-            ]
-        },
+        // {
+        //     path: '/flow-editor',
+        //     visible: true,
+        //     component: layout,
+        //     meta: {
+        //         title: 'flowEditor',
+        //         icon: 'mdi-vector-triangle',
+        //         keepAlive: false
+        //     },
+        //     children: [
+        //         {
+        //             path: '/flow-editor',
+        //             name: 'FlowEditor',
+        //             meta: {
+        //                 title: 'Flow Editor',
+        //                 icon: 'mdi-vector-triangle',
+        //                 keepAlive: false
+        //             },
+        //             component: () => import(/* webpackChunkName: "flowchart" */ '@/views/flowchart/index.vue')
+        //         }
+        //     ]
+        // },
         // 测试页面缓存
         {
             path: '/keep-alive',
@@ -214,14 +264,25 @@ const router = new Router({
                 }
             ]
         },
-        // 登录页面
+        // 退出登录
+        {
+            path: '/logout',
+            name: 'logout',
+            visible: true,
+            meta: {
+                title: 'logout',
+                icon: 'mdi-logout',
+                keepAlive: false
+            },
+            component: () => import(/* webpackChunkName: "login" */ '@/views/login/logout.vue')
+        },
         {
             path: '/login',
             name: 'login',
             visible: true,
             meta: {
                 title: 'login',
-                icon: 'mdi-fingerprint',
+                icon: 'mdi-login',
                 keepAlive: false
             },
             component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue')
