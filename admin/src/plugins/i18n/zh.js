@@ -5,6 +5,7 @@ module.exports = {
         draft: '草稿',
         manage: '管理',
         article: '文章',
+        manageArticles: '文章',
         keepAlive: '页面缓存',
         login: '登录页',
         logout: '退出登录',

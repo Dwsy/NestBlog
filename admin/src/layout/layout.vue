@@ -17,7 +17,7 @@
 			<template v-slot:img>
 				<v-img
 					src="https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg"
-					gradient="rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)"
+					gradient="rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)"
 				/>
 			</template>
 

@@ -8,10 +8,14 @@ import { PptOptions } from 'libs/db/models/ppt.model';
 @Crud({
 
     model:PptOptions,
-
+    // routes: {
+    //     // create: false,
+    //     update: false,
+    //     delete: false
+    // }
 
 })
-@Controller('ppt')
+@Controller('api/ppt')
 @ApiTags('博客首页轮播图设置')
 export class PptController {
     constructor(@InjectModel(PptOptions) private readonly model) { }

@@ -5,11 +5,14 @@ import { ApiTags } from '@nestjs/swagger';
 import { Contents } from 'libs/db/models/contents.model';
 
 @Crud({
+    model: Contents,
+    routes: {
 
-    model:Contents,
-  
+        update: false,
+        delete: false
+    }
 })
-@Controller('contents')
+@Controller('api/contents')
 @ApiTags('文章主体')
 export class ContentsController {
     constructor(@InjectModel(Contents) private readonly model) { }

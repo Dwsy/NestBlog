@@ -9,6 +9,7 @@ import i18n from './plugins/i18n';
 import VCharts from 'v-charts';
 import VueApexCharts from 'vue-apexcharts';
 import '../src/styles/index.scss';
+import './api'
 
 Vue.use(VCharts);
 Vue.use(VueAMap);

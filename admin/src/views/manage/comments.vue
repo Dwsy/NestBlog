@@ -1,13 +1,17 @@
 <template>
-  <div>test</div>
+    <div>{{ comments }}</div>
 </template>
 
 <script>
-export default {
 
-}
+export default {
+    props: {
+        comments: []
+    },
+    async created() {
+        this.comments = await this.$http.recently();
+    }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

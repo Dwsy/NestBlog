@@ -6,10 +6,14 @@ import { Navigation } from 'libs/db/models/navigation.model';
 
 @Crud({
     model:Navigation,
-
+    // routes: {
+    //     create: false,
+    //     update: false,
+    //     delete: false
+    // }
 })
 
-@Controller('navigation')
+@Controller('api/navigation')
 @ApiTags('博客导航设置')
 export class NavigationController {
     constructor(@InjectModel(Navigation) private readonly model) { }

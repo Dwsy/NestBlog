@@ -8,10 +8,14 @@ import { User } from 'libs/db/models/user.model';
 
 @Crud({
 
-    model:User
-  
+    model: User,
+    routes: {
+        create: false,
+        update: false,
+        delete: false
+    }
 })
-@Controller('users')
+@Controller('api/users')
 @ApiTags('用户')
 export class UsersController {
     constructor(@InjectModel(User) private readonly model) { }

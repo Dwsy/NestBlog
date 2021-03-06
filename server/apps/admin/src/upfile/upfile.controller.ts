@@ -8,7 +8,7 @@ import { UpFile } from 'libs/db/models/upfile.model';
     model: UpFile,
 
 })
-@Controller('upfile')
+@Controller('api/upfile')
 @ApiTags('上传文件')
 export class UpfileController {
     constructor(@InjectModel(UpFile) private readonly model) { }

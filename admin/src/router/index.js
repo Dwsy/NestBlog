@@ -64,7 +64,7 @@ const router = new Router({
                         keepAlive: false
                     },
                     component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/article.vue')
-                }, 
+                },
                 {
                     path: 'draft',
                     name: 'draft',
@@ -81,7 +81,7 @@ const router = new Router({
         {
             path: '/manage',
             visible: true,
-            redirect: '/manage/articles',
+            redirect: '/manage/manageArticles',
             component: layout,
             meta: {
                 title: 'manage',
@@ -90,10 +90,10 @@ const router = new Router({
             },
             children: [
                 {
-                    path: 'articles',
-                    name: 'article',
+                    path: 'manageArticles',
+                    name: 'manageArticles',
                     meta: {
-                        title: 'article',
+                        title: 'manageArticles',
                         icon: 'mdi-note-text',
                         keepAlive: false
                     },
