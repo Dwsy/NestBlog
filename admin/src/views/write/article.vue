@@ -1,10 +1,8 @@
 <template>
     <v-container>
         <v-row align="center" justify="center">
-            <v-col cols="12" xl="12" lg="12" md="12" sm="12" xs="12">
-                <h2>撰写新文章</h2>
-            </v-col>
             <v-col cols="12" xl="11" lg="11" md="11" sm="12" xs="12">
+                <h3>撰写文章</h3>
                 <v-divider></v-divider>
                 <v-text-field
                     label="标题"
@@ -70,7 +68,33 @@
 
                 <v-divider></v-divider>
 
-                <v-combobox  label="选择分类" :items="classifications" append-icon="mdi-book-plus"></v-combobox>
+                <v-combobox
+                    label="选择分类"
+                    :items="classifications"
+                    append-icon="mdi-book-plus"
+                ></v-combobox>
+                <v-divider></v-divider>
+
+                <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="大头图url"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="小头图url"
+                    required
+                ></v-text-field>
+                <v-row justify="end">
+                    <v-spacer></v-spacer>
+                    <v-btn color="#2196f3" outlined class="ma-3"
+                        >存为草稿</v-btn
+                    >
+
+                    <v-btn color="success" class="ma-3">发布</v-btn>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>
@@ -84,7 +108,7 @@ export default {
         return {
             contentEditor: "",
             tag: ["Gaming", "Programming", "Vue", "Vuetify"],
-            classifications:["学习笔记","吐槽","算法"],
+            classifications: ["学习笔记", "吐槽", "算法"],
             model: ["Vuetify"],
             search: null
         };

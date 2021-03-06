@@ -1,65 +1,55 @@
 <template>
-<div>
-  <ul class="vular-list-title">
-    <li 
-      v-for="(column, index) in columns"
-      :key="column.field"
-      :style="{
-        'margin-left' : canSelect && index===0 ? '50px' : '',
-        flex: column.flex,
-        width: column.width,
-      }"
-    >
-      {{column.title}}
-    </li>
-    <li class="list-action"></li>
-  </ul>
-</div>
+    <v-container grid-list-md>
+        <v-toolbar color="#1e88e5" dark>
+            <v-toolbar-title>文章列表</v-toolbar-title>
+            <v-divider class="mx-4" vertical></v-divider>
+            <span class="subheading">共20篇。</span>
+            <v-spacer></v-spacer>
+            <v-btn text>撰写 </v-btn>
+        </v-toolbar>
 
+        <v-row>
+            <v-col cols="12">
+                <v-card class="employee-list mb-1">
+                    <v-card-title class="pa-6 pb-3">
+                        <!-- <p>Employee List</p> -->
+                        <!-- <v-spacer></v-spacer> -->
+                        <v-text-field
+                            v-model="mock.employeeTable.search"
+                            append-icon="mdi-magnify"
+                            label="Search"
+                            clearable
+                            single-line
+                            hide-details
+                        ></v-text-field>
+                    </v-card-title>
+                    <v-data-table
+                        v-model="mock.employeeTable.selected"
+                        :headers="mock.employeeTable.headers"
+                        :items="mock.employeeTable.employee"
+                        :search="mock.employeeTable.search"
+                        item-key="name"
+                        show-select
+                    >
+                    </v-data-table>
+                </v-card>
+            </v-col>
+            
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'vular-list-title',
-    props: {
-      columns: {default : ()=>{return []}},
-      canSelect: {default: true},
-    },
+import mock from './mock'
 
-    data () {
-      return {
-      }
-    },
-
-    computed:{
-    },
-
-    methods: {
-    },
+export default {
+  name: 'Tables',
+  data() {
+    return {
+      mock
+    }
   }
+}
+
 </script>
-
-<style>
-  .vular-list-title{
-    list-style: none;
-    padding: 0; 
-    margin:0;
-    display: flex; 
-    flex-flow: row;
-    padding: 0 !important;
-    flex: 1;
-  }
-
-  .vular-list-title li{
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    padding-right:20px;
-    word-break:break-all;
-  }
-
-  .vular-list-title .list-action{
-    width: 150px;
-    justify-content: flex-end;
-  }
-</style>
+<style></style>
