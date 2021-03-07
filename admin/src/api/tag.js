@@ -8,6 +8,13 @@ export const delTag = (data) => {
 export const upTag = (data) => {
     return $put('/tag', data);
 }
-export const getTag = (data) => {
-    return $get('/tag', data);
+export const getTag = () => {
+    return $get('/tag', {
+        params: {
+            query: {
+                limit: 777,
+                sort: "-contentsNum"
+            }
+        }
+    });
 }
