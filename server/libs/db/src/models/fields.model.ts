@@ -31,11 +31,15 @@ export class Fields {
     @prop()
     coverSmall: string;
 
-    @ApiProperty({description: '文章标签', example: '标签id数组'})
+    @ApiProperty({description: '文章标签', example: ''})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Tag})
     tag: Array<MongooseSchema.Types.ObjectId>
 
-    @ApiProperty({description: '文章分类 id'})
+    @ApiProperty({ description: '评论数', example: '123' })
+    @prop()
+    commentsNum: Number;
+
+    @ApiProperty({description: '文章分类 id',example: ''})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Classification})
         // @prop()
     classification: MongooseSchema.Types.ObjectId;

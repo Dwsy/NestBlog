@@ -38,9 +38,7 @@ export class Contents {
   // status:password
   isPublish: boolean;
 
-  @ApiProperty({ description: '评论数', example: '123' })
-  @prop()
-  commentsNum: Number;
+
 
   @ApiProperty({ description: '是否允许评论', example: true })
   @prop()

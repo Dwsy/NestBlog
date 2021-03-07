@@ -11,6 +11,16 @@ import VueApexCharts from 'vue-apexcharts';
 import '../src/styles/index.scss';
 import './api'
 import formatDate from './plugins/formatDate'
+// Import the CSS or use your own!
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+Vue.use(Toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true
+});
+
 Vue.use(VCharts);
 Vue.use(VueAMap);
 Vue.use(VueApexCharts);

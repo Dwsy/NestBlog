@@ -8,8 +8,8 @@ import { Contents } from 'libs/db/models/contents.model';
     model: Contents,
     routes: {
 
-        update: false,
-        delete: false
+        // update: false,
+        // delete: false
     }
 })
 @Controller('api/contents')
