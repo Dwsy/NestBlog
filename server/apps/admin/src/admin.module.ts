@@ -12,6 +12,8 @@ import { TagModule } from './tag/tag.module';
 import { UpfileModule } from './upfile/upfile.module';
 import { ClassificationModule } from './classification/classification.module';
 import { NavigationModule } from './navigation/navigation.module';
+import { LinksController } from './links/links.controller';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -24,9 +26,10 @@ import { NavigationModule } from './navigation/navigation.module';
     PptModule,
     TagModule,
     UpfileModule,
-    NavigationModule
+    NavigationModule,
+    LinksModule
   ],
-  controllers: [AdminController],
+  controllers: [AdminController, LinksController],
   providers: [AdminService],
 })
 export class AdminModule {}

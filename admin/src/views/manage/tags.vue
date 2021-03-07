@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md>
+    <div>
         <v-toolbar color="#1a0033" dark>
             <v-toolbar-title>标签列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
@@ -43,7 +43,6 @@
                                             formTitle
                                         }}</span>
                                     </v-card-title>
-
                                     <v-card-text>
                                         <v-container>
                                             <v-row>
@@ -108,7 +107,27 @@
                             </v-dialog>
                             <!-- </v-toolbar> -->
                         </template>
-                        <template v-slot:item.actions="{ item }">
+
+                        <template v-slot:[`item.colours`]="{ item }">
+                            <v-chip :color="item.colours" dark outlined>
+                                {{ item.colours }}
+                            </v-chip>
+                        </template>
+
+                        <template v-slot:[`item.icon`]="{ item }">
+                            <v-icon :color="item.colours" dark>
+                                {{ item.icon }}
+                            </v-icon>
+                        </template>
+
+                        <template v-slot:[`item.createdAt`]="{ item }">
+                            {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
+                        </template>
+                        <template v-slot:[`item.updatedAt`]="{ item }">
+                            {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
+                        </template>
+
+                        <template v-slot:[`item.actions`]="{ item }">
                             <v-icon small class="mr-2" @click="editItem(item)">
                                 mdi-pencil
                             </v-icon>
@@ -125,18 +144,17 @@
                 </v-card>
             </v-col>
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <script>
 export default {
     props: {
         selected: [],
-        search: "",
-        
+        search: ""
     },
     data: () => ({
-        tags:[],
+        tags: [],
         dialog: false,
         headers: [
             {
@@ -145,85 +163,12 @@ export default {
                 sortable: false,
                 value: "name"
             },
-            { text: "标签文章数", value: "contentsNum" },
+            { text: "标签颜色", value: "colours" },
             { text: "标签图标", value: "icon" },
-            { text: "标签颜色", value: "colours"},
+            { text: "标签文章数", value: "contentsNum" },
             { text: "标签更新时间", value: "createdAt" },
             { text: "标签创建时间", value: "updatedAt" },
             { text: "Actions", value: "actions", sortable: false }
-            
-        ],
-        desserts: [
-            {
-                name: "Frozen Yogurt",
-                calories: 159,
-                fat: 6.0,
-                carbs: 24,
-                protein: 4.0
-            },
-            {
-                name: "Ice cream sandwich",
-                calories: 237,
-                fat: 9.0,
-                carbs: 37,
-                protein: 4.3
-            },
-            {
-                name: "Eclair",
-                calories: 262,
-                fat: 16.0,
-                carbs: 23,
-                protein: 6.0
-            },
-            {
-                name: "Cupcake",
-                calories: 305,
-                fat: 3.7,
-                carbs: 67,
-                protein: 4.3
-            },
-            {
-                name: "Gingerbread",
-                calories: 356,
-                fat: 16.0,
-                carbs: 49,
-                protein: 3.9
-            },
-            {
-                name: "Jelly bean",
-                calories: 375,
-                fat: 0.0,
-                carbs: 94,
-                protein: 0.0
-            },
-            {
-                name: "Lollipop",
-                calories: 392,
-                fat: 0.2,
-                carbs: 98,
-                protein: 0
-            },
-            {
-                name: "Honeycomb",
-                calories: 408,
-                fat: 3.2,
-                carbs: 87,
-                protein: 6.5
-            },
-            {
-                name: "Donut",
-                calories: 452,
-                fat: 25.0,
-                carbs: 51,
-                protein: 4.9
-            },
-            {
-                name: "KitKat",
-                calories: 518,
-                fat: 26.0,
-                carbs: 65,
-                protein: 7
-            }
         ],
         editedIndex: -1,
         editedItem: {
@@ -263,9 +208,8 @@ export default {
             const tagData = await this.$http.getTag();
             // console.log(tagData);
             // this.tags = tagData[0].data[0];
-            console.log(tagData[0].data);
-            return this.tags=tagData[0].data
-
+            // console.log(tagData[0].data);
+            return (this.tags = tagData[0].data);
         },
 
         dialogControl() {

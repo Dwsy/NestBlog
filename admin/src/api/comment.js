@@ -11,3 +11,7 @@ export const upcomment = (data) => {
 export const getcomment = (data) => {
     return $get('/comment', data);
 }
+
+export const getComment = () => {
+    return $get('/comments');
+}

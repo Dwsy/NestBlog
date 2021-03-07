@@ -8,6 +8,13 @@ export const delfClassification = (data) => {
 export const upClassification = (data) => {
     return $put('/classification', data);
 }
-export const getClassification = (data) => {
-    return $get('/classification', data);
+export const getClassification = () => {
+    return $get('/classification', {
+        params: {
+            query: {
+                limit: 777,
+                sort: "rank",
+            }
+        }
+    });
 }

@@ -11,6 +11,7 @@ import { PptOptions } from './models/ppt.model';
 import { Comments } from './models/comments.model';
 import { Classification } from './models/classification.model';
 import { Navigation } from './models/navigation.model';
+import { Links } from './models/links.model';
 
 const models = TypegooseModule.forFeature([
   Classification,
@@ -21,7 +22,8 @@ const models = TypegooseModule.forFeature([
   Tag,
   UpFile,
   User,
-  Navigation
+  Navigation,
+  Links
 ]);
 
 @Global()

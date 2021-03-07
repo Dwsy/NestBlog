@@ -2,6 +2,7 @@ import {Body, Controller, Get, Post} from '@nestjs/common';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
 import {Comments} from 'libs/db/models/comments.model';
+import {Fields} from 'libs/db/models/fields.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
 import {prop, ReturnModelType} from '@typegoose/typegoose';
 import {Param} from '@nestjs/common';
@@ -13,6 +14,9 @@ import {Schema as MongooseSchema} from "mongoose";
 class sendCommentDto {
     @ApiProperty({description: '评论文章id', example: '评论文章id'})
     contentsId: string
+    @ApiProperty({description: 'fieldsId', example: 'fieldsId'})
+    @prop({type: MongooseSchema.Types.ObjectId, ref: Fields})
+    fieldsId: Array<MongooseSchema.Types.ObjectId>
     @ApiProperty({description: '评论所属内容作者id', example: '评论所属内容作者id',})
     authorId: string
     @ApiProperty({description: '评论作者名称', example: 'Dwsy'})
@@ -40,11 +44,15 @@ class sendCommentDto {
     @ApiProperty({description: 'childId', example: 'childId'})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
     childId: Array<MongooseSchema.Types.ObjectId>
+
 }
 
 class sendChildCommentDto {
     @ApiProperty({description: '评论文章id', example: '评论文章id'})
     contentsId: string
+    @ApiProperty({description: 'fieldsId', example: 'fieldsId'})
+    @prop({type: MongooseSchema.Types.ObjectId, ref: Fields})
+    fieldsId: Array<MongooseSchema.Types.ObjectId>
     @ApiProperty({description: '评论所属内容作者id', example: '评论所属内容作者id',})
     authorId: string
     @ApiProperty({description: '评论作者名称', example: 'Dwsy'})
@@ -82,7 +90,12 @@ class sendChildCommentDto {
 export class CommentsController {
     constructor(@InjectModel(Comments) private readonly CommentsModel: ReturnModelType<typeof Comments>) {
     }
-
+@Get()
+@ApiOperation({summary: '请求all评论'})
+async getComments() {
+    // this.CommentsModel.
+    return this.CommentsModel.find().populate('fieldsId','title');
+}
 
     @Get('recently')
     @ApiOperation({summary: '请求最近5条评论'})

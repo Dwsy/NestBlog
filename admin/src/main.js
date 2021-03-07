@@ -10,12 +10,13 @@ import VCharts from 'v-charts';
 import VueApexCharts from 'vue-apexcharts';
 import '../src/styles/index.scss';
 import './api'
-
+import formatDate from './plugins/formatDate'
 Vue.use(VCharts);
 Vue.use(VueAMap);
 Vue.use(VueApexCharts);
 
 Vue.component('apexchart', VueApexCharts);
+Vue.filter(formatDate)
 
 VueAMap.initAMapApiLoader({
     key: '527a03c5d37f26c924d83b3c68f9ac5c',

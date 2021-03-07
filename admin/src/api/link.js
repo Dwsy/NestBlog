@@ -8,6 +8,13 @@ export const delLink = (data) => {
 export const upLink = (data) => {
     return $put('/link', data);
 }
-export const getLink = (data) => {
-    return $get('/link', data);
+export const getLinks = () => {
+    return $get('/links',{
+        params: {
+            query: {
+                limit: 777,
+                sort: "-_id",
+            }
+        }
+    });
 }

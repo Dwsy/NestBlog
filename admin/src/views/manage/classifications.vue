@@ -1,50 +1,45 @@
 <template>
-    <v-container grid-list-md>
+    <div>
         <v-toolbar color="#1a0033" dark>
             <v-toolbar-title>分类列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20篇。</span>
+            <span class="subheading">共20个。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" @click="dialogControl"
                 >添加</v-btn
             >
         </v-toolbar>
 
-        <v-row>
-            <v-col cols="12">
-                <v-card class="employee-list mb-1">
-                    <v-card-title class="pa-6 pb-3">
-                        <!-- <p>Employee List</p> -->
-                        <!-- <v-spacer></v-spacer> -->
-                        <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="搜索"
-                            clearable
-                            single-line
-                            hide-details
-                        ></v-text-field>
-                    </v-card-title>
+        <v-card class="employee-list mb-1">
+            <v-card-title class="pa-6 pb-3">
+                <!-- <p>Employee List</p> -->
+                <!-- <v-spacer></v-spacer> -->
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="搜索"
+                    clearable
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
 
-                    <v-data-table
-                    v-model="selected"
-                        :headers="headers"
-                        :items="desserts"
-                        :search="search"
-                        item-key="name"
-                        class="elevation-1"
-                        show-select
-                    >
-                        <template v-slot:top>
-                            <v-dialog v-model="dialog" max-width="500px">
-                                <v-card>
-                                    <v-card-title>
-                                        <span class="headline">{{
-                                            formTitle
-                                        }}</span>
-                                    </v-card-title>
-
-                                    <v-card-text>
+            <v-data-table
+                v-model="selected"
+                :headers="headers"
+                :items="tags"
+                :search="search"
+                item-key="name"
+                class="elevation-1"
+                show-select
+            >
+                <template v-slot:top>
+                    <v-dialog v-model="dialog" max-width="500px">
+                        <v-card>
+                            <v-card-title>
+                                <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+                            <!-- <v-card-text>
                                         <v-container>
                                             <v-row>
                                                 <v-col cols="12" sm="6" md="4">
@@ -87,45 +82,49 @@
                                                 </v-col>
                                             </v-row>
                                         </v-container>
-                                    </v-card-text>
+                                    </v-card-text> -->
 
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn
-                                            color="blue darken-1"
-                                            text
-                                            @click="close"
-                                            >Cancel</v-btn
-                                        >
-                                        <v-btn
-                                            color="blue darken-1"
-                                            text
-                                            @click="save"
-                                            >Save</v-btn
-                                        >
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                            <!-- </v-toolbar> -->
-                        </template>
-                        <template v-slot:item.actions="{ item }">
-                            <v-icon small class="mr-2" @click="editItem(item)">
-                                mdi-pencil
-                            </v-icon>
-                            <v-icon small @click="deleteItem(item)">
-                                mdi-delete
-                            </v-icon>
-                        </template>
-                        <template v-slot:no-data>
-                            <v-btn color="primary" @click="initialize"
-                                >Reset</v-btn
-                            >
-                        </template>
-                    </v-data-table>
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="close"
+                                    >Cancel</v-btn
+                                >
+                                <v-btn color="blue darken-1" text @click="save"
+                                    >Save</v-btn
+                                >
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    <!-- </v-toolbar> -->
+                </template>
+
+                <template v-slot:[`item.icon`]="{ item }">
+                    <v-icon color="primary" >
+                        {{ item.icon }}
+                    </v-icon>
+                </template>
+
+                <template v-slot:[`item.createdAt`]="{ item }">
+                    {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
+                </template>
+                <template v-slot:[`item.updatedAt`]="{ item }">
+                    {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
+                </template>
+
+                <template v-slot:[`item.actions`]="{ item }">
+                    <v-icon small class="mr-2" @click="editItem(item)">
+                        mdi-pencil
+                    </v-icon>
+                    <v-icon small @click="deleteItem(item)">
+                        mdi-delete
+                    </v-icon>
+                </template>
+                <template v-slot:no-data>
+                    <v-btn color="primary" @click="initialize">Reset</v-btn>
+                </template>
+            </v-data-table>
+        </v-card>
+    </div>
 </template>
 
 <script>
@@ -135,92 +134,23 @@ export default {
         search: ""
     },
     data: () => ({
+        tags: [],
         dialog: false,
         headers: [
             {
-                text: "Dessert (100g serving)",
+                text: "分类名称",
                 align: "start",
                 sortable: false,
                 value: "name"
             },
-            { text: "Calories", value: "calories" },
-            { text: "Fat (g)", value: "fat" },
-            { text: "Carbs (g)", value: "carbs" },
-            { text: "Protein (g)", value: "protein" },
+            { text: "分类描述", value: "description" },
+            { text: "分类文章数", value: "contentsNum" },
+            { text: "分类排序", value: "rank" },
+            { text: "分类图标", value: "icon" },
+            { text: "创建时间", value: "createdAt" },
+            { text: "更新时间", value: "updatedAt" },
             { text: "Actions", value: "actions", sortable: false }
         ],
-        desserts: [
-                {
-                    name: "Frozen Yogurt",
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0
-                },
-                {
-                    name: "Ice cream sandwich",
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3
-                },
-                {
-                    name: "Eclair",
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0
-                },
-                {
-                    name: "Cupcake",
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3
-                },
-                {
-                    name: "Gingerbread",
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9
-                },
-                {
-                    name: "Jelly bean",
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0
-                },
-                {
-                    name: "Lollipop",
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0
-                },
-                {
-                    name: "Honeycomb",
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5
-                },
-                {
-                    name: "Donut",
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9
-                },
-                {
-                    name: "KitKat",
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7
-                }
-            ],
         editedIndex: -1,
         editedItem: {
             name: "",
@@ -251,27 +181,36 @@ export default {
     },
 
     created() {
-        // this.initialize();
+        this.get();
     },
 
     methods: {
+        async get() {
+            const tagData = await this.$http.getClassification();
+            // console.log(tagData);
+            // this.tags = tagData[0].data[0];
+            // console.log(tagData[0].data);
+            return (this.tags = tagData[0].data);
+        },
+
         dialogControl() {
             this.dialog = !this.dialog;
+            console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;
         // },
 
         editItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         deleteItem(item) {
-            const index = this.desserts.indexOf(item);
+            const index = this.tags.indexOf(item);
             confirm("Are you sure you want to delete this item?") &&
-                this.desserts.splice(index, 1);
+                this.tags.splice(index, 1);
         },
 
         close() {
@@ -284,9 +223,9 @@ export default {
 
         save() {
             if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem);
+                Object.assign(this.tags[this.editedIndex], this.editedItem);
             } else {
-                this.desserts.push(this.editedItem);
+                this.tags.push(this.editedItem);
             }
             this.close();
         }
