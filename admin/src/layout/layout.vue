@@ -131,7 +131,7 @@
 				}}</v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-text-field
-					label="Search"
+					label="搜索"
 					placeholder="search keyword"
 					filled
 					rounded

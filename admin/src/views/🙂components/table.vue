@@ -74,7 +74,7 @@
                 ></v-select>
                 <v-text-field
                     hint="keyword name age"
-                    label="search"
+                    label="搜索"
                     clearable
                     style="flex:200px 0 0;"
                     append-icon="mdi-magnify"

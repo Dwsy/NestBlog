@@ -15,16 +15,16 @@
                         <!-- <p>Employee List</p> -->
                         <!-- <v-spacer></v-spacer> -->
                         <v-text-field
-                            v-model="mock.employeeTable.search"
+                            v-model="search"
                             append-icon="mdi-magnify"
-                            label="Search"
+                            label="搜索"
                             clearable
                             single-line
                             hide-details
                         ></v-text-field>
                     </v-card-title>
                     <v-data-table
-                        v-model="mock.employeeTable.selected"
+                        v-model="selected"
                         :headers="mock.employeeTable.headers"
                         :items="mock.employeeTable.employee"
                         :search="mock.employeeTable.search"
@@ -34,22 +34,34 @@
                     </v-data-table>
                 </v-card>
             </v-col>
-            
         </v-row>
     </v-container>
 </template>
 
 <script>
-import mock from './mock'
+import mock from "./mock";
 
 export default {
-  name: 'Tables',
-  data() {
-    return {
-      mock
+    props: {
+        selected: [],
+        search: "",
+        headers: [
+            {
+                text: "Name",
+                align: "start",
+                sortable: true,
+                value: "name"
+            },
+            { text: "Company", value: "company" },
+            { text: "City", value: "city" },
+            { text: "State", value: "state" }
+        ]
+    },
+    data() {
+        return {
+            mock
+        };
     }
-  }
-}
-
+};
 </script>
 <style></style>

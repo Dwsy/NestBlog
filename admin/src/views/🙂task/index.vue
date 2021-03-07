@@ -16,7 +16,7 @@
         </v-btn>
         <v-spacer></v-spacer>
         <v-text-field
-          label="Search"
+          label="搜索"
           clearable
           prepend-inner-icon="mdi-magnify"
           class="min_hide"

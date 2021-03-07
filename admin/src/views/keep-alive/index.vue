@@ -7,7 +7,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search"
+          label="搜索"
           style="flex:400px 0 0;"
           hint="Niubility Keyword"
           placeholder="修改这里的值，点击表格项跳转"

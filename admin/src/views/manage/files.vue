@@ -17,7 +17,7 @@
                         <v-text-field
                             v-model="mock.employeeTable.search"
                             append-icon="mdi-magnify"
-                            label="Search"
+                            label="搜索"
                             clearable
                             single-line
                             hide-details
@@ -43,7 +43,7 @@
 import mock from './mock'
 
 export default {
-  name: 'Tables',
+  
   data() {
     return {
       mock
