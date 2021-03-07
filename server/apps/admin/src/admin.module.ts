@@ -11,7 +11,7 @@ import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
 import { UpfileModule } from './upfile/upfile.module';
 import { ClassificationModule } from './classification/classification.module';
-import { NavigationModule } from './navigation/navigation.module';
+import { ThemeModule } from './theme/theme.module';
 import { LinksController } from './links/links.controller';
 import { LinksModule } from './links/links.module';
 
@@ -26,7 +26,7 @@ import { LinksModule } from './links/links.module';
     PptModule,
     TagModule,
     UpfileModule,
-    NavigationModule,
+    ThemeModule,
     LinksModule
   ],
   controllers: [AdminController, LinksController],

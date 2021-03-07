@@ -16,7 +16,7 @@ module.exports = {
         user: '用户',
         link: '友情链接',
         file: '文件',
-        theme: '主题',
+        theme: '博客主题',
         ppt: '首页轮播图',
     },
     files: {

@@ -8,7 +8,8 @@ import * as link from './link';
 import * as tag from './tag';
 import * as article from './article';
 import * as user from './user';
-
+import * as ppt from './ppt';
+import * as theme from './theme';
 Vue.prototype.$http = {
   $ajax,
   $get,
@@ -21,5 +22,7 @@ Vue.prototype.$http = {
   ...link,
   ...tag,
   ...user,
+  ...ppt,
+  ...theme
 }
 

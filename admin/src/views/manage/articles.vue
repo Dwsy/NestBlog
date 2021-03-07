@@ -99,39 +99,41 @@
                 </template>
 
                 <template v-slot:[`item.cover`]="{ item }">
-                    <v-img
-                        :src="item.cover"
-                        width="200px"
-                        :aspect-ratio="16 / 9"
-                    >
-                    </v-img>
+                    <a :href="item.cover" target="_blank">
+                        <v-img
+                            :src="item.cover"
+                            width="200px"
+                            :aspect-ratio="16 / 9"
+                        >
+                        </v-img>
+                    </a>
                 </template>
 
                 <template v-slot:[`item.coverSmall`]="{ item }">
-                    <v-img
-                        :src="item.coverSmall"
-                        max-height="100"
-                        max-width="100"
-                    >
-                    </v-img>
+                    <a :href="item.coverSmall" target="_blank" >
+                        <v-img
+                            :src="item.coverSmall"
+                            max-height="100"
+                            max-width="100"
+                        >
+                        </v-img>
+                    </a>
                 </template>
 
                 <template v-slot:[`item.tag`]="{ item }">
-
-                        <v-chip
-                            class="ma-1"
-                            v-for="i in item.tag"
-                            :key="i.name"
-                            :color="i.colours"
-                            small
-                            outlined
-                        >
-                            {{ i.name }}
-                            <v-avatar v-show="i.icon">
-                                <v-icon>{{ i.icon }}</v-icon>
-                            </v-avatar>
-                        </v-chip>
-
+                    <v-chip
+                        class="ma-1"
+                        v-for="i in item.tag"
+                        :key="i.name"
+                        :color="i.colours"
+                        small
+                        outlined
+                    >
+                        {{ i.name }}
+                        <v-avatar v-show="i.icon">
+                            <v-icon>{{ i.icon }}</v-icon>
+                        </v-avatar>
+                    </v-chip>
                 </template>
 
                 <template v-slot:[`item.createdAt`]="{ item }">

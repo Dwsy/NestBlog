@@ -10,7 +10,7 @@ import { Tag } from './models/tag.model';
 import { PptOptions } from './models/ppt.model';
 import { Comments } from './models/comments.model';
 import { Classification } from './models/classification.model';
-import { Navigation } from './models/navigation.model';
+import { Theme } from './models/theme.model';
 import { Links } from './models/links.model';
 
 const models = TypegooseModule.forFeature([
@@ -22,7 +22,7 @@ const models = TypegooseModule.forFeature([
   Tag,
   UpFile,
   User,
-  Navigation,
+  Theme,
   Links
 ]);
 

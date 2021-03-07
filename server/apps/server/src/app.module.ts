@@ -9,7 +9,7 @@ import { FieldsModule } from './fields/fields.module';
 import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
 import { ClassificationModule } from './classification/classification.module';
-import {NavigationModule} from "./navigation/navigation.module";
+import {ThemeModule} from "./theme/theme.module";
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import {NavigationModule} from "./navigation/navigation.module";
     FieldsModule,
     PptModule,
     TagModule,
-    NavigationModule
+    ThemeModule
     ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,10 +2,10 @@ import { Controller } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 import { ApiTags } from '@nestjs/swagger';
-import { Navigation } from 'libs/db/models/navigation.model';
+import { Theme } from 'libs/db/models/theme.model';
 
 @Crud({
-    model:Navigation,
+    model:Theme,
     routes: {
         create: false,
         update: false,
@@ -13,9 +13,9 @@ import { Navigation } from 'libs/db/models/navigation.model';
     }
 })
 
-@Controller('navigation')
-@ApiTags('博客导航设置')
-export class NavigationController {
-    constructor(@InjectModel(Navigation) private readonly model) { }
+@Controller('api/theme')
+@ApiTags('博客主题')
+export class ThemeController {
+    constructor(@InjectModel(Theme) private readonly model) { }
 
 }
