@@ -10,7 +10,8 @@ Admin:`Vue.js + Vuetify.js`
 暂无权限验证功能（开发进度百分之30%大概）
 
 Blog在线预览地址：http://dwsy.link:5000/
-Admin在线预览地址:暂未部署
+Admin在线预览地址:http://dwsy.link:4000/
+Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 ---
 运行
 ```bash
@@ -39,3 +40,4 @@ yarn/npm i
 yarn run dev/npm run dev
 ``
 端口设置： vue.config.js -> devServer:port  proxy->target为api端口
+上线修改：admin\src\plugins\axios.js  中的('~~~/api')   baseURL: process.env.NODE_ENV === 'development' ? '/api' : `'~~~/api'`
