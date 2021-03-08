@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <v-toolbar color="#1a0033" dark>
+    <div style="margin:20px">
+        <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>评论列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
             <span class="subheading">共20条。</span>

@@ -1,9 +1,10 @@
 import { $ajax, $post, $get, $put, $del } from '../plugins/axios';
 
-export const getFields = () => {
+export const getFields = (isDraft) => {
     return $get('/fields', {
         params: {
             query: {
+                where:{"isDraft":isDraft},
                 limit: 777,
                 sort: "-_id",
                 populate: 'tag classification'
@@ -11,6 +12,19 @@ export const getFields = () => {
         }
     });
 }
+
+export const getFieldsById = (id) => {
+    let Fields = $get(`/fields/${id}`, {
+        params: {
+            query: {
+                populate: 'tag classification contentsId'
+            }
+        }
+    });
+    return Fields
+
+}
+
 export const createContent = (data) => {
     let contentId = $post('/contents', {
         text: data.text,
@@ -30,6 +44,25 @@ export const addField = (data) => {
     return add
 }
 
+export const delField = (id) => {
+    let del = $del(`/fields/${id}`);
+    return del
+}
+
+export const delContent = (id) => {
+    let del = $del(`/contents/${id}`);
+    return del
+}
+
+export const updataField = (id,data) => {
+    let up = $put(`/fields/${id}`,data);
+    return up
+}
+
+export const updataContent = (id,data) => {
+    let up = $put(`/contents/${id}`,data);
+    return up
+}
 
     // let fields = $post('fields',{
     //     contentsId:contentId[0]._id,

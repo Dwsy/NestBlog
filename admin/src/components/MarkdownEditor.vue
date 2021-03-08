@@ -11,7 +11,7 @@ import "vditor/dist/index.css";
 export default {
     name: "MarkdownEditor",
     props: {
-        content: ""
+        // content: ""
     },
     data() {
         return {
@@ -20,7 +20,9 @@ export default {
             vditor: null
         };
     },
-    created() {},
+    created() {
+
+    },
     components: {},
     // computed: {
     //     vditorClass: function() {
@@ -33,7 +35,7 @@ export default {
         this.initVditor();
     },
     methods: {
-        initVditor() {
+         initVditor() {
             const options = {
                 height: 660,
                 toolbarConfig: {
@@ -43,33 +45,36 @@ export default {
                     enable: true
                 },
                 outline: true,
-                after: () => {
-                    this.vditor.setValue("hello,Vditor+Vue!");
-                }
+                // after: () => {
+                //     this.vditor.setValue(this.content);
+                // }
             };
-            this.vditor = new Vditor("vditor", options);
+            this.vditor =  new Vditor("vditor", options);
             // return vditor
         },
         //获取data
         getData() {
             return this.vditor.getValue();
         },
+        setData(content) {
+            this.vditor.setValue(content);
+        },
         settheme(){
             this.vditor.setTheme("dark")
         },
-        setData: function(data) {
-            // console.log("将html转", this.vditor.html2md(data))
-            var that = this;
-            this.$nextTick(() => {
-                //DOM现在更新了
-                that.initVditor();
+        // setData: function(data) {
+        //     // console.log("将html转", this.vditor.html2md(data))
+        //     var that = this;
+        //     this.$nextTick(() => {
+        //         //DOM现在更新了
+        //         that.initVditor();
 
-                let markdownText = that.$commonUtil.htmlToMarkdown(data);
-                console.log("转换前", data);
-                console.log("得到的html", markdownText);
-                localStorage.setItem("vditorvditor", markdownText);
-            });
-        }
+        //         let markdownText = that.$commonUtil.htmlToMarkdown(data);
+        //         console.log("转换前", data);
+        //         console.log("得到的html", markdownText);
+        //         localStorage.setItem("vditorvditor", markdownText);
+        //     });
+        // }
     }
 };
 </script>

@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <v-toolbar color="#1a0033" dark>
+    <div style="margin:20px">
+        <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>文章列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
             <span class="subheading">共20篇。</span>
             <v-spacer></v-spacer>
-            <v-btn dark color="primary" class="mb-2" @click="dialogControl"
-                >添加</v-btn
+            <v-btn dark color="primary" class="mb-2" to="/write/article"
+                >撰写文章</v-btn
             >
         </v-toolbar>
 
@@ -218,7 +218,7 @@ export default {
 
     methods: {
         async get() {
-            const tagData = await this.$http.getFields();
+            const tagData = await this.$http.getFields(false);
             // console.log(tagData);
             // this.tags = tagData[0].data[0];
             // console.log(tagData[0].data);
@@ -234,15 +234,32 @@ export default {
         // },
 
         editItem(item) {
+            console.log(item);
             this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
-        deleteItem(item) {
+        editItem(item) {
+            console.log(item);
+            let id=item._id;
+            let contentsId=item.contentsId;
+
+            // this.$router.push({ name: '/write/edit/', params: { id: id }})
+            this.$router.push(`/edit/${id}`)
+            // this.editedIndex = this.tags.indexOf(item);
+            // this.editedItem = Object.assign({}, item);
+            // this.dialog = true;
+        },
+
+        async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("Are you sure you want to delete this item?") &&
+            confirm("你确定要删除这篇文章吗？") &&
+                await this.$http.delContent(item.contentsId)
+                await this.$http.delField(item._id)
+                console.log("删除成功");
                 this.tags.splice(index, 1);
+
         },
 
         close() {

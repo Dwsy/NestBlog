@@ -20,6 +20,7 @@ const router = new Router({
                 keepAlive: false
             }
         },
+
         // 仪表盘
         {
             path: '/dashboard',
@@ -40,6 +41,28 @@ const router = new Router({
                         keepAlive: false
                     },
                     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
+                },
+            ]
+        },
+        {
+            path: '/edit',
+            visible: false,
+            component: layout,
+            meta: {
+                title: 'edit',
+                icon: 'mdi-gauge',
+                keepAlive: false
+            },
+            children: [
+                {
+                    path: '/edit/:id',
+                    name: 'edit',
+                    meta: {
+                        title: 'edit',
+                        icon: 'mdi-file-document-edit-outline',
+                        keepAlive: false
+                    },
+                    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/write/edit.vue')
                 },
             ]
         },
@@ -74,9 +97,20 @@ const router = new Router({
                         keepAlive: false
                     },
                     component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/draft.vue')
-                }
+                },
+                // {
+                //     path: 'edit/:id',
+                //     name: 'edit',
+                //     meta: {
+                //         title: 'edit',
+                //         icon: 'mdi-pencil',
+                //         keepAlive: false
+                //     },
+                //     component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/edit.vue')
+                // },
             ]
         },
+        
         // 管理
         {
             path: '/manage',

@@ -9,11 +9,13 @@
                     hide-details="auto"
                     v-model="title"
                     prepend-icon="mdi-format-title"
-
                 ></v-text-field>
-                <br>
+                <br />
                 <!-- <div id="vditor" style="height: 640px; width: auto;"></div> -->
-                <MarkdownEditor ref="editor"></MarkdownEditor>
+                <MarkdownEditor
+                   
+                    ref="editor"
+                ></MarkdownEditor>
                 <!-- <v-col cols="12">
                     <v-combobox
                         v-model="select"
@@ -92,9 +94,9 @@
                         >存为草稿</v-btn
                     >
 
-                    <v-btn color="success" class="ma-3" @click="send"
-                        >发布</v-btn
-                    >
+                    <v-btn color="success" class="ma-3" @click="send">{{
+                        state
+                    }}</v-btn>
                 </v-row>
             </v-col>
         </v-row>
@@ -112,15 +114,17 @@ export default {
         return {
             tag: [],
             classifications: [],
-
+            fieldsId: "",
+            contentsId: "",
             title: "",
             cover: "",
             coverSmall: "",
-            
+
             selectTag: [],
             selectClass: "",
-
-            search: null
+            
+            search: null,
+            state: "..."
         };
     },
     mounted() {
@@ -138,75 +142,98 @@ export default {
         //     }
         // });
     },
+    beforeCreate() {},
     created() {
+        this.fieldsId = this.$route.params.id;
+        this.getParams();
+        
         this.getTag();
         this.getClassification();
     },
     methods: {
+        async getParams() {
+            const fields = await this.$http.getFieldsById(this.fieldsId);
+            console.log(fields[0]);
+            if (fields[0].isDraft == true) {
+                this.state = "发布";
+            } else {
+                this.state = "更新";
+            }
+            this.title = fields[0].title;
+            this.coverSmall = fields[0].coverSmall;
+            this.cover = fields[0].cover;
+            this.selectTag = fields[0].tag;
+            this.selectClass = fields[0].classification;
+            let content = fields[0].contentsId.text;
+            // console.log(this.content);
+            this.contentsId = fields[0].contentsId._id;
+            this.$refs.editor.setData(content)
+        },
         async draft() {
             let ContentData = {
                 text: this.$refs.editor.getData()
             };
-            const Content = await this.$http.createContent(ContentData);
+            const Content = await this.$http.updataContent(
+                this.contentsId,
+                ContentData
+            );
             let FieldData = {
                 title: this.title,
-                contentsId: Content[0]._id,
                 tag: this.selectTag.map(value => value._id),
                 classification: this.selectClass._id,
                 cover: this.cover,
                 coverSmall: this.coverSmall,
-                commentsNum: 0,
-                isDraft:true
+                isDraft: true
             };
-            const Field = await this.$http.createField(FieldData);
-            console.log(Field[0].contentsId);
-            console.log(Content[0]._id);
+            const Field = await this.$http.updataField(
+                this.fieldsId,
+                FieldData
+            );
             let addData = {
                 fieldsId: Field[0]._id,
                 ContentTd: Content[0]._id
             };
             const add = await this.$http.addField(addData);
-            console.log(add);
             if (Field[0].contentsId === Content[0]._id) {
                 console.log("保存成功");
                 this.success("保存成功");
-                this.$router.push('/write/draft')
+                this.$router.push("/write/draft");
             } else {
                 console.log("保存失败");
                 this.error("保存失败");
-                
             }
         },
         async send() {
             let ContentData = {
                 text: this.$refs.editor.getData()
             };
-            const Content = await this.$http.createContent(ContentData);
+            const Content = await this.$http.updataContent(
+                this.contentsId,
+                ContentData
+            );
             let FieldData = {
                 title: this.title,
-                contentsId: Content[0]._id,
                 tag: this.selectTag.map(value => value._id),
                 classification: this.selectClass._id,
                 cover: this.cover,
                 coverSmall: this.coverSmall,
-                commentsNum: 0,
-                isDraft:false
+                isDraft: false
             };
-            const Field = await this.$http.createField(FieldData);
-            console.log(Field[0].contentsId);
-            console.log(Content[0]._id);
+            const Field = await this.$http.updataField(
+                this.fieldsId,
+                FieldData
+            );
             let addData = {
                 fieldsId: Field[0]._id,
                 ContentTd: Content[0]._id
             };
             const add = await this.$http.addField(addData);
-            console.log(add);
             if (Field[0].contentsId === Content[0]._id) {
-                console.log("发送成功");
+                console.log("保存成功");
                 this.success("发送成功");
                 this.$router.push("/manage/manageArticles");
             } else {
-                console.log("发送失败");
+                console.log("保存失败");
                 this.error("发送失败");
             }
         },

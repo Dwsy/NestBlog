@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar color="#1a0033" dark>
+        <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>分类列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
             <span class="subheading">共20个。</span>

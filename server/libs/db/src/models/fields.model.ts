@@ -43,4 +43,9 @@ export class Fields {
     @prop({type: MongooseSchema.Types.ObjectId, ref: Classification})
         // @prop()
     classification: MongooseSchema.Types.ObjectId;
+
+    @ApiProperty({ description: '是否为草稿', example: false })
+    @prop()
+    isDraft: boolean;
+
 }
