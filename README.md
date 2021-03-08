@@ -7,7 +7,7 @@ Server:`NestJS + MongoDB`
 
 Admin:`Vue.js + Vuetify.js`
 
-暂无权限验证功能
+暂无权限验证功能（开发进度百分之30%大概）
 
 Blog在线预览地址：http://dwsy.link:5000/
 Admin在线预览地址:暂未部署
