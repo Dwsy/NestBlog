@@ -74,4 +74,7 @@ export class Comments {
     @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
     childId: Array<MongooseSchema.Types.ObjectId>
 
+    @ApiProperty({description: '父评论id', example: ''})
+    @prop()
+    fatherId: string
 }

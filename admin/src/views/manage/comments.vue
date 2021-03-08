@@ -5,9 +5,7 @@
             <v-divider class="mx-4" vertical></v-divider>
             <span class="subheading">共20条。</span>
             <v-spacer></v-spacer>
-            <v-btn dark color="primary" class="mb-2" @click="dialogControl"
-                >添加</v-btn
-            >
+            <v-btn dark color="primary" class="mb-2">添加</v-btn>
         </v-toolbar>
 
         <v-card class="employee-list mb-1">
@@ -34,56 +32,48 @@
                 show-select
             >
                 <template v-slot:top>
-                    <v-dialog v-model="dialog" max-width="500px">
+                    <v-dialog v-model="dialog" max-width="900px">
                         <v-card>
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-                            <!-- <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.name
-                                                        "
-                                                        label="Dessert name"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.calories
-                                                        "
-                                                        label="Calories"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="editedItem.fat"
-                                                        label="Fat (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.carbs
-                                                        "
-                                                        label="Carbs (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.protein
-                                                        "
-                                                        label="Protein (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text> -->
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.authorName"
+                                                label="评论人"
+                                            ></v-text-field>
+                                        </v-col>
 
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.email"
+                                                label="email"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.ip"
+                                                label="ip"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field
+                                                v-model="editedItem.url"
+                                                label="网址"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-textarea
+                                                v-model="editedItem.text"
+                                                label="评论内容"
+                                            ></v-textarea>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="blue darken-1" text @click="close"
@@ -116,22 +106,19 @@
                     </v-img>
                 </template>
 
-                <template v-slot:[`item.tag`]="{ item }">
-
-                        <v-chip
-                            class="ma-1"
-                            v-for="i in item.tag"
-                            :key="i.name"
-                            :color="i.colours"
-                            small
-                            outlined
+                <template v-slot:[`item.MD5email`]="{ item }">
+                    <v-avatar>
+                        <v-img
+                            :src="
+                                'https://gravatar.helingqi.com/wavatar/' +
+                                    item.MD5email +
+                                    '?s=220&r=X&d=mm'
+                            "
+                            max-height="80px"
+                            max-width="80px"
                         >
-                            {{ i.name }}
-                            <v-avatar v-show="i.icon">
-                                <v-icon>{{ i.icon }}</v-icon>
-                            </v-avatar>
-                        </v-chip>
-
+                        </v-img>
+                    </v-avatar>
                 </template>
 
                 <template v-slot:[`item.createdAt`]="{ item }">
@@ -158,6 +145,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         selected: [],
@@ -166,6 +154,7 @@ export default {
     data: () => ({
         tags: [],
         dialog: false,
+        delDialog: false,
         headers: [
             {
                 text: "文章标题",
@@ -174,6 +163,7 @@ export default {
                 value: "fieldsId.title"
             },
             { text: "评论人", value: "authorName" },
+            { text: "头像", value: "MD5email" },
             { text: "评论内容", value: "text" },
             { text: "email", value: "email" },
             { text: "ip", value: "ip" },
@@ -204,12 +194,6 @@ export default {
         }
     },
 
-    watch: {
-        dialog(val) {
-            val || this.close();
-        }
-    },
-
     created() {
         this.get();
     },
@@ -217,16 +201,13 @@ export default {
     methods: {
         async get() {
             const tagData = await this.$http.getComment();
+            // console.log(md5(123123));
             // console.log(tagData);
             // this.tags = tagData[0].data[0];
             // console.log(tagData[0].data);
             return (this.tags = tagData[0]);
         },
 
-        dialogControl() {
-            this.dialog = !this.dialog;
-            console.log(this.tag);
-        },
         // initialize() {
         //     this.desserts = ;
         // },
@@ -234,13 +215,18 @@ export default {
         editItem(item) {
             this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
+            // console.log(item);
+            // console.log(item._id);
             this.dialog = true;
         },
 
-        deleteItem(item) {
+        async deleteItem(item) {
+            //删除评论及其子评论
             const index = this.tags.indexOf(item);
-            confirm("Are you sure you want to delete this item?") &&
+            if (confirm("是否删除该条评论及其子评论?")) {
+                await this.$http.delComment(item._id, item.isChild);
                 this.tags.splice(index, 1);
+            }
         },
 
         close() {
@@ -251,10 +237,14 @@ export default {
             });
         },
 
-        save() {
+        async save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
+                let a= await this.$http.upComment(this.editedItem);
+                console.log(this.editedItem)
             } else {
+                // let b= await this.$http.createComment(this.editedItem);
+                console.log(this.editedItem);
                 this.tags.push(this.editedItem);
             }
             this.close();

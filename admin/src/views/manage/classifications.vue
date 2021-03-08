@@ -39,51 +39,42 @@
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-                            <!-- <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.name
-                                                        "
-                                                        label="Dessert name"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.calories
-                                                        "
-                                                        label="Calories"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="editedItem.fat"
-                                                        label="Fat (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.carbs
-                                                        "
-                                                        label="Carbs (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.protein
-                                                        "
-                                                        label="Protein (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text> -->
-
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.name"
+                                                label="分类名称"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.description"
+                                                label="分类描述"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.contentsNum"
+                                                label="分类文章数"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.rank"
+                                                label="分类排序"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="10" md="8">
+                                            <v-text-field
+                                                v-model="editedItem.icon"
+                                                label="分类图标"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="blue darken-1" text @click="close"
@@ -99,7 +90,7 @@
                 </template>
 
                 <template v-slot:[`item.icon`]="{ item }">
-                    <v-icon color="primary" >
+                    <v-icon color="primary">
                         {{ item.icon }}
                     </v-icon>
                 </template>
@@ -154,23 +145,23 @@ export default {
         editedIndex: -1,
         editedItem: {
             name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            description: "",
+            contentsNum: 0,
+            rank: 0,
+            icon: 0
         },
         defaultItem: {
             name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            description: "",
+            contentsNum: 0,
+            rank: 0,
+            icon: 0
         }
     }),
 
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? "New Item" : "Edit Item";
+            return this.editedIndex === -1 ? "添加" : "修改";
         }
     },
 
@@ -195,7 +186,6 @@ export default {
 
         dialogControl() {
             this.dialog = !this.dialog;
-            console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;
@@ -204,13 +194,16 @@ export default {
         editItem(item) {
             this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
+            console.log(this.editedItem);
             this.dialog = true;
         },
 
-        deleteItem(item) {
+        async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("Are you sure you want to delete this item?") &&
+            if (confirm("是否删除此分类?")) {
+                await this.$http.delfClassification(item._id);
                 this.tags.splice(index, 1);
+            }
         },
 
         close() {
@@ -221,12 +214,20 @@ export default {
             });
         },
 
-        save() {
+        async save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
+                let a= await this.$http.upClassification(this.editedItem);
+                console.log(a)
             } else {
+                let b= await this.$http.createClassification(this.editedItem);
+                console.log(b);
                 this.tags.push(this.editedItem);
             }
+
+            // console.log(this.editedItem._id);
+            
+            ;
             this.close();
         }
     }
