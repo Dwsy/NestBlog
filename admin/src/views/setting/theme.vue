@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div style="margin:20px">
         <v-toolbar color="#2e62cd" dark>
-            <v-toolbar-title>分类列表</v-toolbar-title>
+            <v-toolbar-title>主题列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20个。</span>
+            <span class="subheading">共{{tags.length}}个。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" @click="dialogControl"
                 >添加</v-btn
@@ -34,56 +34,94 @@
                 show-select
             >
                 <template v-slot:top>
-                    <v-dialog v-model="dialog" max-width="500px">
+                    <v-dialog v-model="dialog" max-width="900px">
                         <v-card>
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-                            <!-- <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.name
-                                                        "
-                                                        label="Dessert name"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.calories
-                                                        "
-                                                        label="Calories"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="editedItem.fat"
-                                                        label="Fat (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.carbs
-                                                        "
-                                                        label="Carbs (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.protein
-                                                        "
-                                                        label="Protein (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text> -->
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field
+                                                v-model="editedItem.themeName"
+                                                label="主题名称"
+                                            ></v-text-field>
+                                        </v-col>
 
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field
+                                                v-model="
+                                                    editedItem.navigationImage
+                                                "
+                                                label="导航栏图片"
+                                            ></v-text-field>
+                                            导航栏图片：<v-img
+                                                :src="editedItem.navigationImage"
+                                                max-height="250px"
+                                                max-width="250px"
+                                            >
+                                            </v-img>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field
+                                                v-model="editedItem.topImage"
+                                                label="顶栏图片"
+                                            ></v-text-field>
+                                            顶栏图片：<v-img
+                                                :src="editedItem.topImage"
+                                                max-height="250px"
+                                                
+                                            >
+                                            </v-img>
+                                        </v-col>
+
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.primary"
+                                                label="primary"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.secondary"
+                                                label="secondary"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.accent"
+                                                label="accent"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.error"
+                                                label="error"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.info"
+                                                label="info"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.success"
+                                                label="success"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.warning"
+                                                label="warning"
+                                            ></v-text-field>
+                                        </v-col>
+
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="blue darken-1" text @click="close"
@@ -200,18 +238,28 @@ export default {
         ],
         editedIndex: -1,
         editedItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            themeName: "",
+            navigationImage: "",
+            topImage: '',
+            primary: '',
+            secondary: '',
+            accent: '',
+            error:'',
+            info: '',
+            success: '',
+            warning: ''
         },
         defaultItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            themeName: "",
+            navigationImage: "",
+            topImage: '',
+            primary: '',
+            secondary: '',
+            accent: '',
+            error:'',
+            info: '',
+            success: '',
+            warning: ''
         }
     }),
 
@@ -254,10 +302,12 @@ export default {
             this.dialog = true;
         },
 
-        deleteItem(item) {
+        async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("Are you sure you want to delete this item?") &&
+            if (confirm("是否删除该主题?")) {
+                await this.$http.Theme(item._id);
                 this.tags.splice(index, 1);
+            }
         },
 
         close() {
@@ -268,10 +318,14 @@ export default {
             });
         },
 
-        save() {
+        async save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
+                let a = await this.$http.upTheme(this.editedItem);
+                console.log(this.editedItem);
             } else {
+                let a = await this.$http.createTheme(this.editedItem);
+                console.log(this.editedItem);
                 this.tags.push(this.editedItem);
             }
             this.close();

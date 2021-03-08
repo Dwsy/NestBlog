@@ -20,9 +20,7 @@ export default {
             vditor: null
         };
     },
-    created() {
-
-    },
+    created() {},
     components: {},
     // computed: {
     //     vditorClass: function() {
@@ -35,21 +33,27 @@ export default {
         this.initVditor();
     },
     methods: {
-         initVditor() {
+        initVditor() {
             const options = {
                 height: 660,
+                icon: "material",
+                // theme: "dark",
+                IHljs: {
+                    lineNumber: true,
+                    style: "monokai"
+                },
                 toolbarConfig: {
                     pin: true
                 },
                 cache: {
                     enable: true
                 },
-                outline: true,
+                outline: true
                 // after: () => {
                 //     this.vditor.setValue(this.content);
                 // }
             };
-            this.vditor =  new Vditor("vditor", options);
+            this.vditor = new Vditor("vditor", options);
             // return vditor
         },
         //获取data
@@ -59,9 +63,27 @@ export default {
         setData(content) {
             this.vditor.setValue(content);
         },
-        settheme(){
-            this.vditor.setTheme("dark")
-        },
+        settheme() {
+            this.vditor =new Vditor("vditor",{
+                height: 660,
+                icon: "material",
+                theme: "dark",
+                IHljs: {
+                    lineNumber: true,
+                    style: "monokai"
+                },
+                toolbarConfig: {
+                    pin: true
+                },
+                cache: {
+                    enable: true
+                },
+                outline: true
+                // after: () => {
+                //     this.vditor.setValue(this.content);
+                // }
+            })
+        }
         // setData: function(data) {
         //     // console.log("将html转", this.vditor.html2md(data))
         //     var that = this;

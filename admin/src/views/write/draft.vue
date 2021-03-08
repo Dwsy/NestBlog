@@ -3,7 +3,7 @@
         <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>草稿列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20篇。</span>
+            <span class="subheading">共{{tags.length}}篇。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" to="/write/article"
                 >撰写文章</v-btn
@@ -39,50 +39,7 @@
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-                            <!-- <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.name
-                                                        "
-                                                        label="Dessert name"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.calories
-                                                        "
-                                                        label="Calories"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="editedItem.fat"
-                                                        label="Fat (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.carbs
-                                                        "
-                                                        label="Carbs (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-text-field
-                                                        v-model="
-                                                            editedItem.protein
-                                                        "
-                                                        label="Protein (g)"
-                                                    ></v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text> -->
+
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -203,6 +160,7 @@ export default {
     computed: {
         formTitle() {
             return this.editedIndex === -1 ? "New Item" : "Edit Item";
+            
         }
     },
 

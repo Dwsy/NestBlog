@@ -18,6 +18,9 @@ export class Links {
     @ApiProperty({ description: '友链头像', example: '' })
     @prop()
     linksAvatar: String;
+    @ApiProperty({ description: '友链邮箱', example: '' })
+    @prop()
+    linksEmail: String;
     @ApiProperty({ description: '友链简述', example: '' })
     @prop()
     linksDescription: String;

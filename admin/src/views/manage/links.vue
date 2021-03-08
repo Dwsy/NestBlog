@@ -1,9 +1,9 @@
 <template>
     <div style="margin:20px">
         <v-toolbar color="#2e62cd" dark>
-            <v-toolbar-title>分类列表</v-toolbar-title>
+            <v-toolbar-title>友情链接列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20个。</span>
+            <span class="subheading">共{{tags.length}}个。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" @click="dialogControl"
                 >添加</v-btn
@@ -34,12 +34,58 @@
                 show-select
             >
                 <template v-slot:top>
-                    <v-dialog v-model="dialog" max-width="500px">
+                    <v-dialog v-model="dialog" max-width="900px">
                         <v-card>
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.linksName"
+                                                label="友联名称"
+                                            ></v-text-field>
+                                        </v-col>
 
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="
+                                                    editedItem.linksDescription
+                                                "
+                                                label="描述"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                                                                        <v-text-field
+                                                v-model="
+                                                    editedItem.linksAvatar
+                                                "
+                                                label="头像链接"
+                                            ></v-text-field>
+                                            头像预览：<v-img
+                                                :src="editedItem.linksAvatar"
+                                                max-height="250px"
+                                                max-width="250px"
+                                            >
+                                            </v-img>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.linksEmail"
+                                                label="Email"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field
+                                                v-model="editedItem.rank"
+                                                label="排序"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="blue darken-1" text @click="close"
@@ -107,6 +153,7 @@ export default {
             { text: "描述", value: "linksDescription" },
             { text: "链接", value: "linksUrl" },
             { text: "头像", value: "linksAvatar" },
+            { text: "Email", value: "linksEmail" },
             { text: "排序", value: "rank" },
             { text: "创建时间", value: "createdAt" },
             { text: "更新时间", value: "updatedAt" },
@@ -114,18 +161,18 @@ export default {
         ],
         editedIndex: -1,
         editedItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            linksName: "",
+            linksUrl: "",
+            linksAvatar: "",
+            rank: 0,
+            linksEmail: ""
         },
         defaultItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            linksName: "",
+            linksUrl: "",
+            linksAvatar: "",
+            rank: 0,
+            linksEmail: ""
         }
     }),
 
@@ -168,10 +215,12 @@ export default {
             this.dialog = true;
         },
 
-        deleteItem(item) {
+        async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("Are you sure you want to delete this item?") &&
+            if (confirm("是否删除该友联?")) {
+                await this.$http.delLink(item._id);
                 this.tags.splice(index, 1);
+            }
         },
 
         close() {
@@ -182,10 +231,14 @@ export default {
             });
         },
 
-        save() {
+        async save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
+                let a= await this.$http.upLink(this.editedItem);
+                console.log(this.editedItem)
             } else {
+                 let a= await this.$http.createLink(this.editedItem);
+                console.log(this.editedItem)
                 this.tags.push(this.editedItem);
             }
             this.close();

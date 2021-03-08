@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container app>
         <v-row align="center" justify="center">
             <v-col cols="12" xl="11" lg="11" md="11" sm="12" xs="12">
                 <h3>撰写文章</h3>
@@ -9,82 +9,56 @@
                     hide-details="auto"
                     v-model="title"
                     prepend-icon="mdi-format-title"
-
                 ></v-text-field>
-                <br>
-                <!-- <div id="vditor" style="height: 640px; width: auto;"></div> -->
+                <br />
                 <MarkdownEditor ref="editor"></MarkdownEditor>
-                <!-- <v-col cols="12">
-                    <v-combobox
-                        v-model="select"
-                        :items="items"
-                        label="选择标签"
-                        multiple
-                        chips
-                    >
-                        <template v-slot:selection="data">
-                            <v-chip
-                                :key="JSON.stringify(data.item)"
-                                v-bind="data.attrs"
-                                :input-value="data.selected"
-                                :disabled="data.disabled"
-                                @click:close="data.parent.selectItem(data.item)"
-                            >
-                                <v-avatar
-                                    class="accent white--text"
-                                    left
-                                    v-text="data.item.slice(0, 1).toUpperCase()"
-                                ></v-avatar>
-                                {{ data.item }}
-                            </v-chip>
-                        </template>
-                    </v-combobox>
-                </v-col> -->
-                <v-container fluid>
-                    <v-combobox
-                        v-model="selectTag"
-                        :items="tag"
-                        :search-input.sync="search"
-                        clearable
-                        hint="最多4个"
-                        label="添加标签"
-                        item-text="name"
-                        item-value="_id"
-                        multiple
-                        persistent-hint
-                        small-chips
-                        prepend-icon="mdi-tag-plus"
-                    >
-                        <template v-slot:no-data>
-                            <v-list-item>
-                                <v-list-item-content>
-                                    <v-list-item-title>
-                                        没有搜索到 "<strong>{{ search }}</strong
-                                        >". 请按 <kbd>enter</kbd> to create a
-                                        new one
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </template>
-                    </v-combobox>
-                </v-container>
+
+                <v-autocomplete
+                    v-model="selectTag"
+                    :items="tag"
+                    :search-input.sync="search"
+                    clearable
+                    hint="最多4个"
+                    label="添加标签"
+                    item-text="name"
+                    item-value="_id"
+                    multiple
+                    persistent-hint
+                    prepend-icon="mdi-tag-plus"
+                >
+                    <template v-slot:no-data>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>
+                                    没有搜索到 "<strong>{{ search }}</strong
+                                    >". 请手动前往标签管理添加
+                                </v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </template>
+                </v-autocomplete>
 
                 <v-divider></v-divider>
 
-                <v-combobox
+                <v-autocomplete
                     v-model="selectClass"
                     label="选择分类"
                     :items="classifications"
                     item-text="name"
                     item-value="_id"
                     prepend-icon="mdi-book-plus"
-                ></v-combobox>
+                ></v-autocomplete>
                 <v-divider></v-divider>
 
-                <v-text-field v-model="cover" label="大头图url"></v-text-field>
+                <v-text-field
+                    v-model="cover"
+                    label="大头图url"
+                    prepend-icon="mdi-image-plus"
+                ></v-text-field>
                 <v-text-field
                     v-model="coverSmall"
                     label="小头图url"
+                    prepend-icon="mdi-image-plus"
                 ></v-text-field>
                 <v-row justify="end">
                     <v-spacer></v-spacer>
@@ -98,6 +72,7 @@
                 </v-row>
             </v-col>
         </v-row>
+        <v-btn color="success" @click="mdtheme">text</v-btn>
     </v-container>
 </template>
 <script>
@@ -116,33 +91,21 @@ export default {
             title: "",
             cover: "",
             coverSmall: "",
-            
+
             selectTag: [],
             selectClass: "",
 
             search: null
         };
     },
-    mounted() {
-        // this.contentEditor = new Vditor("vditor", {
-        //     height: 360,
-        //     toolbarConfig: {
-        //         pin: true
-        //     },
-        //     cache: {
-        //         enable: true
-        //     },
-        //     IHint: {},
-        //     after: () => {
-        //         // this.contentEditor.setValue();
-        //     }
-        // });
-    },
     created() {
         this.getTag();
         this.getClassification();
     },
     methods: {
+        mdtheme() {
+            this.$refs.editor.settheme();
+        },
         async draft() {
             let ContentData = {
                 text: this.$refs.editor.getData()
@@ -156,7 +119,7 @@ export default {
                 cover: this.cover,
                 coverSmall: this.coverSmall,
                 commentsNum: 0,
-                isDraft:true
+                isDraft: true
             };
             const Field = await this.$http.createField(FieldData);
             console.log(Field[0].contentsId);
@@ -170,11 +133,10 @@ export default {
             if (Field[0].contentsId === Content[0]._id) {
                 console.log("保存成功");
                 this.success("保存成功");
-                this.$router.push('/write/draft')
+                this.$router.push("/write/draft");
             } else {
                 console.log("保存失败");
                 this.error("保存失败");
-                
             }
         },
         async send() {
@@ -190,7 +152,7 @@ export default {
                 cover: this.cover,
                 coverSmall: this.coverSmall,
                 commentsNum: 0,
-                isDraft:false
+                isDraft: false
             };
             const Field = await this.$http.createField(FieldData);
             console.log(Field[0].contentsId);
@@ -258,6 +220,10 @@ export default {
             if (val.length > 5) {
                 this.$nextTick(() => this.model.pop());
             }
+        },
+        theme(val) {
+            console.log(123);
+            console.log(val);
         }
     }
 };

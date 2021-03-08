@@ -11,37 +11,10 @@
                     prepend-icon="mdi-format-title"
                 ></v-text-field>
                 <br />
-                <!-- <div id="vditor" style="height: 640px; width: auto;"></div> -->
                 <MarkdownEditor
                    
                     ref="editor"
                 ></MarkdownEditor>
-                <!-- <v-col cols="12">
-                    <v-combobox
-                        v-model="select"
-                        :items="items"
-                        label="选择标签"
-                        multiple
-                        chips
-                    >
-                        <template v-slot:selection="data">
-                            <v-chip
-                                :key="JSON.stringify(data.item)"
-                                v-bind="data.attrs"
-                                :input-value="data.selected"
-                                :disabled="data.disabled"
-                                @click:close="data.parent.selectItem(data.item)"
-                            >
-                                <v-avatar
-                                    class="accent white--text"
-                                    left
-                                    v-text="data.item.slice(0, 1).toUpperCase()"
-                                ></v-avatar>
-                                {{ data.item }}
-                            </v-chip>
-                        </template>
-                    </v-combobox>
-                </v-col> -->
                 <v-container fluid>
                     <v-combobox
                         v-model="selectTag"
@@ -91,7 +64,7 @@
                 <v-row justify="end">
                     <v-spacer></v-spacer>
                     <v-btn color="#2196f3" @click="draft" outlined class="ma-3"
-                        >存为草稿</v-btn
+                        >{{state0}}</v-btn
                     >
 
                     <v-btn color="success" class="ma-3" @click="send">{{
@@ -124,7 +97,8 @@ export default {
             selectClass: "",
             
             search: null,
-            state: "..."
+            state: "...",
+            state0:"..."
         };
     },
     mounted() {
@@ -155,8 +129,10 @@ export default {
             const fields = await this.$http.getFieldsById(this.fieldsId);
             console.log(fields[0]);
             if (fields[0].isDraft == true) {
+                this.state0 = "更新草稿";
                 this.state = "发布";
             } else {
+                this.state0 = "存为草稿";
                 this.state = "更新";
             }
             this.title = fields[0].title;

@@ -1,5 +1,5 @@
 <template>
-	<div
+	<div app
 		class="page_root"
 		v-resize="onResize"
 		:class="{ miniVariant: miniVariant }"
@@ -30,10 +30,10 @@
 					</v-list-item-avatar>
 					<v-list-item-content>
 						<v-list-item-title class="title"
-							>MATERIAL-UI</v-list-item-title
+							>Dwsy</v-list-item-title
 						>
 						<v-list-item-subtitle
-							>vue-material-admin</v-list-item-subtitle
+							>Blog-Admin</v-list-item-subtitle
 						>
 					</v-list-item-content>
 				</v-list-item>
@@ -130,18 +130,7 @@
 					pageTitle
 				}}</v-toolbar-title>
 				<v-spacer></v-spacer>
-				<v-text-field
-					label="搜索"
-					placeholder="search keyword"
-					filled
-					rounded
-					flat
-					hide-details
-					dense
-					solo
-					prepend-inner-icon="mdi-magnify"
-                    style="max-width:400px; margin-right:16px"
-				></v-text-field>
+
 				<v-menu
 					v-model="noticeVisible"
 					:close-on-content-click="false"
@@ -211,11 +200,11 @@
 				<v-btn
 					text
 					target="_blank"
-					href="https://github.com/Groundhog-Chen/vue-material-admin"
+					href="https://github.com/Dwsy/blog"
 					class="min_hide"
 				>
 					<v-icon
-						title="https://github.com/Groundhog-Chen/vue-material-admin"
+						title="https://github.com/Dwsy/blog"
 						>mdi-github-circle</v-icon
 					>
 				</v-btn>
@@ -320,18 +309,18 @@ export default {
                 ['Delete', 'delete'],
             ],
             items: [
-                { header: 'Today' },
+                { header: '2021年3月9日03:09:30' },
                 {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                    title: 'Birthday gift',
-                    subtitle: '<span class=\'text--primary\'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+                    avatar: 'https://q.qlogo.cn/g?b=qq&nk=1521986032&s=100',
+                    title: '大部分功能还未实现',
+                    // subtitle: '<span class=\'text--primary\'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
                 },
                 { divider: true, inset: true },
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                    title: 'Recipe to try',
-                    subtitle: '<span class=\'text--primary\'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-                },
+                // {
+                //     avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+                //     title: 'Recipe to try',
+                //     subtitle: '<span class=\'text--primary\'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+                // },
             ],
         };
     },
@@ -386,7 +375,9 @@ export default {
             }
         },
         onDarkModeChange(val) {
-            this.$vuetify.theme.dark = val;
+
+			this.$vuetify.theme.dark = val;
+
             this.$store.commit('handleDarkMode', val);
         },
         checkMenuGroupValue(path) {
@@ -403,24 +394,7 @@ export default {
             this.miniVariant = !this.miniVariant;
         },
         onAxios() {
-            // const data = {
-            //     title: this.name,
-            //     desc: this.desc
-            // };
-            // axios.get(url,AxiosRequestConfig).then((res) => {
-            //     console.log(res);
-            // });
-            // const token = this.token;
-            // axios.request({
-            //     url: '/news/create',
-            //     method: 'post',
-            //     baseURL: 'http://127.0.0.1:7001',
-            //     data: data,
-            //     headers: {
-            //         'x-csrf-token': token
-            //     }
-            // });
-            window.open('https://github.com/Groundhog-Chen/vue-material-admin'); 
+            window.open('https://github.com/Dwsy/blog'); 
         },
         tmyx() {
             this.$store.commit('handleChangeMlmlh');

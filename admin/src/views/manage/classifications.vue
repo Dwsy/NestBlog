@@ -3,7 +3,7 @@
         <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>分类列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20个。</span>
+            <span class="subheading">共{{tags.length}}个。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" @click="dialogControl"
                 >添加</v-btn

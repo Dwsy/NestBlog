@@ -3,7 +3,7 @@
         <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>评论列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共20条。</span>
+            <span class="subheading">共{{tags.length}}条。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2">添加</v-btn>
         </v-toolbar>
