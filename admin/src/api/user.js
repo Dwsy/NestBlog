@@ -5,3 +5,6 @@ export const getUsers = () => {
 export const delUsers = () => {
     return $del('/users', data);
 }
+export const Login = (data) => {
+    return $post('auth/login', data);
+}

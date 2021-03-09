@@ -10,12 +10,14 @@ app.enableCors();
     .setTitle('NestJs博客API')
     .setDescription('博客后台管理API')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
   app.enableCors();
-  await app.listen(3000);
-  console.log('http://localhost:3000/api-docs');
+  const PORT = process.env.ADMIN_PORT || 2999
+  await app.listen(PORT);
+  console.log(`http://localhost:${PORT}/api-docs`)
 
 }
 bootstrap();
