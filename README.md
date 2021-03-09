@@ -7,7 +7,7 @@ Server:`NestJS + MongoDB`
 
 Admin:`Vue.js + Vuetify.js`
 
-暂无权限验证功能（开发进度百分之30%大概）
+基本功能都有了，细节有待添加。（开发进度百分之30%大概）
 
 Blog在线预览地址：http://dwsy.link:5000/
 -
