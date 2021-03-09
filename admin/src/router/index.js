@@ -316,10 +316,10 @@ let router = new Router({
 });
 router.beforeEach((to, from, next) => {
 
-    if(!to.meta.isPublic&&!localStorage.token){
-        console.log("未登录");
-        return next('/')
-    }
+    // if(!to.meta.isPublic&&!localStorage.token){
+    //     console.log("未登录");
+    //     return next('/')
+    // }
     next()
 })
 export default router;

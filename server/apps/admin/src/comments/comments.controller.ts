@@ -1,12 +1,13 @@
-import {Body, Controller, Get, Post, Delete, Put} from '@nestjs/common';
+import {Body, Controller, Get, Post, Delete, Put, UseGuards} from '@nestjs/common';
 import {InjectModel} from 'nestjs-typegoose';
-import {ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
 import {Comments} from 'libs/db/models/comments.model';
 import {Fields} from 'libs/db/models/fields.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
 import {prop, ReturnModelType} from '@typegoose/typegoose';
 import {Param} from '@nestjs/common';
 import {Schema as MongooseSchema, Types} from "mongoose";
+import { AuthGuard } from '@nestjs/passport';
 
 
 // import {md5} from ''
@@ -131,6 +132,8 @@ export class CommentsController {
         // return await this.CommentsModel.create()
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Put(':id')
     @ApiOperation({summary: '修改评论'})
     async put(@Param('id') id: string,@Body() dto: sendChildCommentDto) {

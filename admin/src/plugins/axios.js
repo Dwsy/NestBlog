@@ -12,7 +12,7 @@ import router from '../router/index';
 // console.log(process.env.NODE_ENV);
 
 let config = {
-  baseURL: process.env.NODE_ENV === 'development' ? '/api' : '~~'
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://www.dwsy.link:3000/api'
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
@@ -23,7 +23,7 @@ _axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
 
-    const token = localStorage.token
+    const token = localStorage.token;
     if (token) {
       config.headers['Authorization'] = 'Bearer ' + token;
     }
@@ -41,7 +41,6 @@ _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
     const resData = response.data;
-
     if (resData.code === 0) {
       return resData.data;
     } else {
@@ -55,7 +54,6 @@ _axios.interceptors.response.use(
   },
   function (error) {
     // Do something with response error
-
     return Promise.reject(error);
   }
 );

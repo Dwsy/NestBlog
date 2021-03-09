@@ -23,7 +23,7 @@ export class TagController {
     ) {
     }
 
-    article
+    
 
     @Get('article/:ids')
     async get(@Param('ids') ids: Array<String>) {
