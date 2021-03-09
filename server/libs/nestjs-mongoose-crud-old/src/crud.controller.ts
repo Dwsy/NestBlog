@@ -7,14 +7,15 @@ import {
   Delete,
   Body,
   Query,
-  Req
+  Req, UseGuards
 } from "@nestjs/common";
-import { ApiOperation, ApiQuery } from "@nestjs/swagger";
+import {ApiBearerAuth, ApiOperation, ApiQuery} from "@nestjs/swagger";
 import { CrudQuery, ICrudQuery } from "./crud-query.decorator";
 import { CrudConfig, defaultPaginate } from "./crud-config";
 import { get, merge } from "lodash";
 import { CrudOptionsWithModel, PaginateKeys, Fields } from "./crud.interface";
 import { CRUD_FIELD_METADATA } from "./constants";
+import {AuthGuard} from "@nestjs/passport";
 
 export class CrudPlaceholderDto {
   fake?: string;
@@ -52,8 +53,7 @@ export class CrudController {
       page = 1,
       skip = 0,
       populate = get(this.crudOptions, "routes.find.populate", undefined),
-      sort = get(this.crudOptions, "routes.find.sort", undefined),
-      collation = undefined
+      sort = get(this.crudOptions, "routes.find.sort", undefined)
     } = query;
 
     if (skip < 1) {
@@ -73,8 +73,7 @@ export class CrudController {
         .skip(skip)
         .limit(limit)
         .sort(sort)
-        .populate(populate)
-        .collation(collation);
+        .populate(populate);
       if (paginateKeys !== false) {
         const total = await this.model.countDocuments(where);
         return {
@@ -90,6 +89,7 @@ export class CrudController {
   }
 
   @Get(":id")
+
   @ApiOperation({ summary: "Find a record" })
   findOne(@Param("id") id: string, @CrudQuery("query") query: ICrudQuery = {}) {
     let {
