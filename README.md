@@ -31,7 +31,7 @@ cd server
 yarn/npm i
 nest start admin
 ```
-端口设置：server\apps\admin\src\main.ts      await app.listen(3000);
+端口设置：复制.env.example为.env 修改
 
 Blog前端
 ```bash
