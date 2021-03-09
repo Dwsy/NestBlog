@@ -7,14 +7,15 @@ import {
   Delete,
   Body,
   Query,
-  Req
+  Req, UseGuards
 } from "@nestjs/common";
-import { ApiOperation, ApiQuery } from "@nestjs/swagger";
+import {ApiBearerAuth, ApiOperation, ApiQuery} from "@nestjs/swagger";
 import { CrudQuery, ICrudQuery } from "./crud-query.decorator";
 import { CrudConfig, defaultPaginate } from "./crud-config";
 import { get, merge } from "lodash";
 import { CrudOptionsWithModel, PaginateKeys, Fields } from "./crud.interface";
 import { CRUD_FIELD_METADATA } from "./constants";
+import {AuthGuard} from "@nestjs/passport";
 
 export class CrudPlaceholderDto {
   fake?: string;
@@ -88,6 +89,7 @@ export class CrudController {
   }
 
   @Get(":id")
+
   @ApiOperation({ summary: "Find a record" })
   findOne(@Param("id") id: string, @CrudQuery("query") query: ICrudQuery = {}) {
     let {
@@ -103,6 +105,8 @@ export class CrudController {
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Create a record" })
   create(@Body() body: CrudPlaceholderDto) {
     const transform = get(this.crudOptions, "routes.create.transform");
@@ -113,6 +117,8 @@ export class CrudController {
   }
 
   @Put(":id")
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Update a record" })
   update(@Param("id") id: string, @Body() body: CrudPlaceholderDto) {
     const transform = get(this.crudOptions, "routes.update.transform");
@@ -127,6 +133,8 @@ export class CrudController {
   }
 
   @Delete(":id")
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Delete a record" })
   delete(@Param("id") id: string) {
     return this.model.findOneAndRemove({ _id: id });

@@ -6,58 +6,65 @@ import store from 'store2';
 import router from '../router/index';
 
 // Full config:  https://github.com/axios/axios#request-config
+// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// console.log(process.env.NODE_ENV);
 
+let config = {
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : '~~'
+  // timeout: 60 * 1000, // Timeout
+  // withCredentials: true, // Check cross-site Access-Control
+};
 
-let instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '/api' : '~~',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded'
+const _axios = axios.create(config);
+
+_axios.interceptors.request.use(
+  function (config) {
+    // Do something before request is sent
+
+    const token = localStorage.token
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+
+    return config;
+  },
+  function (error) {
+    // Do something with request error
+    return Promise.reject(error);
   }
-})
+);
 
+// Add a response interceptor
+_axios.interceptors.response.use(
+  function (response) {
+    // Do something with response data
+    const resData = response.data;
 
-// http request 拦截器
-instance.interceptors.request.use(
-  config => {
-    const token = sessionStorage.getItem('token')
-    if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
-      config.headers.authorization = token  //请求头加上token
-    }
-    return config
-  },
-  err => {
-    return Promise.reject(err)
-  })
+    if (resData.code === 0) {
+      return resData.data;
+    } else {
 
-// http response 拦截器
-instance.interceptors.response.use(
-  response => {
-    //拦截响应，做统一处理 
-    if (response.data.code) {
-      switch (response.data.code) {
-        case 1002:
-          store.state.isLogin = false
-          router.replace({
-            path: 'login',
-            query: {
-              redirect: router.currentRoute.fullPath
-            }
-          })
+      if (resData.code === 403 || resData.code > 1000 && resData.code <= 1010) {
+        router.replace({ path: '/login', query: { redirect: router.currentRoute.path } })
       }
+      // resData.message && Message.error(resData.message);
     }
-    return response
+    return Promise.reject(resData);
   },
-  //接口错误状态处理，也就是说无响应时的处理
-  error => {
-    return Promise.reject(error.response.status) // 返回接口返回的错误信息
-  })
-export default instance
+  function (error) {
+    // Do something with response error
+
+    return Promise.reject(error);
+  }
+);
 
 
 export const $ajax = async (methods = 'get', ...args) => {
   const res = [null, null];
   try {
-    res[1] = await instance[methods](...args);
+    res[1] = await _axios[methods](...args);
   } catch (error) {
     res[0] = error;
   }
@@ -79,4 +86,24 @@ export const $del = (url, data = {}, config = {}) => {
   return $ajax('delete', url, data, config);
 }
 
-// export default _axios;
+export default _axios;
+// Plugin.install = function(Vue, options) {
+//   Vue.axios = _axios;
+//   window.axios = _axios;
+//   Object.defineProperties(Vue.prototype, {
+//     axios: {
+//       get() {
+//         return _axios;
+//       }
+//     },
+//     $axios: {
+//       get() {
+//         return _axios;
+//       }
+//     },
+//   });
+// };
+
+// Vue.use(Plugin)
+
+// export default Plugin;

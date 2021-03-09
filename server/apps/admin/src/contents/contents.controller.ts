@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Crud } from 'nestjs-mongoose-crud';
+import { Crud } from 'libs/nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 import { ApiTags } from '@nestjs/swagger';
 import { Contents } from 'libs/db/models/contents.model';

@@ -35,7 +35,6 @@
     "bcryptjs": "^2.4.3",
     "md5": "^2.3.0",
     "mongoose": "^5.11.17",
-    "nestjs-mongoose-crud": "^2.0.0",
     "nestjs-typegoose": "^7.1.38",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

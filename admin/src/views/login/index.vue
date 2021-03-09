@@ -78,13 +78,14 @@ export default {
                 username: this.username,
                 password: this.password
             };
-            let a = await this.$http.Login(data);
-            console.log(a);
-            // this.mlmlh = true;
-            // this.$store.commit("handleSignIn");
-            // setTimeout(() => {
-            //     this.$router.push("/dashboard");
-            // }, 400);
+            const res = await this.$http.Login(data);
+            // console.log(res);
+            localStorage.token = res[0].token||'';
+            this.mlmlh = true;
+            this.$store.commit("handleSignIn");
+            setTimeout(() => {
+                this.$router.push("/dashboard");
+            }, 400);
         }
     }
 };

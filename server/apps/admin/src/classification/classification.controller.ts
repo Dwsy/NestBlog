@@ -1,5 +1,5 @@
 import {Controller, Get, Param} from '@nestjs/common';
-import { Crud } from 'nestjs-mongoose-crud';
+import { Crud } from 'libs/nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 import { ApiTags } from '@nestjs/swagger';
 import { Classification } from 'libs/db/models/classification.model';
@@ -8,13 +8,9 @@ import {Comments} from "libs/db/models/comments.model";
 import {Fields} from "libs/db/models/fields.model";
 // import { Contents } from 'libs/db/models/contents.model';
 
+
 @Crud({
     model:Classification,
-    // routes: {
-    //     // create: false,
-    //     // update: false,
-    //     // delete: false
-    //   }
 })
 
 @Controller('api/classification')

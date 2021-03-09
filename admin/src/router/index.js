@@ -5,7 +5,7 @@ import layout from '@/layout/layout.vue';
 // import treeRoute from '@/views/layout/router.vue';
 
 Vue.use(Router);
-const router = new Router({
+let router = new Router({
     // mode:'history',
     routes: [
         //首页
@@ -17,7 +17,8 @@ const router = new Router({
             component: layout,
             meta: {
                 title: 'home',
-                keepAlive: false
+                keepAlive: false,
+                isPublic:true
             }
         },
 
@@ -141,7 +142,7 @@ const router = new Router({
                         icon: 'mdi-comment-processing',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "charts" */ '@/views/manage/comments.vue')
+                    component: () => import('@/views/manage/comments.vue')
                 },
                 {
                     path: 'classifications',
@@ -151,7 +152,7 @@ const router = new Router({
                         icon: 'mdi-bookshelf',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "charts" */ '@/views/manage/classifications.vue')
+                    component: () => import('@/views/manage/classifications.vue')
                 },
                 {
                     path: 'tags',
@@ -161,7 +162,7 @@ const router = new Router({
                         icon: 'mdi-tag-multiple',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/tags.vue')
+                    component: () => import( '@/views/manage/tags.vue')
                 },
                 {
                     path: 'users',
@@ -171,7 +172,7 @@ const router = new Router({
                         icon: 'mdi-account-group',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/users.vue')
+                    component: () => import( '@/views/manage/users.vue')
                 },
                 {
                     path: 'files',
@@ -181,7 +182,7 @@ const router = new Router({
                         icon: 'mdi-file-multiple',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/files.vue')
+                    component: () => import( '@/views/manage/files.vue')
                 },
                 {
                     path: 'links',
@@ -191,7 +192,7 @@ const router = new Router({
                         icon: 'mdi-link-variant',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "starTask" */ '@/views/manage/links.vue')
+                    component: () => import( '@/views/manage/links.vue')
                 },
             ]
         },
@@ -215,7 +216,7 @@ const router = new Router({
                         icon: 'mdi-image-size-select-actual',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "map" */ '@/views/setting/ppt.vue')
+                    component: () => import('@/views/setting/ppt.vue')
                 },
                 {
                     path: '/theme',
@@ -225,33 +226,10 @@ const router = new Router({
                         icon: 'mdi-theme-light-dark',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "map" */ '@/views/setting/theme.vue')
+                    component: () => import('@/views/setting/theme.vue')
                 },
             ]
         },
-        // 流程图
-        // {
-        //     path: '/flow-editor',
-        //     visible: true,
-        //     component: layout,
-        //     meta: {
-        //         title: 'flowEditor',
-        //         icon: 'mdi-vector-triangle',
-        //         keepAlive: false
-        //     },
-        //     children: [
-        //         {
-        //             path: '/flow-editor',
-        //             name: 'FlowEditor',
-        //             meta: {
-        //                 title: 'Flow Editor',
-        //                 icon: 'mdi-vector-triangle',
-        //                 keepAlive: false
-        //             },
-        //             component: () => import(/* webpackChunkName: "flowchart" */ '@/views/flowchart/index.vue')
-        //         }
-        //     ]
-        // },
         // 测试页面缓存
         {
             path: '/keep-alive',
@@ -271,7 +249,7 @@ const router = new Router({
                         strategy: 'keep', // keep,  refresh
                         keepAlive: true
                     },
-                    component: () => import(/* webpackChunkName: "keepAlive" */ '@/views/keep-alive/index.vue'),
+                    component: () => import( '@/views/keep-alive/index.vue'),
                 }
             ]
         },
@@ -294,7 +272,7 @@ const router = new Router({
                         icon: '',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "widget22" */ '@/views/keep-alive/inner.vue')
+                    component: () => import( '@/views/keep-alive/inner.vue')
                 }
             ]
         },
@@ -308,7 +286,7 @@ const router = new Router({
                 icon: 'mdi-logout',
                 keepAlive: false
             },
-            component: () => import(/* webpackChunkName: "login" */ '@/views/login/logout.vue')
+            component: () => import( '@/views/login/logout.vue')
         },
         {
             path: '/login',
@@ -317,15 +295,16 @@ const router = new Router({
             meta: {
                 title: 'login',
                 icon: 'mdi-login',
-                keepAlive: false
+                keepAlive: false,
+                isPublic:true
             },
-            component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue')
+            component: () => import( '@/views/login/index.vue')
         },
         {
             path: '/404',
             name: '404',
             visible: false,
-            component: () => import(/* webpackChunkName: "404page" */ '@/views/exception-page/404.vue'),
+            component: () => import( '@/views/exception-page/404.vue'),
             meta: {
                 title: '404',
                 keepAlive: false
@@ -333,13 +312,14 @@ const router = new Router({
         },
         { path: '*', redirect: '/404' }
     ],
-    // scrollBehavior(to, from, savedPosition) {
-    //     if (savedPosition) {
-    //         return savedPosition;
-    //     } else {
-    //         return { x: 0, y: 0 };
-    //     }
-    // }
-});
 
+});
+router.beforeEach((to, from, next) => {
+
+    if(!to.meta.isPublic&&!localStorage.token){
+        console.log("未登录");
+        return next('/')
+    }
+    next()
+})
 export default router;
