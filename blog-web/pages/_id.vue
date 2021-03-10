@@ -62,7 +62,8 @@ export default {
           limit: 8,
           page: id,
           sort: "-_id",
-          populate:'tag classification'
+          populate:'tag classification',
+          
         }
       }
     });

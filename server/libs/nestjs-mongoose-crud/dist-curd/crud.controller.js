@@ -35,11 +35,14 @@ class CrudController {
         return config;
     }
     find(query = {}) {
-        let { where = lodash_1.get(this.crudOptions, "routes.find.where", {}), limit = lodash_1.get(this.crudOptions, "routes.find.limit", 10), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, "routes.find.populate", undefined), sort = lodash_1.get(this.crudOptions, "routes.find.sort", undefined) } = query;
+        let { where = lodash_1.get(this.crudOptions, "routes.find.where", {}), limit = lodash_1.get(this.crudOptions, "routes.find.limit", 20), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, "routes.find.populate", undefined), sort = lodash_1.get(this.crudOptions, "routes.find.sort", undefined) } = query;
+        // console.log(where);
+        // console.log(query);
         if (skip < 1) {
             skip = (page - 1) * limit;
         }
         const paginateKeys = lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate);
+        // console.log(lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate));
         const find = async () => {
             const data = await this.model
                 .find()

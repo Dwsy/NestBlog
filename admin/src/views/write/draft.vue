@@ -176,7 +176,8 @@ export default {
 
     methods: {
         async get() {
-            const tagData = await this.$http.getFields(true);
+            const tagData = await this.$http.getDraft();
+            console.log(tagData);
             // console.log(tagData);
             // this.tags = tagData[0].data[0];
             // console.log(tagData[0].data);
