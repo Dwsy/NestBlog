@@ -1,20 +1,10 @@
 import { $ajax, $post, $get, $put, $del } from '../plugins/axios';
 
-export const getFields = (iDraft) => {
+export const getFields = (isDraft) => {
     return $get('/fields', {
         params: {
             query: {
-                limit: 777,
-                sort: "-_id",
-                populate: 'tag classification'
-            }
-        }
-    });
-}
-export const getDraft = () => {
-    return $get('/fields/draft', {
-        params: {
-            query: {
+                where:{"isDraft":isDraft},
                 limit: 777,
                 sort: "-_id",
                 populate: 'tag classification'
