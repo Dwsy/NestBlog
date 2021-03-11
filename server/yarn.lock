@@ -4486,6 +4486,7 @@ neo-async@^2.6.2:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 nest-morgan@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/nest-morgan/download/nest-morgan-2.0.0.tgz#9e16d9f32a9c2166ffa0e9c9ef1026c13a1a5cba"
@@ -4493,6 +4494,8 @@ nest-morgan@^2.0.0:
   dependencies:
     morgan "^1.10.0"
 
+=======
+>>>>>>> parent of 89922a6 (log)
 =======
 >>>>>>> parent of 89922a6 (log)
 nestjs-mongoose-crud@^2.1.2:

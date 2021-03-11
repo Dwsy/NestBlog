@@ -2,11 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AdminModule } from './admin.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // import { Log4jsLogger } from '@nestx-log4js/core';
 // import * as express from 'express';
 // import { logger } from './middleware/logger.middleware';
 
+=======
+>>>>>>> parent of 89922a6 (log)
 =======
 >>>>>>> parent of 89922a6 (log)
 // import * as mongoose from 'mongoose';
@@ -24,6 +27,7 @@ app.enableCors();
   SwaggerModule.setup('api-docs', app, document);
   app.enableCors();
 <<<<<<< HEAD
+<<<<<<< HEAD
   // app.useLogger(app.get(Log4jsLogger));
 
   // app.use(express.json()); // For parsing application/json
@@ -32,6 +36,8 @@ app.enableCors();
 
   // app.use(logger);
   
+=======
+>>>>>>> parent of 89922a6 (log)
 =======
 >>>>>>> parent of 89922a6 (log)
   const PORT = process.env.ADMIN_PORT || 2999

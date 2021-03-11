@@ -37,8 +37,11 @@
     "mongoose": "^5.11.17",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "morgan": "^1.10.0",
     "nest-morgan": "^2.0.0",
+=======
+>>>>>>> parent of 89922a6 (log)
 =======
 >>>>>>> parent of 89922a6 (log)
     "nestjs-mongoose-crud": "^2.1.2",
