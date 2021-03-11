@@ -38,9 +38,12 @@
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "mongoose": "^5.11.17",
+<<<<<<< HEAD
     "morgan": "^1.10.0",
     "nest-morgan": "^2.0.0",
     "nestjs-mongoose-crud": "^2.1.2",
+=======
+>>>>>>> parent of 7539fd4 (分页、草稿加密)
     "nestjs-typegoose": "^7.1.38",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

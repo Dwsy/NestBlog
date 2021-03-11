@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!field.isDraft">
+  <v-container >
     <div>
       
       <HeadImage :cover="field.cover"/>
@@ -30,9 +30,7 @@
         </div>
       </v-col>
     </v-row>
-    
   </v-container>
-  <p v-else>无法访问</p>
 </template>
 
 <script>
