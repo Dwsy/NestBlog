@@ -3,8 +3,8 @@ import { AdminModule } from './admin.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 // import { Log4jsLogger } from '@nestx-log4js/core';
-import * as express from 'express';
-import { logger } from './middleware/logger.middleware';
+// import * as express from 'express';
+// import { logger } from './middleware/logger.middleware';
 
 // import * as mongoose from 'mongoose';
 async function bootstrap() {
@@ -23,10 +23,11 @@ app.enableCors();
   app.enableCors();
   // app.useLogger(app.get(Log4jsLogger));
 
-  app.use(express.json()); // For parsing application/json
-  app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+  // app.use(express.json()); // For parsing application/json
+  // app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
   // 监听所有的请求路由，并打印日志
-  app.use(logger);
+
+  // app.use(logger);
   
   const PORT = process.env.ADMIN_PORT || 2999
   await app.listen(PORT);
