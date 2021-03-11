@@ -35,11 +35,14 @@
     "bcryptjs": "^2.4.3",
     "md5": "^2.3.0",
     "mongoose": "^5.11.17",
+<<<<<<< HEAD
 
 
     "morgan": "^1.10.0",
     "nest-morgan": "^2.0.0",
 
+=======
+>>>>>>> parent of 89922a6 (log)
     "nestjs-mongoose-crud": "^2.1.2",
 
 
