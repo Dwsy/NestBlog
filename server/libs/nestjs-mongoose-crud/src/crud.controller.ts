@@ -47,18 +47,14 @@ export class CrudController {
     description: "Query options"
   })
   find(@CrudQuery("query") query: ICrudQuery = {}) {
-    
     let {
       where = get(this.crudOptions, "routes.find.where", {}),
-      limit = get(this.crudOptions, "routes.find.limit", 20),
+      limit = get(this.crudOptions, "routes.find.limit", 10),
       page = 1,
       skip = 0,
       populate = get(this.crudOptions, "routes.find.populate", undefined),
       sort = get(this.crudOptions, "routes.find.sort", undefined)
     } = query;
-    console.log(get(this.crudOptions, "routes.find.where", {}));
-    
-console.log(query);
 
     if (skip < 1) {
       skip = (page - 1) * limit;
@@ -69,11 +65,6 @@ console.log(query);
       "routes.find.paginate",
       defaultPaginate
     );
-console.log(get(
-  this.crudOptions,
-  "routes.find.paginate",
-  defaultPaginate
-));
 
     const find = async () => {
       const data = await this.model

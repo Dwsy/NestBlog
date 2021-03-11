@@ -19,8 +19,8 @@ app.enableCors();
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
-
   app.enableCors();
+
   // app.useLogger(app.get(Log4jsLogger));
 
   app.use(express.json()); // For parsing application/json
@@ -29,6 +29,7 @@ app.enableCors();
 
   app.use(logger);
   
+
   const PORT = process.env.ADMIN_PORT || 2999
   await app.listen(PORT);
   console.log(`http://localhost:${PORT}/api-docs`)

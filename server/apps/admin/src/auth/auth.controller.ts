@@ -9,9 +9,9 @@ import { InjectModel } from 'nestjs-typegoose';
 import { User } from 'libs/db/models/user.model';
 import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { JwtService } from '@nestjs/jwt';
 import { CurrentUser } from './current-user.decorator';
 
 @Controller('api/auth')
