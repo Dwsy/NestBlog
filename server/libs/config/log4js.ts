@@ -2,6 +2,7 @@
 
 import * as path from 'path';
 const baseLogPath = path.resolve('./logs'); // 日志要写入哪个目录
+// const baseLogPath = path.resolve('./'); // 日志要写入哪个目录
 
 const log4jsConfig = {
   appenders: {
