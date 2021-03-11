@@ -14,9 +14,15 @@ import { ThemeModule } from './theme/theme.module';
 import { LinksModule } from './links/links.module';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from '@app/common';
+import { APP_INTERCEPTOR } from "@nestjs/core";
+import { MorganModule, MorganInterceptor } from "nest-morgan";
+// import { Log4jsModule } from '@nestx-log4js/core';
 
 @Module({
   imports: [
+    MorganModule,
+    // Log4jsModule.forRoot(),
+
     CommonModule,
     ClassificationModule,
     // UsersModule,
@@ -28,9 +34,15 @@ import { CommonModule } from '@app/common';
     UpfileModule,
     ThemeModule,
     LinksModule,
-    AuthModule
+    AuthModule,
+
+    
   ],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService, {
+              provide: APP_INTERCEPTOR,
+              useClass: MorganInterceptor("combined"),}],
 })
-export class AdminModule {}
+export class AdminModule { }
+
+

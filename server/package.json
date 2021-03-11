@@ -32,9 +32,14 @@
     "@nestjs/swagger": "^4.7.13",
     "@typegoose/typegoose": "^7.4.8",
     "@types/mongoose": "^5.10.3",
+    "@types/morgan": "^1.9.2",
     "bcryptjs": "^2.4.3",
+    "log4js": "^6.3.0",
     "md5": "^2.3.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.11.17",
+    "morgan": "^1.10.0",
+    "nest-morgan": "^2.0.0",
     "nestjs-mongoose-crud": "^2.1.2",
     "nestjs-typegoose": "^7.1.38",
     "passport": "^0.4.1",
@@ -43,6 +48,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
+    "stacktrace-js": "^2.0.2",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
