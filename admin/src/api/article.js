@@ -1,6 +1,6 @@
 import { $ajax, $post, $get, $put, $del } from '../plugins/axios';
 
-export const getFields = (iDraft) => {
+export const getFields = () => {
     return $get('/fields', {
         params: {
             query: {

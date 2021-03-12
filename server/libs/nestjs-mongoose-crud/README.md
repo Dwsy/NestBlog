@@ -1,7 +1,9 @@
+增加jwt权限验证
+
 # NestJs + Mongoose CRUD
 
 Nest.js crud module for mongoose models **without** `@nestjsx/crud`
-增加jwt权限验证版本
+
 ## Important
 - NestJs 6.x ----> nestjs-mongoose-crud v1.x
 - NestJs 7.x ----> nestjs-mongoose-crud v2.x
