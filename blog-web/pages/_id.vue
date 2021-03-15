@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xs class="main">
+  <div>
     <div>
       <PPT v-bind:ppts="ppt" />
     </div>
@@ -25,13 +25,13 @@
           <br />
 
           <Recently v-bind:recently="recently" />
-          <Top-50 />
+          <Top-50 v-bind:pixivTop="pixivTop"/>
           <p class="text-h6 pb-4">标签</p>
           <Tag v-bind:tags="tag" />
         </div>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -71,7 +71,7 @@ export default {
     // const fieldsData = await $axios.$get(`fields/all/${id}`);
     // const titleData = await $axios.$get(`/fields/title/${id}`);
     const recentlyData = await $axios.$get("comments/recently");
-    // const classificationData = await $axios.$get("classification");
+    const pixivTop = await $axios.$get("/theme/pixiv");
 
     const tagData = await $axios.$get("tag", {
       params: {
@@ -100,7 +100,8 @@ export default {
       tag: tagData.data,
       total: parseInt(fieldsData.total),
       lastPage: parseInt(fieldsData.lastPage),
-      page: parseInt(fieldsData.page)
+      page: parseInt(fieldsData.page),
+      pixivTop:pixivTop
     };
   },
   // mounted() {

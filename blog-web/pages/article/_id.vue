@@ -55,22 +55,18 @@ export default {
     // const content = await $axios.$get(`contents/${id}`)
     const content = await $axios.$get(`contents/${id}`);
     // console.log(content.fieldsId);
-    const field = await $axios.$get(`fields/${content.fieldsId}`, {
-      params: {
-        query: {
-          populate: "tag classification"
-        }
-      }
-    });
+    const field = await $axios.$get(`fields/${content.fieldsId}`);
     const comments = await $axios.$get(`comments/${id}`);
 
-    const ipData = await $axios.$get(`http://ip-api.com/json/`);
+    // const ipData = await $axios.$get(`http://ip-api.com/json/`);
+    const ipData = await $axios.$get(`api/fields/ip`);
     // console.log(ipData.query);
     return {
       comments: comments,
       content: content,
       id: id,
-      IP: ipData.query,
+      // IP: ipData.query,
+      IP: ipData,
       field: field
     };
   },

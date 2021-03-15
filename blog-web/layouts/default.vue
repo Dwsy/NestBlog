@@ -151,7 +151,7 @@ export default {
     this.$vuetify.theme.dark = true;
     const classificationData = await this.$axios.$get("classification");
     this.items[5].children = classificationData.data;
-    console.log(classificationData);
+    // console.log(classificationData);
     // this.$vuetify.theme.dark = true;
   },
   data() {

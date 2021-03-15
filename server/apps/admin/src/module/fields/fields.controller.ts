@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Ip, Param, Query, UseGuards } from '@nestjs/common';
 import { Crud } from 'libs/nestjs-mongoose-crud/';
 import { InjectModel } from 'nestjs-typegoose';
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
@@ -16,7 +16,8 @@ import { AuthGuard } from '@nestjs/passport';
 @Crud({
     model: Fields,
     routes: {
-        find: false
+        find: false,
+        findOne:false
         // create: false,
         // update: false,
         // delete: false
@@ -50,7 +51,34 @@ export class FieldsController {
         return this.model.find().populate('tag').populate('classification').limit(8).skip(parseInt(page) * 8 - 8).sort({ '_id': -1 });
     }
 
+    @Get('ip')
+    async test(@Ip()ip){
+        return ip
+    }
+    @Get(':id')
+    // findOne(@Param("id") id: string, @Query('query') query) {
+    async findOne(@Param("id") id: string) {
 
+        // let populate = undefined
+        // let populate1 = undefined
+        // let select = undefined
+        // let where = undefined
+        
+        
+        // if (query) {
+        //     query = JSON.parse(query)
+        //     populate = query.populate
+        //     populate = query.populate1
+        //     where = query.where
+        //     select = query.select
+        // }
+        // console.log(populate);
+        return await this.model
+            .findById(id)
+            .populate('tag classification')
+            // .select(select)
+            // .where(where);
+    }
 
     @Get()
     @ApiOperation({ summary: "Find all records", operationId: "list" })
@@ -82,9 +110,6 @@ export class FieldsController {
             .limit(limit)
             .sort(sort)
             .populate(populate);
-
-
-
         const paginateKeys: PaginateKeys | false = {
             data: 'data',
             total: 'total',

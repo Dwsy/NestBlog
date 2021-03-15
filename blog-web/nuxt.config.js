@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: "stylesheet", type: "text/css", href: "http://www.bootcdn.cn/animate.css" }
+      // { rel: "stylesheet", type: "text/css", href: "http://www.bootcdn.cn/animate.css" }
     ],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
