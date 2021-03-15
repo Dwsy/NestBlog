@@ -59,7 +59,7 @@ export default {
     const comments = await $axios.$get(`comments/${id}`);
 
     // const ipData = await $axios.$get(`http://ip-api.com/json/`);
-    const ipData = await $axios.$get(`api/fields/ip`);
+    const ipData = await $axios.$get(`fields/ip`);
     // console.log(ipData.query);
     return {
       comments: comments,

@@ -24,13 +24,7 @@ export const getDraft = () => {
 }
 
 export const getFieldsById = (id) => {
-    let Fields = $get(`/fields/${id}`, {
-        params: {
-            query: {
-                populate: 'tag classification contentsId'
-            }
-        }
-    });
+    let Fields = $get(`/fields/${id}`);
     return Fields
 
 }
