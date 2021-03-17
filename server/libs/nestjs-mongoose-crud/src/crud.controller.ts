@@ -56,9 +56,9 @@ export class CrudController {
       populate = get(this.crudOptions, "routes.find.populate", undefined),
       sort = get(this.crudOptions, "routes.find.sort", undefined)
     } = query;
-    console.log(get(this.crudOptions, "routes.find.where", {}));
+    // console.log(get(this.crudOptions, "routes.find.where", {}));
     
-console.log(query);
+// console.log(query);
 
     if (skip < 1) {
       skip = (page - 1) * limit;
@@ -69,11 +69,11 @@ console.log(query);
       "routes.find.paginate",
       defaultPaginate
     );
-console.log(get(
-  this.crudOptions,
-  "routes.find.paginate",
-  defaultPaginate
-));
+// console.log(get(
+//   this.crudOptions,
+//   "routes.find.paginate",
+//   defaultPaginate
+// ));
 
     const find = async () => {
       const data = await this.model

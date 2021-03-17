@@ -80,42 +80,49 @@
                                             <v-text-field
                                                 v-model="editedItem.primary"
                                                 label="primary"
+                                                :background-color="editedItem.primary"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.secondary"
                                                 label="secondary"
+                                                :background-color="editedItem.secondary"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.accent"
                                                 label="accent"
+                                                :background-color="editedItem.accent"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.error"
                                                 label="error"
+                                                :background-color="editedItem.error"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.info"
                                                 label="info"
+                                                :background-color="editedItem.info"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.success"
                                                 label="success"
+                                                :background-color="editedItem.success"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.warning"
                                                 label="warning"
+                                                :background-color="editedItem.warning"
                                             ></v-text-field>
                                         </v-col>
 
@@ -290,7 +297,7 @@ export default {
 
         dialogControl() {
             this.dialog = !this.dialog;
-            console.log(this.tag);
+            // console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;
@@ -322,10 +329,10 @@ export default {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
                 let a = await this.$http.upTheme(this.editedItem);
-                console.log(this.editedItem);
+                // console.log(this.editedItem);
             } else {
                 let a = await this.$http.createTheme(this.editedItem);
-                console.log(this.editedItem);
+                // console.log(this.editedItem);
                 this.tags.push(this.editedItem);
             }
             this.close();

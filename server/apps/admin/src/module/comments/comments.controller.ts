@@ -123,9 +123,9 @@ export class CommentsController {
     async sendChild(@Body() dto: sendChildCommentDto) {
 
         let a = this.CommentsModel.create(dto);
-        console.log((await a))
-        console.log((await a)._id)
-        console.log(dto.fatherId);
+        // console.log((await a))
+        // console.log((await a)._id)
+        // console.log(dto.fatherId);
         let b = this.CommentsModel.findByIdAndUpdate(dto.fatherId, {$push: {childId: (await a)._id}})
 
         return b;
@@ -159,8 +159,8 @@ export class CommentsController {
             delAll = await this.CommentsModel.deleteMany({fatherId: id})
 
         }
-        console.log(del);
-        console.log(delAll)
+        // console.log(del);
+        // console.log(delAll)
         // let del =this.CommentsModel.deleteOne()
     }
 

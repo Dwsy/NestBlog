@@ -4,15 +4,11 @@
         <v-carousel
             cycle
             hide-delimiter-background
-            style="width:100%; height:400px;"
             show-arrows-on-hover
             hide-delimiters
             :interval="5000"
         >
-                        <!-- :next-icon="mdo"
-                :prev-icon="mdiChevronLeft" -->
             <v-carousel-item
-
                 v-for="(image, i) in pixivTop.image"
                 :key="pixivTop[i]"
                 :href="'https://www.pixiv.net/' + pixivTop.url[i]"
@@ -20,7 +16,7 @@
             >
                 <div cent>
                     <v-img
-                        style="justify-content: center;align-items: center;"
+                        style="width:100%; height:100%;"
                         :src="image"
                     ></v-img>
                 </div>

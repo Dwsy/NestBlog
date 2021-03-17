@@ -127,7 +127,8 @@ export default {
     methods: {
         async getParams() {
             const fields = await this.$http.getFieldsById(this.fieldsId);
-            console.log(fields[0]);
+            console.log(fields);
+
             if (fields[0].isDraft == true) {
                 this.state0 = "更新草稿";
                 this.state = "发布";
@@ -171,11 +172,11 @@ export default {
             };
             const add = await this.$http.addField(addData);
             if (Field[0].contentsId === Content[0]._id) {
-                console.log("保存成功");
+                // console.log("保存成功");
                 this.success("保存成功");
                 this.$router.push("/write/draft");
             } else {
-                console.log("保存失败");
+                // console.log("保存失败");
                 this.error("保存失败");
             }
         },
@@ -205,11 +206,11 @@ export default {
             };
             const add = await this.$http.addField(addData);
             if (Field[0].contentsId === Content[0]._id) {
-                console.log("保存成功");
+                // console.log("保存成功");
                 this.success("发送成功");
                 this.$router.push("/manage/manageArticles");
             } else {
-                console.log("保存失败");
+                // console.log("保存失败");
                 this.error("发送失败");
             }
         },

@@ -13,7 +13,7 @@
                 <br />
                 <MarkdownEditor ref="editor"></MarkdownEditor>
 
-                <v-autocomplete
+                <v-combobox
                     v-model="selectTag"
                     :items="tag"
                     :search-input.sync="search"
@@ -24,6 +24,7 @@
                     item-value="_id"
                     multiple
                     persistent-hint
+                    small-chips
                     prepend-icon="mdi-tag-plus"
                 >
                     <template v-slot:no-data>
@@ -36,18 +37,18 @@
                             </v-list-item-content>
                         </v-list-item>
                     </template>
-                </v-autocomplete>
+                </v-combobox>
 
                 <v-divider></v-divider>
 
-                <v-autocomplete
+                <v-combobox
                     v-model="selectClass"
                     label="选择分类"
                     :items="classifications"
                     item-text="name"
                     item-value="_id"
                     prepend-icon="mdi-book-plus"
-                ></v-autocomplete>
+                ></v-combobox>
                 <v-divider></v-divider>
 
                 <v-text-field
@@ -104,6 +105,8 @@ export default {
     },
     methods: {
         mdtheme() {
+            console.log(this.selectTag.map(value => value));
+            // console.log(this.sel);
             this.$refs.editor.settheme();
         },
         async draft() {
@@ -122,20 +125,20 @@ export default {
                 isDraft: true
             };
             const Field = await this.$http.createField(FieldData);
-            console.log(Field[0].contentsId);
-            console.log(Content[0]._id);
+            // console.log(Field[0].contentsId);
+            // console.log(Content[0]._id);
             let addData = {
                 fieldsId: Field[0]._id,
                 ContentTd: Content[0]._id
             };
             const add = await this.$http.addField(addData);
-            console.log(add);
+            // console.log(add);
             if (Field[0].contentsId === Content[0]._id) {
-                console.log("保存成功");
+                // console.log("保存成功");
                 this.success("保存成功");
                 this.$router.push("/write/draft");
             } else {
-                console.log("保存失败");
+                // console.log("保存失败");
                 this.error("保存失败");
             }
         },
@@ -147,7 +150,8 @@ export default {
             let FieldData = {
                 title: this.title,
                 contentsId: Content[0]._id,
-                tag: this.selectTag.map(value => value._id),
+                // tag: this.selectTag.map(value => value._id),
+                tag: this.selectTag,
                 classification: this.selectClass._id,
                 cover: this.cover,
                 coverSmall: this.coverSmall,
@@ -155,20 +159,20 @@ export default {
                 isDraft: false
             };
             const Field = await this.$http.createField(FieldData);
-            console.log(Field[0].contentsId);
-            console.log(Content[0]._id);
+            // console.log(Field[0].contentsId);
+            // console.log(Content[0]._id);
             let addData = {
                 fieldsId: Field[0]._id,
                 ContentTd: Content[0]._id
             };
             const add = await this.$http.addField(addData);
-            console.log(add);
+            // console.log(add);
             if (Field[0].contentsId === Content[0]._id) {
-                console.log("发送成功");
+                // console.log("发送成功");
                 this.success("发送成功");
                 this.$router.push("/manage/manageArticles");
             } else {
-                console.log("发送失败");
+                // console.log("发送失败");
                 this.error("发送失败");
             }
         },
@@ -222,8 +226,8 @@ export default {
             }
         },
         theme(val) {
-            console.log(123);
-            console.log(val);
+            // console.log(123);
+            // console.log(val);
         }
     }
 };

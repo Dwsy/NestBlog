@@ -203,7 +203,7 @@ export default {
 
         dialogControl() {
             this.dialog = !this.dialog;
-            console.log(this.tag);
+            // console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;

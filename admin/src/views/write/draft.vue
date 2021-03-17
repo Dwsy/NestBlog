@@ -177,7 +177,7 @@ export default {
     methods: {
         async get() {
             const tagData = await this.$http.getDraft();
-            console.log(tagData);
+            // console.log(tagData);
             // console.log(tagData);
             // this.tags = tagData[0].data[0];
             // console.log(tagData[0].data);
@@ -186,14 +186,14 @@ export default {
 
         dialogControl() {
             this.dialog = !this.dialog;
-            console.log(this.tag);
+            // console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;
         // },
 
         editItem(item) {
-            console.log(item);
+            // console.log(item);
             let id=item._id;
             let contentsId=item.contentsId;
 

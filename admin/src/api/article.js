@@ -12,7 +12,7 @@ export const getFields = () => {
     });
 }
 export const getDraft = () => {
-    return $get('/fields/draft', {
+    return $get('/fields/draftList', {
         params: {
             query: {
                 limit: 777,
@@ -24,7 +24,13 @@ export const getDraft = () => {
 }
 
 export const getFieldsById = (id) => {
-    let Fields = $get(`/fields/${id}`);
+    let Fields = $get(`/fields/${id}`, {
+        params: {
+            query: {
+                populate: 'tag classification contentsId'
+            }
+        }
+    });
     return Fields
 
 }

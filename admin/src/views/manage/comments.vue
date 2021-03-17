@@ -241,10 +241,10 @@ export default {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
                 let a= await this.$http.upComment(this.editedItem);
-                console.log(this.editedItem)
+                // console.log(this.editedItem)
             } else {
                 // let b= await this.$http.createComment(this.editedItem);
-                console.log(this.editedItem);
+                // console.log(this.editedItem);
                 this.tags.push(this.editedItem);
             }
             this.close();

@@ -194,7 +194,7 @@ export default {
         editItem(item) {
             this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
-            console.log(this.editedItem);
+            // console.log(this.editedItem);
             this.dialog = true;
         },
 
@@ -218,10 +218,10 @@ export default {
             if (this.editedIndex > -1) {
                 Object.assign(this.tags[this.editedIndex], this.editedItem);
                 let a= await this.$http.upClassification(this.editedItem);
-                console.log(a)
+                // console.log(a)
             } else {
                 let b= await this.$http.createClassification(this.editedItem);
-                console.log(b);
+                // console.log(b);
                 this.tags.push(this.editedItem);
             }
 

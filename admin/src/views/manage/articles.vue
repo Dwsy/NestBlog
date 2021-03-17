@@ -184,21 +184,21 @@ export default {
 
         dialogControl() {
             this.dialog = !this.dialog;
-            console.log(this.tag);
+            // console.log(this.tag);
         },
         // initialize() {
         //     this.desserts = ;
         // },
 
         editItem(item) {
-            console.log(item);
+            // console.log(item);
             this.editedIndex = this.tags.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         editItem(item) {
-            console.log(item);
+            // console.log(item);
             let id=item._id;
             let contentsId=item.contentsId;
 
@@ -214,7 +214,7 @@ export default {
             confirm("你确定要删除这篇文章吗？") &&
                 await this.$http.delContent(item.contentsId)
                 await this.$http.delField(item._id)
-                console.log("删除成功");
+                // console.log("删除成功");
                 this.tags.splice(index, 1);
 
         },

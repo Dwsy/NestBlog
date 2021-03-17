@@ -17,7 +17,7 @@ import { AuthGuard } from '@nestjs/passport';
     model: Fields,
     routes: {
         find: false,
-        findOne:false
+        findOne: false
         // create: false,
         // update: false,
         // delete: false
@@ -52,32 +52,70 @@ export class FieldsController {
     }
 
     @Get('ip')
-    async test(@Ip()ip){
+    async test(@Ip() ip) {
         return ip
     }
-    @Get(':id')
-    // findOne(@Param("id") id: string, @Query('query') query) {
-    async findOne(@Param("id") id: string) {
+    @Get('draftList')
+    @ApiOperation({ summary: "Find all records", operationId: "list" })
+    async draftList(@Query('query') query) {
+        let populate = undefined
+        let page = 1
+        let skip = 0
+        let limit = 20
+        let where = {}
+        let sort = undefined
+        if (query) {
+            query = JSON.parse(query)
+            populate = query.populate
+            page = query.page
+            skip = 0
+            limit = query.limit
+            where = query.where
+            sort = query.sort
+        }
 
-        // let populate = undefined
-        // let populate1 = undefined
-        // let select = undefined
-        // let where = undefined
-        
-        
-        // if (query) {
-        //     query = JSON.parse(query)
-        //     populate = query.populate
-        //     populate = query.populate1
-        //     where = query.where
-        //     select = query.select
-        // }
+        if (skip < 1) {
+            skip = (page - 1) * limit;
+        }
+        const data = await this.model
+            .find()
+            // .where(where)
+            .where({ "isDraft": true })
+            .skip(skip)
+            .limit(limit)
+            .sort(sort)
+            .populate(populate);
+        const paginateKeys: PaginateKeys | false = {
+            data: 'data',
+            total: 'total',
+            lastPage: 'lastPage',
+            currentPage: 'page'
+        };
+
+
+        if (paginateKeys !== false) {
+            const total = await this.model.countDocuments(where);
+            return {
+                [paginateKeys.total]: total,
+                [paginateKeys.data]: data,
+                [paginateKeys.lastPage]: Math.ceil(total / limit),
+                [paginateKeys.currentPage]: page
+            };
+        }
+
+        return data;
+    };
+    @Get(':id')
+    async findOne(@Param("id") id: string, @Query('query') query) {
+        let populate = undefined
+        if (query) {
+            query = JSON.parse(query)
+            populate = query.populate
+        }
         // console.log(populate);
         return await this.model
             .findById(id)
-            .populate('tag classification')
-            // .select(select)
-            // .where(where);
+            .populate(populate)
     }
 
     @Get()
@@ -127,71 +165,13 @@ export class FieldsController {
                 [paginateKeys.currentPage]: page
             };
         }
-        // console.log(limit);
-        // console.log(query.populate);
-
 
         return data;
     };
 
 
 
-    @Get('/draft')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    @ApiOperation({ summary: "Find all records", operationId: "list" })
-    async findDraft(@Query('query') query) {
-        let populate = undefined
-        let page = 1
-        let skip = 0
-        let limit = 20
-        let where = {}
-        let sort = undefined
-        if (query) {
-            query = JSON.parse(query)
-            populate = query.populate
-            page = query.page
-            skip = 0
-            limit = query.limit
-            where = query.where
-            sort = query.sort
-        }
-
-        if (skip < 1) {
-            skip = (page - 1) * limit;
-        }
-        const data = await this.model
-            .find()
-            // .where(where)
-            .where({ "isDraft": true })
-            .skip(skip)
-            .limit(limit)
-            .sort(sort)
-            .populate(populate);
 
 
 
-        const paginateKeys: PaginateKeys | false = {
-            data: 'data',
-            total: 'total',
-            lastPage: 'lastPage',
-            currentPage: 'page'
-        };
-
-
-        if (paginateKeys !== false) {
-            const total = await this.model.countDocuments(where);
-            return {
-                [paginateKeys.total]: total,
-                [paginateKeys.data]: data,
-                [paginateKeys.lastPage]: Math.ceil(total / limit),
-                [paginateKeys.currentPage]: page
-            };
-        }
-        // console.log(limit);
-        // console.log(query.populate);
-
-
-        return data;
-    };
 }
