@@ -18,3 +18,9 @@ export const getTag = () => {
         }
     });
 }
+export const TagContentsNum = (ids,num) => {
+    return $post(`/tag/contentsNum/`,{
+        tagId:ids,
+        num:num
+    });
+}

@@ -127,7 +127,7 @@ export default {
     methods: {
         async getParams() {
             const fields = await this.$http.getFieldsById(this.fieldsId);
-            console.log(fields);
+            // console.log(fields);
 
             if (fields[0].isDraft == true) {
                 this.state0 = "更新草稿";
@@ -148,7 +148,7 @@ export default {
         },
         async draft() {
             let ContentData = {
-                text: this.$refs.editor.getData()
+                text: this.$refs.editor.getHTML()
             };
             const Content = await this.$http.updataContent(
                 this.contentsId,
@@ -182,7 +182,7 @@ export default {
         },
         async send() {
             let ContentData = {
-                text: this.$refs.editor.getData()
+                text: this.$refs.editor.getHTML()
             };
             const Content = await this.$http.updataContent(
                 this.contentsId,

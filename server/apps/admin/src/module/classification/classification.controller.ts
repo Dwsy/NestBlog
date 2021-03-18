@@ -1,11 +1,12 @@
-import {Controller, Get, Param} from '@nestjs/common';
+import {Controller, Get, Post,Param, UseGuards} from '@nestjs/common';
 import { Crud } from 'libs/nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
-import { ApiTags } from '@nestjs/swagger';
+import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import { Classification } from 'libs/db/models/classification.model';
 import {ReturnModelType} from "@typegoose/typegoose";
 import {Comments} from "libs/db/models/comments.model";
 import {Fields} from "libs/db/models/fields.model";
+import {AuthGuard} from "@nestjs/passport";
 // import { Contents } from 'libs/db/models/contents.model';
 
 
@@ -26,6 +27,13 @@ export class ClassificationController {
         // return this.CommentsModel.find(contentsId:id);
         return this.FieldsModel.find({classification:id}).populate('tag').populate('classification','name').sort({'_id':-1})
     }
+    @Get('contentsNum/:id/:num')
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
+    async addArticle (@Param('id') id: string,@Param('num') num: string) {
+        await  this.model.findByIdAndUpdate(id,{$inc:{"contentsNum":num}})
+    }
+
     // @Get('articleTitle/:id')
     // async articleTitle (@Param('id') id: string) {
     //     // return this.CommentsModel.find(contentsId:id);

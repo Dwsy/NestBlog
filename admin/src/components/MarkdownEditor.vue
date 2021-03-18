@@ -60,9 +60,15 @@ export default {
         getData() {
             return this.vditor.getValue();
         },
-        setData(content) {
-            this.vditor.setValue(content);
+        getHTML() {
+            
+            return this.vditor.getHTML()
         },
+        setData(content) {
+            this.vditor.setValue(this.vditor.html2md(content));
+        },
+
+        
         settheme() {
             this.vditor =new Vditor("vditor",{
                 height: 660,

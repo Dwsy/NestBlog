@@ -3,7 +3,7 @@
         <v-toolbar color="#2e62cd" dark>
             <v-toolbar-title>文章列表</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
-            <span class="subheading">共{{tags.length}}篇。</span>
+            <span class="subheading">共{{ tags.length }}篇。</span>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" class="mb-2" to="/write/article"
                 >撰写文章</v-btn
@@ -39,7 +39,6 @@
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-   
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -67,7 +66,7 @@
                 </template>
 
                 <template v-slot:[`item.coverSmall`]="{ item }">
-                    <a :href="item.coverSmall" target="_blank" >
+                    <a :href="item.coverSmall" target="_blank">
                         <v-img
                             :src="item.coverSmall"
                             max-height="100"
@@ -214,10 +213,14 @@ export default {
             confirm("你确定要删除这篇文章吗？") &&
                 await this.$http.delContent(item.contentsId)
                 await this.$http.delField(item._id)
-                // console.log("删除成功");
+                await this.$http.ClassificationContentsNum(item.classification._id,-1)
+                await this.$http.TagContentsNum(item.tag.map(val=>val._id),-1)
+                console.log("删除成功");
                 this.tags.splice(index, 1);
+                // console.log(123);
+                // console.log();
 
-        },
+},
 
         close() {
             this.dialog = false;

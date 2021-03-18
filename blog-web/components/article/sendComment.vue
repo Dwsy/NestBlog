@@ -2,6 +2,7 @@
   <v-row>
     <v-col>
       <v-card>
+        <v-subheader> 评论 </v-subheader>
         <v-snackbar
           v-model="snackbar"
           color="light-blue lighten-4 lighten-5 accent-4"

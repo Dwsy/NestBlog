@@ -105,13 +105,14 @@ export default {
     },
     methods: {
         mdtheme() {
-            console.log(this.selectTag.map(value => value));
+            // console.log(this.$refs.editor.getHTML());
+            // console.log(this.selectTag.map(value => value));
             // console.log(this.sel);
             this.$refs.editor.settheme();
         },
         async draft() {
             let ContentData = {
-                text: this.$refs.editor.getData()
+                text: this.$refs.editor.getHTML()
             };
             const Content = await this.$http.createContent(ContentData);
             let FieldData = {
@@ -144,7 +145,7 @@ export default {
         },
         async send() {
             let ContentData = {
-                text: this.$refs.editor.getData()
+                text: this.$refs.editor.getHTML()
             };
             const Content = await this.$http.createContent(ContentData);
             let FieldData = {
@@ -159,6 +160,9 @@ export default {
                 isDraft: false
             };
             const Field = await this.$http.createField(FieldData);
+
+            await this.$http.ClassificationContentsNum(this.selectClass._id,1);
+            await this.$http.TagContentsNum(this.selectTag.map(val=>val._id),1);
             // console.log(Field[0].contentsId);
             // console.log(Content[0]._id);
             let addData = {

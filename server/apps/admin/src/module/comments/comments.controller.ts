@@ -3,11 +3,12 @@ import {InjectModel} from 'nestjs-typegoose';
 import {ApiBearerAuth, ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
 import {Comments} from 'libs/db/models/comments.model';
 import {Fields} from 'libs/db/models/fields.model';
+import {Contents} from 'libs/db/models/contents.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
 import {prop, ReturnModelType} from '@typegoose/typegoose';
 import {Param} from '@nestjs/common';
 import {Schema as MongooseSchema, Types} from "mongoose";
-import { AuthGuard } from '@nestjs/passport';
+import {AuthGuard} from '@nestjs/passport';
 
 
 // import {md5} from ''
@@ -91,7 +92,9 @@ class sendChildCommentDto {
 @Controller('api/comments')
 @ApiTags('评论')
 export class CommentsController {
-    constructor(@InjectModel(Comments) private readonly CommentsModel: ReturnModelType<typeof Comments>) {
+    constructor(@InjectModel(Comments) private readonly CommentsModel: ReturnModelType<typeof Comments>,
+                @InjectModel(Fields) private readonly fieldsModel: ReturnModelType<typeof Fields>,
+                @InjectModel(Contents) private readonly contentsModel: ReturnModelType<typeof Fields>) {
     }
 
     @Get()
@@ -113,22 +116,28 @@ export class CommentsController {
     @Post()
     @ApiOperation({summary: '发送评论'})
     async send(@Body() dto: sendCommentDto) {
-
+        await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById(dto.contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": 1}})
         return this.CommentsModel.create(dto);
         // return await this.CommentsModel.create()
     }
 
+    // @Get('test/:id')
+    // async test(@Param('id')id:string){
+    //     let fieldsId = (await this.contentsModel.findById(id,'fieldsId')).fieldsId
+    //     let a = await this.fieldsModel.findByIdAndUpdate(fieldsId,{$inc:{"commentsNum":1}})
+    //     console.log(a)
+    //     return a
+    // }
     @Post('child')
     @ApiOperation({summary: '发送子评论'})
     async sendChild(@Body() dto: sendChildCommentDto) {
-
-        let a = this.CommentsModel.create(dto);
+        await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById(dto.contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": 1}})
+        let a = await this.CommentsModel.create(dto);
         // console.log((await a))
         // console.log((await a)._id)
         // console.log(dto.fatherId);
-        let b = this.CommentsModel.findByIdAndUpdate(dto.fatherId, {$push: {childId: (await a)._id}})
 
-        return b;
+        return this.CommentsModel.findByIdAndUpdate(dto.fatherId, {$push: {childId: (await a)._id}})
         // return await this.CommentsModel.create()
     }
 
@@ -136,8 +145,8 @@ export class CommentsController {
     @ApiBearerAuth()
     @Put(':id')
     @ApiOperation({summary: '修改评论'})
-    async put(@Param('id') id: string,@Body() dto: sendChildCommentDto) {
-        return this.CommentsModel.findByIdAndUpdate(id,dto)
+    async put(@Param('id') id: string, @Body() dto: sendChildCommentDto) {
+        return this.CommentsModel.findByIdAndUpdate(id, dto)
     }
 
     @Get(':id')
@@ -148,20 +157,23 @@ export class CommentsController {
     }
 
     @Delete(':id/:isChild')
-    async del(@Param('id') id: string, @Param('isChild') isChild: boolean) {
-        let del;
-        let delAll;
-        if (isChild == true) {
+    async del(@Param('id') id: string, @Param('isChild') isChild: String) {
+
+        if (isChild === "true") {
             // mongoose.Types.ObjectId()
-            del = await this.CommentsModel.findByIdAndDelete(id)
+            await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -1}})
+            await this.CommentsModel.findByIdAndDelete(id)
+
         } else {
-            del = await this.CommentsModel.findByIdAndDelete(id)
-            delAll = await this.CommentsModel.deleteMany({fatherId: id})
+            let a = await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -((await this.CommentsModel.findById(id,'childId')).childId).length}})
+            await this.CommentsModel.findByIdAndDelete(id)
+            await this.CommentsModel.deleteMany({fatherId: id})
+            // let contentsId= (await this.CommentsModel.findById(id,'contentsId')).contentsId
+            // let fieldsId=(await this.contentsModel.findById(contentsId,'fieldsId')).fieldsId
 
         }
-        // console.log(del);
-        // console.log(delAll)
-        // let del =this.CommentsModel.deleteOne()
+
+        return true
     }
 
     // @Post()

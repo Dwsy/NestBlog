@@ -101,7 +101,7 @@ pre.line-numbers {
 	counter-reset:linenumber
 }
 pre.line-numbers>code {
-	white-space:inherit font-size:15px
+	white-space:inherit; font-size:15px
 }
 
 .line-numbers .line-numbers-rows {
