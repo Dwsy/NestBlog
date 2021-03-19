@@ -11,10 +11,7 @@
                     prepend-icon="mdi-format-title"
                 ></v-text-field>
                 <br />
-                <MarkdownEditor
-                   
-                    ref="editor"
-                ></MarkdownEditor>
+                <MarkdownEditor ref="editor"></MarkdownEditor>
                 <v-container fluid>
                     <v-combobox
                         v-model="selectTag"
@@ -63,13 +60,18 @@
                 ></v-text-field>
                 <v-row justify="end">
                     <v-spacer></v-spacer>
-                    <v-btn color="#2196f3" @click="draft" outlined class="ma-3"
-                        >{{state0}}</v-btn
+                    <v-btn
+                        color="#2196f3"
+                        @click="draft"
+                        outlined
+                        class="ma-3"
+                        >{{ state0 }}</v-btn
                     >
 
                     <v-btn color="success" class="ma-3" @click="send">{{
                         state
                     }}</v-btn>
+                    <v-btn color="success" @click="mdtheme">text</v-btn>
                 </v-row>
             </v-col>
         </v-row>
@@ -92,13 +94,13 @@ export default {
             title: "",
             cover: "",
             coverSmall: "",
-
             selectTag: [],
+            originalSelectTag: [],
             selectClass: "",
-            
             search: null,
             state: "...",
-            state0:"..."
+            state0: "...",
+            isDraft: Boolean
         };
     },
     mounted() {
@@ -120,16 +122,19 @@ export default {
     created() {
         this.fieldsId = this.$route.params.id;
         this.getParams();
-        
         this.getTag();
         this.getClassification();
     },
+
     methods: {
+        mdtheme() {
+            // console.log(this.originalSelectTag);
+        },
         async getParams() {
             const fields = await this.$http.getFieldsById(this.fieldsId);
             // console.log(fields);
-
-            if (fields[0].isDraft == true) {
+            this.isDraft = fields[0].isDraft;
+            if (this.isDraft == true) {
                 this.state0 = "更新草稿";
                 this.state = "发布";
             } else {
@@ -144,7 +149,7 @@ export default {
             let content = fields[0].contentsId.text;
             // console.log(this.content);
             this.contentsId = fields[0].contentsId._id;
-            this.$refs.editor.setData(content)
+            this.$refs.editor.setData(content);
         },
         async draft() {
             let ContentData = {
@@ -170,6 +175,34 @@ export default {
                 fieldsId: Field[0]._id,
                 ContentTd: Content[0]._id
             };
+            if (this.isDraft == true) {
+                // await this.$http.ClassificationContentsNum(
+                //     this.selectClass._id,
+                //     1
+                // );
+                // await this.$http.TagContentsNum(
+                //     this.selectTag.map(val => val._id),
+                //     1
+                // );
+            } else {
+                let newTag = this.selectTag.map(val => val._id);
+                let originalTag = this.originalSelectTag.map(val => val._id);
+
+                const _arr1Set = new Set(newTag),
+                    _arr2Set = new Set(originalTag);
+                console.log("originalTag", originalTag);
+                let add = newTag.filter(item => !_arr2Set.has(item));
+                let rm = originalTag.filter(item => !_arr1Set.has(item));
+                console.log("add", add);
+                console.log("rm", rm);
+                // await this.$http.TagContentsNum(add, 1);
+                await this.$http.TagContentsNum(rm, -1);
+                await this.$http.ClassificationContentsNum(
+                    this.selectClass._id,
+                    -1
+                );
+            }
+
             const add = await this.$http.addField(addData);
             if (Field[0].contentsId === Content[0]._id) {
                 // console.log("保存成功");
@@ -196,6 +229,35 @@ export default {
                 coverSmall: this.coverSmall,
                 isDraft: false
             };
+
+            if (this.isDraft == true) {
+                await this.$http.ClassificationContentsNum(
+                    this.selectClass._id,
+                    1
+                );
+                await this.$http.TagContentsNum(
+                    this.selectTag.map(val => val._id),
+                    1
+                );
+            } else {
+                await this.$http.ClassificationContentsNum(
+                    this.selectClass._id,
+                    1
+                );
+                let newTag = this.selectTag.map(val => val._id);
+                let originalTag = this.originalSelectTag.map(val => val._id);
+
+                const _arr1Set = new Set(newTag),
+                    _arr2Set = new Set(originalTag);
+                console.log("originalTag", originalTag);
+                let add = newTag.filter(item => !_arr2Set.has(item));
+                let rm = originalTag.filter(item => !_arr1Set.has(item));
+                console.log("add", add);
+                console.log("rm", rm);
+                await this.$http.TagContentsNum(add, 1);
+                await this.$http.TagContentsNum(rm, -1);
+            }
+
             const Field = await this.$http.updataField(
                 this.fieldsId,
                 FieldData
@@ -221,7 +283,7 @@ export default {
         async getClassification() {
             const ClassificationData = await this.$http.getClassification();
             this.classifications = ClassificationData[0].data;
-            // console.log(this.classifications);
+            this.originalSelectTag = this.selectTag;
         },
 
         success(message) {

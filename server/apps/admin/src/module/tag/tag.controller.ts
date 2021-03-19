@@ -41,7 +41,7 @@ export class TagController {
     async test (@Body()dto:contentsNum) {
         for (let i = 0; i < dto.tagId.length; i++) {
             let a = await  this.model.findByIdAndUpdate(dto.tagId[i],{$inc:{"contentsNum":dto.num}})
-            console.log(a)
+            // console.log(a)
         }
         // return a
     }

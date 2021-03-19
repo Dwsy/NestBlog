@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Delete, Put, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Post, Delete, Put, UseGuards, HttpCode} from '@nestjs/common';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiBearerAuth, ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
 import {Comments} from 'libs/db/models/comments.model';
@@ -158,22 +158,18 @@ export class CommentsController {
 
     @Delete(':id/:isChild')
     async del(@Param('id') id: string, @Param('isChild') isChild: String) {
-
         if (isChild === "true") {
-            // mongoose.Types.ObjectId()
             await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -1}})
             await this.CommentsModel.findByIdAndDelete(id)
+            return HttpCode(200)
 
         } else {
-            let a = await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -((await this.CommentsModel.findById(id,'childId')).childId).length}})
+            await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -((await this.CommentsModel.findById(id,'childId')).childId).length}})
             await this.CommentsModel.findByIdAndDelete(id)
             await this.CommentsModel.deleteMany({fatherId: id})
-            // let contentsId= (await this.CommentsModel.findById(id,'contentsId')).contentsId
-            // let fieldsId=(await this.contentsModel.findById(contentsId,'fieldsId')).fieldsId
-
+            return HttpCode(200)
         }
-
-        return true
+        
     }
 
     // @Post()

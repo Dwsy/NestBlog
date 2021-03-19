@@ -25,12 +25,14 @@ export class ThemeController {
 
     async get() {
         if (date + 43200000 > (new Date()).getTime()) {
+            console.log("使用缓存pixiv");
             return data
         }
         //api www.mokeyjay.com
         data = (await axios.get('http://cloud.mokeyjay.com/pixiv/storage/app/pixiv.json')).data
         date = (new Date()).getTime()
-        // console.log(data);
+        console.log("更新pixiv");
+        return data
         // console.log(date.getTime());
     }
 

@@ -163,6 +163,7 @@ export default {
 
             await this.$http.ClassificationContentsNum(this.selectClass._id,1);
             await this.$http.TagContentsNum(this.selectTag.map(val=>val._id),1);
+            
             // console.log(Field[0].contentsId);
             // console.log(Content[0]._id);
             let addData = {
