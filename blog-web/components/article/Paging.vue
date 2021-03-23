@@ -14,7 +14,11 @@ export default {
       page: Number
     };
   },
-watch:{
+  created() {
+    console.log("test")
+    console.log(this.page)
+  },
+  watch:{
 			page: {
 				handler(val){
 					// console.log(`当前为第${this.page}页`);
@@ -23,7 +27,7 @@ watch:{
 				},
 				deep: true
 
-			}			
+			}
 		}
 };
 </script>

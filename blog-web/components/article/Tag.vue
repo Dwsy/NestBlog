@@ -10,10 +10,11 @@
               :key="tag.name"
               :color="tag.colours"
               :to="`/tag/${tag._id}`"
+            small
             >
               {{ tag.name }} {{ tag.contentsNum }}
-              <v-avatar v-show="tag.icon">
-                <v-icon>{{tag.icon}}</v-icon>
+              <v-avatar v-show="tag.icon" >
+                <v-icon >{{tag.icon}}</v-icon>
               </v-avatar>
 
             </v-chip>

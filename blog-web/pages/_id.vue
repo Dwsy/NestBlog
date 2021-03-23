@@ -4,7 +4,7 @@
       <PPT v-bind:ppts="ppt" />
     </div>
     <v-row>
-      <v-col cols="12" xl="9" lg="9" md="12" 	sm="12" xs="12">
+      <v-col cols="12" xl="9" lg="9" md="9" 	sm="12" xs="12">
         <div>
           <br />
           <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
@@ -20,7 +20,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" xl="3"  lg="3" md="12"   sm="12" xs="12">
+      <v-col cols="12" xl="3"  lg="3" md="3"   sm="12" xs="12">
         <div >
           <br />
 
@@ -53,7 +53,6 @@ export default {
     ArticleList,
     Paging
   },
-  // (tag)
   async asyncData({ $axios, params }) {
     let id = params.id;
     const fieldsData = await $axios.$get("fields", {
@@ -63,13 +62,11 @@ export default {
           page: id,
           sort: "-_id",
           populate:'tag classification',
-          
+
         }
       }
     });
-    // /users?query={"where":{"username":"user1","age":{"$gt":18}},"sort":"-_id","limit":10,"page":2,"populate":"friends"}
-    // const fieldsData = await $axios.$get(`fields/all/${id}`);
-    // const titleData = await $axios.$get(`/fields/title/${id}`);
+
     const recentlyData = await $axios.$get("comments/recently");
     const pixivTop = await $axios.$get("/theme/pixiv");
 
@@ -88,28 +85,19 @@ export default {
         }
       }
     });
-    // localStorage.setItem
 
-    // localStorage.setItem("classifications", JSON.stringify(this.classificationData));
     return {
       fields: fieldsData.data,
-      // titleData: titleData,
-      // classification: classificationData.data,
       ppt: pptData.data,
       recently: recentlyData,
       tag: tagData.data,
       total: parseInt(fieldsData.total),
       lastPage: parseInt(fieldsData.lastPage),
-      page: parseInt(fieldsData.page),
+      page: parseInt(fieldsData.page)||1,
       pixivTop:pixivTop
     };
   },
-  // mounted() {
-  //   localStorage.setItem(
-  //     "classifications",
-  //     JSON.stringify(this.classification)
-  //   );
-  // },
+
 
   watch: {
     page: {

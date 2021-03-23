@@ -92,6 +92,12 @@
                     </v-chip>
                 </template>
 
+                <template v-slot:[`item.title`]="{ item }">
+                    <a :href="'http://dwsy.link:5000/article/'+item.contentsId" target="_blank" style="text-decoration:none">{{item.title}}</a>
+                </template>
+                <template v-slot:[`item.commentsNum`]="{ item }">
+                    {{ item.commentsNum}}
+                </template>
                 <template v-slot:[`item.createdAt`]="{ item }">
                     {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
                 </template>
@@ -108,7 +114,7 @@
                     </v-icon>
                 </template>
                 <template v-slot:no-data>
-                    <v-btn color="primary" @click="initialize">Reset</v-btn>
+                    <!-- <v-btn color="primary" @click="initialize">Reset</v-btn> -->
                 </template>
             </v-data-table>
         </v-card>
@@ -131,6 +137,7 @@ export default {
                 sortable: false,
                 value: "title"
             },
+            { text: "评论数", value: "commentsNum" },
             { text: "分类", value: "classification.name" },
             { text: "标签", value: "tag" },
             { text: "大图", value: "cover" },

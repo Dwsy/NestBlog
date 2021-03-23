@@ -9,7 +9,7 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 //   import { getToken } from '@/utils/auth'
 export default {
-    name: "MarkdownEditor",
+    namd: "Mdedit",
     props: {
         // content: ""
     },
@@ -61,16 +61,14 @@ export default {
             return this.vditor.getValue();
         },
         getHTML() {
-            
-            return this.vditor.getHTML()
+            return this.vditor.getHTML();
         },
         setData(content) {
             this.vditor.setValue(this.vditor.html2md(content));
         },
 
-        
         settheme() {
-            this.vditor =new Vditor("vditor",{
+            this.vditor = new Vditor("vditor", {
                 height: 660,
                 icon: "material",
                 theme: "dark",
@@ -88,7 +86,7 @@ export default {
                 // after: () => {
                 //     this.vditor.setValue(this.content);
                 // }
-            })
+            });
         }
         // setData: function(data) {
         //     // console.log("将html转", this.vditor.html2md(data))

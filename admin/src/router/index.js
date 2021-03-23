@@ -41,7 +41,7 @@ let router = new Router({
                         icon: 'mdi-gauge',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
+                    component: () => import('@/views/dashboard/index.vue')
                 },
             ]
         },
@@ -63,7 +63,7 @@ let router = new Router({
                         icon: 'mdi-file-document-edit-outline',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/write/edit.vue')
+                    component: () => import('@/views/write/edit.vue')
                 },
             ]
         },
@@ -87,7 +87,7 @@ let router = new Router({
                         icon: 'mdi-note-plus',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/article.vue')
+                    component: () => import('@/views/write/article.vue')
                 },
                 {
                     path: 'draft',
@@ -97,7 +97,7 @@ let router = new Router({
                         icon: 'mdi-file',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "myTask" */ '@/views/write/draft.vue')
+                    component: () => import('@/views/write/draft.vue')
                 },
                 // {
                 //     path: 'edit/:id',
@@ -132,7 +132,7 @@ let router = new Router({
                         icon: 'mdi-note-text',
                         keepAlive: false
                     },
-                    component: () => import(/* webpackChunkName: "table" */ '@/views/manage/articles.vue')
+                    component: () => import('@/views/manage/articles.vue')
                 },
                 {
                     path: 'comments',
@@ -230,52 +230,52 @@ let router = new Router({
                 },
             ]
         },
-        // 测试页面缓存
-        {
-            path: '/keep-alive',
-            visible: false,
-            component: layout,
-            meta: {
-                title: 'keepAlive',
-                icon: 'mdi-archive-arrow-down-outline',
-                keepAlive: false
-            },
-            children: [
-                {
-                    path: '/keep-alive',
-                    name: 'keepAlive',
-                    meta: {
-                        title: 'Keep Alive',
-                        strategy: 'keep', // keep,  refresh
-                        keepAlive: true
-                    },
-                    component: () => import( '@/views/keep-alive/index.vue'),
-                }
-            ]
-        },
-        // 测试离开缓存页面
-        {
-            path: '/keep-alive',
-            visible: false,
-            component: layout,
-            meta: {
-                title: 'keepAlive',
-                icon: 'mdi-archive-arrow-down-outline',
-                keepAlive: false
-            },
-            children: [
-                {
-                    path: ':id',
-                    name: 'ddddd',
-                    meta: {
-                        title: 'Keep Alive',
-                        icon: '',
-                        keepAlive: false
-                    },
-                    component: () => import( '@/views/keep-alive/inner.vue')
-                }
-            ]
-        },
+        // // 测试页面缓存
+        // {
+        //     path: '/keep-alive',
+        //     visible: false,
+        //     component: layout,
+        //     meta: {
+        //         title: 'keepAlive',
+        //         icon: 'mdi-archive-arrow-down-outline',
+        //         keepAlive: false
+        //     },
+        //     children: [
+        //         {
+        //             path: '/keep-alive',
+        //             name: 'keepAlive',
+        //             meta: {
+        //                 title: 'Keep Alive',
+        //                 strategy: 'keep', // keep,  refresh
+        //                 keepAlive: true
+        //             },
+        //             component: () => import( '@/views/keep-alive/index.vue'),
+        //         }
+        //     ]
+        // },
+        // // 测试离开缓存页面
+        // {
+        //     path: '/keep-alive',
+        //     visible: false,
+        //     component: layout,
+        //     meta: {
+        //         title: 'keepAlive',
+        //         icon: 'mdi-archive-arrow-down-outline',
+        //         keepAlive: false
+        //     },
+        //     children: [
+        //         {
+        //             path: ':id',
+        //             name: 'ddddd',
+        //             meta: {
+        //                 title: 'Keep Alive',
+        //                 icon: '',
+        //                 keepAlive: false
+        //             },
+        //             component: () => import( '@/views/keep-alive/inner.vue')
+        //         }
+        //     ]
+        // },
         // 退出登录
         {
             path: '/logout',
@@ -316,10 +316,10 @@ let router = new Router({
 });
 router.beforeEach((to, from, next) => {
 
-    // if(!to.meta.isPublic&&!localStorage.token){
-    //     console.log("未登录");
-    //     return next('/')
-    // }
+    if(!to.meta.isPublic&&!localStorage.token){
+        console.log("未登录");
+        return next('/')
+    }
     next()
 })
 export default router;

@@ -1,18 +1,18 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-if (process.env.NODE_ENV !== 'development') {
-    var fs = require('fs');
-    var version = new Date().getTime();
-    var content = 'getVersion(\'' + version + '\')';
+// if (process.env.NODE_ENV !== 'development') {
+//     var fs = require('fs');
+//     var version = new Date().getTime();
+//     var content = 'getVersion(\'' + version + '\')';
 
-    // console.log('开始创建版本文件...')
-    fs.writeFile('./src/version.js', content, function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log('version.js OK');
-    });
-}
+//     // console.log('开始创建版本文件...')
+//     fs.writeFile('./src/version.js', content, function (err) {
+//         if (err) {
+//             return console.log(err);
+//         }
+//         console.log('version.js OK');
+//     });
+// }
 
 module.exports = {
     lintOnSave: false,
@@ -46,8 +46,8 @@ module.exports = {
         proxy: {
             "/": {
                 // target: "https://api.notbucai.cc",
-                target: "http://127.0.0.1:3000",
-                // target: "http://dwsy.link:3000",
+                // target: "http://127.0.0.1:3000",
+                target: "http://dwsy.link:3000",
                 changeOrigin: true,
                 
                 ws: true,

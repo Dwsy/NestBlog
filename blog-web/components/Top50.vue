@@ -6,17 +6,20 @@
             hide-delimiter-background
             show-arrows-on-hover
             hide-delimiters
-            :interval="5000"
+            :interval="6000"
+            height="400px"
         >
             <v-carousel-item
                 v-for="(image, i) in pixivTop.image"
                 :key="pixivTop[i]"
                 :href="'https://www.pixiv.net/' + pixivTop.url[i]"
                 target="_blank"
+                align="center"
             >
-                <div cent>
+                <div style="width: 100%;height:100%;text-align: center;">
                     <v-img
-                        style="width:100%; height:100%;"
+
+
                         :src="image"
                     ></v-img>
                 </div>

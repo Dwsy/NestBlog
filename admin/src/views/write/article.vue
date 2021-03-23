@@ -11,7 +11,7 @@
                     prepend-icon="mdi-format-title"
                 ></v-text-field>
                 <br />
-                <MarkdownEditor ref="editor"></MarkdownEditor>
+                <Mdedit ref="editor"></Mdedit>
 
                 <v-combobox
                     v-model="selectTag"
@@ -79,10 +79,10 @@
 <script>
 // import Vditor from "vditor";
 import "vditor/dist/index.css";
-import MarkdownEditor from "../../components/MarkdownEditor";
+import Mdedit from "../../components/mdedit";
 export default {
     components: {
-        MarkdownEditor
+        Mdedit
     },
     data() {
         return {

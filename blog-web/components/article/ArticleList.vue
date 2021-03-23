@@ -4,7 +4,7 @@
       <v-row dense>
         <v-col v-for="item in fields" :key="item._id" cols="12">
           <v-hover v-slot:default="{ hover }" close-delay="50">
-            
+
             <v-card
               :to="'/article/' + item.contentsId"
               :elevation="hover ? 4 : 1"
@@ -13,7 +13,7 @@
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-container>
                   <v-card-title
-                   
+
                     class="headline"
                     v-text="item.title"
                   ></v-card-title>
@@ -24,13 +24,13 @@
                       :aspect-ratio="8 / 5"
                       lazy-src
                       transition="slide-y-reverse-transition"
-                      class="d-lg-none imgbig"
+                      class="d-sm-none imgbig"
                     ></v-img>
                   </div>
 
-                  <v-chip class="ma-1" color="light-blue darken-1" outlined>
-                    <v-avatar center>
-                      <v-icon>mdi-tag-outline</v-icon>
+                  <v-chip class="ma-1" color="light-blue darken-1" outlined small>
+                    <v-avatar center >
+                      <v-icon >mdi-tag-outline</v-icon>
                     </v-avatar>
                     Tag
                   </v-chip>
@@ -41,27 +41,30 @@
                     :key="l"
                     outlined
                     :to="`/tag/${t._id}`"
+                    small
                   >
                     <!-- :to="`/tag/${t._id}`" -->
                     {{ t.name }}
-                    <v-avatar v-show="t.icon">
+                    <v-avatar v-show="t.icon" >
                       <v-icon>{{ t.icon }}</v-icon>
                     </v-avatar>
                   </v-chip>
 
                   <v-col>
                     <span align-content-end>
-                      <v-icon class="m2">mdi-calendar-clock </v-icon>
+                      <v-icon class="m2" small>mdi-calendar-clock </v-icon>
                       {{ item.createdAt | formatDate("yyyy年MM月dd日")
-                      }}<v-icon>mdi-book </v-icon>分类:{{
+                      }}<v-icon small>mdi-book </v-icon>分类:{{
                         item.classification.name
                       }}</span
                     >
-                    <v-spacer></v-spacer>
+                    <span style="float: right"><v-icon small>mdi-comment-processing-outline </v-icon>{{
+                        item.commentsNum
+                      }}</span>
                   </v-col>
                 </v-container>
 
-                <v-avatar class="ma-3 d-none d-lg-block imgbig" size="150" tile>
+                <v-avatar class="ma-3 d-none d-sm-block imgbig" size="150" tile>
                   <v-img
                     :src="item.coverSmall"
                     lazy-src
