@@ -11,7 +11,7 @@ Admin:`Vue.js + Vuetify.js`
 
 Blog在线预览地址：http://dwsy.link:5000/
 -
-Admin在线预览地址:http://admindwsy.glitch.me/blog/        http://dwsy.link:4000/
+Admin在线预览地址:http://dwsy.link:4000/    http://admindwsy.glitch.me/blog/ (未更新)
 -
 Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 ---
