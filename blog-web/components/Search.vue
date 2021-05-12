@@ -15,33 +15,21 @@
                         ref="search"
                     ></v-text-field>
                 </template>
+
                 <v-list v-if="text.length > 0" class="border-list" dense>
                     <v-list-item
                         v-for="(item, index) in title.slice(0, 8)"
                         :key="index"
                         @click="itemClick(item)"
                     >
-                        <!-- :to="'/article/' + item.contentsId" -->
                         <v-list-item-title>
                             <v-icon>{{ "mdi-access-point" }}</v-icon>
-                            <!-- http://localhost:3001/ -->
+
                             <a :href="'/article/' + item.contentsId">
                                 标题:{{ item.title }}
                             </a>
                         </v-list-item-title>
                     </v-list-item>
-
-                    <!-- <v-list-item
-                        v-for="(item, index) in tag"
-                        :key="index"
-                        @click="itemClick(item)"
-                    >
-                        <v-list-item-title>
-                            <a :href="'/tag/' + item._id">
-                            标签:{{ item.name }}
-                            </a>
-                        </v-list-item-title>
-                    </v-list-item> -->
 
                     <v-list-item
                         v-for="(item, index) in content"
@@ -72,11 +60,7 @@
                     </v-list-item>
                 </v-list>
 
-                <!-- <v-list-item  v-for="(s, index) in item.S_content" :key="index">
-                            <v-list-item-title>{{ s }}</v-list-item-title>
-                        </v-list-item> -->
-                <!-- <v-list-item-title>{{ s.S_tag }}</v-list-item-title>
-                        <v-list-item-title>{{ s.S_classification }}</v-list-item-title> -->
+
             </v-menu>
         </div>
     </v-row>
@@ -201,7 +185,7 @@ a {
     margin: auto;
 }
 .width-20-percent {
-    width: 20%;
+    width: 30%;
 }
 .img-div {
     margin: 16vh 0 40px 0;
