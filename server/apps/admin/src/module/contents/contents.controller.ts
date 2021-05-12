@@ -39,25 +39,30 @@ export class ContentsController {
             let classification = {
                 name:{$regex:reg}
             };
-            let t={
-                '*.tag' : {
-                    $elemMatch: {
-                    name:{$regex:reg}}
-                }
-
-            }
+            let title = {
+                title:{$regex:reg}
+            };
+            // let t={
+            //     '*.tag' : {
+            //         $elemMatch: {
+            //         name:{$regex:reg}}
+            //     }
+            //
+            // }
             let S_content= await this.model.find(content,'mdText');
         // .find({'tag.name':{$regex:reg}})
         //     let test= await this.field.find({},'tag').populate('tag','name').find(t)
-            let S_tag= await this.tag.find(Tag,'name')
+            let S_tag= await this.tag.find(Tag)
             let S_classification= await this.classification.find(classification)
+            let S_title= await this.field.find(title,'title contentsId')
 
             // find({$or:[{title:{$regex:regexp}},{content:{$regex:regexp}},{author:{$regex:regexp}}]})
             let all = {
                 // test,
+                S_title,
                 S_content,
                 S_tag,
-                S_classification
+                S_classification,
             }
             //
             // console.log(test);
