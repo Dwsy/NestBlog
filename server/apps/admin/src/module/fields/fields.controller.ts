@@ -55,6 +55,7 @@ export class FieldsController {
     async test(@Ip() ip) {
         return ip
     }
+
     @Get('draftList')
     @ApiOperation({ summary: "Find all records", operationId: "list" })
     async draftList(@Query('query') query) {
@@ -105,6 +106,7 @@ export class FieldsController {
 
         return data;
     };
+
     @Get(':id')
     async findOne(@Param("id") id: string, @Query('query') query) {
         let populate = undefined
@@ -154,7 +156,6 @@ export class FieldsController {
             lastPage: 'lastPage',
             currentPage: 'page'
         };
-
 
         if (paginateKeys !== false) {
             const total = await this.model.countDocuments(where);

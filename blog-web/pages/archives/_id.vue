@@ -1,0 +1,92 @@
+<template>
+    <v-timeline>
+        <header class="bg-light lter wrapper-md">
+            <h1 class="entry-title m-n font-thin text-black l-h">文章归档</h1>
+            <small class="text-muted letterspacing indexWords"
+                >好! 目前共计 16 篇日志。 继续努力。</small
+            >
+        </header>
+        <v-timeline-item
+            v-for="(year, i) in years"
+            :key="i"
+            :color="year.color"
+            small
+        >
+            <template v-slot:opposite>
+                <span
+                    :class="`headline font-weight-bold ${year.color}--text`"
+                    v-text="year.year"
+                ></span>
+            </template>
+            <div class="py-4">
+                <h2
+                    :class="
+                        `headline font-weight-light mb-4 ${year.color}--text`
+                    "
+                >
+                    Lorem ipsum
+                </h2>
+                <div>
+                    Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
+                    scaevola imperdiet nec ut, sed euismod convenire principes
+                    at. Est et nobis iisque percipit, an vim zril disputando
+                    voluptatibus, vix an salutandi sententiae.
+                </div>
+            </div>
+        </v-timeline-item>
+    </v-timeline>
+</template>
+
+<script>
+export default {
+    async asyncData({ $axios, params }) {
+        // http://dwsy.link:3000/api/fields
+        // const content = await $axios.$get(`contents/${id}`);
+
+        const ALLfields = await $axios.$get(`fields`);
+        console.log("now++++++++++test");
+        const data = ALLfields.data;
+        for (let index = 0; index < data.length; index++) {
+            const createdAt = data[index].createdAt;
+            let now = new Date();
+            console.log(createdAt);
+        }
+        new Data
+        console.log();
+        return {
+            ALLfields: ALLfields
+            // comments: comments,
+            // content: content,
+            // id: id,
+            // // IP: ipData.query,
+            // IP: ipData,
+            // field: field
+        };
+    },
+    
+    data: () => ({
+        years: [
+            {
+                color: "cyan",
+                year: "1960"
+            },
+            {
+                color: "green",
+                year: "1970"
+            },
+            {
+                color: "pink",
+                year: "1980"
+            },
+            {
+                color: "amber",
+                year: "1990"
+            },
+            {
+                color: "orange",
+                year: "2000"
+            }
+        ]
+    })
+};
+</script>

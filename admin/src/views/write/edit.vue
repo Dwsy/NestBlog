@@ -153,7 +153,8 @@ export default {
         },
         async draft() {
             let ContentData = {
-                text: this.$refs.editor.getHTML()
+                text: this.$refs.editor.getHTML(),
+                mdText: this.$refs.editor.getData()
             };
             const Content = await this.$http.updataContent(
                 this.contentsId,
@@ -215,7 +216,8 @@ export default {
         },
         async send() {
             let ContentData = {
-                text: this.$refs.editor.getHTML()
+                text: this.$refs.editor.getHTML(),
+                mdText: this.$refs.editor.getData()
             };
             const Content = await this.$http.updataContent(
                 this.contentsId,

@@ -60,6 +60,7 @@ export default {
         getData() {
             return this.vditor.getValue();
         },
+        //获取渲染文本
         getHTML() {
             return this.vditor.getHTML();
         },

@@ -25,9 +25,15 @@ export class Contents {
   // @prop()
   // isContents:boolean
 
-  @ApiProperty({ description: '内容文字', example: 'text文字' })
+  //渲染-html
+  @ApiProperty({ description: '渲染-html', example: 'text文字' })
   @prop()
   text: string;
+  //Markdown
+  @ApiProperty({ description: 'Markdown', example: 'Markdown' })
+  @prop()
+  mdText: string;
+
 
   // @ApiProperty({description:'内容类别',example:'page/post/file'})
   // @prop()
