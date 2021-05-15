@@ -50,8 +50,10 @@ yarn run dev/npm run dev
 端口设置： vue.config.js -> devServer:port  proxy->target为api端口
 上线修改：admin\src\plugins\axios.js  中的('~~~/api')   baseURL: process.env.NODE_ENV === 'development' ? '/api' : `'~~~/api'`
 
-#### 更新日志
+#### 填坑
+- [x] 搜索 2021-5-12 22:18:10
+- [ ] 归档
+- [ ] 时光机
+- [ ] 相册
+- [ ] About
 
-- 2021-5-12 22:18:10
-
-  添加简单的搜索功能
