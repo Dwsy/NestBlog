@@ -4,9 +4,14 @@
     <v-list v-for="(YY, index) in dataArray" :key="index">
       <v-list-item-title v-for="(MM,i) in YY">
         {{ MM.Y }}年
-        <v-list-item-subtitle v-for="(DD,j) in MM.ddList">
-          {{ MM.M }}月 {{ DD }}
-        </v-list-item-subtitle>
+
+        <v-list-item v-for="(DD,j) in MM.ddList">
+          <v-list-item :to="'article/'+DD._id">
+            {{ MM.M }}月{{ DD.D }}日_{{ DD.title }}
+          </v-list-item>
+        </v-list-item>
+
+
       </v-list-item-title>
 
     </v-list>
@@ -44,7 +49,7 @@ export default {
           Y: date.getFullYear().toString(),
           M: (date.getMonth() + 1).toString(),
           D: date.getDate().toString(),
-          _id: data[i]._id
+          _id: data[i].contentsId
         };
       }
       // console.log(dataArray);
@@ -65,7 +70,7 @@ export default {
         let index = -1;
         // 判断数组中是否已经存在当前遍历数据的时间
         let isExists = YY.some((newItem, j) => {
-          if (item.Y == newItem.Y) {
+          if (item.Y === newItem.Y) {
             // 存在就保存当前数据下标  用于插入数据
             index = j;
             return true;
@@ -104,7 +109,7 @@ export default {
         let index = -1;
         // 判断数组中是否已经存在当前遍历数据的时间
         let isExists = MM.some((newItem, j) => {
-          if (item.M == newItem.M) {
+          if (item.M === newItem.M) {
             // 存在就保存当前数据下标  用于插入数据
             index = j;
             return true;

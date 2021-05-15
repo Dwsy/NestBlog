@@ -36,7 +36,7 @@ export class FieldsController {
 
     @Get('archives')
     async archives() {
-        let t = await this.model.find({isDraft: false}, 'title createdAt contentsId ').sort({'_id': -1});
+        let t = await this.model.find({isDraft: false}, 'title createdAt contentsId').sort({'_id': -1});
         return t;
     }
 
