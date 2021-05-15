@@ -28,16 +28,21 @@ import { AuthGuard } from '@nestjs/passport';
 @ApiTags('文章自定义字段')
 export class FieldsController {
     constructor(@InjectModel(Fields) private readonly model: ReturnModelType<typeof Fields>,
-        @InjectModel(Contents) private readonly ContentsModel: ReturnModelType<typeof Contents>,
-        @InjectModel(Classification) private readonly ClassificationModel: ReturnModelType<typeof Classification>,
-        @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
+                @InjectModel(Contents) private readonly ContentsModel: ReturnModelType<typeof Contents>,
+                @InjectModel(Classification) private readonly ClassificationModel: ReturnModelType<typeof Classification>,
+                @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
     ) {
     }
 
+    @Get('archives')
+    async archives() {
+        let t = await this.model.find({isDraft: false}, 'title createdAt contentsId ').sort({'_id': -1});
+        return t;
+    }
 
     @Get('title/:page')
     async titlePage(@Param('page') page: string) {
-        return this.ContentsModel.find({}, 'title').limit(8).skip(parseInt(page) * 8 - 8).sort({ '_id': 1 });
+        return this.ContentsModel.find({}, 'title').limit(8).skip(parseInt(page) * 8 - 8).sort({'_id': 1});
     }
 
     @Get('tag/:id')
