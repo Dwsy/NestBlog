@@ -3,13 +3,21 @@
         <div v-on:keyup.enter="search">
             <v-menu offset-y>
                 <template v-slot:activator="{ on }">
+                            <!-- flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify" append-icon="mdi-magnify"
+        label="搜索"
+        class="hidden-sm-and-down" -->
                     <v-text-field
-                        solo
+                        flat
+                        clearable
                         hide-details
-                        label="请输入关键词"
-                        append-icon="mdi-magnify"
+                        label="搜索.."
+                        prepend-inner-icon="mdi-magnify"
+                        
                         v-model="text"
-                        class="input-search"
+                        class="input-search "
                         autocomplete="off"
                         v-on="on"
                         ref="search"
@@ -35,13 +43,18 @@
                         v-for="(item, index) in content"
                         :key="index"
                         @click="itemClick(item)"
+                        :to="'/article/' + item._id"
                     >
                         <v-icon>{{ "mdi-text" }}</v-icon>
-                        <v-list-item-title>
-                            <a :href="'/article/' + item._id">
+
+                        <v-card-text >
                                 内容:{{ item.mdText | ellipsis }}
+                        </v-card-text>
+                        <!-- <v-list-item-title>
+                            <a :href="'/article/' + item._id">
+                                
                             </a>
-                        </v-list-item-title>
+                        </v-list-item-title> -->
                     </v-list-item>
 
                     <Tag v-bind:tags="tag" />
@@ -50,13 +63,16 @@
                         v-for="(item, index) in classification"
                         :key="index"
                         @click="itemClick(item)"
+                        :to="/classification/"
                     >
-                        <v-list-item-title>
+
                             <v-icon>{{ "mdi-book-variant" }}</v-icon>
-                            <a :href="'/classification/' + item._id">
+                            <v-card-text :to="/classification/" >
+
                                 分类:{{ item.name }}
-                            </a>
-                        </v-list-item-title>
+
+                            </v-card-text >
+
                     </v-list-item>
                 </v-list>
 
@@ -108,7 +124,7 @@ export default {
         async getEntity() {
             // 请求接口更新 items 数据
             // let a= this.$emit('search',this.text);
-            if (this.now !== this.text) {
+            if (this.now !== this.text && this.text!=='') {
                 this.now = String(this.text);
                 let Sdata;
                 Sdata = await this.SearchFunction(this.text);
