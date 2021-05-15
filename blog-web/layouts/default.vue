@@ -1,5 +1,13 @@
 <template>
     <v-app id="inspire">
+        <v-skeleton-loader
+            ref="skeleton"
+            :boilerplate="boilerplate"
+            :type="type"
+            :tile="tile"
+            class="mx-auto"
+        ></v-skeleton-loader>
+        <!-- 加载动画 -->
         <div id="Loading">
             <div data-loader="ball-scale" v-show="loader">
                 <div></div>
@@ -8,6 +16,7 @@
                 <div></div>
             </div>
         </div>
+        <!-- 侧边导航栏 -->
         <v-navigation-drawer
             v-model="drawer"
             :clipped="$vuetify.breakpoint.lgAndUp"
@@ -81,13 +90,14 @@
             </v-list>
         </v-navigation-drawer>
 
-        <!-- <Navigation  :navigationsrc="navigationsrc"/> -->
+        <!-- 主视图 -->
         <v-main>
             <v-container>
                 <nuxt />
             </v-container>
         </v-main>
 
+        <!-- 顶部 -->
         <v-app-bar
             :clipped-left="$vuetify.breakpoint.lgAndUp"
             app
@@ -97,31 +107,15 @@
             <v-app-bar-nav-icon
                 @click.stop="drawer = !drawer"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
+            <v-toolbar-title class="dwsy ml-0 pl-4">
                 <span class="hidden-sm-and-down">Dwsy-blog</span>
             </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <!-- <v-row align="center" style="max-width: 30vw">
-                
-                <v-text-field
-                    placeholder="搜索..."
-                    append-icon="mdi-magnify"
-                    single-line
-                    filled
-                    rounded
-                    dense
-                    color="white"
-                    hide-details
-                />
-
-            </v-row> -->
-
-            <v-row>
-                <!-- <Search @search="search" v-bind:retSearch="retSearch"></Search> -->
+            <v-col></v-col>
+            <v-row style="max-width: 100%">
                 <Search :SearchFunction="SearchFunction"></Search>
             </v-row>
+            <v-spacer></v-spacer>
 
-            <!-- <v-switch v-model="$vuetify.theme.dark" ></v-switch><p>明暗切换</p> -->
             <v-btn
                 elevation="0"
                 @click="handleChangeTheme"
@@ -310,12 +304,12 @@ export default {
             this.$store.commit("SET_SIDE_STATUS", true);
         },
         async SearchFunction(a) {
-            let url=`contents/search/s/${a}`
+            let url = `contents/search/s/${a}`;
             const retSearch = await this.$axios.$get(url);
             // callback(retSearch.S_content[0])
             // console.log(retSearch);
             // console.log(url);
-            return retSearch
+            return retSearch;
         }
     }
 };
@@ -324,6 +318,11 @@ export default {
 pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
+}
+@media only screen and (min-width: 320px) {
+    .dwsy {
+        width: 200px;
+    }
 }
 
 ::-webkit-scrollbar {

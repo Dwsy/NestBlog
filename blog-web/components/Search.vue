@@ -1,21 +1,16 @@
 <template>
     <v-row>
         <div v-on:keyup.enter="search">
-            <v-menu offset-y>
+            <v-menu offset-y transition="slide-y-transition">
                 <template v-slot:activator="{ on }">
-                            <!-- flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify" append-icon="mdi-magnify"
-        label="搜索"
-        class="hidden-sm-and-down" -->
                     <v-text-field
                         flat
                         clearable
                         hide-details
                         label="搜索.."
                         prepend-inner-icon="mdi-magnify"
-                        
+                        dense
+                        full-width
                         v-model="text"
                         class="input-search "
                         autocomplete="off"
@@ -23,8 +18,12 @@
                         ref="search"
                     ></v-text-field>
                 </template>
-
-                <v-list v-if="text.length > 0" class="border-list" dense>
+                <v-list
+                    v-if="text.length > 0"
+                    class="border-list"
+                    dense
+                    fill-height
+                >
                     <v-list-item
                         v-for="(item, index) in title.slice(0, 8)"
                         :key="index"
@@ -43,40 +42,35 @@
                         v-for="(item, index) in content"
                         :key="index"
                         @click="itemClick(item)"
-                        :to="'/article/' + item._id"
                     >
                         <v-icon>{{ "mdi-text" }}</v-icon>
-
-                        <v-card-text >
-                                内容:{{ item.mdText | ellipsis }}
-                        </v-card-text>
-                        <!-- <v-list-item-title>
+                        <v-list-item-title>
                             <a :href="'/article/' + item._id">
-                                
+                                内容:{{ item.mdText | ellipsis }}
                             </a>
-                        </v-list-item-title> -->
+                        </v-list-item-title>
                     </v-list-item>
 
+                    <v-list-tile-title>
+                        Tag列表:
+                    </v-list-tile-title>
+                    <v-list-></v-list->
+                    <p></p>
                     <Tag v-bind:tags="tag" />
 
                     <v-list-item
                         v-for="(item, index) in classification"
                         :key="index"
                         @click="itemClick(item)"
-                        :to="/classification/"
                     >
-
+                        <v-list-item-title>
                             <v-icon>{{ "mdi-book-variant" }}</v-icon>
-                            <v-card-text :to="/classification/" >
-
+                            <a :href="'/classification/' + item._id">
                                 分类:{{ item.name }}
-
-                            </v-card-text >
-
+                            </a>
+                        </v-list-item-title>
                     </v-list-item>
                 </v-list>
-
-
             </v-menu>
         </div>
     </v-row>
@@ -124,7 +118,7 @@ export default {
         async getEntity() {
             // 请求接口更新 items 数据
             // let a= this.$emit('search',this.text);
-            if (this.now !== this.text && this.text!=='') {
+            if (this.now !== this.text && this.text !== "") {
                 this.now = String(this.text);
                 let Sdata;
                 Sdata = await this.SearchFunction(this.text);
@@ -196,7 +190,10 @@ a {
     width: 100%;
     height: 100%;
 }
-.input-search {
+::-webkit-scrollbar {
+    width: 0px;
+}
+/* .input-search {
     width: 100%;
     margin: auto;
 }
@@ -211,6 +208,7 @@ a {
     box-shadow: none !important;
 }
 .border-list {
+    
     border: 1px solid #eee !important;
-}
+} */
 </style>
