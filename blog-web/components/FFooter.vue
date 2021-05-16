@@ -24,11 +24,11 @@ export default {
     heroui: [
       {
         text: "Github",
-        href: "https://github.com/AGDholo",
+        href: "https://github.com/Dwsy",
       },
       {
         text: "Themes",
-        href: "https://heroui.net/",
+        // href: "https://heroui.net/",
       },
     ],
   }),

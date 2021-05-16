@@ -118,9 +118,11 @@
                                     <v-list-item-subtitle>
                                         <div
                                             style="font-size:18px"
-                                            v-html="'<pre>'+item.text+'</pre>'"
+                                            v-html="
+                                                '<pre>' + item.text + '</pre>'
+                                            "
                                         ></div>
- 
+
                                         <!-- {{ item.text }} -->
                                     </v-list-item-subtitle>
                                     <b>
@@ -171,7 +173,13 @@
                                                 :key="child._id"
                                             ></v-divider>
                                             <v-list-item-subtitle
-                                                ><div v-html="'<pre>'+child.text+'</pre>'"></div
+                                                ><div
+                                                    v-html="
+                                                        '<pre>' +
+                                                            child.text +
+                                                            '</pre>'
+                                                    "
+                                                ></div
                                             ></v-list-item-subtitle>
 
                                             <b>
@@ -318,8 +326,8 @@ export default {
 .fleft {
     overflow: hidden;
 }
-pre{ 
-white-space:pre-wrap;
-white-space:-moz-pre-wrap; 
-} 
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+}
 </style>

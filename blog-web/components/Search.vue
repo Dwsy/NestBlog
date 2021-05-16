@@ -129,43 +129,6 @@ export default {
                 this.classification = Sdata.S_classification;
                 this.title = Sdata.S_title;
             }
-
-            // let SD;
-            // Sdata.then(data => {
-            //     SD = data;
-            // });
-            // let a = this.$emit("search", this.text, val => {
-            //     itemName = val;
-            // });
-            // console.log(itemName);
-
-            // this.items={}
-            // this.items = [
-            //   {
-            //     key: '1234',
-            //     name: '1234'
-            //   },
-            //   {
-            //     key: 'abc',
-            //     name: 'abc'
-            //   },
-            //   {
-            //     key: 'def',
-            //     name: 'def'
-            //   },
-            //   {
-            //     key: 'ccc',
-            //     name: 'ccc'
-            //   },
-            //   {
-            //     key: 'ccc',
-            //     name: 'ccc'
-            //   },
-            //   {
-            //     key: 'ccc',
-            //     name: 'ccc'
-            //   }
-            // ]
         },
         search() {
             this.$refs.search.blur();

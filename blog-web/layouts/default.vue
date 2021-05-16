@@ -1,12 +1,6 @@
 <template>
     <v-app id="inspire">
-        <v-skeleton-loader
-            ref="skeleton"
-            :boilerplate="boilerplate"
-            :type="type"
-            :tile="tile"
-            class="mx-auto"
-        ></v-skeleton-loader>
+
         <!-- 加载动画 -->
         <div id="Loading">
             <div data-loader="ball-scale" v-show="loader">
@@ -138,13 +132,16 @@
         <v-footer color=" lighten-1" padless>
             <v-row justify="center" no-gutters>
                 <v-btn
-                    v-for="link in links"
-                    :key="link"
+                    v-for="(link,i) in links"
+                    :key="i"
+                    
                     text
                     rounded
                     class="my-2"
                 >
-                    {{ link }}
+                <a :href="link.url" style="text-decoration:none" target="_blank">
+                    {{ link.name }}
+                    </a>
                 </v-btn>
                 <v-col class=" lighten-2 py-4 text-center " cols="12">
                     {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
@@ -206,7 +203,7 @@ export default {
         } else if (h > 19 && h <= 24) {
             this.greetings = "晚上好！( ఠൠఠ )ﾉ👻";
         } else if (h > 0 && h <= 8) {
-            this.greetings = "好耶！○( ＾皿＾)っHiahiahia…";
+            this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍Hiahiahia…";
         }
         if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
             this.navigationsrc = this.themeDark.navigationImage;
@@ -265,14 +262,33 @@ export default {
                     link: "/about"
                 }
             ],
-            links: [
-                "Home",
-                "About Us",
-                "Team",
-                "Services",
-                "Blog",
-                "Contact Us"
+            links:[
+                {
+                    "name": "Home",
+                    "url": "http://www.dwsy.link:5000"
+                },
+                {
+                     "name": "About Us",
+                    "url":"1"
+                },
+                {
+                    "name": "Admin",
+                    "url":"http://www.dwsy.link:4000/"
+                },
+                {
+                    "name": "Github",
+                    "url":"https://github.com/Dwsy"
+                },
+                {
+                    "name": "Blog",
+                    "url":"http://www.dwsy.link:88"
+                },
+                {
+                    "name": "Contact Us",
+                    "url":"1"
+                },
             ],
+            
             miniVariant: false,
             right: true,
             rightDrawer: false,
