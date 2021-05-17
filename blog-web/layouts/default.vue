@@ -168,6 +168,7 @@ export default {
         this.$vuetify.theme.dark = true;
         const classificationData = await this.$axios.$get("classification");
         const themeData = await this.$axios.$get("theme");
+        // console.log(themeData);
         this.items[5].children = classificationData.data;
         this.themeDark = themeData.data[0];
         this.themeLight = themeData.data[1];

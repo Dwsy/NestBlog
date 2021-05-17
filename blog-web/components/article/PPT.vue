@@ -51,7 +51,7 @@ export default {
   watch: {
     innerWidth: function(val) {
 
-      console.log(this.innerWidth)
+      // console.log(this.innerWidth)
     }
   },
   // data: function() {

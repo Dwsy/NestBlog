@@ -5,7 +5,7 @@
         <v-col>
           <v-sheet elevation="0" class="pa-10 ma-2" >
             <h2 class="title mb-2">
-              文章筛选
+              文章筛选:{{tagName}}
             </h2>
 
               <v-chip
@@ -50,14 +50,21 @@ export default {
         query: {
           limit: 777,
           sort: "-contentsNum",
-          
         }
       }
     });
     const fields = await $axios.$get(`tag/article/${id}`);
-    // console.log(data);
+      let tagName= String;
+       (data.data).forEach(p=>{
+          if (p._id===id){
+              tagName = p.name
+             return
+          }
+      })
+      // console.log(tagName)
+
     // console.log(fields);
-    return { tags: data.data, fields: fields };
+    return { tags: data.data, fields: fields,tagName:tagName };
   },
   // data() {
   //   return {

@@ -24,8 +24,10 @@
                     dense
                     fill-height
                 >
+
                     <v-list-item
                         v-for="(item, index) in title.slice(0, 8)"
+                        v-show="title.length!==0"
                         :key="index"
                         @click="itemClick(item)"
                     >
@@ -40,6 +42,7 @@
 
                     <v-list-item
                         v-for="(item, index) in content"
+                        v-show="content.length!==0"
                         :key="index"
                         @click="itemClick(item)"
                     >
@@ -51,15 +54,15 @@
                         </v-list-item-title>
                     </v-list-item>
 
-                    <v-list-tile-title>
-                        Tag列表:
-                    </v-list-tile-title>
-                    <v-list-></v-list->
-                    <p></p>
-                    <Tag v-bind:tags="tag" />
-
+                    <v-sheet v-show="tag.length!==0">
+                        <Tag v-bind:tags="tag"/>
+                    </v-sheet>
+                    <v-list v-show="tag.length===0&&classification.length===0&&content.length===0&&title.length===0">
+                        <v-list-item-title class="grey--text font-weight-medium"> ❌无搜索结果。</v-list-item-title>
+                    </v-list>
                     <v-list-item
                         v-for="(item, index) in classification"
+                        v-show="classification.length!==0"
                         :key="index"
                         @click="itemClick(item)"
                     >
@@ -77,6 +80,7 @@
 </template>
 <script>
 import Tag from "./article/Tag";
+
 export default {
     components: {
         Tag
@@ -153,9 +157,11 @@ a {
     width: 100%;
     height: 100%;
 }
+
 ::-webkit-scrollbar {
     width: 0px;
 }
+
 /* .input-search {
     width: 100%;
     margin: auto;
@@ -171,7 +177,7 @@ a {
     box-shadow: none !important;
 }
 .border-list {
-    
+
     border: 1px solid #eee !important;
 } */
 </style>

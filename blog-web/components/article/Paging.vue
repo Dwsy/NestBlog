@@ -15,7 +15,7 @@ export default {
     };
   },
   created() {
-    console.log("test")
+    // console.log("test")
     console.log(this.page)
   },
   watch:{
