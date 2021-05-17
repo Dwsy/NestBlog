@@ -9,7 +9,7 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 //   import { getToken } from '@/utils/auth'
 export default {
-    namd: "Mdedit",
+    name: "Mdedit",
     props: {
         // content: ""
     },

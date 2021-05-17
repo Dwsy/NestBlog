@@ -3,8 +3,8 @@
   "version": "2.0.1",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "set NODE_ENV=development&&vue-cli-service serve",
+    "build": "set NODE_ENV=production&&vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
@@ -47,6 +47,7 @@
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "chai": "^4.1.2",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",

@@ -1,5 +1,5 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const IsProduction = process.env.NODE_ENV === "production";
 // if (process.env.NODE_ENV !== 'development') {
 //     var fs = require('fs');
 //     var version = new Date().getTime();
@@ -39,17 +39,15 @@ module.exports = {
         // open: true,
         /* 设置为0.0.0.0则所有的地址均能访问 */
         clientLogLevel: 'warning',
-        host: '0.0.0.0',
-        port: 5000,
+
+        host: process.env.NODE_ENV_DEV_HOST,
+        port: process.env.NODE_ENV_DEV_PORT,
         https: false,
         hotOnly: false,
         proxy: {
             "/": {
-                // target: "https://api.notbucai.cc",
-                target: "http://127.0.0.1:3000",
-                // target: "http://dwsy.link:3000",
+                target: process.env.NODE_ENV_API_L_URL,
                 changeOrigin: true,
-                
                 ws: true,
                 pathRewrite: {
                     "^/": "/"

@@ -146,7 +146,7 @@ export default {
             this.cover = fields[0].cover;
             this.selectTag = fields[0].tag;
             this.selectClass = fields[0].classification;
-            let content = fields[0].contentsId.text;
+            let content = fields[0].contentsId.mdText;
             // console.log(this.content);
             this.contentsId = fields[0].contentsId._id;
             this.$refs.editor.setData(content);

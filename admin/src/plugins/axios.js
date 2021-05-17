@@ -1,33 +1,25 @@
 "use strict";
 
 import axios from "axios";
-import store from 'store2';
+// import store from 'store2';
 // import { Message } from 'element-ui'
 import router from '../router/index';
-
-// Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// console.log(process.env.NODE_ENV);
-
-let config = {
-  baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://www.dwsy.link:3000/api'
+let _congfig={
+  // baseURL: process.env.NODE_ENV_API_URL,
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
-};
-
-const _axios = axios.create(config);
+  // baseURL: process.env.NODE_ENV === 'development' ? process.env.NODE_ENV_API_localhost_URL: process.env.NODE_ENV_API_server_URL
+  baseURL:process.env.VUE_APP_API
+}
+const _axios = axios.create(_congfig);
 
 _axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-
     const token = localStorage.token;
     if (token) {
       config.headers['Authorization'] = 'Bearer ' + token;
     }
-
     return config;
   },
   function (error) {

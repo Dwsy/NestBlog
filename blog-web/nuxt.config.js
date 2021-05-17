@@ -6,7 +6,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - myblog',
-    title: 'myblog',
+    title: 'Blog',
     htmlAttrs: {
       lang: 'zh-CN',
       amp: true
@@ -80,7 +80,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'zh-CN'
     }
   },
 
