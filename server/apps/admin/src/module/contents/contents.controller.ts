@@ -31,7 +31,7 @@ export class ContentsController {
 
             let reg = new RegExp(s,'i');
             let content = {
-                mdText:{$regex:reg}
+                text:{$regex:reg}
             };
             let Tag = {
                 name:{$regex:reg}
@@ -49,7 +49,7 @@ export class ContentsController {
             //     }
             //
             // }
-            let S_content= await this.model.find(content,'mdText');
+            let S_content= await this.model.find(content,'text');
         // .find({'tag.name':{$regex:reg}})
         //     let test= await this.field.find({},'tag').populate('tag','name').find(t)
             let S_tag= await this.tag.find(Tag)
