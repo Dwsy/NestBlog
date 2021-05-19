@@ -8,7 +8,8 @@ import {ReturnModelType} from "@typegoose/typegoose";
 import {Tag} from "libs/db/models/tag.model";
 import {Classification} from "libs/db/models/classification.model";
 import {Comments} from "libs/db/models/comments.model";
-
+import {JwtService} from "@nestjs/jwt";
+import {User} from "libs/db/models/user.model";
 @Crud({
     model: Contents,
     routes: {
