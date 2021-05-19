@@ -8,7 +8,8 @@ let _congfig={
   // baseURL: process.env.NODE_ENV_API_URL,
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
-  baseURL: process.env.NODE_ENV === 'development' ? process.env.NODE_ENV_API_L_URL: process.env.VUE_APP_API
+  // baseURL: process.env.NODE_ENV === 'development' ? process.env.NODE_ENV_API_localhost_URL: process.env.NODE_ENV_API_server_URL
+  baseURL:process.env.VUE_APP_API
 }
 const _axios = axios.create(_congfig);
 
