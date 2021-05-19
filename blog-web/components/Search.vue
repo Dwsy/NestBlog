@@ -34,6 +34,7 @@
                             <v-icon>{{ "mdi-access-point" }}</v-icon>
                             标题:<span v-html="item._highlights"></span>
                         </v-list-item-title>
+                         <v-divider></v-divider>
                     </v-list-item>
                     <!-- 内容 -->
                     <v-list-item
@@ -50,6 +51,7 @@
                             内容:<span v-html="item._highlights"></span>
                             <!--                            </a>-->
                         </v-list-item-title>
+                         <v-divider></v-divider>
                     </v-list-item>
                     <!-- Tag -->
                     <v-sheet v-show="tag.length !== 0">
@@ -70,7 +72,9 @@
                             分类:<span v-html="item._highlights"></span>
                             <!--                            </a>-->
                         </v-list-item-title>
+                         <v-divider></v-divider>
                     </v-list-item>
+                     <v-divider></v-divider>
                     <v-list
                         v-show="
                             tag.length === 0 &&

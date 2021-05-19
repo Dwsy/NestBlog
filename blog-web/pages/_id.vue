@@ -13,7 +13,7 @@
               <ArticleList v-bind:fields="fields" />
 
               <div class="text-center">
-                <v-pagination v-model="page" v-bind:length="lastPage"></v-pagination>
+                <v-pagination v-model="page" v-bind:length="lastPage-1"></v-pagination>
               </div>
             </v-col>
           </v-row>
