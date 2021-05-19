@@ -1,24 +1,18 @@
 <template>
-  <v-container v-if="!field.isDraft">
+  <v-container v-if="content.key!==0">
     <div>
-      
       <HeadImage :cover="field.cover"/>
     </div>
     <v-row>
       <v-col cols="12" xl="11" lg="11" md="11" 	sm="12" xs="12">
         <div>
           <br />
-          <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
           <v-row>
             <v-col xl="11" lg="11" md="11">
               <Content :content="content" :field="field" />
-
-              
               <ContentTag :tags="field.tag" />
               <CommentList :comments="comments" :id="id" :IP="IP" />
               <SendComment :id="id" :IP="IP" />
-              <!-- <Ccomment :id="id" :IP="IP"/> -->
-
             </v-col>
           </v-row>
         </div>
@@ -30,11 +24,9 @@
         </div>
       </v-col>
     </v-row>
-    
   </v-container>
-  <p v-else>无法访问</p>
+  <p v-else>⭕无权访问</p>
 </template>
-
 <script>
 // import Comment  from "./comment";
 import Content from "../../components/article/Content";
@@ -44,17 +36,18 @@ import HeadImage from "../../components/article/HeadImage";
 import ContentTag from "../../components/article/ContentTag";
 import Catalogue from "../../components/article/Catalogue";
 // import Ccomment from '../../components/article/Ccomment';
-
 export default {
   async asyncData({ $axios, params }) {
     let id = params.id;
     if (id === undefined) {
-      id = "603e751045d89d46e830734a";
+      id = "603e751045d89d46e830734a";//直接通过前缀访问跳转
     }
-    // console.log(id);
-    // const content = await $axios.$get(`contents/${id}`)
     const content = await $axios.$get(`contents/${id}`);
-    // console.log(content.fieldsId);
+    if (content?.key===0) {
+      return {
+        content: content
+      }
+    }
     const field = await $axios.$get(`fields/${content.fieldsId}`, {
         params: {
             query: {
@@ -62,9 +55,8 @@ export default {
             }
         }
     });
-    const comments = await $axios.$get(`comments/${id}`);
-
     // const ipData = await $axios.$get(`http://ip-api.com/json/`);
+    const comments = await $axios.$get(`comments/${id}`);
     const ipData = await $axios.$get(`fields/ip`);
     // console.log(ipData.query);
     return {
