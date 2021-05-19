@@ -1,15 +1,15 @@
 <template>
   <v-container v-if="content.key!==0">
-    <div>
-      <HeadImage :cover="field.cover"/>
-    </div>
-    <v-row>
-      <v-col cols="12" xl="11" lg="11" md="11" 	sm="12" xs="12">
-        <div>
-          <br />
-          <v-row>
-            <v-col xl="11" lg="11" md="11">
-              <Content :content="content" :field="field" />
+      <div>
+          <HeadImage :cover="field.cover"/>
+      </div>
+      <v-row>
+          <v-col cols="12" xl="11" lg="11" md="11" sm="12" xs="12">
+              <div>
+                  <br/>
+                  <v-row>
+                      <v-col xl="11" lg="11" md="11">
+                          <Content :content="content" :field="field"/>
               <ContentTag :tags="field.tag" />
               <CommentList :comments="comments" :id="id" :IP="IP" />
               <SendComment :id="id" :IP="IP" />
@@ -25,7 +25,7 @@
       </v-col>
     </v-row>
   </v-container>
-  <p v-else>⭕无权访问</p>
+    <h2 v-else>⭕没有权限访问此文章</h2>
 </template>
 <script>
 // import Comment  from "./comment";
@@ -38,26 +38,26 @@ import Catalogue from "../../components/article/Catalogue";
 // import Ccomment from '../../components/article/Ccomment';
 export default {
   async asyncData({ $axios, params }) {
-    let id = params.id;
-    if (id === undefined) {
-      id = "603e751045d89d46e830734a";//直接通过前缀访问跳转
-    }
-    const content = await $axios.$get(`contents/${id}`);
-    if (content?.key===0) {
-      return {
-        content: content
+      let id = params.id;
+      if (id === undefined) {
+          id = "603e751045d89d46e830734a";//直接通过前缀访问跳转
       }
-    }
-    const field = await $axios.$get(`fields/${content.fieldsId}`, {
-        params: {
-            query: {
-                populate: 'tag classification'
-            }
-        }
-    });
-    // const ipData = await $axios.$get(`http://ip-api.com/json/`);
-    const comments = await $axios.$get(`comments/${id}`);
-    const ipData = await $axios.$get(`fields/ip`);
+      const content = await $axios.$get(`contents/${id}`);
+      if (content.key == 0) {
+          return {
+              content: content
+          }
+      }
+      const field = await $axios.$get(`fields/${content.fieldsId}`, {
+          params: {
+              query: {
+                  populate: 'tag classification'
+              }
+          }
+      });
+      // const ipData = await $axios.$get(`http://ip-api.com/json/`);
+      const comments = await $axios.$get(`comments/${id}`);
+      const ipData = await $axios.$get(`fields/ip`);
     // console.log(ipData.query);
     return {
       comments: comments,

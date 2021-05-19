@@ -113,7 +113,9 @@ export default {
         async draft() {
             let ContentData = {
                 text: this.$refs.editor.getHTML(),
-                mdText: this.$refs.editor.getData()
+                mdText: this.$refs.editor.getData(),
+                isPublish: true,
+                allowComment: false
             };
             const Content = await this.$http.createContent(ContentData);
             let FieldData = {
@@ -147,7 +149,9 @@ export default {
         async send() {
             let ContentData = {
                 text: this.$refs.editor.getHTML(),
-                mdText: this.$refs.editor.getData()
+                mdText: this.$refs.editor.getData(),
+                isPublish: true,
+                allowComment: false
             };
             const Content = await this.$http.createContent(ContentData);
             let FieldData = {

@@ -33,7 +33,7 @@ import {User} from "libs/db/models/user.model";
 @Controller('api/contents')
 @ApiTags('文章主体')
 // extends PassportStrategy(Strategy)
-export class ContentsController  {
+export class ContentsController {
     constructor(@InjectModel(Contents) private readonly model, private jwtService: JwtService,
                 @InjectModel(User) private userModel: ReturnModelType<typeof User>,
                 @InjectModel(Fields) private readonly field: ReturnModelType<typeof Fields>,

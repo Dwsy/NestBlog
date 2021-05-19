@@ -1,16 +1,16 @@
-import { Body, Controller, Get, Ip, Param, Query, UseGuards } from '@nestjs/common';
-import { Crud } from 'libs/nestjs-mongoose-crud/';
-import { InjectModel } from 'nestjs-typegoose';
-import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Fields } from 'libs/db/models/fields.model';
-import { Contents } from "libs/db/models/contents.model";
-import { ReturnModelType } from "@typegoose/typegoose";
-import { Classification } from "libs/db/models/classification.model";
+import {Body, Controller, Get, HttpCode, Ip, Param, Query, UseGuards} from '@nestjs/common';
+import {Crud} from 'libs/nestjs-mongoose-crud/';
+import {InjectModel} from 'nestjs-typegoose';
+import {ApiBearerAuth, ApiOperation, ApiQuery, ApiTags} from '@nestjs/swagger';
+import {Fields} from 'libs/db/models/fields.model';
+import {Contents} from "libs/db/models/contents.model";
+import {ReturnModelType} from "@typegoose/typegoose";
+import {Classification} from "libs/db/models/classification.model";
 // import {Comments} from "libs/db/models/comments.model";
-import { Tag } from "libs/db/models/tag.model";
-import { PaginateKeys } from 'libs/nestjs-mongoose-crud/src/crud.interface';
-import { AuthGuard } from '@nestjs/passport';
-
+import {Tag} from "libs/db/models/tag.model";
+import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
+import {AuthGuard} from '@nestjs/passport';
+import {Schema} from "mongoose";
 
 
 @Crud({
@@ -53,7 +53,7 @@ export class FieldsController {
 
     @Get('all/:page')
     async getAll(@Param('page') page: string) {
-        return this.model.find().populate('tag').populate('classification').limit(8).skip(parseInt(page) * 8 - 8).sort({ '_id': -1 });
+        return this.model.find().populate('tag').populate('classification').limit(8).skip(parseInt(page) * 8 - 8).sort({'_id': -1});
     }
 
     @Get('ip')
@@ -62,7 +62,7 @@ export class FieldsController {
     }
 
     @Get('draftList')
-    @ApiOperation({ summary: "Find all records", operationId: "list" })
+    @ApiOperation({summary: "Find all records", operationId: "list"})
     async draftList(@Query('query') query) {
         let populate = undefined
         let page = 1
@@ -86,7 +86,7 @@ export class FieldsController {
         const data = await this.model
             .find()
             // .where(where)
-            .where({ "isDraft": true })
+            .where({"isDraft": true})
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -120,13 +120,32 @@ export class FieldsController {
             populate = query.populate
         }
         // console.log(populate);
-        return await this.model
-            .findById(id)
-            .populate(populate)
+        let ret = await this.model.findById(id).populate(populate)
+        if (!ret.isDraft) {
+            return ret;
+        } else {
+            return {
+                'isDraft': true,
+                'date': new Date()
+            }
+        }
+        // if (ret.contentsId['isPublish']!==undefined) {
+        //     if (ret.contentsId['isPublish']) {
+        //
+        //     }
+        // }else return ret;
+        // console.log();
+        // console.log(ret)
+        // console.log(ret.contentsId['isPublish'])
+        // if (ret.contentsId['isPublish']!==undefined&&ret.contentsId['isPublish']===true) {
+        //     return ret;
+        // } else {
+        //     return "<h4>无访问权限</h4>"
+        // }
     }
 
     @Get()
-    @ApiOperation({ summary: "Find all records", operationId: "list" })
+    @ApiOperation({summary: "Find all records", operationId: "list"})
     async find(@Query('query') query) {
         let populate = undefined
         let page = 1
@@ -150,7 +169,7 @@ export class FieldsController {
         const data = await this.model
             .find()
             // .where(where)
-            .where({ "isDraft": false })
+            .where({"isDraft": false})
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -174,10 +193,6 @@ export class FieldsController {
 
         return data;
     };
-
-
-
-
 
 
 }

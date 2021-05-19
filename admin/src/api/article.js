@@ -38,6 +38,9 @@ export const getFieldsById = (id) => {
 export const createContent = (data) => {
     let contentId = $post('/contents', {
         text: data.text,
+        mdText: data.mdText,
+        isPublish: data.isPublish,
+        allowComment: data.allowComment
     });
     return contentId
 
