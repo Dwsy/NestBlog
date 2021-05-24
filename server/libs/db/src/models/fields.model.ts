@@ -39,6 +39,10 @@ export class Fields {
     @prop()
     commentsNum: Number;
 
+    @ApiProperty({ description: '文章浏览量', example: '123' })
+    @prop()
+    view: Number;
+
     @ApiProperty({description: '文章分类 id',example: ''})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Classification})
         // @prop()
@@ -47,5 +51,6 @@ export class Fields {
     @ApiProperty({ description: '是否为草稿', example: false })
     @prop()
     isDraft: boolean;
+
 
 }

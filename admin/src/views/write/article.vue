@@ -126,7 +126,8 @@ export default {
                 cover: this.cover,
                 coverSmall: this.coverSmall,
                 commentsNum: 0,
-                isDraft: true
+                isDraft: true,
+                view:0
             };
             const Field = await this.$http.createField(FieldData);
             // console.log(Field[0].contentsId);
@@ -163,7 +164,8 @@ export default {
                 cover: this.cover,
                 coverSmall: this.coverSmall,
                 commentsNum: 0,
-                isDraft: false
+                isDraft: false,
+                view:0
             };
             const Field = await this.$http.createField(FieldData);
 

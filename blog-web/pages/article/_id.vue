@@ -9,6 +9,7 @@
                   <br/>
                   <v-row>
                       <v-col xl="11" lg="11" md="11">
+                        <p>浏览量:{{view.view}}</p>
                           <Content :content="content" :field="field"/>
               <ContentTag :tags="field.tag" />
               <CommentList :comments="comments" :id="id" :IP="IP" />
@@ -48,6 +49,7 @@ export default {
               content: content
           }
       }
+      const view = await $axios.$get(`/fields/view/${content.fieldsId}`);
       const field = await $axios.$get(`fields/${content.fieldsId}`, {
           params: {
               query: {
@@ -55,19 +57,35 @@ export default {
               }
           }
       });
+      
       // const ipData = await $axios.$get(`http://ip-api.com/json/`);
       const comments = await $axios.$get(`comments/${id}`);
       const ipData = await $axios.$get(`fields/ip`);
     // console.log(ipData.query);
     return {
       comments: comments,
+      IP: ipData,
       content: content,
       id: id,
       // IP: ipData.query,
-      IP: ipData,
-      field: field
+      field: field,
+      view:view
     };
   },
+  // mounted () {
+  //   this.getComments()
+  // },
+  // methods: {
+  //   async getComments({ $axios, params }){
+  //     const comments = await $axios.$get(`comments/${id}`);
+  //     console.log("comments");
+  //     const ipData = await $axios.$get(`fields/ip`);
+  //     return{
+  //     comments: comments,
+  //     IP: ipData,
+  //     }
+  //   }
+  // },
   components: {
     Content,
     CommentList,

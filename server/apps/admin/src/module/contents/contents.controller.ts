@@ -46,10 +46,12 @@ export class ContentsController {
         // } as StrategyOptions);
     }
 
+
     @Get('/test')
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()
     async test(@Req() request: Request) {
+
         return 123
         //
         // let Authorization = (new Object(request.headers)['authorization']).split(' ')[1]

@@ -40,6 +40,15 @@ export class FieldsController {
         return t;
     }
 
+    @Get('/view/:id')
+    async view(@Param('id') id: string) {
+        let data = await this.model.findByIdAndUpdate(id, {$inc: {"view": 1}});
+        return {
+            view: data.view,
+
+        }
+    }
+
     @Get('title/:page')
     async titlePage(@Param('page') page: string) {
         return this.ContentsModel.find({}, 'title').limit(8).skip(parseInt(page) * 8 - 8).sort({'_id': 1});
