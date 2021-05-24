@@ -15,9 +15,7 @@
 
       <p class="caption">最后修改时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}</p>
     </v-col>
-
-
-
+    
   </v-row>
   
 </template>

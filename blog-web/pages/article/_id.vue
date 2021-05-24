@@ -10,7 +10,7 @@
                   <v-row>
                       <v-col xl="11" lg="11" md="11">
                         <p>浏览量:{{view.view}}</p>
-                          <Content :content="content" :field="field"/>
+              <Content :content="content" :field="field"/>
               <ContentTag :tags="field.tag" />
               <CommentList :comments="comments" :id="id" :IP="IP" />
               <SendComment :id="id" :IP="IP" />

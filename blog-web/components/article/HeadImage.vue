@@ -1,8 +1,7 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-img max-height="400" :src="cover"></v-img>
-    </v-card>
+  <v-container >
+    <!-- <img :src="cover" > -->
+      <v-img max-height="600px" :src="cover"></v-img>
   </v-container>
 </template>
 
@@ -14,4 +13,11 @@ export default {
 };
 </script>
 
-<style></style>
+    <style>
+
+        
+        img {
+            width: 800px;
+            height: 500px;
+        }
+    </style>

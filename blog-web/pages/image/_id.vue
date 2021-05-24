@@ -1,13 +1,17 @@
 <template>
-  <div><p>qwe</p></div>
+  <List></List>
 </template>
 
 <script>
+import List from "../../components/Photo/List";
 export default {
-  asyncData({ route, params }) {
-    // console.log(route);
-    // console.log(params);
-  }
+components: {
+  List,
+}
+  // asyncData({ route, params }) {
+  //   // console.log(route);
+  //   // console.log(params);
+  // }
 };
 </script>
 
