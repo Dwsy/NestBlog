@@ -205,6 +205,7 @@ export default {
             }
 
             const add = await this.$http.addField(addData);
+            const toc = await this.$http.createdToc(Content[0]._id);
             if (Field[0].contentsId === Content[0]._id) {
                 // console.log("保存成功");
                 this.success("保存成功");
@@ -269,6 +270,8 @@ export default {
                 ContentTd: Content[0]._id
             };
             const add = await this.$http.addField(addData);
+            const toc = await this.$http.createdToc(Content[0]._id);
+            console.log(toc);
             if (Field[0].contentsId === Content[0]._id) {
                 // console.log("保存成功");
                 this.success("发送成功");

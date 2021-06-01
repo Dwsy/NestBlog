@@ -1,4 +1,4 @@
-import {Body, Controller, Get, HttpCode, Ip, Param, Query, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, HttpCode, Ip, Param, Query, Req, UseGuards} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud/';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiBearerAuth, ApiOperation, ApiQuery, ApiTags} from '@nestjs/swagger';
@@ -11,7 +11,8 @@ import {Tag} from "libs/db/models/tag.model";
 import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
 import {AuthGuard} from '@nestjs/passport';
 import {Schema} from "mongoose";
-
+import {JwtService} from "@nestjs/jwt";
+import {User} from "libs/db/models/user.model";
 
 @Crud({
     model: Fields,
@@ -31,6 +32,8 @@ export class FieldsController {
                 @InjectModel(Contents) private readonly ContentsModel: ReturnModelType<typeof Contents>,
                 @InjectModel(Classification) private readonly ClassificationModel: ReturnModelType<typeof Classification>,
                 @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
+                @InjectModel(User) private userModel: ReturnModelType<typeof User>,
+                private jwtService: JwtService,
     ) {
     }
 
@@ -122,7 +125,7 @@ export class FieldsController {
     };
 
     @Get(':id')
-    async findOne(@Param("id") id: string, @Query('query') query) {
+    async findOne(@Param("id") id: string, @Req() request: Request, @Query('query') query) {
         let populate = undefined
         if (query) {
             query = JSON.parse(query)
@@ -130,6 +133,15 @@ export class FieldsController {
         }
         // console.log(populate);
         let ret = await this.model.findById(id).populate(populate)
+        let Authorization = (new Object(request.headers)['authorization'])?.split(' ')[1]
+        if (Authorization !== undefined) {
+            let users: Array<object> = await this.userModel.find({}, '_id')
+            for (let i = 0; i < users.length; i++) {
+                if (Authorization === this.jwtService.sign(String(users[i]['_id']))) {
+                    return ret
+                }
+            }
+        }
         if (!ret.isDraft) {
             return ret;
         } else {

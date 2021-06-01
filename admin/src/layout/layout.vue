@@ -16,7 +16,7 @@
 		>
 			<template v-slot:img>
 				<v-img
-					src="https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg"
+					src="http://tva1.sinaimg.cn/large/005NWBIgly1gomplzktnmj30aw0txtb9.jpg"
 					gradient="rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)"
 				/>
 			</template>
@@ -25,7 +25,7 @@
 				<v-list-item @click="onAxios" style="margin-top: 8px">
 					<v-list-item-avatar size="40">
 						<img
-							src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png"
+							src="https://gravatar.helingqi.com/wavatar/a0b7b30cbef507e1fad31e75c6a134ee?s=220&r=X&d=mm"
 						/>
 					</v-list-item-avatar>
 					<v-list-item-content>

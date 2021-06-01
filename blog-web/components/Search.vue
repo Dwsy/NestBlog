@@ -7,7 +7,7 @@
                         flat
                         clearable
                         hide-details
-                        label="搜索.."
+                        label="搜索....."
                         prepend-inner-icon="mdi-magnify"
                         dense
                         full-width

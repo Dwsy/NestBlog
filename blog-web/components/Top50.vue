@@ -2,14 +2,17 @@
     <v-container>
         <p>&nbsp;&nbsp;&nbsp;Pixiv每日排行榜Top50</p>
         <v-carousel
+        
             cycle
             hide-delimiter-background
             show-arrows-on-hover
             hide-delimiters
             :interval="6000"
             height="400px"
+            v-if="pixivTop!==null"
         >
             <v-carousel-item
+                
                 v-for="(image, i) in pixivTop.image"
                 :key="pixivTop[i]"
                 :href="'https://www.pixiv.net/' + pixivTop.url[i]"

@@ -61,15 +61,15 @@ export class ContentsController {
     @ApiBearerAuth()
     async createdToc(@Param('id') id: string){
         const data = await this.model.findById(id,'text mdText')
-        console.log("---------------------")
-        console.log(data)
-        console.log("---------------------")
+        // console.log("---------------------")
+        // console.log(data)
+        // console.log("---------------------")
         const menusData = await this.contentToArticleAttr(data.text,data.mdText )
-        console.log(menusData)
+        // console.log(menusData)
         const ret = await this.model.findByIdAndUpdate(id,{$set: {
                     menus:{menus:menusData.menus, summary:menusData.summary},
                     text :menusData.menusHtml}})
-        console.log(ret)
+        // console.log(ret)
         return ret.menus
     }
 

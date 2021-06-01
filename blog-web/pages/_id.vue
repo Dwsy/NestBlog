@@ -100,16 +100,22 @@ export default {
     mounted() {
         setTimeout(() => {
             this.getPixiv()
-            setTimeout(() => this.getTag(), 500);
-        }, 1000);
+            setTimeout(() => this.getTag(), 100);
+        }, 100);
 
     },
     methods: {
         async getPixiv() {
+        this.pixivTop = JSON.parse(localStorage.getItem("pixivTop"))
+        if(this.pixivTop===null){
             this.pixivTop = await this.$axios.$get("/theme/pixiv");
+            localStorage.setItem("pixivTop", JSON.stringify(this.pixivTop));
+        }
+        // this.pixivTop = await this.$axios.$get("/theme/pixiv");
         },
         async getTag() {
-
+        this.tag = JSON.parse(localStorage.getItem("tag"))
+        if(this.tag===null){
             this.tag = (await this.$axios.$get("/tag", {
                 params: {
                     query: {
@@ -118,6 +124,17 @@ export default {
                     }
                 }
             }))['data'];
+            localStorage.setItem("tag", JSON.stringify(this.tag));
+        }
+
+            // this.tag = (await this.$axios.$get("/tag", {
+            //     params: {
+            //         query: {
+            //             limit: 777,
+            //             sort: "-contentsNum"
+            //         }
+            //     }
+            // }))['data'];
         }
     },
 

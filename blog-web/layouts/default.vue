@@ -1,17 +1,17 @@
 <template>
     <v-app id="inspire">
-
         <!-- 加载动画 -->
         <div id="Loading">
             <div data-loader="ball-scale" v-show="loader">
                 <div></div>
-                <div></div>
-                <div></div>
+                <!-- <div></div>
+                <div></div> -->
                 <div></div>
             </div>
         </div>
         <!-- 侧边导航栏 -->
         <v-navigation-drawer
+
             v-model="drawer"
             :clipped="$vuetify.breakpoint.lgAndUp"
             app
@@ -27,6 +27,8 @@
                         />
                     </v-avatar>
                     <sub>{{ greetings }}</sub>
+                    <sub>{{ yy.hitokoto }}</sub><br/>
+                    <sub style="left: 120px;">--{{ yy.from }}</sub>
                 </v-col>
 
                 <template v-for="item in items">
@@ -132,15 +134,18 @@
         <v-footer color=" lighten-1" padless>
             <v-row justify="center" no-gutters>
                 <v-btn
-                    v-for="(link,i) in links"
+                    v-for="(link, i) in links"
                     :key="i"
-                    
                     text
                     rounded
                     class="my-2"
                 >
-                <a :href="link.url" style="text-decoration:none" target="_blank">
-                    {{ link.name }}
+                    <a
+                        :href="link.url"
+                        style="text-decoration:none"
+                        target="_blank"
+                    >
+                        {{ link.name }}
                     </a>
                 </v-btn>
                 <v-col class=" lighten-2 py-4 text-center " cols="12">
@@ -166,8 +171,30 @@ export default {
 
     async created() {
         this.$vuetify.theme.dark = true;
-        const classificationData = await this.$axios.$get("classification");
-        const themeData = await this.$axios.$get("theme");
+        // const classificationData = await this.$axios.$get("classification");
+        // const themeData = await this.$axios.$get("theme");
+
+        let classificationData = JSON.parse(localStorage.getItem("classificationData"))
+        let themeData = JSON.parse(localStorage.getItem("themeData"));
+        console.log(classificationData);
+        console.log(themeData);
+        if(classificationData===null){
+            classificationData = await this.$axios.$get("classification")
+            localStorage.setItem("classificationData", JSON.stringify(classificationData));
+        }
+        if(themeData===null){
+            themeData = await this.$axios.$get("theme")
+            localStorage.setItem("themeData", JSON.stringify(themeData));
+        }
+
+        // classificationData = classificationData===null?await this.$axios.$get("classification"):classificationData
+        // themeData = themeData===null?await this.$axios.$get("theme"):themeData
+        // console.log("1111111111111111111111");
+        // console.log(JSON.parse(localStorage.getItem("test")));
+        // console.log("1111111111111111111111");
+        // this.userinfoArr = JSON.parse(localStorage.getItem("classificationData"));
+        // this.userinfoArr = JSON.parse(localStorage.getItem("themeData"));
+        
         // console.log(themeData);
         this.items[5].children = classificationData.data;
         this.themeDark = themeData.data[0];
@@ -195,17 +222,20 @@ export default {
         this.loader = !this.loader;
         const h = new Date().getHours();
         this.$vuetify.theme.dark = (h >= 19 && h <= 24) || (h >= 0 && h <= 7);
+        // this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍Hiahiahia…"
         if (h >= 6 && h <= 10) {
             this.greetings = "早上好！👾👾";
         } else if (h > 10 && h <= 14) {
             this.greetings = "中午好！(❁´◡`❁)🙂";
         } else if (h > 14 && h <= 19) {
             this.greetings = "下午好ヾ(≧ ▽ ≦)ゝ🤯";
-        } else if (h > 19 && h <= 24) {
+        } else if (h > 19 && h <= 23) {
             this.greetings = "晚上好！( ఠൠఠ )ﾉ👻";
-        } else if (h > 0 && h <= 8) {
-            this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍Hiahiahia…";
+        } else if (h >= 0 && h <= 8) {
+            this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍";
         }
+        this.yy = await this.$axios.$get("https://v1.hitokoto.cn/")
+        console.log(this.yy);
         if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
             this.navigationsrc = this.themeDark.navigationImage;
             this.appbarsrc = this.themeDark.topImage;
@@ -230,6 +260,7 @@ export default {
             appbarsrc: "",
             // greetings: new Date(),
             greetings: "",
+            yy:{},
             items: [
                 { icon: "mdi-home-outline", text: "博客首页", link: "/" },
                 {
@@ -263,33 +294,33 @@ export default {
                     link: "/about"
                 }
             ],
-            links:[
+            links: [
                 {
-                    "name": "Home",
-                    "url": "http://www.dwsy.link:5000"
+                    name: "Home",
+                    url: "http://www.dwsy.link:5000"
                 },
                 {
-                     "name": "About Us",
-                    "url":"1"
+                    name: "About Us",
+                    url: "1"
                 },
                 {
-                    "name": "Admin",
-                    "url":"http://www.dwsy.link:4000/"
+                    name: "Admin",
+                    url: "http://www.dwsy.link:4000/"
                 },
                 {
-                    "name": "Github",
-                    "url":"https://github.com/Dwsy"
+                    name: "Github",
+                    url: "https://github.com/Dwsy"
                 },
                 {
-                    "name": "Blog",
-                    "url":"http://www.dwsy.link:88"
+                    name: "Blog",
+                    url: "http://www.dwsy.link:88"
                 },
                 {
-                    "name": "Contact Us",
-                    "url":"1"
-                },
+                    name: "Contact Us",
+                    url: "1"
+                }
             ],
-            
+
             miniVariant: false,
             right: true,
             rightDrawer: false,
@@ -332,6 +363,7 @@ export default {
 };
 </script>
 <style>
+
 pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;

@@ -32,7 +32,6 @@ export const getFieldsById = (id) => {
         }
     });
     return Fields
-
 }
 
 export const createContent = (data) => {
@@ -45,6 +44,7 @@ export const createContent = (data) => {
     return contentId
 
 }
+
 export const createField = (data) => {
     let Fields = $post('/fields', data);
     return Fields
@@ -55,6 +55,11 @@ export const addField = (data) => {
         fieldsId: data.fieldsId,
     });
     return add
+}
+
+export const createdToc = (id) => {
+    let createdToc = $put(`/contents/created_toc/${id}`);
+    return createdToc
 }
 
 export const delField = (id) => {
