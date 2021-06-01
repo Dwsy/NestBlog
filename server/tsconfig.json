@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny":false, //TS bug 迫不得已
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

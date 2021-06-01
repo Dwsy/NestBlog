@@ -28,6 +28,7 @@ export class ClassificationController {
     @Get('article/:id')
     async get (@Param('id') id: string) {
         // return this.CommentsModel.find(contentsId:id);
+        // @ts-ignore
         return this.FieldsModel.find({classification:id}).populate('tag').populate('classification','name').sort({'_id':-1})
     }
     // @Get('articleTitle/:id')

@@ -116,6 +116,7 @@ export class CommentsController {
     @Post()
     @ApiOperation({summary: '发送评论'})
     async send(@Body() dto: sendCommentDto) {
+        // @ts-ignore
         await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById(dto.contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": 1}})
         return this.CommentsModel.create(dto);
         // return await this.CommentsModel.create()
@@ -131,6 +132,7 @@ export class CommentsController {
     @Post('child')
     @ApiOperation({summary: '发送子评论'})
     async sendChild(@Body() dto: sendChildCommentDto) {
+        // @ts-ignore
         await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById(dto.contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": 1}})
         let a = await this.CommentsModel.create(dto);
         // console.log((await a))
@@ -159,17 +161,19 @@ export class CommentsController {
     @Delete(':id/:isChild')
     async del(@Param('id') id: string, @Param('isChild') isChild: String) {
         if (isChild === "true") {
+            // @ts-ignore
             await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -1}})
             await this.CommentsModel.findByIdAndDelete(id)
             return HttpCode(200)
 
         } else {
+            // @ts-ignore
             await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -((await this.CommentsModel.findById(id,'childId')).childId).length}})
             await this.CommentsModel.findByIdAndDelete(id)
             await this.CommentsModel.deleteMany({fatherId: id})
             return HttpCode(200)
         }
-        
+
     }
 
     // @Post()

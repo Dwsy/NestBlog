@@ -81,7 +81,7 @@
 
         <v-col>
             <v-card>
-                <v-list>
+                <v-list v-if="comments!==undefined">
                     <v-subheader> 评论列表 </v-subheader>
                     <template v-for="item in comments">
                         <v-divider :key="item._id"></v-divider>

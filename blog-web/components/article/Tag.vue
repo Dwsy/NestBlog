@@ -6,6 +6,7 @@
 
             <v-chip
             class="ma-1 imgbig"
+            v-if="tags!=={}"
               v-for="tag in tags"
               :key="tag.name"
               :color="tag.colours"

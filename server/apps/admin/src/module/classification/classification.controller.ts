@@ -1,4 +1,4 @@
-import {Controller, Get, Post,Param, UseGuards} from '@nestjs/common';
+import {Controller, Get,Param, UseGuards} from '@nestjs/common';
 import { Crud } from 'libs/nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
 import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
@@ -25,6 +25,7 @@ export class ClassificationController {
     @Get('article/:id')
     async get (@Param('id') id: string) {
         // return this.CommentsModel.find(contentsId:id);
+        // @ts-ignore
         return this.FieldsModel.find({classification:id}).populate('tag').populate('classification','name').sort({'_id':-1})
     }
     @Get('contentsNum/:id/:num')

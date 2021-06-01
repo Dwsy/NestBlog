@@ -189,6 +189,7 @@ export default {
                 this.error("发送失败");
             }
         },
+        
         async getTag() {
             const tagData = await this.$http.getTag();
             this.tag = tagData[0].data;

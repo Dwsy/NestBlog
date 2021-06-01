@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <v-list v-for="link in data">
+        <v-list v-for="link in data" :key=link._id>
 
                 <a :href="link.linksUrl">
                     <v-img

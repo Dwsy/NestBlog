@@ -34,7 +34,16 @@ export class Contents {
   @prop()
   mdText: string;
 
+  //目录
+  @ApiProperty({ description: '目录', example: '目录' })
+  @prop()
+  menus: {
+    // menusHtml:string,
+    menus:string,
+    summary:string
+  };
 
+  //目录
   // @ApiProperty({description:'内容类别',example:'page/post/file'})
   // @prop()
   // type:string
@@ -43,8 +52,6 @@ export class Contents {
   @prop()
   // status:password
   isPublish: boolean;
-
-
 
   @ApiProperty({ description: '是否允许评论', example: true })
   @prop()
