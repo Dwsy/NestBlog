@@ -11,7 +11,6 @@
         </div>
         <!-- 侧边导航栏 -->
         <v-navigation-drawer
-
             v-model="drawer"
             :clipped="$vuetify.breakpoint.lgAndUp"
             app
@@ -27,7 +26,8 @@
                         />
                     </v-avatar>
                     <sub>{{ greetings }}</sub>
-                    <sub>{{ yy.hitokoto }}</sub><br/>
+                    <sub>{{ yy.hitokoto }}</sub
+                    ><br />
                     <sub style="left: 120px;">--{{ yy.from }}</sub>
                 </v-col>
 
@@ -174,50 +174,39 @@ export default {
         // const classificationData = await this.$axios.$get("classification");
         // const themeData = await this.$axios.$get("theme");
 
-        let classificationData = JSON.parse(localStorage.getItem("classificationData"))
-        let themeData = JSON.parse(localStorage.getItem("themeData"));
-        console.log(classificationData);
-        console.log(themeData);
-        if(classificationData===null){
-            classificationData = await this.$axios.$get("classification")
-            localStorage.setItem("classificationData", JSON.stringify(classificationData));
+        // let classificationData = JSON.parse(localStorage.getItem("classificationData"))
+        // let themeData = JSON.parse(localStorage.getItem("themeData"));
+        console.log(this.classificationData);
+        console.log(this.themeData);
+        if (this.classificationData === null) {
+            this.classificationData = await this.$axios.$get("classification");
         }
-        if(themeData===null){
-            themeData = await this.$axios.$get("theme")
-            localStorage.setItem("themeData", JSON.stringify(themeData));
+        if (this.themeData === null) {
+            this.themeData = await this.$axios.$get("theme");
         }
-
-        // classificationData = classificationData===null?await this.$axios.$get("classification"):classificationData
-        // themeData = themeData===null?await this.$axios.$get("theme"):themeData
-        // console.log("1111111111111111111111");
-        // console.log(JSON.parse(localStorage.getItem("test")));
-        // console.log("1111111111111111111111");
-        // this.userinfoArr = JSON.parse(localStorage.getItem("classificationData"));
-        // this.userinfoArr = JSON.parse(localStorage.getItem("themeData"));
-        
-        // console.log(themeData);
-        this.items[5].children = classificationData.data;
-        this.themeDark = themeData.data[0];
-        this.themeLight = themeData.data[1];
-        // Light theme
-        this.$vuetify.theme.themes.light.accent = themeData.data[1].accent;
-        this.$vuetify.theme.themes.light.error = themeData.data[1].error;
-        this.$vuetify.theme.themes.light.info = themeData.data[1].info;
-        this.$vuetify.theme.themes.light.primary = themeData.data[1].primary;
-        this.$vuetify.theme.themes.light.secondary =
-            themeData.data[1].secondary;
-        this.$vuetify.theme.themes.light.success = themeData.data[1].success;
-        this.$vuetify.theme.themes.light.warning = themeData.data[1].warning;
-
-        // Dark theme
-        this.$vuetify.theme.themes.dark.accent = themeData.data[0].accent;
-        this.$vuetify.theme.themes.dark.error = themeData.data[0].error;
-        this.$vuetify.theme.themes.dark.info = themeData.data[0].info;
-        this.$vuetify.theme.themes.dark.primary = themeData.data[0].primary;
-        this.$vuetify.theme.themes.dark.secondary = themeData.data[0].secondary;
-        this.$vuetify.theme.themes.dark.success = themeData.data[0].success;
-        this.$vuetify.theme.themes.dark.warning = themeData.data[0].warning;
-
+        this.items[5].children = this.classificationData.data;
+        this.themeDark = this.themeData.data[0];
+        this.themeLight = this.themeData.data[1];
+        let dark = {
+            accent: this.themeDark.accent,
+            primary: this.themeDark.primary,
+            error: this.themeDark.error,
+            warning: this.themeDark.warning,
+            success: this.themeDark.success,
+            secondary: this.themeDark.secondary,
+            info: this.themeDark.info
+        };
+        let light = {
+            accent: this.themeLight.accent,
+            primary: this.themeLight.primary,
+            error: this.themeLight.error,
+            warning: this.themeLight.warning,
+            success: this.themeLight.success,
+            secondary: this.themeLight.secondary,
+            info: this.themeLight.info
+        };
+        this.$vuetify.theme.themes.light = light;
+        this.$vuetify.theme.themes.dark = dark;
         // this.document.body.removeChild(document.getElementById("Loading"));
         this.loader = !this.loader;
         const h = new Date().getHours();
@@ -234,7 +223,7 @@ export default {
         } else if (h >= 0 && h <= 8) {
             this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍";
         }
-        this.yy = await this.$axios.$get("https://v1.hitokoto.cn/")
+        this.yy = await this.$axios.$get("https://v1.hitokoto.cn/");
         console.log(this.yy);
         if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
             this.navigationsrc = this.themeDark.navigationImage;
@@ -252,6 +241,8 @@ export default {
     },
     data() {
         return {
+            themeData: null,
+            classificationData: null,
             loader: true,
             dialog: false,
             drawer: null,
@@ -260,7 +251,7 @@ export default {
             appbarsrc: "",
             // greetings: new Date(),
             greetings: "",
-            yy:{},
+            yy: {},
             items: [
                 { icon: "mdi-home-outline", text: "博客首页", link: "/" },
                 {
@@ -363,7 +354,6 @@ export default {
 };
 </script>
 <style>
-
 pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;

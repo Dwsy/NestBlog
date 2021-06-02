@@ -67,74 +67,148 @@ export default {
             }
         });
         const recentlyData = await $axios.$get("comments/recently");
-        // const pixivTop = await $axios.$get("/theme/pixiv");
-        // const tagData = await $axios.$get("tag", {
-        //     params: {
-        //         query: {
-        //             limit: 777,
-        //             sort: "-contentsNum"
-        //         }
-        //     }
-        // });
-        const pptData = await $axios.$get("ppt", {
-            params: {
-                query: {
-                    sort: "rank"
-                }
-            }
-        });
+
+
+
+
 
         return {
             fields: fieldsData.data,
-            ppt: pptData.data,
+            // ppt: pptData.data,
             recently: recentlyData,
             // tag: tagData.data,
-            tag: {},
             total: parseInt(fieldsData.total),
             lastPage: parseInt(fieldsData.lastPage),
             page: parseInt(fieldsData.page) || 1,
             // pixivTop: pixivTop
-            pixivTop: {}
+
         };
     },
     mounted() {
+
+
         setTimeout(() => {
+            this.getPpt()
             this.getPixiv()
             setTimeout(() => this.getTag(), 100);
-        }, 100);
+        }, 0);
 
     },
+    data() {
+        return {
+            tag: null,
+            pixivTop: null,
+            ppt:null
+        }
+    },
     methods: {
-        async getPixiv() {
-        this.pixivTop = JSON.parse(localStorage.getItem("pixivTop"))
-        if(this.pixivTop===null){
-            this.pixivTop = await this.$axios.$get("/theme/pixiv");
-            localStorage.setItem("pixivTop", JSON.stringify(this.pixivTop));
-        }
-        // this.pixivTop = await this.$axios.$get("/theme/pixiv");
-        },
-        async getTag() {
-        this.tag = JSON.parse(localStorage.getItem("tag"))
-        if(this.tag===null){
-            this.tag = (await this.$axios.$get("/tag", {
-                params: {
-                    query: {
-                        limit: 777,
-                        sort: "-contentsNum"
-                    }
-                }
-            }))['data'];
-            localStorage.setItem("tag", JSON.stringify(this.tag));
-        }
-
-            // this.tag = (await this.$axios.$get("/tag", {
+        async getPpt(){
+            // this.ppt= (await this.$axios.$get("ppt", {
             //     params: {
             //         query: {
-            //             limit: 777,
-            //             sort: "-contentsNum"
+            //             sort: "rank"
             //         }
             //     }
-            // }))['data'];
+            // })).data
+            console.log(this.ppt)
+            let data = JSON.parse(localStorage.getItem("ppt"))
+            if (data === null) {
+                console.log("if")
+                this.ppt= (await this.$axios.$get("ppt", {
+                    params: {
+                        query: {
+                            sort: "rank"
+                        }
+                    }
+                })).data
+                localStorage.setItem("ppt", JSON.stringify({
+                    data: this.ppt,
+                    date: (new Date()).getTime()
+                }));
+            } else {
+                console.log("else")
+
+                if (data.date + 22200000 > (new Date()).getTime()) {
+                    this.ppt=data.data
+                    console.log("使用缓存");
+                }else {
+                    console.log("更新缓存");
+                    this.ppt= (await this.$axios.$get("ppt", {
+                        params: {
+                            query: {
+                                sort: "rank"
+                            }
+                        }
+                    })).data
+                    localStorage.setItem("ppt", JSON.stringify({
+                        data: this.ppt,
+                        date: (new Date()).getTime()
+                    }));
+                }
+
+            }
+        },
+        async getPixiv() {
+            let data = JSON.parse(localStorage.getItem("pixivTop"))
+            if (data === null) {
+                this.pixivTop = await this.$axios.$get("/theme/pixiv");
+                localStorage.setItem("pixivTop", JSON.stringify({
+                    data: this.pixivTop,
+                    date: (new Date()).getTime()
+                }));
+            } else {
+
+                if (data.date + 22200000 > (new Date()).getTime()) {
+                    this.pixivTop=data.data
+                    // console.log("使用缓存");
+                }else {
+                    // console.log("更新缓存");
+                    this.pixivTop = await this.$axios.$get("/theme/pixiv");
+                    localStorage.setItem("pixivTop", JSON.stringify({
+                        data: this.pixivTop,
+                        date: (new Date()).getTime()
+                    }));
+                }
+
+            }
+        },
+        async getTag() {
+            let data = JSON.parse(localStorage.getItem("tag"))
+            if (data === null) {
+                this.tag = (await this.$axios.$get("/tag", {
+                    params: {
+                        query: {
+                            limit: 777,
+                            sort: "-contentsNum"
+                        }
+                    }
+                }))['data'];
+                localStorage.setItem("tag", JSON.stringify({
+                    data: this.tag,
+                    date: (new Date()).getTime()
+                }));
+            }
+            else {
+
+                if (data.date + 22200000 > (new Date()).getTime()) {
+                    this.tag=data.data
+                    // console.log("使用缓存");
+                }else {
+                    // console.log("更新缓存");
+                    this.tag = (await this.$axios.$get("/tag", {
+                        params: {
+                            query: {
+                                limit: 777,
+                                sort: "-contentsNum"
+                            }
+                        }
+                    }))['data'];
+                    localStorage.setItem("tag", JSON.stringify({
+                        data: this.tag,
+                        date: (new Date()).getTime()
+                    }));
+                }
+            }
         }
     },
 
