@@ -18,13 +18,12 @@ Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 ---
 Run
 
-* 导入myblog.js
-
 
 ```bash
 git clone https://github.com/Dwsy/blog.git
 ```
 
+* 导入myblog.js
 Server
 ```shell
 cd server

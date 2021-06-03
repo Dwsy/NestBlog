@@ -5,13 +5,13 @@
  Source Server Type    : MongoDB
  Source Server Version : 40404
  Source Host           : localhost:27017
- Source Schema         : myblog
+ Source Schema         : blog
 
  Target Server Type    : MongoDB
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 02/06/2021 18:32:56
+ Date: 03/06/2021 21:27:19
 */
 
 
@@ -258,7 +258,7 @@ db.getCollection("comments").insert([ {
 db.getCollection("contents").drop();
 db.createCollection("contents");
 db.getCollection("contents").createIndex({
-    text: NumberInt("1")
+    "$**": "text"
 }, {
     name: "内容",
     weights: {
