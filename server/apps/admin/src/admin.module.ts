@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {HttpModule, Module} from '@nestjs/common';
 // import { DbModule } from 'libs/db';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
@@ -16,6 +16,7 @@ import { ThemeModule } from './module/theme/theme.module';
 import { UpfileModule } from './module/upfile/upfile.module';
 
 import { CommonModule } from '@app/common';
+import {timeout} from "rxjs/operators";
 // import { APP_INTERCEPTOR } from "@nestjs/core";
 // import { MorganModule, MorganInterceptor } from "nest-morgan";
 // import { Log4jsModule } from '@nestx-log4js/core';
@@ -25,7 +26,13 @@ import { CommonModule } from '@app/common';
   imports: [
     // MorganModule,
     // Log4jsModule.forRoot(),
-
+// HttpModule.registerAsync({
+//   useFactory:
+// ),
+    // HttpModule.register({
+    //   timeout: 5000,
+    //   maxRedirects: 5,
+    // }),
     CommonModule,
     ClassificationModule,
     // UsersModule,

@@ -912,6 +912,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/multer@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.nlark.com/@types/multer/download/@types/multer-1.4.5.tgz#db0557562307e9adb6661a9500c334cd7ddd0cd9"
+  integrity sha1-2wVXViMH6a22ZhqVAMM0zX3dDNk=
+  dependencies:
+    "@types/express" "*"
+
 "@types/node@*", "@types/node@^14.14.6":
   version "14.14.31"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-14.14.31.tgz?cache=0&sync_timestamp=1613758420136&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-14.14.31.tgz#72286bd33d137aa0d152d47ec7c1762563d34055"

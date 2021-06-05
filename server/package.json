@@ -33,6 +33,7 @@
     "@typegoose/typegoose": "^7.4.8",
     "@types/mongoose": "^5.10.3",
     "@types/morgan": "^1.9.2",
+    "@types/multer": "^1.4.5",
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.9",
     "log4js": "^6.3.0",

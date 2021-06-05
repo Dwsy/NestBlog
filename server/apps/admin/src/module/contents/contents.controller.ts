@@ -74,11 +74,11 @@ export class ContentsController {
     }
 
     @Get('/test')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    async test(@Req() request: Request) {
-
-        return 123
+    // @UseGuards(AuthGuard('jwt'))
+    // @ApiBearerAuth()
+    async test(@Res() res:Response,@Req() req:Request) {
+        // res.
+        // return 123
         //
         // let Authorization = (new Object(request.headers)['authorization']).split(' ')[1]
         // let users: Array<object> = await this.userModel.find({}, '_id')

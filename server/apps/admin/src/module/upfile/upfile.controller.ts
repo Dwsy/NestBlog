@@ -12,4 +12,5 @@ import { UpFile } from 'libs/db/models/upfile.model';
 @ApiTags('上传文件')
 export class UpfileController {
     constructor(@InjectModel(UpFile) private readonly model) { }
+
 }

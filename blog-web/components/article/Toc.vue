@@ -14,7 +14,8 @@
                         (currentTitleHash == item.target ? 'active' : '')
                 "
                 @click="handleGoToScroll(item.target)"
-            > --><a :href="`${item.target}`" style="text-decoration:none">
+                style="text-decoration:none"
+            > --><a :href="`${item.target}`" >
                     {{ item.title }}
                 </a>
             </li>
