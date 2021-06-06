@@ -3,15 +3,15 @@
 
 Blog前端:`Nuxt.js + Vuetify.js`
 
-Server:`NestJS + MongoDB`
+Server:`Nest.js + MongoDB`
 
 Admin:`Vue.js + Vuetify.js`
 
  基本功能都有了，细节有待添加。（开发进度百分之30%大概）
 
-Blog在线预览地址：http://dwsy.link:5000/
+Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/
 
-Admin在线预览地址:http://dwsy.link:4000/    http://admindwsy.glitch.me/blog/ (未更新)
+Admin在线预览地址:http://dwsy.link:4000/
 
 Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 
