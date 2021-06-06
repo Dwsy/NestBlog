@@ -22,7 +22,7 @@
             </v-col>
             <v-col cols="2" xl="2" lg="2" md="2" sm="12" xs="12" >
                 <br />
-                <Toc :toc="toc" style="position:fixed"/>
+                <Toc :toc="toc" />
             </v-col>
         </v-row>
     </v-container>

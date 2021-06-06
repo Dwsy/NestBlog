@@ -26,9 +26,13 @@
                         />
                     </v-avatar>
                     <sub>{{ greetings }}</sub>
-                    <sub>{{ yy.hitokoto }}</sub
-                    ><br />
-                    <sub style="left: 120px;">--{{ yy.from }}</sub>
+                    <div @click="upyy">
+                        <sub>{{ yy.hitokoto }}</sub
+                        ><br />
+                        <sub style="left: 120px;">--{{ yy.from }}</sub>
+                    </div>
+
+                    
                 </v-col>
 
                 <template v-for="item in items">
@@ -176,8 +180,8 @@ export default {
 
         // let classificationData = JSON.parse(localStorage.getItem("classificationData"))
         // let themeData = JSON.parse(localStorage.getItem("themeData"));
-        console.log(this.classificationData);
-        console.log(this.themeData);
+        // console.log(this.classificationData);
+        // console.log(this.themeData);
         if (this.classificationData === null) {
             this.classificationData = await this.$axios.$get("classification");
         }
@@ -224,7 +228,7 @@ export default {
             this.greetings = "好耶！○( ＾皿＾)っ🐱‍🏍";
         }
         this.yy = await this.$axios.$get("https://v1.hitokoto.cn/");
-        console.log(this.yy);
+        // console.log(this.yy);
         if ((h >= 19 && h <= 24) || (h >= 0 && h <= 7)) {
             this.navigationsrc = this.themeDark.navigationImage;
             this.appbarsrc = this.themeDark.topImage;
@@ -323,6 +327,9 @@ export default {
         // this.handleLoadNoticeStatus();
     },
     methods: {
+        async upyy() {
+            this.yy = await this.$axios.$get("https://v1.hitokoto.cn/");
+        },
         handleChangeTheme() {
             this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
             if (this.islight === true) {
