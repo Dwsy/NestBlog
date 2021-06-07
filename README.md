@@ -9,9 +9,11 @@ Admin:`Vue.js + Vuetify.js`
 
  基本功能都有了，细节有待添加。（开发进度百分之40%大概）
 
-Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/ http://blog.dwsy.link/
+Blog在线预览地址：http://dwsy.link:5000/  
 
-Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/
+static: http://dwsy.link:5001/ http://blog.dwsy.link/ http://dwsy7.gitee.io/
+
+Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/ http://dwsy7.gitee.io/
 
 Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 
