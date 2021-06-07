@@ -9,7 +9,7 @@ Admin:`Vue.js + Vuetify.js`
 
  基本功能都有了，细节有待添加。（开发进度百分之40%大概）
 
-Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/ https://dwsy.github.io/
+Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/ http://github.dwsy.link/
 
 Admin在线预览地址:http://dwsy.link:4000/
 
