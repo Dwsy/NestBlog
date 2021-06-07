@@ -7,9 +7,9 @@ Server:`Nest.js + MongoDB`
 
 Admin:`Vue.js + Vuetify.js`
 
- 基本功能都有了，细节有待添加。（开发进度百分之30%大概）
+ 基本功能都有了，细节有待添加。（开发进度百分之40%大概）
 
-Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/
+Blog在线预览地址：http://dwsy.link:5000/  static: http://dwsy.link:5001/ https://dwsy.github.io/
 
 Admin在线预览地址:http://dwsy.link:4000/
 
@@ -61,8 +61,8 @@ VUE_APP_API=http://www.dwsy.link:3000/api 远程apiURL build时使用
 
 ```
 #### 填坑
-- [x] 搜索 2021-5-12 22:18:10
-- [x] 归档 2021-5-16 00:53:16
+- [x] 搜索   2021-5-12 22:18:10
+- [x] 归档   2021-5-16 00:53:16
 - [x] MD目录 2021-6-1 13:47:43
 - [ ] 骨骼:加载动画
 - [ ] 异常处理
