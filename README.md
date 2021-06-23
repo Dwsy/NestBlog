@@ -13,7 +13,7 @@ Blog在线预览地址：http://dwsy.link:5000/
 
 static: http://dwsy.link:5001/ http://blog.dwsy.link/ http://dwsy7.gitee.io/
 
-Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/ http://dwsy7.gitee.io/
+Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/ 
 
 Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 

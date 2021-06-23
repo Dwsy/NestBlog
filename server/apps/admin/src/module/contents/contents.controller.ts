@@ -1,26 +1,19 @@
-import {Body, Controller, Get, Param, Put, Res, UseGuards} from '@nestjs/common';
-import {Crud} from 'libs/nestjs-mongoose-crud';
-import {InjectModel} from 'nestjs-typegoose';
-import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
-import {Contents} from 'libs/db/models/contents.model';
-import {Fields} from "libs/db/models/fields.model";
-import {ReturnModelType} from "@typegoose/typegoose";
-import {Tag} from "libs/db/models/tag.model";
-import {Classification} from "libs/db/models/classification.model";
-import {Comments} from "libs/db/models/comments.model";
-
-// import {
-//     CrudRoute,
-//     CrudRouteForFind,
-//     CrudRouteForFindOne,
-//     CrudRouteWithDto
-// } from "nestjs-mongoose-crud/src/crud.interface";
-// import {ExtractJwt, Strategy, StrategyOptions} from "passport-jwt";
-import {AuthGuard, PassportStrategy} from "@nestjs/passport";
-import {Req} from "@nestjs/common/decorators/http/route-params.decorator";
-import {JwtService} from "@nestjs/jwt";
-import {User} from "libs/db/models/user.model";
+import { Body, Controller, Get, Param, Put, Res, UseGuards } from '@nestjs/common';
+import { Crud } from 'libs/nestjs-mongoose-crud';
+import { InjectModel } from 'nestjs-typegoose';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Contents } from 'libs/db/models/contents.model';
+import { Fields } from "libs/db/models/fields.model";
+import { ReturnModelType } from "@typegoose/typegoose";
+import { Tag } from "libs/db/models/tag.model";
+import { Classification } from "libs/db/models/classification.model";
+import { Comments } from "libs/db/models/comments.model";
+import { AuthGuard, PassportStrategy } from "@nestjs/passport";
+import { Req } from "@nestjs/common/decorators/http/route-params.decorator";
+import { JwtService } from "@nestjs/jwt";
+import { User } from "libs/db/models/user.model";
 import MarkdownUtils from 'libs/utils/markdown';
+import { CacheService } from '../../cache/cache.service';
 @Crud({
     model: Contents,
     routes: {
@@ -34,41 +27,46 @@ import MarkdownUtils from 'libs/utils/markdown';
 @ApiTags('文章主体')
 // extends PassportStrategy(Strategy)
 export class ContentsController {
-    constructor(@InjectModel(Contents) private readonly model, private jwtService: JwtService,
-                @InjectModel(User) private userModel: ReturnModelType<typeof User>,
-                @InjectModel(Fields) private readonly field: ReturnModelType<typeof Fields>,
-                @InjectModel(Tag) private readonly tag: ReturnModelType<typeof Tag>,
-                @InjectModel(Classification) private readonly classification: ReturnModelType<typeof Comments>,
+    constructor(
+        @InjectModel(Contents) private readonly model, private jwtService: JwtService,
+        @InjectModel(User) private userModel: ReturnModelType<typeof User>,
+        @InjectModel(Fields) private readonly field: ReturnModelType<typeof Fields>,
+        @InjectModel(Tag) private readonly tag: ReturnModelType<typeof Tag>,
+        @InjectModel(Classification) private readonly classification: ReturnModelType<typeof Comments>,
+        private readonly cache: CacheService,
     ) {
         // super({
         //     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         //     secretOrKey: process.env.SECRET
         // } as StrategyOptions);
     }
-    contentToArticleAttr (htmlStr: string,mdStr: string) {
+    contentToArticleAttr(htmlStr: string, mdStr: string) {
         console.log(htmlStr)
         console.log(mdStr)
         const { html: menusHtml, menus } = MarkdownUtils.markdownRender(htmlStr);
         const markText = MarkdownUtils.htmlStrToText(htmlStr);
         return {
-          menusHtml,
-          menus,
-          summary: mdStr.substr(0, 150).replace(/[\r\n]/g, '')
+            menusHtml,
+            menus,
+            summary: mdStr.substr(0, 150).replace(/[\r\n]/g, '')
         }
-      }
+    }
     @Put('/created_toc/:id')
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()
-    async createdToc(@Param('id') id: string){
-        const data = await this.model.findById(id,'text mdText')
+    async createdToc(@Param('id') id: string) {
+        const data = await this.model.findById(id, 'text mdText')
         // console.log("---------------------")
         // console.log(data)
         // console.log("---------------------")
-        const menusData = await this.contentToArticleAttr(data.text,data.mdText )
+        const menusData = await this.contentToArticleAttr(data.text, data.mdText)
         // console.log(menusData)
-        const ret = await this.model.findByIdAndUpdate(id,{$set: {
-                    menus:{menus:menusData.menus, summary:menusData.summary},
-                    text :menusData.menusHtml}})
+        const ret = await this.model.findByIdAndUpdate(id, {
+            $set: {
+                menus: { menus: menusData.menus, summary: menusData.summary },
+                text: menusData.menusHtml
+            }
+        })
         // console.log(ret)
         return ret.menus
     }
@@ -76,7 +74,13 @@ export class ContentsController {
     @Get('/test')
     // @UseGuards(AuthGuard('jwt'))
     // @ApiBearerAuth()
-    async test(@Res() res:Response,@Req() req:Request) {
+    async test(@Res() res: Response, @Req() req: Request) {
+
+        await this.cache.set('username', '李四');
+        // // await this.cache.
+        console.log(await this.cache.get('username'));
+
+
         // res.
         // return 123
         //
@@ -97,7 +101,7 @@ export class ContentsController {
 
     @Get('/:id')
     async get(@Param('id') id: string, @Req() request: Request) {
-        let ret = await this.model.findById(id,'-mdText')
+        let ret = await this.model.findById(id, '-mdText')
         let Authorization = (new Object(request.headers)['authorization'])?.split(' ')[1]
         if (Authorization !== undefined) {
             let users: Array<object> = await this.userModel.find({}, '_id')
@@ -110,7 +114,7 @@ export class ContentsController {
         if (ret.isPublish) {
             return ret
         } else {
-            return {key: 0, date: new Date()}
+            return { key: 0, date: new Date() }
         }
     }
 
@@ -119,16 +123,16 @@ export class ContentsController {
     async search(@Param('s') s: string) {
         let reg = new RegExp(s, 'i');
         let content = {
-            text: {$regex: reg}
+            text: { $regex: reg }
         };
         let Tag = {
-            name: {$regex: reg}
+            name: { $regex: reg }
         };
         let classification = {
-            name: {$regex: reg}
+            name: { $regex: reg }
         };
         let title = {
-            title: {$regex: reg}
+            title: { $regex: reg }
         };
         let S_content = await this.model.find(content, 'text');
         let S_tag = await this.tag.find(Tag)

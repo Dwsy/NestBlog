@@ -56,6 +56,9 @@ export default {
     },
     async asyncData({$axios, params}) {
         let id = params.id;
+        if(id==undefined){
+            id=1
+        }
         const fieldsData = await $axios.$get("fields", {
             params: {
                 query: {
@@ -67,11 +70,6 @@ export default {
             }
         });
         const recentlyData = await $axios.$get("comments/recently");
-
-
-
-
-
         return {
             fields: fieldsData.data,
             // ppt: pptData.data,
@@ -85,8 +83,6 @@ export default {
         };
     },
     mounted() {
-
-
         setTimeout(() => {
             this.getPpt()
             this.getPixiv()

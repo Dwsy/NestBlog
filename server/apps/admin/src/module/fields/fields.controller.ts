@@ -9,10 +9,11 @@ import {Classification} from "libs/db/models/classification.model";
 // import {Comments} from "libs/db/models/comments.model";
 import {Tag} from "libs/db/models/tag.model";
 import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
-import {AuthGuard} from '@nestjs/passport';
-import {Schema} from "mongoose";
+// import {AuthGuard} from '@nestjs/passport';
+// import {Schema} from "mongoose";
 import {JwtService} from "@nestjs/jwt";
 import {User} from "libs/db/models/user.model";
+import { CacheService } from '../../cache/cache.service';
 
 @Crud({
     model: Fields,
@@ -34,8 +35,10 @@ export class FieldsController {
                 @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
                 @InjectModel(User) private userModel: ReturnModelType<typeof User>,
                 private jwtService: JwtService,
+                private readonly cache: CacheService
     ) {
     }
+
 
     @Get('archives')
     async archives() {
@@ -82,14 +85,15 @@ export class FieldsController {
         let limit = 20
         let where = {}
         let sort = undefined
+
         if (query) {
-            query = JSON.parse(query)
-            populate = query.populate
-            page = query.page
-            skip = 0
-            limit = query.limit
-            where = query.where
-            sort = query.sort
+            query = JSON.parse(query);
+            populate = query.populate;
+            page = query.page;
+            skip = 0;
+            limit = query.limit;
+            where = query.where;
+            sort = query.sort;
         }
 
         if (skip < 1) {
@@ -164,10 +168,18 @@ export class FieldsController {
         //     return "<h4>无访问权限</h4>"
         // }
     }
-
-    @Get()
+    @Get('cache')
     @ApiOperation({summary: "Find all records", operationId: "list"})
-    async find(@Query('query') query) {
+    async cacheIndex(query) {
+        // return await this.find(query);
+        console.log("cache")
+        let ret = await this.cache.get('index')
+        console.log("ret"+ret)
+        if (ret !== null) {
+            return ret
+        }
+        console.log("==null")
+        //--
         let populate = undefined
         let page = 1
         let skip = 0
@@ -175,7 +187,65 @@ export class FieldsController {
         let where = {}
         let sort = undefined
         if (query) {
-            query = JSON.parse(query)
+
+            populate = query.populate
+            page = query.page
+            skip = 0
+            limit = query.limit
+            where = query.where
+            sort = query.sort
+        }
+
+        if (skip < 1) {
+            skip = (page - 1) * limit;
+        }
+        const data = await this.model
+            .find()
+            // .where(where)
+            .where({"isDraft": false})
+            .skip(skip)
+            .limit(limit)
+            .sort(sort)
+            .populate(populate);
+        const paginateKeys: PaginateKeys | false = {
+            data: 'data',
+            total: 'total',
+            lastPage: 'lastPage',
+            currentPage: 'page'
+        };
+
+        if (paginateKeys !== false) {
+            const total = await this.model.countDocuments(where);
+            ret= {
+                [paginateKeys.total]: total,
+                [paginateKeys.data]: data,
+                [paginateKeys.lastPage]: Math.ceil(total / limit),
+                [paginateKeys.currentPage]: page
+            };
+        }
+        //--
+        await this.cache.set('index',ret,5*60)
+        return this.cache.get('index');
+    }
+
+
+    @Get()
+    @ApiOperation({summary: "Find all records", operationId: "list"})
+    async find(@Query('query') query) {
+        query = JSON.parse(query)
+        let populate = undefined
+        let page = 1
+        let skip = 0
+        let limit = 20
+        let where = {}
+        let sort = undefined
+
+        console.log(typeof query.page)
+        if ('1'===query.page) {
+            console.log("c")
+            return  this.cacheIndex(query)
+        }
+        if (query) {
             populate = query.populate
             page = query.page
             skip = 0
