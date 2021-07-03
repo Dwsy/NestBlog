@@ -11,7 +11,7 @@ Admin:`Vue.js + Vuetify.js`
 
 Blog在线预览地址：http://dwsy.link:5000/  
 
-static: http://dwsy.link:5001/ http://blog.dwsy.link/ http://dwsy7.gitee.io/
+static: https://cf.dwsy.link/ (cloudflare自动化部署)
 
 Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/ http://dwsy7.gitee.io/
 
