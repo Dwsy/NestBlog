@@ -25,6 +25,10 @@ import {CommonModule} from '@app/common';
 import {RedisModule} from 'nestjs-redis'
 import {CacheModule} from './cache/cache.module';
 
+// SSL
+
+
+
 @Module({
     imports: [
         // MorganModule,
@@ -49,11 +53,11 @@ import {CacheModule} from './cache/cache.module';
         LinksModule,
         AuthModule,
         RedisModule.register({
-    host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT),
-    db: parseInt(process.env.REDIS_DB),
-    password: process.env.REDIS_PASSWORD,
-    keyPrefix: process.env.REDIS_PRIFIX,
+            host: process.env.REDIS_HOST,
+            port: parseInt(process.env.REDIS_PORT),
+            db: parseInt(process.env.REDIS_DB),
+            password: process.env.REDIS_PASSWORD,
+            keyPrefix: process.env.REDIS_PRIFIX,
         }),
         CacheModule
     ],

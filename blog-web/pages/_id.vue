@@ -69,7 +69,9 @@ export default {
                 }
             }
         });
-        const recentlyData = await $axios.$get("comments/recently");
+        // const recentlyData = await $axios.$get("comments/recently");
+        // 并载
+        const recentlyData = fieldsData.recently
         return {
             fields: fieldsData.data,
             // ppt: pptData.data,

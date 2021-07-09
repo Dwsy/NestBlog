@@ -6,7 +6,7 @@ import {Fields} from 'libs/db/models/fields.model';
 import {Contents} from "libs/db/models/contents.model";
 import {ReturnModelType} from "@typegoose/typegoose";
 import {Classification} from "libs/db/models/classification.model";
-// import {Comments} from "libs/db/models/comments.model";
+import {Comments} from "libs/db/models/comments.model";
 import {Tag} from "libs/db/models/tag.model";
 import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {AuthGuard} from '@nestjs/passport';
@@ -34,6 +34,7 @@ export class FieldsController {
                 @InjectModel(Classification) private readonly ClassificationModel: ReturnModelType<typeof Classification>,
                 @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
                 @InjectModel(User) private userModel: ReturnModelType<typeof User>,
+                @InjectModel(Comments) private CommentModel: ReturnModelType<typeof Comments>,
                 private jwtService: JwtService,
                 private readonly cache: CacheService
     ) {
@@ -170,15 +171,16 @@ export class FieldsController {
     }
     @Get('cache')
     @ApiOperation({summary: "Find all records", operationId: "list"})
-    async cacheIndex(query) {
+    async cacheIndex(query,recently) {
         // return await this.find(query);
-        console.log("cache")
+        // console.log("cache")
         let ret = await this.cache.get('index')
-        console.log("ret"+ret)
+        // console.log("ret"+ret)
         if (ret !== null) {
+
             return ret
         }
-        console.log("==null")
+        // console.log("==null")
         //--
         let populate = undefined
         let page = 1
@@ -220,7 +222,8 @@ export class FieldsController {
                 [paginateKeys.total]: total,
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
-                [paginateKeys.currentPage]: page
+                [paginateKeys.currentPage]: page,
+                recently:recently
             };
         }
         //--
@@ -233,6 +236,13 @@ export class FieldsController {
     @ApiOperation({summary: "Find all records", operationId: "list"})
     async find(@Query('query') query) {
         query = JSON.parse(query)
+        let recently = await this.cache.get('recently')
+        // console.log(recently)
+        if (recently === null) {
+            // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
+            recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})
+            await this.cache.set('recently',recently,10*60)
+        }
         let populate = undefined
         let page = 1
         let skip = 0
@@ -240,10 +250,10 @@ export class FieldsController {
         let where = {}
         let sort = undefined
 
-        console.log(typeof query.page)
+
         if ('1'===query.page) {
-            console.log("c")
-            return  this.cacheIndex(query)
+
+            return  this.cacheIndex(query,recently)
         }
         if (query) {
             populate = query.populate
@@ -278,11 +288,12 @@ export class FieldsController {
                 [paginateKeys.total]: total,
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
-                [paginateKeys.currentPage]: page
+                [paginateKeys.currentPage]: page,
+                recently:recently
             };
         }
 
-        return data;
+        // return data;
     };
 
 
