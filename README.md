@@ -11,7 +11,9 @@ Admin:`Vue.js + Vuetify.js`
 
 Blog在线预览地址：http://dwsy.link:5000/   static:https://cf.dwsy.link/ (cloudflare自动部署)
 
-Admin在线预览地址:http://dwsy.link:4000/   https://admin.dwsy.link/     (cloudflare自动部署)
+static: http://dwsy.link:5001/ http://blog.dwsy.link/ http://dwsy7.gitee.io/
+
+Admin在线预览地址:http://dwsy.link:4000/ http://blog.dwsy.link/admin/ 
 
 Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
 

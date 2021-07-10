@@ -36,137 +36,7 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-
-.content >>>  p {
-  margin: 0 0 20px 0;
-}
-.content >>>  h1 {
-  font-size: 30px;
-}
-.content >>>  h2 {
-  font-size: 24px;
-}
-.content >>>  h1:before,
-.content >>>  h2:before {
-  display: block;
-  content: "";
-  margin-top: 30px;
-}
-.content >>>  h1:after,
-.content >>>  h2:after {
-  display: block;
-  content: "";
-  margin-bottom: 10px;
-}
-.content >>>  h1,
-.content >>>  h2 {
-  background: linear-gradient(
-      to bottom,
-      transparent 60%,
-      rgba(189, 202, 219, 0.3) 0
-    )
-    no-repeat;
-  width: auto;
-  display: inline;
-}
-.content >>>  h3 {
-  font-size: 20px;
-}
-.content >>>  h4 {
-  font-size: 15px;
-}
-.content >>>  h1,
-.content >>>  h2,
-.content >>>  h3,
-.content >>>  h4,
-.content >>>  h5,
-.content >>>  h6 {
-  color: #666;
-  line-height: 1.4;
-  font-weight: 700;
-  margin: 30px 0 10px 0;
-}
-.content >>>  button {
-  max-width: 100%;
-  overflow-y: hidden;
-  overflow-x: scroll;
-}
-.content >>>  button a {
-  color: #fff !important;
-  outline: 0 !important;
-  border: none !important;
-}
-.content >>>  .table-responsive,
-.content >>>  blockquote,
-.content >>>  ol,
-.content >>>  pre,
-.content >>>  ul {
-  margin: 1.5em 0;
-}
-.entry-content blockquote:first-child,
-.entry-content h2:first-child,
-.entry-content h3:first-child,
-.entry-content h4:first-child,
-.entry-content ol:first-child,
-.entry-content p:first-child,
-.entry-content pre:first-child,
-.entry-content ul:first-child,
-.entry-content > h1:first-child {
-  margin-top: 0 !important;
-}
-blockquote ol:last-child,
-blockquote p:last-child,
-blockquote ul:last-child {
-  margin-bottom: 0 !important;
-}
-.content >>>  blockquote {
-  margin: 1.6em -31px;
-  padding: 13px 45px !important;
-  border-left: 3px solid #dde6e9 !important;
-  background-color: #f3f5f7;
-}
-@media (max-width: 767px) {
-  .content >>>  blockquote {
-    margin: 1.6em -17px;
-  }
-}
-#comments pre,
-.content >>>  pre {
-  padding: 0;
-  border-radius: 0;
-  overflow: hidden;
-  position: relative;
-}
-.content >>> pre {
-  padding: 0;
-}
-.content >>> pre code {
-  display: block;
-  overflow-x: auto;
-  position: relative;
-  margin: 0;
-  padding: 15px;
-}
-
-.content >>> a:hover,
-.wrapper-lg .entry-content a:hover {
-  color: rgb(0, 0, 0);
-  border-bottom-color: rgb(0, 0, 0);
-}
-.content >>> a {
-  display: inline;
-}
-.content >>> a,
-.content >>> a {
-  color: #000000;
-  border-bottom-color: #222;
-  border-bottom: 1px solid #999;
-  word-wrap: break-word;
-  word-break: break-all;
-}
-
 .content >>> table {
   width: 100%;
   overflow: auto;
@@ -289,5 +159,97 @@ ul li {
   font-size: 12px;
   font-family: Verdana;
   font-weight: bold;
+}
+</style>
+<style lang="scss">
+#__nuxt {
+  .content {
+    color: #4c4e4d;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  }
+
+  .content code,
+  .content pre code {
+    box-shadow: none;
+    color: inherit;
+  }
+  .content img{
+    display: block;
+    margin: 0 auto;
+  }
+  .content table tr{
+    background-color: initial;
+  }
+  .hljs {
+    background-color: initial;
+  }
+}
+
+.theme--dark {
+  .content {
+    background-color: initial;
+
+    code {
+      background-color: #000;
+    }
+
+    .highlight pre,
+    pre {
+      background-color: #282b33;
+
+      code {
+        background-color: initial;
+      }
+    }
+
+  }
+  .v-note-wrapper{
+    border-color: #000!important;
+  }
+
+  .v-note-wrapper .v-note-op {
+    border-bottom-color: #000;
+  }
+
+  .v-note-wrapper .v-note-op .v-left-item .op-icon:hover, .v-note-wrapper .v-note-op .v-right-item .op-icon:hover{
+    background-color: #000;
+    color: #ccc;
+  }
+
+  .content blockquote,
+  .content dl,
+  .content ol,
+  .content p,
+  .content pre,
+  .content table,
+  .content ul {
+    color: #ccc;
+  }
+
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6 {
+    color: #dddddd;
+    border-bottom-color: #282b33;
+  }
+
+  .content blockquote {
+    border-left-color: #282b33;
+  }
+
+  .auto-textarea-wrapper .auto-textarea-input {
+    color: #ccc;
+  }
+
+}
+
+
+@media (min-width: 960px) {
+  .content-container {
+    width: 980px !important;
+  }
 }
 </style>
