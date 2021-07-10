@@ -93,10 +93,17 @@
                 </template>
 
                 <template v-slot:[`item.title`]="{ item }">
-                    <a :href="'http://dwsy.link:5000/article/'+item.contentsId" target="_blank" style="text-decoration:none">{{item.title}}</a>
+                    <a
+                        :href="
+                            'http://dwsy.link:5000/article/' + item.contentsId
+                        "
+                        target="_blank"
+                        style="text-decoration:none"
+                        >{{ item.title }}</a
+                    >
                 </template>
                 <template v-slot:[`item.commentsNum`]="{ item }">
-                    {{ item.commentsNum}}
+                    {{ item.commentsNum }}
                 </template>
                 <template v-slot:[`item.createdAt`]="{ item }">
                     {{ item.createdAt | formatDate("yyyy年MM月dd日hh:mm") }}
@@ -205,11 +212,11 @@ export default {
 
         editItem(item) {
             // console.log(item);
-            let id=item._id;
-            let contentsId=item.contentsId;
+            let id = item._id;
+            let contentsId = item.contentsId;
 
             // this.$router.push({ name: '/write/edit/', params: { id: id }})
-            this.$router.push(`/edit/${id}`)
+            this.$router.push(`/edit/${id}`);
             // this.editedIndex = this.tags.indexOf(item);
             // this.editedItem = Object.assign({}, item);
             // this.dialog = true;
@@ -217,17 +224,24 @@ export default {
 
         async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("你确定要删除这篇文章吗？") &&
-                await this.$http.delContent(item.contentsId)
-                await this.$http.delField(item._id)
-                await this.$http.ClassificationContentsNum(item.classification._id,-1)
-                await this.$http.TagContentsNum(item.tag.map(val=>val._id),-1)
+            if (confirm("你确定要删除这篇文章吗？")) {
+                await this.$http.delContent(item.contentsId);
+                await this.$http.delField(item._id);
+                await this.$http.ClassificationContentsNum(
+                    item.classification._id,
+                    -1
+                );
+                await this.$http.TagContentsNum(
+                    item.tag.map(val => val._id),
+                    -1
+                );
                 console.log("删除成功");
                 this.tags.splice(index, 1);
-                // console.log(123);
-                // console.log();
+            }
 
-},
+            // console.log(123);
+            // console.log();
+        },
 
         close() {
             this.dialog = false;

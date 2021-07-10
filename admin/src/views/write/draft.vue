@@ -206,12 +206,20 @@ export default {
 
         async deleteItem(item) {
             const index = this.tags.indexOf(item);
-            confirm("你确定要删除这篇文章吗？") &&
-                await this.$http.delContent(item.contentsId)
-                await this.$http.delField(item._id)
+            if (confirm("你确定要删除这篇文章吗？")) {
+                await this.$http.delContent(item.contentsId);
+                await this.$http.delField(item._id);
+                await this.$http.ClassificationContentsNum(
+                    item.classification._id,
+                    -1
+                );
+                await this.$http.TagContentsNum(
+                    item.tag.map(val => val._id),
+                    -1
+                );
                 console.log("删除成功");
                 this.tags.splice(index, 1);
-
+            }
         },
 
         close() {
