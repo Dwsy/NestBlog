@@ -9,6 +9,8 @@ export class memCache{
      * @return: Promise<any>
      */
     set(key:string,value:any,seconds?:number){
+        console.log(`set key：${key}`);
+        
         if (!seconds) {
             cacheMap.set(key, {
                 value,
@@ -28,7 +30,7 @@ export class memCache{
      */
     get(key: string) {
         let data = cacheMap.get(key);
-        console.log('mem')
+        console.log(`get key：${key}`)
         if (data?.time > new Date().getTime()) {
             return data['value'];
         }
