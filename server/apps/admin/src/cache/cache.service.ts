@@ -20,6 +20,7 @@ export class CacheService {
          * @param seconds {Number} 过期时间
          * @return: Promise<any>
          */
+
     public async set(key: string, value: any, seconds?: number): Promise<any> {
         value = JSON.stringify(value);
         if (!this.client) {

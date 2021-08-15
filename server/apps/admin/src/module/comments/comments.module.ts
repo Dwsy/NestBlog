@@ -4,9 +4,11 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { CommentsController } from './comments.controller';
 
 // import { TypegooseModule } from 'nestjs-typegoose';
+import { CommentsService } from './comments.service';
 @Module({
 
   imports: [TypegooseModule.forFeature([Comments])],
-  controllers: [CommentsController]
+  controllers: [CommentsController],
+  providers: [CommentsService]
 })
 export class CommentsModule { }

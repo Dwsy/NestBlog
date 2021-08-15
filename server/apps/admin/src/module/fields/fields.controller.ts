@@ -13,7 +13,8 @@ import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {Schema} from "mongoose";
 import {JwtService} from "@nestjs/jwt";
 import {User} from "libs/db/models/user.model";
-import {CacheService} from '../../cache/cache.service';
+import memCache from  "libs/utils/memCache"
+// import {CacheService} from '../../cache/cache.service';
 
 @Crud({
     model: Fields,
@@ -36,10 +37,11 @@ export class FieldsController {
                 @InjectModel(User) private userModel: ReturnModelType<typeof User>,
                 @InjectModel(Comments) private CommentModel: ReturnModelType<typeof Comments>,
                 private jwtService: JwtService,
-                private readonly cache: CacheService
     ) {
-    }
 
+    }
+    // private readonly cache: CacheService
+    private cache= memCache;
 
     @Get('archives')
     async archives() {
@@ -175,7 +177,7 @@ export class FieldsController {
         // console.log("cache")
         let ret = await this.cache.get('index')
         // console.log("ret"+ret)
-        if (ret !== null) {
+        if (ret !== undefined) {
 
             return ret
         }
@@ -251,8 +253,8 @@ export class FieldsController {
         let sort = undefined
 
 
-        if ('1'===query.page) {
-
+        if ('1'===query.page||1===query.page) {
+            console.log('memcccc')
             return  this.cacheIndex(query,recently)
         }
         if (query) {

@@ -77,9 +77,9 @@ export class ContentsController {
     // @ApiBearerAuth()
     async test(@Res() res: Response, @Req() req: Request) {
 
-        await this.cache.set('username', '李四');
+        // await this.cache.set('username', '李四');
         // // await this.cache.
-        console.log(await this.cache.get('username'));
+        // console.log(await this.cache.get('username'));
 
 
         // res.
