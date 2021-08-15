@@ -1,7 +1,7 @@
-import {Body, Controller, Get, HttpCode, Ip, Param, Query, Req, UseGuards} from '@nestjs/common';
+import {Controller, Get, Ip, Param, Query, Req} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud/';
 import {InjectModel} from 'nestjs-typegoose';
-import {ApiBearerAuth, ApiOperation, ApiQuery, ApiTags} from '@nestjs/swagger';
+import {ApiOperation, ApiTags} from '@nestjs/swagger';
 import {Fields} from 'libs/db/models/fields.model';
 import {Contents} from "libs/db/models/contents.model";
 import {ReturnModelType} from "@typegoose/typegoose";
@@ -13,7 +13,7 @@ import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {Schema} from "mongoose";
 import {JwtService} from "@nestjs/jwt";
 import {User} from "libs/db/models/user.model";
-import { CacheService } from '../../cache/cache.service';
+import {CacheService} from '../../cache/cache.service';
 
 @Crud({
     model: Fields,
@@ -63,8 +63,7 @@ export class FieldsController {
 
     @Get('tag/:id')
     async getTag(@Param('id') id: string) {
-        let a = this.model.find().populate('tag', 'name');
-        return a;
+        return this.model.find().populate('tag', 'name');
     }
 
     @Get('all/:page')
@@ -116,7 +115,9 @@ export class FieldsController {
         };
 
 
-        if (paginateKeys !== false) {
+        if (paginateKeys === false) {
+            return data;
+        } else {
             const total = await this.model.countDocuments(where);
             return {
                 [paginateKeys.total]: total,
@@ -125,8 +126,6 @@ export class FieldsController {
                 [paginateKeys.currentPage]: page
             };
         }
-
-        return data;
     };
 
     @Get(':id')
@@ -216,14 +215,15 @@ export class FieldsController {
             currentPage: 'page'
         };
 
-        if (paginateKeys !== false) {
+        if (paginateKeys === false) {
+        } else {
             const total = await this.model.countDocuments(where);
-            ret= {
+            ret = {
                 [paginateKeys.total]: total,
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
                 [paginateKeys.currentPage]: page,
-                recently:recently
+                recently: recently
             };
         }
         //--
@@ -282,14 +282,15 @@ export class FieldsController {
             currentPage: 'page'
         };
 
-        if (paginateKeys !== false) {
+        if (paginateKeys === false) {
+        } else {
             const total = await this.model.countDocuments(where);
             return {
                 [paginateKeys.total]: total,
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
                 [paginateKeys.currentPage]: page,
-                recently:recently
+                recently: recently
             };
         }
 

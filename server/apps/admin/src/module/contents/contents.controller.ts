@@ -1,19 +1,20 @@
-import { Body, Controller, Get, Param, Put, Res, UseGuards } from '@nestjs/common';
-import { Crud } from 'libs/nestjs-mongoose-crud';
-import { InjectModel } from 'nestjs-typegoose';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Contents } from 'libs/db/models/contents.model';
-import { Fields } from "libs/db/models/fields.model";
-import { ReturnModelType } from "@typegoose/typegoose";
-import { Tag } from "libs/db/models/tag.model";
-import { Classification } from "libs/db/models/classification.model";
-import { Comments } from "libs/db/models/comments.model";
-import { AuthGuard, PassportStrategy } from "@nestjs/passport";
-import { Req } from "@nestjs/common/decorators/http/route-params.decorator";
-import { JwtService } from "@nestjs/jwt";
-import { User } from "libs/db/models/user.model";
+import {Controller, Get, Param, Put, Res, UseGuards} from '@nestjs/common';
+import {Crud} from 'libs/nestjs-mongoose-crud';
+import {InjectModel} from 'nestjs-typegoose';
+import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
+import {Contents} from 'libs/db/models/contents.model';
+import {Fields} from "libs/db/models/fields.model";
+import {ReturnModelType} from "@typegoose/typegoose";
+import {Tag} from "libs/db/models/tag.model";
+import {Classification} from "libs/db/models/classification.model";
+import {Comments} from "libs/db/models/comments.model";
+import {AuthGuard} from "@nestjs/passport";
+import {Req} from "@nestjs/common/decorators/http/route-params.decorator";
+import {JwtService} from "@nestjs/jwt";
+import {User} from "libs/db/models/user.model";
 import MarkdownUtils from 'libs/utils/markdown';
-import { CacheService } from '../../cache/cache.service';
+import {CacheService} from '../../cache/cache.service';
+
 @Crud({
     model: Contents,
     routes: {
@@ -118,7 +119,7 @@ export class ContentsController {
         }
     }
 
-    //搜索2021-5-10 21:31:23 挖坑
+    //搜索2021-5-10 21:31:23
     @Get('search/s/:s')
     async search(@Param('s') s: string) {
         let reg = new RegExp(s, 'i');
@@ -138,13 +139,12 @@ export class ContentsController {
         let S_tag = await this.tag.find(Tag)
         let S_classification = await this.classification.find(classification)
         let S_title = await this.field.find(title, 'title contentsId')
-        let all = {
+        return {
             S_title,
             S_content,
             S_tag,
             S_classification,
         }
-        return all
 
     }
 }

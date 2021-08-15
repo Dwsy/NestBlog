@@ -4,6 +4,7 @@
     </v-app>
 </template>
 <script>
+
 export default {
     updated() {
         const dom = document.getElementById('loading');

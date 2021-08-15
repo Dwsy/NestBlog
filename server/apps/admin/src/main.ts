@@ -14,14 +14,14 @@ import {
   NestExpressApplication,
   ExpressAdapter,
 } from '@nestjs/platform-express';
-
-const httpsOptions = {
-  key: fs.readFileSync('/root/SSL/key'),
-  cert: fs.readFileSync('/root/SSL/pem'),
-  // key: fs.readFileSync('E:\\code\\my\\blog\\server\\SSL\\key'),
-  // cert: fs.readFileSync('E:\\code\\my\\blog\\server\\SSL\\pem'),
-};
-
+//https
+// const httpsOptions = {
+//   key: fs.readFileSync('/root/SSL/key'),
+//   cert: fs.readFileSync('/root/SSL/pem'),
+//   // key: fs.readFileSync('E:\\code\\my\\blog\\server\\SSL\\key'),
+//   // cert: fs.readFileSync('E:\\code\\my\\blog\\server\\SSL\\pem'),
+// };
+//https
 async function bootstrap() {
   const server = express();
   const app = await NestFactory.create(
@@ -48,7 +48,9 @@ async function bootstrap() {
   await app.init();
   const PORT = process.env.ADMIN_PORT || 2999
   http.createServer(server).listen(PORT);
-  https.createServer(httpsOptions, server).listen(3030);
+  //https
+  // https.createServer(httpsOptions, server).listen(3030);
+  //https
   // const PORT = process.env.ADMIN_PORT || 2999
   // await app.listen(PORT);
   // console.log(`http://localhost:${PORT}/api-docs`)

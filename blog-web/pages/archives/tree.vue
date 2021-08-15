@@ -77,6 +77,7 @@ export default {
             // console.log(this.mmResort(dataArray));
             // console.log("-----------------------");
             this.dataArray = this.Resort(dataArray);
+            
         },
         Resort(data) {
             // 定义空数组，用于存储新组装的数据
@@ -116,6 +117,7 @@ export default {
             });
             // console.log(retArray);
             // console.log("1111111111111111111");
+            
             return retArray;
         },
         mmResort(data) {
