@@ -5,19 +5,20 @@ import { ApiTags } from '@nestjs/swagger';
 import { PptOptions } from 'libs/db/models/ppt.model';
 import { PptService } from './ppt.service';
 
-
 @Crud({
-
-    model:PptOptions,
+    model: PptOptions,
     // routes: {
     //     // create: false,
     //     update: false,
     //     delete: false
     // }
-
 })
 @Controller('api/ppt')
 @ApiTags('博客首页轮播图设置')
 export class PptController {
-    constructor(@InjectModel(PptOptions) private readonly model,private readonly pptService: PptService) { }
+    constructor(
+        @InjectModel(PptOptions) private readonly model,
+        private readonly pptService: PptService,
+    ) {
+    }
 }

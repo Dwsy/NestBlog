@@ -4,6 +4,6 @@ import { LinksService } from './links.service';
 
 @Module({
     controllers: [LinksController],
-    providers: [LinksService]
+    providers: [LinksService],
 })
 export class LinksModule {}

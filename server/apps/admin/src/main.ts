@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AdminModule } from './admin.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-
 import * as express from 'express';
 import { logger } from './middleware/logger.middleware';
 
@@ -24,10 +23,7 @@ import {
 //https
 async function bootstrap() {
   const server = express();
-  const app = await NestFactory.create(
-    AdminModule,
-    new ExpressAdapter(server),
-  );
+  const app = await NestFactory.create(AdminModule, new ExpressAdapter(server));
 
   // const app = await NestFactory.create(AdminModule);
   app.enableCors();
@@ -46,7 +42,7 @@ async function bootstrap() {
   app.use(logger);
   // app.use(logger);
   await app.init();
-  const PORT = process.env.ADMIN_PORT || 2999
+  const PORT = process.env.ADMIN_PORT || 2999;
   http.createServer(server).listen(PORT);
   //https
   // https.createServer(httpsOptions, server).listen(3030);
@@ -54,6 +50,5 @@ async function bootstrap() {
   // const PORT = process.env.ADMIN_PORT || 2999
   // await app.listen(PORT);
   // console.log(`http://localhost:${PORT}/api-docs`)
-
 }
 bootstrap();

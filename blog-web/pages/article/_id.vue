@@ -82,10 +82,11 @@ export default {
             const comments = await this.$axios.$get(`comments/${this.id}`);
             // const comments = await this.$axios.$get(`comments/603e751045d89d46e830734a`);
             console.log(comments);
-            const ipData = await this.$axios.$get(`fields/ip`);
-            console.log(ipData);
+            const userData = await this.$axios.$get(`fields/user`);
             this.comments = comments;
-            this.IP = ipData;
+            this.IP = userData.ip;
+            this.UA = userData.ua;
+
         }
     },
     components: {

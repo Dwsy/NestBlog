@@ -47,44 +47,52 @@ Log4js.addLayout('Awesome-nest', (logConfig: any) => {
         return;
       }
 
-      if (typeof value !== 'string') {
-        value = Util.inspect(value, false, 3, true);
-      }
+        if (typeof value !== 'string') {
+            value = Util.inspect(value, false, 3, true);
+        }
 
-      messageList.push(value);
+        messageList.push(value);
     });
 
-    // 日志组成部分
-    const messageOutput: string = messageList.join(' ');
-    const positionOutput: string = position ? ` [${position}]` : '';
-    const typeOutput: string = `[${logConfig.type}] ${logEvent.pid.toString()}   - `;
-    const dateOutput: string = `${Moment(logEvent.startTime).format('YYYY-MM-DD HH:mm:ss')}`;
-    const moduleOutput: string = moduleName ? `[${moduleName}] ` : '[LoggerService] ';
-    let levelOutput: string = `[${logEvent.level}] ${messageOutput}`;
+      // 日志组成部分
+      const messageOutput: string = messageList.join(' ');
+      const positionOutput: string = position ? ` [${position}]` : '';
+      const typeOutput: string = `[${
+          logConfig.type
+      }] ${logEvent.pid.toString()}   - `;
+      const dateOutput: string = `${Moment(logEvent.startTime).format(
+          'YYYY-MM-DD HH:mm:ss',
+      )}`;
+      const moduleOutput: string = moduleName
+          ? `[${moduleName}] `
+          : '[LoggerService] ';
+      let levelOutput: string = `[${logEvent.level}] ${messageOutput}`;
 
-    // 根据日志级别，用不同颜色区分
-    switch (logEvent.level.toString()) {
-      case LoggerLevel.DEBUG:
-        levelOutput = Chalk.green(levelOutput);
-        break;
-      case LoggerLevel.INFO:
-        levelOutput = Chalk.cyan(levelOutput);
-        break;
+      // 根据日志级别，用不同颜色区分
+      switch (logEvent.level.toString()) {
+          case LoggerLevel.DEBUG:
+              levelOutput = Chalk.green(levelOutput);
+              break;
+          case LoggerLevel.INFO:
+              levelOutput = Chalk.cyan(levelOutput);
+              break;
       case LoggerLevel.WARN:
         levelOutput = Chalk.yellow(levelOutput);
         break;
       case LoggerLevel.ERROR:
-        levelOutput = Chalk.red(levelOutput);
-        break;
-      case LoggerLevel.FATAL:
-        levelOutput = Chalk.hex('#DD4C35')(levelOutput);
-        break;
-      default:
-        levelOutput = Chalk.grey(levelOutput);
-        break;
-    }
+          levelOutput = Chalk.red(levelOutput);
+          break;
+          case LoggerLevel.FATAL:
+              levelOutput = Chalk.hex('#DD4C35')(levelOutput);
+              break;
+          default:
+              levelOutput = Chalk.grey(levelOutput);
+              break;
+      }
 
-    return `${Chalk.green(typeOutput)}${dateOutput}  ${Chalk.yellow(moduleOutput)}${levelOutput}${positionOutput}`;
+      return `${Chalk.green(typeOutput)}${dateOutput}  ${Chalk.yellow(
+          moduleOutput,
+      )}${levelOutput}${positionOutput}`;
   };
 });
 

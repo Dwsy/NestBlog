@@ -3,8 +3,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { InjectModel } from 'nestjs-typegoose';
 import { User } from 'libs/db/models/user.model';
 import { ReturnModelType } from '@typegoose/typegoose';
-import { BadRequestException } from '@nestjs/common';
-import {compareSync} from 'bcryptjs'
+import {BadRequestException} from '@nestjs/common';
+import {compareSync} from 'bcryptjs';
 
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(
@@ -22,7 +22,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
       throw new BadRequestException('用户名不正确');
     }
     if (!compareSync(password, user.password)) {
-      throw new BadRequestException('密码不正确')
+        throw new BadRequestException('密码不正确');
     }
     return user;
   }

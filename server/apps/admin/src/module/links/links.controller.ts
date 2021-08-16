@@ -7,10 +7,13 @@ import { LinksService } from './links.service';
 
 @Crud({
     model: Links,
-
 })
 @Controller('api/links')
 @ApiTags('友情链接')
 export class LinksController {
-    constructor(@InjectModel(Links) private readonly model,private readonly linksService: LinksService) { }
+    constructor(
+        @InjectModel(Links) private readonly model,
+        private readonly linksService: LinksService,
+    ) {
+    }
 }

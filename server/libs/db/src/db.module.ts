@@ -11,19 +11,21 @@ import { PptOptions } from './models/ppt.model';
 import { Comments } from './models/comments.model';
 import { Classification } from './models/classification.model';
 import { Theme } from './models/theme.model';
-import { Links } from './models/links.model';
+import {Links} from './models/links.model';
+import {Browsedata} from './models/browsedata.model';
 
 const models = TypegooseModule.forFeature([
-  Classification,
-  Comments,
-  Contents,
-  Fields,
-  PptOptions,
-  Tag,
-  UpFile,
-  User,
-  Theme,
-  Links
+    Classification,
+    Comments,
+    Contents,
+    Fields,
+    PptOptions,
+    Tag,
+    UpFile,
+    User,
+    Theme,
+    Links,
+    Browsedata,
 ]);
 
 @Global()

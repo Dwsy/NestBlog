@@ -5,18 +5,17 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { User } from 'libs/db/models/user.model';
 
-
 @Crud({
-
     model: User,
     routes: {
         create: false,
         update: false,
-        delete: false
-    }
+        delete: false,
+    },
 })
 @Controller('users')
 @ApiTags('用户')
 export class UsersController {
-    constructor(@InjectModel(User) private readonly model) { }
+    constructor(@InjectModel(User) private readonly model) {
+    }
 }

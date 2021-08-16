@@ -19,17 +19,19 @@ export class Tag {
   @prop()
   description: string;
 
-  @ApiProperty({ description: '当前标签文章数目', example: '文章数' })
-  @prop()
-  contentsNum: number;
+    @ApiProperty({description: '当前标签文章数目', example: '文章数'})
+    @prop()
+    contentsNum: number;
 
-  // @ApiProperty({description:'标签排序',example:''})
-  @ApiProperty({ description: '标签权重', example: '整数型，越高越靠前' })
-  @prop()
-  order: number;
+    // @ApiProperty({description:'标签排序',example:''})
+    @ApiProperty({description: '标签权重', example: '整数型，越高越靠前'})
+    @prop()
+    order: number;
 
-  @ApiProperty({ description: '标签icon', example: 'https://material.iconhelper.cn/' })
-  @prop()
-  icon: String;
-
+    @ApiProperty({
+        description: '标签icon',
+        example: 'https://material.iconhelper.cn/',
+    })
+    @prop()
+    icon: String;
 }

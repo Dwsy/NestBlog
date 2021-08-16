@@ -5,42 +5,42 @@ const md = require('markdown-it')({
 })
   .use(require('markdown-it-highlightjs')) // 代码高亮 目前太大了
   .use(require('./markdown-it-sanitizer'), {
-    extraTags: ['details', 'summary']
+      extraTags: ['details', 'summary'],
   });
 
 import * as cheerio from 'cheerio';
 
 export class MarkdownUtils {
-
-  markdown (content: string) {
-    const resRender = md.render(content);
-    return resRender;
-  }
-  markdownRender (htmlStr: string) {
-    const $ = cheerio.load(htmlStr);
-    const hns = $('h1,h2,h3,h4,h5,h6').toArray();
-
-    const menus = [];
-    hns.forEach((item, i) => {
-      var tag = item.tagName.toLowerCase();
-      $(item).attr('id', 't' + i);
-      menus.push({
-        type: tag,
-        target: '#t' + i,
-        title: $(item).text(),
-      });
-    });
-    return {
-      html: $.html(),
-      menus
+    markdown(content: string) {
+        const resRender = md.render(content);
+        return resRender;
     }
-  }
-  htmlStrToText (htmlStr: string) {
-    const $ = cheerio.load(htmlStr);
 
-    return $($.html()).text();
-  }
+    markdownRender(htmlStr: string) {
+        const $ = cheerio.load(htmlStr);
+        const hns = $('h1,h2,h3,h4,h5,h6').toArray();
 
+        const menus = [];
+        hns.forEach((item, i) => {
+            var tag = item.tagName.toLowerCase();
+            $(item).attr('id', 't' + i);
+            menus.push({
+                type: tag,
+                target: '#t' + i,
+                title: $(item).text(),
+            });
+        });
+        return {
+            html: $.html(),
+            menus,
+        };
+    }
+
+    htmlStrToText(htmlStr: string) {
+        const $ = cheerio.load(htmlStr);
+
+        return $($.html()).text();
+    }
 }
 
 export default new MarkdownUtils();

@@ -7,11 +7,13 @@ import { UpfileService } from './upfile.service';
 
 @Crud({
     model: UpFile,
-
 })
 @Controller('api/upfile')
 @ApiTags('上传文件')
 export class UpfileController {
-    constructor(@InjectModel(UpFile) private readonly model,private readonly upfileService: UpfileService) { }
-
+    constructor(
+        @InjectModel(UpFile) private readonly model,
+        private readonly upfileService: UpfileService,
+    ) {
+    }
 }

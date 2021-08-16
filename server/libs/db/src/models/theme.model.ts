@@ -1,7 +1,7 @@
 import {prop, modelOptions} from '@typegoose/typegoose';
 import {ApiProperty} from '@nestjs/swagger';
-import {Types, ObjectId, Schema as MongooseSchema} from "mongoose";
-import {Classification} from "libs/db/models/classification.model";
+import {Types, ObjectId, Schema as MongooseSchema} from 'mongoose';
+import {Classification} from 'libs/db/models/classification.model';
 
 @modelOptions({
     schemaOptions: {
@@ -12,7 +12,7 @@ import {Classification} from "libs/db/models/classification.model";
 export class Theme {
     @ApiProperty({description: '主题名称', example: 'light/dark'})
     @prop()
-    themeName: "light" | "dark";
+    themeName: 'light' | 'dark';
     @ApiProperty({description: '导航栏图片', example: ''})
     @prop()
     navigationImage: string;
@@ -44,4 +44,3 @@ export class Theme {
     @prop()
     warning: string;
 }
-

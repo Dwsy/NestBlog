@@ -1,20 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { Controller, Get, Ip, Param, Query, Req } from '@nestjs/common';
-import { Crud } from 'libs/nestjs-mongoose-crud/';
-import { InjectModel } from 'nestjs-typegoose';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Fields } from 'libs/db/models/fields.model';
-import { Contents } from "libs/db/models/contents.model";
-import { ReturnModelType } from "@typegoose/typegoose";
-import { Classification } from "libs/db/models/classification.model";
-import { Comments } from "libs/db/models/comments.model";
-import { Tag } from "libs/db/models/tag.model";
-import { PaginateKeys } from 'libs/nestjs-mongoose-crud/src/crud.interface';
+import {Injectable} from '@nestjs/common';
+import {Controller, Get, Ip, Param, Query, Req} from '@nestjs/common';
+import {Crud} from 'libs/nestjs-mongoose-crud/';
+import {InjectModel} from 'nestjs-typegoose';
+import {ApiOperation, ApiTags} from '@nestjs/swagger';
+import {Fields} from 'libs/db/models/fields.model';
+import {Contents} from 'libs/db/models/contents.model';
+import {ReturnModelType} from '@typegoose/typegoose';
+import {Classification} from 'libs/db/models/classification.model';
+import {Comments} from 'libs/db/models/comments.model';
+import {Tag} from 'libs/db/models/tag.model';
+import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {AuthGuard} from '@nestjs/passport';
 // import {Schema} from "mongoose";
-import { JwtService } from "@nestjs/jwt";
-import { User } from "libs/db/models/user.model";
-import memCache from "libs/utils/memCache"
+import {JwtService} from '@nestjs/jwt';
+import {User} from 'libs/db/models/user.model';
+import memCache from 'libs/utils/memCache';
 
 // import {CacheService} from '../../cache/cache.service';
 
@@ -22,21 +22,27 @@ import memCache from "libs/utils/memCache"
 export class FieldsService {
     private cache = memCache;
 
-    constructor(@InjectModel(Fields) private readonly model: ReturnModelType<typeof Fields>,
-        @InjectModel(Contents) private readonly ContentsModel: ReturnModelType<typeof Contents>,
-        @InjectModel(Classification) private readonly ClassificationModel: ReturnModelType<typeof Classification>,
+    constructor(
+        @InjectModel(Fields) private readonly model: ReturnModelType<typeof Fields>,
+        @InjectModel(Contents)
+        private readonly ContentsModel: ReturnModelType<typeof Contents>,
+        @InjectModel(Classification)
+        private readonly ClassificationModel: ReturnModelType<typeof Classification>,
         @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
         @InjectModel(User) private userModel: ReturnModelType<typeof User>,
-        @InjectModel(Comments) private CommentModel: ReturnModelType<typeof Comments>,
+        @InjectModel(Comments)
+        private CommentModel: ReturnModelType<typeof Comments>,
         private jwtService: JwtService,
-    ) { }
+    ) {
+    }
+
     async getDraftList(query: any) {
-        let populate = undefined
-        let page = 1
-        let skip = 0
-        let limit = 20
-        let where = {}
-        let sort = undefined
+        let populate = undefined;
+        let page = 1;
+        let skip = 0;
+        let limit = 20;
+        let where = {};
+        let sort = undefined;
         if (query) {
             query = JSON.parse(query);
             populate = query.populate;
@@ -53,7 +59,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({ "isDraft": true })
+            .where({isDraft: true})
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -62,9 +68,8 @@ export class FieldsService {
             data: 'data',
             total: 'total',
             lastPage: 'lastPage',
-            currentPage: 'page'
+            currentPage: 'page',
         };
-
 
         if (paginateKeys === false) {
             return data;
@@ -74,25 +79,27 @@ export class FieldsService {
                 [paginateKeys.total]: total,
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
-                [paginateKeys.currentPage]: page
+                [paginateKeys.currentPage]: page,
             };
         }
-
     }
+
     async findOneById(id: string, request: Request, @Query('query') query) {
-        let populate = undefined
+        let populate = undefined;
         if (query) {
-            query = JSON.parse(query)
-            populate = query.populate
+            query = JSON.parse(query);
+            populate = query.populate;
         }
         // console.log(populate);
-        let ret = await this.model.findById(id).populate(populate)
-        let Authorization = (new Object(request.headers)['authorization'])?.split(' ')[1]
+        let ret = await this.model.findById(id).populate(populate);
+        let Authorization = new Object(request.headers)['authorization']?.split(
+            ' ',
+        )[1];
         if (Authorization !== undefined) {
-            let users: Array<object> = await this.userModel.find({}, '_id')
+            let users: Array<object> = await this.userModel.find({}, '_id');
             for (let i = 0; i < users.length; i++) {
                 if (Authorization === this.jwtService.sign(String(users[i]['_id']))) {
-                    return ret
+                    return ret;
                 }
             }
         }
@@ -100,36 +107,35 @@ export class FieldsService {
             return ret;
         } else {
             return {
-                'isDraft': true,
-                'date': new Date()
-            }
+                isDraft: true,
+                date: new Date(),
+            };
         }
     }
+
     async cacheIndex(query, recently) {
         // return await this.find(query);
         // console.log("cache")
-        let ret = await this.cache.get('index')
+        let ret = await this.cache.get('index');
         // console.log("ret"+ret)
         if (ret !== undefined) {
-
-            return ret
+            return ret;
         }
         // console.log("==null")
         //--
-        let populate = undefined
-        let page = 1
-        let skip = 0
-        let limit = 20
-        let where = {}
-        let sort = undefined
+        let populate = undefined;
+        let page = 1;
+        let skip = 0;
+        let limit = 20;
+        let where = {};
+        let sort = undefined;
         if (query) {
-
-            populate = query.populate
-            page = query.page
-            skip = 0
-            limit = query.limit
-            where = query.where
-            sort = query.sort
+            populate = query.populate;
+            page = query.page;
+            skip = 0;
+            limit = query.limit;
+            where = query.where;
+            sort = query.sort;
         }
 
         if (skip < 1) {
@@ -138,7 +144,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({ "isDraft": false })
+            .where({isDraft: false})
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -147,7 +153,7 @@ export class FieldsService {
             data: 'data',
             total: 'total',
             lastPage: 'lastPage',
-            currentPage: 'page'
+            currentPage: 'page',
         };
 
         if (paginateKeys === false) {
@@ -158,41 +164,43 @@ export class FieldsService {
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
                 [paginateKeys.currentPage]: page,
-                recently: recently
+                recently: recently,
             };
         }
         //--
-        await this.cache.set('index', ret, 5 * 60)
+        await this.cache.set('index', ret, 5 * 60);
         return this.cache.get('index');
     }
-    async findByQuery(query) { 
-        query = JSON.parse(query)
-        let recently = await this.cache.get('recently')
+
+    async findByQuery(query) {
+        query = JSON.parse(query);
+        let recently = await this.cache.get('recently');
         // console.log(recently)
         if (recently === undefined) {
             // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
-            recently = await this.CommentModel.find({}, '-email').limit(5).sort({ '_id': -1 })
-            await this.cache.set('recently', recently, 10 * 60)
+            recently = await this.CommentModel.find({}, '-email')
+                .limit(5)
+                .sort({_id: -1});
+            await this.cache.set('recently', recently, 10 * 60);
         }
-        let populate = undefined
-        let page = 1
-        let skip = 0
-        let limit = 20
-        let where = {}
-        let sort = undefined
-
+        let populate = undefined;
+        let page = 1;
+        let skip = 0;
+        let limit = 20;
+        let where = {};
+        let sort = undefined;
 
         if ('1' === query.page || 1 === query.page) {
-            console.log('memcccc')
-            return this.cacheIndex(query, recently)
+            console.log('memcccc');
+            return this.cacheIndex(query, recently);
         }
         if (query) {
-            populate = query.populate
-            page = query.page
-            skip = 0
-            limit = query.limit
-            where = query.where
-            sort = query.sort
+            populate = query.populate;
+            page = query.page;
+            skip = 0;
+            limit = query.limit;
+            where = query.where;
+            sort = query.sort;
         }
 
         if (skip < 1) {
@@ -201,7 +209,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({ "isDraft": false })
+            .where({isDraft: false})
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -210,7 +218,7 @@ export class FieldsService {
             data: 'data',
             total: 'total',
             lastPage: 'lastPage',
-            currentPage: 'page'
+            currentPage: 'page',
         };
 
         if (paginateKeys === false) {
@@ -221,7 +229,7 @@ export class FieldsService {
                 [paginateKeys.data]: data,
                 [paginateKeys.lastPage]: Math.ceil(total / limit),
                 [paginateKeys.currentPage]: page,
-                recently: recently
+                recently: recently,
             };
         }
 

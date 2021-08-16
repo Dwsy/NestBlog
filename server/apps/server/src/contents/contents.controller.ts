@@ -7,13 +7,13 @@ import { Contents } from 'libs/db/models/contents.model';
 @Crud({
     model: Contents,
     routes: {
-
         update: false,
-        delete: false
-    }
+        delete: false,
+    },
 })
 @Controller('contents')
 @ApiTags('文章主体')
 export class ContentsController {
-    constructor(@InjectModel(Contents) private readonly model) { }
+    constructor(@InjectModel(Contents) private readonly model) {
+    }
 }

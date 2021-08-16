@@ -22,56 +22,50 @@ import {CommonModule} from '@app/common';
 // import { Log4jsModule } from '@nestx-log4js/core';
 // import {MarkdownUtils} from 'libs/utils/markdown';
 
-import {RedisModule} from 'nestjs-redis'
-import {CacheModule} from './cache/cache.module';
-
-
+// import { RedisModule } from 'nestjs-redis';
+// import { CacheModule } from './cache/cache.module';
 
 // SSL
 
-
-
 @Module({
-    imports: [
-        // MorganModule,
-        // Log4jsModule.forRoot(),
-        // HttpModule.registerAsync({
-        //   useFactory:
-        // ),
-        // HttpModule.register({
-        //   timeout: 5000,
-        //   maxRedirects: 5,
-        // }),
-        CommonModule,
-        ClassificationModule,
-        // UsersModule,
-        CommentsModule,
-        ContentsModule,
-        FieldsModule,
-        PptModule,
-        TagModule,
-        UpfileModule,
-        ThemeModule,
-        LinksModule,
-        AuthModule,
-        RedisModule.register({
-            host: process.env.REDIS_HOST,
-            port: parseInt(process.env.REDIS_PORT),
-            db: parseInt(process.env.REDIS_DB),
-            password: process.env.REDIS_PASSWORD,
-            keyPrefix: process.env.REDIS_PRIFIX,
-        }),
-        CacheModule
-    ],
-    controllers: [AdminController],
-    providers: [AdminService],
+  imports: [
+    // MorganModule,
+    // Log4jsModule.forRoot(),
+    // HttpModule.registerAsync({
+    //   useFactory:
+    // ),
+    // HttpModule.register({
+    //   timeout: 5000,
+    //   maxRedirects: 5,
+    // }),
+    CommonModule,
+    ClassificationModule,
+    // UsersModule,
+    CommentsModule,
+    ContentsModule,
+    FieldsModule,
+    PptModule,
+    TagModule,
+    UpfileModule,
+    ThemeModule,
+    LinksModule,
+    AuthModule,
 
 
-    // providers: [AdminService, {
-    //             provide: APP_INTERCEPTOR,
-    //             useClass: MorganInterceptor("combined"),}],
+  ],
+  controllers: [AdminController],
+  providers: [AdminService],
+  // CacheModule,
+//    RedisModule.register({
+//       host: process.env.REDIS_HOST,
+//       port: parseInt(process.env.REDIS_PORT),
+//       db: parseInt(process.env.REDIS_DB),
+//       password: process.env.REDIS_PASSWORD,
+//       keyPrefix: process.env.REDIS_PRIFIX,
+//     }),
+  // providers: [AdminService, {
+  //             provide: APP_INTERCEPTOR,
+  //             useClass: MorganInterceptor("combined"),}],
 })
 export class AdminModule {
 }
-
-

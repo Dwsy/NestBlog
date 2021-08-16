@@ -3,7 +3,7 @@ import { ClassificationController } from './classification.controller';
 import { ClassificationService } from './classification.service';
 
 @Module({
-  controllers: [ClassificationController],
-  providers: [ClassificationService]
+    controllers: [ClassificationController],
+    providers: [ClassificationService],
 })
 export class ClassificationModule {}

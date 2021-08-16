@@ -12,19 +12,21 @@ export class Classification {
   @prop()
   name: string;
 
-  @ApiProperty({ description: '分类描述', example: 'nest.js学习笔记' })
-  @prop()
-  description: string;
+    @ApiProperty({description: '分类描述', example: 'nest.js学习笔记'})
+    @prop()
+    description: string;
 
-  @ApiProperty({ description: '当前分类文章数目', example: '文章数' })
-  @prop()
-  contentsNum: number;
+    @ApiProperty({description: '当前分类文章数目', example: '文章数'})
+    @prop()
+    contentsNum: number;
 
-  @ApiProperty({ description: '分类icon', example: 'https://material.iconhelper.cn/' })
-  @prop()
-  icon: string;
-  @ApiProperty({ description: '分类排序', example: '' })
-  @prop()
-  rank: number;
+    @ApiProperty({
+        description: '分类icon',
+        example: 'https://material.iconhelper.cn/',
+    })
+    @prop()
+    icon: string;
+    @ApiProperty({description: '分类排序', example: ''})
+    @prop()
+    rank: number;
 }
-

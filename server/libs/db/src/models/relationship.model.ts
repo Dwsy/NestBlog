@@ -1,6 +1,6 @@
 import { prop, modelOptions } from '@typegoose/typegoose';
-import { ApiProperty } from '@nestjs/swagger';
-import {Types,ObjectId} from "mongoose";
+import {ApiProperty} from '@nestjs/swagger';
+import {Types, ObjectId} from 'mongoose';
 @modelOptions({
   schemaOptions: {
     //自动生成创建更新时间戳

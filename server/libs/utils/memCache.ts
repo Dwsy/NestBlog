@@ -1,6 +1,5 @@
-
 let cacheMap = new Map();
-export class memCache{
+export class memCache {
     /**
      * @Description: 封装设置redis缓存的方法
      * @param key {String} key值
@@ -8,18 +7,18 @@ export class memCache{
      * @param seconds {Number} 过期时间
      * @return: Promise<any>
      */
-    set(key:string,value:any,seconds?:number){
+    set(key: string, value: any, seconds?: number) {
         console.log(`set key：${key}`);
-        
+
         if (!seconds) {
             cacheMap.set(key, {
                 value,
-                time: 0
+                time: 0,
             });
         } else {
             cacheMap.set(key, {
                 value,
-                time: new Date().getTime() + seconds * 1000
+                time: new Date().getTime() + seconds * 1000,
             });
         }
     }
@@ -30,7 +29,7 @@ export class memCache{
      */
     get(key: string) {
         let data = cacheMap.get(key);
-        console.log(`get key：${key}`)
+        console.log(`get key：${key}`);
         if (data?.time > new Date().getTime()) {
             return data['value'];
         }

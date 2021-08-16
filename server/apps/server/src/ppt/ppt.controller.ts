@@ -4,19 +4,17 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ApiTags } from '@nestjs/swagger';
 import { PptOptions } from 'libs/db/models/ppt.model';
 
-
 @Crud({
-
-    model:PptOptions,
+    model: PptOptions,
     routes: {
         // create: false,
         update: false,
-        delete: false
-    }
-
+        delete: false,
+    },
 })
 @Controller('ppt')
 @ApiTags('博客首页轮播图设置')
 export class PptController {
-    constructor(@InjectModel(PptOptions) private readonly model) { }
+    constructor(@InjectModel(PptOptions) private readonly model) {
+    }
 }

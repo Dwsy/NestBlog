@@ -3,7 +3,6 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { Logger } from 'libs/utils/log4js';
 
-
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
@@ -23,8 +22,6 @@ export class LoggerMiddleware implements NestMiddleware {
   }
 }
 
-
-
 // 函数式中间件
 export function logger(req: Request, res: Response, next: () => any) {
   const code = res.statusCode; // 响应状态码
@@ -37,7 +34,9 @@ export function logger(req: Request, res: Response, next: () => any) {
     Status code: ${code}
     Parmas: ${JSON.stringify(req.params)}
     Query: ${JSON.stringify(req.query)}
-    Body: ${JSON.stringify(req.body)} \n  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    Body: ${JSON.stringify(
+      req.body,
+  )} \n  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   `;
   // 根据状态码，进行日志类型区分
   if (code >= 500) {

@@ -8,22 +8,23 @@ import { ContentsModule } from './contents/contents.module';
 import { FieldsModule } from './fields/fields.module';
 import { PptModule } from './ppt/ppt.module';
 import { TagModule } from './tag/tag.module';
-import { ClassificationModule } from './classification/classification.module';
-import {ThemeModule} from "./theme/theme.module";
+import {ClassificationModule} from './classification/classification.module';
+import {ThemeModule} from './theme/theme.module';
 
 @Module({
-  imports: [
-    ClassificationModule,
-    DbModule,
-    UsersModule,
-    CommentsModule,
-    ContentsModule,
-    FieldsModule,
-    PptModule,
-    TagModule,
-    ThemeModule
+    imports: [
+        ClassificationModule,
+        DbModule,
+        UsersModule,
+        CommentsModule,
+        ContentsModule,
+        FieldsModule,
+        PptModule,
+        TagModule,
+        ThemeModule,
     ],
-  controllers: [AppController],
-  providers: [AppService],
+    controllers: [AppController],
+    providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+}
