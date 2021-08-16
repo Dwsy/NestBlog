@@ -12,7 +12,7 @@ Blog在线预览地址：http://dwsy.link:5000/   static:https://cf.dwsy.link/ (
 
 Admin在线预览地址:http://dwsy.link:4000/   https://admin.dwsy.link/     (cloudflare自动部署)
 
-Server-Swagger UI在线地址：http://dwsy.link:3000/api-docs/
+Server-Swagger UI在线地址：http://dwsy.link:3000/
 
 ---
 
