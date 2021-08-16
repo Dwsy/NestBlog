@@ -14,7 +14,7 @@ export class ThemeService {
         ).data;
         memCache.set('pixiv', pd, 43200);
 
-        console.log('redis更新pixiv');
+        console.log('缓存更新pixiv');
         return pd;
     }
 
@@ -28,7 +28,7 @@ export class ThemeService {
 
         var ret = html.match(/\href.*?\stylesheet/g);
 
-        console.log(ret);
+        // console.log(ret);
         return ret;
     }
 
@@ -78,10 +78,10 @@ export class ThemeService {
                     //         "社区"
                     //     ]
                     // }
-                    console.log('------------');
+                    // console.log('------------');
                 }
             } else {
-                console.log('123------');
+                // console.log('123------');
                 for (let k of element['items']) {
                     let t = {
                         name: k['name'],
@@ -90,9 +90,9 @@ export class ThemeService {
                         des: k['showText'],
                         tags: [element['name']],
                     };
-                    console.log(k);
+                    // console.log(k);
                     r.push(t);
-                    console.log('push------');
+                    // console.log('push------');
                 }
             }
         }

@@ -109,8 +109,8 @@ export class CommentsController {
     @ApiOperation({summary: '发送子评论'})
     async sendChild(@Body() dto: sendChildCommentDto) {
         let a = this.CommentsModel.create(dto);
-        console.log((await a)._id);
-        console.log(dto.fatherId);
+        // console.log((await a)._id);
+        // console.log(dto.fatherId);
         let b = this.CommentsModel.findByIdAndUpdate(dto.fatherId, {
             $push: {childId: (await a)._id},
         });

@@ -187,7 +187,6 @@ export class FieldsService {
         let sort = undefined;
 
         if ('1' === query.page || 1 === query.page) {
-            console.log('memcccc');
             return this.cacheIndex(query, recently);
         }
         if (query) {

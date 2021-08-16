@@ -28,8 +28,8 @@ export class ContentsService {
     }
 
     contentToArticleAttr(htmlStr: string, mdStr: string) {
-        console.log(htmlStr);
-        console.log(mdStr);
+        // console.log(htmlStr);
+        // console.log(mdStr);
         const {html: menusHtml, menus} = MarkdownUtils.markdownRender(htmlStr);
         const markText = MarkdownUtils.htmlStrToText(htmlStr);
         return {

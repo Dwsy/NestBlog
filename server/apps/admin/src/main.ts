@@ -42,13 +42,17 @@ async function bootstrap() {
   app.use(logger);
   // app.use(logger);
   await app.init();
-  const PORT = process.env.ADMIN_PORT || 2999;
-  http.createServer(server).listen(PORT);
+  const HTTP_PORT = process.env.ADMIN_PORT || 2999;
+  const HTTPS_PORT = 3030;
+
+  http.createServer(server).listen(HTTP_PORT);
   //https
-  // https.createServer(httpsOptions, server).listen(3030);
+  // https.createServer(httpsOptions, server).listen(HTTPS_PORT);
   //https
   // const PORT = process.env.ADMIN_PORT || 2999
   // await app.listen(PORT);
-  // console.log(`http://localhost:${PORT}/api-docs`)
+  console.log(`http://localhost:${HTTP_PORT}/api-docs`)
+  console.log("-----------------------------------------");
+  console.log(`https://localhost:${HTTPS_PORT}/api-docs`)
 }
 bootstrap();

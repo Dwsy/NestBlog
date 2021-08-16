@@ -1,25 +1,25 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Ip, Redirect, Req, Res } from '@nestjs/common';
+import { ReturnModelType } from '@typegoose/typegoose';
+import { Browsedata } from 'libs/db/models/browsedata.model';
+import { InjectModel } from 'nestjs-typegoose';
 import { AdminService } from './admin.service';
-// import { CacheService } from 'libs/utils/cache.service';
+
 
 @Controller()
 export class AdminController {
   constructor(
-      private readonly adminService: AdminService,
-  ) // private readonly cache: CacheService
-  {
-  }
-
+    private readonly adminService: AdminService,
+    @InjectModel(Browsedata)
+    private BrowsedataModel: ReturnModelType<typeof Browsedata>,
+  ) { }
   @Get()
-  async getHello() {
-    // for (let index = 0; index < 99999999999999999; index++) {
-    //   console.log(index);
-    // }
-    // // return this.adminService.getHello();
-    // await this.cache.set('username','李四');
-
-    // console.log(await this.cache.get('username'));
-
-    return this.adminService.getHello();
+  @Redirect()
+  async Redirect(@Ip() ip, @Req() req: Request) {
+    let ret = {ip, ua: req.headers['user-agent']+' API'};
+    this.BrowsedataModel.create(ret);
+    return {
+      "url": req.url + 'api-docs',
+      "statusCode": 302
+    }
   }
 }

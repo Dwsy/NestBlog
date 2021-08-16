@@ -92,7 +92,7 @@ export class FieldsController {
 
     @Get('user')
     async ip(@Ip() ip, @Req() req: Request) {
-        console.log(req);
+        // console.log(req);
         let ret = {ip, ua: req.headers['user-agent']};
         this.BrowsedataModel.create(ret);
         return ret;
@@ -105,24 +105,14 @@ export class FieldsController {
     }
 
     @Get(':id')
-    async findOne(
-        @Param('id') id: string,
-        @Req() request: Request,
-        @Query('query') query,
+    async findOne(@Param('id') id: string,@Req() request: Request,@Query('query') query,
     ) {
         return this.fieldsService.findOneById(id, request, query);
     }
 
-    // @Get('cache')
-    // @ApiOperation({ summary: "Find all records", operationId: "list" })
-    // async cacheIndex(query, recently) {
-
-    // }
     @Get()
     @ApiOperation({summary: 'Find all records', operationId: 'list'})
     async find(@Query('query') query) {
         return this.fieldsService.findByQuery(query);
     }
-
-    y;
 }
