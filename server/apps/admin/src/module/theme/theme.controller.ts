@@ -3,7 +3,6 @@ import {Crud} from 'libs/nestjs-mongoose-crud';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiTags} from '@nestjs/swagger';
 import {Theme} from 'libs/db/models/theme.model';
-import axios from 'axios';
 // import {CacheService} from '../../cache/cache.service';
 import memCache from '../../../../../libs/utils/memCache';
 import {ThemeService} from './theme.service';

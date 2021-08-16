@@ -6,22 +6,19 @@ import {
     Delete,
     Put,
     UseGuards,
-    HttpCode,
 } from '@nestjs/common';
 import {InjectModel} from 'nestjs-typegoose';
 import {
     ApiBearerAuth,
     ApiOperation,
-    ApiProperty,
     ApiTags,
 } from '@nestjs/swagger';
 import {Comments} from 'libs/db/models/comments.model';
 import {Fields} from 'libs/db/models/fields.model';
 import {Contents} from 'libs/db/models/contents.model';
 // import { ModelType } from '@typegoose/typegoose/lib/types';
-import {prop, ReturnModelType} from '@typegoose/typegoose';
+import {ReturnModelType} from '@typegoose/typegoose';
 import {Param} from '@nestjs/common';
-import {Schema as MongooseSchema, Types} from 'mongoose';
 import {AuthGuard} from '@nestjs/passport';
 import {CommentsService} from './comments.service';
 import {sendCommentDto} from './dto/sendCommentDto';
@@ -92,7 +89,7 @@ export class CommentsController {
         // console.log(dto.fatherId);
 
         return this.CommentsModel.findByIdAndUpdate(dto.fatherId, {
-            $push: {childId: (await a)._id},
+            $push: {childId: a._id},
         });
         // return await this.CommentsModel.create()
     }

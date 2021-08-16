@@ -1,11 +1,10 @@
 import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud';
 import {InjectModel} from 'nestjs-typegoose';
-import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
+import {ApiTags} from '@nestjs/swagger';
 import {Tag} from 'libs/db/models/tag.model';
 import {ReturnModelType} from '@typegoose/typegoose';
 import {Fields} from 'libs/db/models/fields.model';
-import {AuthGuard} from '@nestjs/passport';
 import {TagService} from './tag.service';
 
 class contentsNum {

@@ -1,6 +1,5 @@
 import {Injectable} from '@nestjs/common';
 import {Controller, Get, Ip, Param, Query, Req} from '@nestjs/common';
-import {Crud} from 'libs/nestjs-mongoose-crud/';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiOperation, ApiTags} from '@nestjs/swagger';
 import {Fields} from 'libs/db/models/fields.model';
@@ -23,13 +22,10 @@ export class FieldsService {
     private cache = memCache;
 
     constructor(
-        @InjectModel(Fields) private readonly model: ReturnModelType<typeof Fields>,
-        @InjectModel(Contents)
-        private readonly ContentsModel: ReturnModelType<typeof Contents>,
-        @InjectModel(Classification)
-        private readonly ClassificationModel: ReturnModelType<typeof Classification>,
-        @InjectModel(Tag) private readonly TagModel: ReturnModelType<typeof Tag>,
-        @InjectModel(User) private userModel: ReturnModelType<typeof User>,
+        @InjectModel(Fields) 
+        private readonly model: ReturnModelType<typeof Fields>,
+        @InjectModel(User) 
+        private userModel: ReturnModelType<typeof User>,
         @InjectModel(Comments)
         private CommentModel: ReturnModelType<typeof Comments>,
         private jwtService: JwtService,
@@ -113,7 +109,7 @@ export class FieldsService {
         }
     }
 
-    async cacheIndex(query, recently) {
+    async cacheIndex(query: { populate: any; page: number; limit: number; where: {}; sort: any; }, recently: any) {
         // return await this.find(query);
         // console.log("cache")
         let ret = await this.cache.get('index');
@@ -168,7 +164,7 @@ export class FieldsService {
             };
         }
         //--
-        await this.cache.set('index', ret, 5 * 60);
+        this.cache.set('index', ret, 5 * 60);
         return this.cache.get('index');
     }
 
@@ -181,7 +177,7 @@ export class FieldsService {
             recently = await this.CommentModel.find({}, '-email')
                 .limit(5)
                 .sort({_id: -1});
-            await this.cache.set('recently', recently, 10 * 60);
+            this.cache.set('recently', recently, 10 * 60);
         }
         let populate = undefined;
         let page = 1;

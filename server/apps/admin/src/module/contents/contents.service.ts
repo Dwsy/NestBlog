@@ -1,16 +1,11 @@
 import {Injectable} from '@nestjs/common';
-import {Controller, Get, Param, Put, Res, UseGuards} from '@nestjs/common';
-import {Crud} from 'libs/nestjs-mongoose-crud';
 import {InjectModel} from 'nestjs-typegoose';
-import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {Contents} from 'libs/db/models/contents.model';
 import {Fields} from 'libs/db/models/fields.model';
 import {ReturnModelType} from '@typegoose/typegoose';
 import {Tag} from 'libs/db/models/tag.model';
 import {Classification} from 'libs/db/models/classification.model';
 import {Comments} from 'libs/db/models/comments.model';
-import {AuthGuard} from '@nestjs/passport';
-import {Req} from '@nestjs/common/decorators/http/route-params.decorator';
 import {JwtService} from '@nestjs/jwt';
 import {User} from 'libs/db/models/user.model';
 import MarkdownUtils from 'libs/utils/markdown';
@@ -18,13 +13,17 @@ import MarkdownUtils from 'libs/utils/markdown';
 @Injectable()
 export class ContentsService {
     constructor(
-        @InjectModel(Contents) private readonly model,
         private jwtService: JwtService,
-        @InjectModel(User) private userModel: ReturnModelType<typeof User>,
-        @InjectModel(Fields) private readonly field: ReturnModelType<typeof Fields>,
-        @InjectModel(Tag) private readonly tag: ReturnModelType<typeof Tag>,
         @InjectModel(Classification)
         private readonly classification: ReturnModelType<typeof Comments>,
+        @InjectModel(Contents) 
+        private readonly model,
+        @InjectModel(User) 
+        private userModel: ReturnModelType<typeof User>,
+        @InjectModel(Fields) 
+        private readonly field: ReturnModelType<typeof Fields>,
+        @InjectModel(Tag) 
+        private readonly tag: ReturnModelType<typeof Tag>,
     ) {
     }
 

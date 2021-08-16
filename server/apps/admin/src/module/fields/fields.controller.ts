@@ -33,7 +33,8 @@ import {FieldsService} from './fields.service';
 @ApiTags('文章自定义字段')
 export class FieldsController {
     constructor(
-        @InjectModel(Fields) private readonly model: ReturnModelType<typeof Fields>,
+        @InjectModel(Fields) 
+        private readonly model: ReturnModelType<typeof Fields>,
         @InjectModel(Contents)
         private readonly ContentsModel: ReturnModelType<typeof Contents>,
         @InjectModel(Classification)

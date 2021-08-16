@@ -18,10 +18,6 @@ import {ClassificationService} from './classification.service';
 @ApiTags('分类')
 export class ClassificationController {
     constructor(
-        @InjectModel(Classification)
-        private readonly model: ReturnModelType<typeof Comments>,
-        @InjectModel(Fields)
-        private readonly FieldsModel: ReturnModelType<typeof Fields>,
         private readonly classificationService: ClassificationService,
     ) // @InjectModel(Contents) private readonly ContentsModel: ReturnModelType<typeof Comments>
     {
@@ -37,7 +33,7 @@ export class ClassificationController {
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()
     addArticle(@Param('id') id: string, @Param('num') num: string) {
-        this.addArticle(id, num);
+        this.classificationService.addArticle(id, num);
     }
 
     // @Get('articleTitle/:id')
