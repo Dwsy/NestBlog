@@ -18,7 +18,7 @@ export class AdminController {
     let ret = {ip, ua: req.headers['user-agent']+' API'};
     this.BrowsedataModel.create(ret);
     return {
-      "url": req.url + 'api-docs',
+      "url":  'api-docs',
       "statusCode": 302
     }
   }
