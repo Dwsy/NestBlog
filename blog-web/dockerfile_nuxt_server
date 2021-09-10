@@ -1,0 +1,11 @@
+FROM node:alpine
+ENV HOST=0.0.0.0
+ENV PORT=5050
+ENV API_URL_HTTPS=https://dwsy.link:3030/api
+ENV API_URL=http://dwsy.link:3000/api
+COPY . /home/blog-web
+RUN cd /home/blog-web && npm config set registry https://registry.npm.taobao.org  && yarn config set registry https://registry.npm.taobao.org -g &&yarn global add pm2 && yarn&& yarn run build
+WORKDIR /home/blog-web
+EXPOSE 5050
+# CMD [ "pm2","start","./dist/apps/admin/main.js"," -i max" ]
+CMD [ "yarn","run","start" ]

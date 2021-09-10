@@ -1,0 +1,6 @@
+FROM nginx
+ENV VUE_APP_API=http://www.dwsy.link:3000/api
+RUN rm -rf /usr/share/nginx/html && mkdir /usr/share/nginx/html
+COPY ./dist  /usr/share/nginx//html
+WORKDIR /usr/share/nginx//html
+EXPOSE 80
