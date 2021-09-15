@@ -10,12 +10,18 @@ import { hashSync } from 'bcryptjs';
 export class Browsedata {
   @ApiProperty({ description: 'ip', example: '0.0.0.0' })
   @prop()
-  ip: string;
+  ip: String;
+  @ApiProperty({ description: 'info', example: '{}' })
+  @prop()
+  info: {};
   @ApiProperty({
     description: 'UA',
     example:
       'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
   })
   @prop()
-  ua: string;
+  ua: String;
+  @prop()
+  view: Number;
+
 }
