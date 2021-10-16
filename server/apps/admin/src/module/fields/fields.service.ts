@@ -33,74 +33,7 @@ export class FieldsService {
     }
 
     async getDraftList(query) {
-        // if (query) {
-        //     query = JSON.parse(query);
-        // }
 
-        // // let recently = await this.cache.get('recently');
-        // // // console.log(recently)
-        // // if (recently === undefined) {
-        // //     // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
-        // //     recently = await this.CommentModel.find({}, '-email')
-        // //         .limit(5)
-        // //         .sort({ _id: -1 });
-        // //     this.cache.set('recently', recently, 10 * 60);
-        // // }
-        // let populate = undefined;
-        // let page = 1;
-        // let skip = 0;
-        // let limit = 20;
-        // let where = {};
-        // let sort = undefined;
-
-        // // if ('1' === query.page || 1 === query.page) {
-        // //     return this.cacheIndex(query, recently);
-        // // }
-        // if (query) {
-        //     populate = query.populate;
-        //     page = query.page;
-        //     skip = 0;
-        //     limit = query.limit;
-        //     where = query.where;
-        //     sort = query.sort;
-        // }
-
-        // if (skip < 1) {
-        //     skip = (page - 1) * limit;
-        // }
-        // const data = await this.model
-        //     .find()
-        //     // .where(where)
-        //     .where({ isDraft: true })
-        //     .skip(skip)
-        //     .limit(limit)
-        //     .sort(sort)
-        //     .populate(populate);
-        // console.log("--------------------");
-        // console.log(data);
-        
-        // console.log("--------------------");
-        
-        // const paginateKeys: PaginateKeys | false = {
-        //     data: 'data',
-        //     total: 'total',
-        //     lastPage: 'lastPage',
-        //     currentPage: 'page',
-        // };
-
-        // // if (paginateKeys === false) {
-        // // } else {
-        // //     const total = await this.model.countDocuments(where);
-        // //     return {
-        // //         [paginateKeys.total]: total,
-        // //         [paginateKeys.data]: data,
-        // //         [paginateKeys.lastPage]: Math.ceil(total / limit),
-        // //         [paginateKeys.currentPage]: page,
-        // //         // recently: recently,
-        // //     };
-        // // }
-
-        // return data;
 
 
 

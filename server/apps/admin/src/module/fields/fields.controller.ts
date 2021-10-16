@@ -1,4 +1,4 @@
-import {Controller, Get, Ip, Param, Query, Req} from '@nestjs/common';
+import {Controller, Get, Ip, Param, Query, Req, UseGuards} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud/';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiOperation, ApiTags} from '@nestjs/swagger';
@@ -10,7 +10,7 @@ import {Classification} from 'libs/db/models/classification.model';
 import {Comments} from 'libs/db/models/comments.model';
 import {Tag} from 'libs/db/models/tag.model';
 import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
-// import {AuthGuard} from '@nestjs/passport';
+import {AuthGuard} from '@nestjs/passport';
 // import {Schema} from "mongoose";
 import {JwtService} from '@nestjs/jwt';
 import {User} from 'libs/db/models/user.model';
@@ -98,6 +98,7 @@ export class FieldsController {
         return ret;
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get('draftList')
     @ApiOperation({summary: 'Find all records', operationId: 'list'})
     async draftList(@Query('query') query) {
