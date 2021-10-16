@@ -101,7 +101,7 @@ export class FieldsController {
     @Get('draftList')
     @ApiOperation({summary: 'Find all records', operationId: 'list'})
     async draftList(@Query('query') query) {
-        this.fieldsService.getDraftList(query);
+        return this.fieldsService.getDraftList(query);
     }
 
     @Get(':id')

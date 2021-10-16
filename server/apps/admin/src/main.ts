@@ -14,11 +14,11 @@ import {
   ExpressAdapter,
 } from '@nestjs/platform-express';
 // https
-const httpsOptions = {
-  key: fs.readFileSync('/root/SSL/key'),
-  cert: fs.readFileSync('/root/SSL/pem'),
+// const httpsOptions = {
+//   key: fs.readFileSync('/root/SSL/key'),
+//   cert: fs.readFileSync('/root/SSL/pem'),
 
-};
+// };
 // https
 async function bootstrap() {
   const server = express();
@@ -47,7 +47,7 @@ async function bootstrap() {
   http.createServer(server).listen(HTTP_PORT);
 
   // https
-  https.createServer(httpsOptions, server).listen(HTTPS_PORT);
+  // https.createServer(httpsOptions, server).listen(HTTPS_PORT);
   // https
 
   // await app.listen(PORT);

@@ -1,18 +1,18 @@
-import {Injectable} from '@nestjs/common';
-import {Controller, Get, Ip, Param, Query, Req} from '@nestjs/common';
-import {InjectModel} from 'nestjs-typegoose';
-import {ApiOperation, ApiTags} from '@nestjs/swagger';
-import {Fields} from 'libs/db/models/fields.model';
-import {Contents} from 'libs/db/models/contents.model';
-import {ReturnModelType} from '@typegoose/typegoose';
-import {Classification} from 'libs/db/models/classification.model';
-import {Comments} from 'libs/db/models/comments.model';
-import {Tag} from 'libs/db/models/tag.model';
-import {PaginateKeys} from 'libs/nestjs-mongoose-crud/src/crud.interface';
+import { Injectable } from '@nestjs/common';
+import { Controller, Get, Ip, Param, Query, Req } from '@nestjs/common';
+import { InjectModel } from 'nestjs-typegoose';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Fields } from 'libs/db/models/fields.model';
+import { Contents } from 'libs/db/models/contents.model';
+import { ReturnModelType } from '@typegoose/typegoose';
+import { Classification } from 'libs/db/models/classification.model';
+import { Comments } from 'libs/db/models/comments.model';
+import { Tag } from 'libs/db/models/tag.model';
+import { PaginateKeys } from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {AuthGuard} from '@nestjs/passport';
 // import {Schema} from "mongoose";
-import {JwtService} from '@nestjs/jwt';
-import {User} from 'libs/db/models/user.model';
+import { JwtService } from '@nestjs/jwt';
+import { User } from 'libs/db/models/user.model';
 import memCache from 'libs/utils/memCache';
 
 // import {CacheService} from '../../cache/cache.service';
@@ -22,9 +22,9 @@ export class FieldsService {
     private cache = memCache;
 
     constructor(
-        @InjectModel(Fields) 
+        @InjectModel(Fields)
         private readonly model: ReturnModelType<typeof Fields>,
-        @InjectModel(User) 
+        @InjectModel(User)
         private userModel: ReturnModelType<typeof User>,
         @InjectModel(Comments)
         private CommentModel: ReturnModelType<typeof Comments>,
@@ -32,7 +32,78 @@ export class FieldsService {
     ) {
     }
 
-    async getDraftList(query: any) {
+    async getDraftList(query) {
+        // if (query) {
+        //     query = JSON.parse(query);
+        // }
+
+        // // let recently = await this.cache.get('recently');
+        // // // console.log(recently)
+        // // if (recently === undefined) {
+        // //     // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
+        // //     recently = await this.CommentModel.find({}, '-email')
+        // //         .limit(5)
+        // //         .sort({ _id: -1 });
+        // //     this.cache.set('recently', recently, 10 * 60);
+        // // }
+        // let populate = undefined;
+        // let page = 1;
+        // let skip = 0;
+        // let limit = 20;
+        // let where = {};
+        // let sort = undefined;
+
+        // // if ('1' === query.page || 1 === query.page) {
+        // //     return this.cacheIndex(query, recently);
+        // // }
+        // if (query) {
+        //     populate = query.populate;
+        //     page = query.page;
+        //     skip = 0;
+        //     limit = query.limit;
+        //     where = query.where;
+        //     sort = query.sort;
+        // }
+
+        // if (skip < 1) {
+        //     skip = (page - 1) * limit;
+        // }
+        // const data = await this.model
+        //     .find()
+        //     // .where(where)
+        //     .where({ isDraft: true })
+        //     .skip(skip)
+        //     .limit(limit)
+        //     .sort(sort)
+        //     .populate(populate);
+        // console.log("--------------------");
+        // console.log(data);
+        
+        // console.log("--------------------");
+        
+        // const paginateKeys: PaginateKeys | false = {
+        //     data: 'data',
+        //     total: 'total',
+        //     lastPage: 'lastPage',
+        //     currentPage: 'page',
+        // };
+
+        // // if (paginateKeys === false) {
+        // // } else {
+        // //     const total = await this.model.countDocuments(where);
+        // //     return {
+        // //         [paginateKeys.total]: total,
+        // //         [paginateKeys.data]: data,
+        // //         [paginateKeys.lastPage]: Math.ceil(total / limit),
+        // //         [paginateKeys.currentPage]: page,
+        // //         // recently: recently,
+        // //     };
+        // // }
+
+        // return data;
+
+
+
         let populate = undefined;
         let page = 1;
         let skip = 0;
@@ -140,7 +211,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({isDraft: false})
+            .where({ isDraft: false })
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -169,14 +240,17 @@ export class FieldsService {
     }
 
     async findByQuery(query) {
-        query = JSON.parse(query);
+        if (query) {
+            query = JSON.parse(query);
+        }
+
         let recently = await this.cache.get('recently');
         // console.log(recently)
         if (recently === undefined) {
             // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
             recently = await this.CommentModel.find({}, '-email')
                 .limit(5)
-                .sort({_id: -1});
+                .sort({ _id: -1 });
             this.cache.set('recently', recently, 10 * 60);
         }
         let populate = undefined;
@@ -204,7 +278,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({isDraft: false})
+            .where({ isDraft: false })
             .skip(skip)
             .limit(limit)
             .sort(sort)
