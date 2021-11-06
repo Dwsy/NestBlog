@@ -13,13 +13,13 @@ import {
   NestExpressApplication,
   ExpressAdapter,
 } from '@nestjs/platform-express';
-// https
-// const httpsOptions = {
-//   key: fs.readFileSync('/root/SSL/key'),
-//   cert: fs.readFileSync('/root/SSL/pem'),
+https
+const httpsOptions = {
+  key: fs.readFileSync('/root/SSL/key'),
+  cert: fs.readFileSync('/root/SSL/pem'),
 
-// };
-// https
+};
+https
 async function bootstrap() {
   const server = express();
   const app = await NestFactory.create(AdminModule, new ExpressAdapter(server));
@@ -46,9 +46,9 @@ async function bootstrap() {
 
   http.createServer(server).listen(HTTP_PORT);
 
-  // https
-  // https.createServer(httpsOptions, server).listen(HTTPS_PORT);
-  // https
+  https
+  https.createServer(httpsOptions, server).listen(HTTPS_PORT);
+  https
 
   // await app.listen(PORT);
   // console.log(JSON.parse(process.env.npm_config_argv)['original'][-1]);

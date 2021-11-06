@@ -165,7 +165,7 @@ export default {
         ]
       ]
     },
-    analyze: true
+    // analyze: true
   },
   alias: {
     'cs': resolve(__dirname, './components'),
