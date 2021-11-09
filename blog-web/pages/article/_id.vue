@@ -22,7 +22,7 @@
             </v-col>
             <v-col cols="2" xl="2" lg="2" md="2" sm="12" xs="12" >
                 <br />
-                <Toc :toc="toc" />
+                <!-- <Toc :toc="toc" /> -->
             </v-col>
         </v-row>
     </v-container>
@@ -35,7 +35,7 @@ import CommentList from "../../components/article/CommentList";
 import SendComment from "../../components/article/sendComment.vue";
 import HeadImage from "../../components/article/HeadImage";
 import ContentTag from "../../components/article/ContentTag";
-import Toc from "../../components/article/Toc";
+// import Toc from "../../components/article/Toc";
 
 // import Ccomment from '../../components/article/Ccomment';
 export default {
@@ -71,7 +71,7 @@ export default {
             // IP: ipData.query,
             field: field,
             view: view,
-            toc: content.menus.menus
+            // toc: content.menus.menus
         };
     },
     mounted() {
@@ -95,7 +95,7 @@ export default {
         SendComment,
         HeadImage,
         ContentTag,
-        Toc
+        // Toc
         // Ccomment
     }
 };

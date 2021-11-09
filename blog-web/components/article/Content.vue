@@ -12,7 +12,10 @@
       <span>创建时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp分类：{{field.classification.name}}</span>
       <!-- <div v-html="$md.render(content.text)" ></div> -->
       <div v-html="content.text" class="content"></div>
-
+        <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/clipboard.min.js"></script>
+        <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/prism.js"></script>
+        <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/styles/coy.css"> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css">
       <p class="caption">最后修改时间：{{content.createdAt|formatDate('yyyy年MM月dd日')}}</p>
     </v-col>
     
@@ -21,7 +24,7 @@
 </template>
 
 <script>
-import Prism from "prismjs";
+// import Prism from "prismjs";
 
 export default {
   // components: {
@@ -32,11 +35,18 @@ export default {
     field: {}
   },
   mounted() {
-    Prism.highlightAll();
+    // Prism.highlightAll();
+    	(function(){
+		var pres = document.querySelectorAll('pre');
+		var lineNumberClassName = 'line-numbers';
+		pres.forEach(function (item, index) {
+			item.className = item.className == '' ? lineNumberClassName : item.className + ' ' + lineNumberClassName;
+		});
+	})();
   }
 };
 </script>
-<style scoped>
+ <style scoped>
 .content >>> table {
   width: 100%;
   overflow: auto;
@@ -161,6 +171,7 @@ ul li {
   font-weight: bold;
 }
 </style>
+
 <style lang="scss">
 #__nuxt {
   .content {
@@ -168,11 +179,11 @@ ul li {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   }
 
-  .content code,
-  .content pre code {
-    box-shadow: none;
-    color: inherit;
-  }
+  // .content code,
+  // .content pre code {
+  //   box-shadow: none;
+  //   color: inherit;
+  // }
   .content img{
     display: block;
     margin: 0 auto;
@@ -180,26 +191,26 @@ ul li {
   .content table tr{
     background-color: initial;
   }
-  .hljs {
-    background-color: initial;
-  }
+  // .hljs {
+  //   background-color: initial;
+  // }
 }
 
 .theme--dark {
   .content {
     background-color: initial;
 
-    code {
-      background-color: #000;
-    }
+    // code {
+    //   background-color: #000;
+    // }
 
     .highlight pre,
     pre {
       background-color: #282b33;
 
-      code {
-        background-color: initial;
-      }
+      // code {
+      //   background-color: initial;
+      // }
     }
 
   }
