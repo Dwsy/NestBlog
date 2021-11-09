@@ -1,4 +1,4 @@
-<template>
+<template >
     <v-row>
         <!-- <h1>nmsl</h1> -->
         <!-- <v-card>
@@ -7,6 +7,7 @@
     </v-card> -->
         <v-col>
             <h2>{{ field.title }}</h2>
+            <h1>{{theme}}</h1>
             <br />
             <span
                 >创建时间：{{
@@ -17,13 +18,16 @@
             >
             <!-- {{content.mdText}} -->
             <!-- <div v-html="$md.render(content.text)" class="Language"></div> -->
-            <div v-html="content.text" class="content"></div>
-            
+            <div v-html="content.text" class="content" :codeStyle="$vuetify.theme.dark ? 'prism-coy' : 'prism-mac'"></div>
+
             <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/clipboard.min.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/prism/prism.js"></script>
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/prism/prism.css"/> -->
             <!-- <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/prism.js"></script> -->
-            <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css"/> 
+            <!-- <link
+                rel="stylesheet"
+                href="//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css"
+            /> -->
 
             <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/styles/coy.css"> -->
             <p class="caption">
@@ -37,26 +41,53 @@
 
 <script>
 // import Prism from "prismjs";
-
+let link=''
 export default {
     // components: {
     //   ContentTag
     // },
+  data () {
+    return {
+        theme:this.$vuetify.theme.dark
+    };
+  },
     props: {
         content: {},
         field: {}
     },
     mounted() {
         // Prism.highlightAll();
+        // Prism.line
         (() => {
             var pres = document.querySelectorAll("pre");
             var lineNumberClassName = "line-numbers";
             pres.forEach(function(item, index) {
-                item.className =item.className == ""? lineNumberClassName: item.className + " " + lineNumberClassName;
+                item.className =
+                    item.className == ""
+                        ? lineNumberClassName
+                        : item.className + " " + lineNumberClassName;
             });
-
         })();
+
+        // theme
+        link = document.createElement("link");
+        link.type = "text/css";
+        link.id = "theme";
+        link.rel = "stylesheet";
+        // link.href = "//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css";
+        document.getElementsByTagName("head")[0].appendChild(link);
+    },
+    watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+     theme: function (a, b) {
+         if(a==false){
+             link.href = "//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css";
+         }else{
+             link.href = "";
+             
+         }
     }
+  },
 };
 </script>
  <style scoped>
@@ -192,10 +223,11 @@ ul li {
     }
 
     // .content code,
-    // .content pre code {
-    //   box-shadow: none;
-    //   color: inherit;
-    // }
+    .content pre code {
+        box-shadow: none;
+        color: inherit;
+        max-height: 710px;
+    }
     .content img {
         display: block;
         margin: 0 auto;
