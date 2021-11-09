@@ -111,6 +111,8 @@ export class CommentsController {
         return a;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Delete(':id/:isChild')
     async del(@Param('id') id: string, @Param('isChild') isChild: String) {
         return this.del(id, isChild);
