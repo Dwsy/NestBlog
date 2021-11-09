@@ -31,7 +31,7 @@ export default {
   
   plugins: [
     { src: '~/plugins/filters.js' },
-    { src:'@/plugins/vue-highlight', ssr: false }
+    // { src:'@/plugins/vue-highlight', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,12 +52,12 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     // Simple Usage
     // 'nuxt-highlightjs',
-    '@nuxtjs/markdownit',
+    // '@nuxtjs/markdownit',
     // With Options
     // ['nuxt-highlightjs', {
     //   style: 'obsidian'
@@ -67,16 +67,16 @@ export default {
 
   // [optional] markdownit options
   // See https://github.com/markdown-it/markdown-it
-  markdownit: {
-    preset: 'default',
-    linkify: true,
-    breaks: true,
-    use: [
-      'markdown-it-div',
-      'markdown-it-attrs'
-    ],
-    runtime: true
-  },
+  // markdownit: {
+  //   preset: 'default',
+  //   linkify: true,
+  //   breaks: true,
+  //   use: [
+  //     'markdown-it-div',
+  //     'markdown-it-attrs'
+  //   ],
+  //   runtime: true
+  // },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
@@ -134,39 +134,39 @@ export default {
   build: {
 
     babel: {
-      plugins: [
-        [
-          'prismjs',
-          {
-            languages: [
-              'html',
-              'css',
-              'javascript',
-              'php',
-              'dart',
-              'bash',
-              'nginx',
-              'sql',
-              'c',
-              'cpp',
-              'python',
-              'go',
-              'java',
-              'sql',
-              'typescript',
-              'go',
-              'shell-session'
-            ],
-            plugins: [
-              'line-numbers',
-              'show-language',
-              'copy-to-clipboard'
-            ],
-            theme: 'tomorrow',
-            css: true
-          }
-        ]
-      ]
+      // plugins: [
+      //   [
+      //     'prismjs',
+      //     {
+      //       languages: [
+      //         'html',
+      //         'css',
+      //         'javascript',
+      //         'php',
+      //         'dart',
+      //         'bash',
+      //         'nginx',
+      //         'sql',
+      //         'c',
+      //         'cpp',
+      //         'python',
+      //         'go',
+      //         'java',
+      //         'sql',
+      //         'typescript',
+      //         'go',
+      //         'shell-session'
+      //       ],
+      //       plugins: [
+      //         'line-numbers',
+      //         'show-language',
+      //         'copy-to-clipboard'
+      //       ],
+      //       theme: 'tomorrow',
+      //       css: true
+      //     }
+      //   ]
+      // ]
     },
     // analyze: true
   },
