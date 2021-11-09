@@ -8,11 +8,11 @@ Admin:`Vue.js + Vuetify.js`
 
 基本功能都有了，细节有待添加。（开发进度百分之40%大概）
 
-Blog在线预览地址：http://dwsy.link:5000/   static:https://cf.dwsy.link/ (cloudflare自动部署)
+Blog在线预览地址：http://nestblog.dwsy.link/   static:https://cf.dwsy.link/ (cloudflare自动部署)
 
-Admin在线预览地址:http://dwsy.link:4000/   https://admin.dwsy.link/     (cloudflare自动部署)
+Admin在线预览地址:http://nestadmin.dwsy.link/   https://admin.dwsy.link/     (cloudflare自动部署)
 
-Server-Swagger UI在线地址：http://dwsy.link:3000/
+Server-Swagger UI在线地址：http://nestapi.dwsy.link/
 
 ---
 
