@@ -14,6 +14,7 @@ export interface CrudRouteWithDto extends CrudRoute {
 export interface CrudRouteForFind extends CrudRoute {
     paginate?: PaginateKeys | false;
     limit?: number;
+    page?: number;
     populate?: string | any;
     sort?: string | any;
     where?: any;
@@ -42,47 +43,7 @@ export interface OptionItem {
 export interface Field {
     label?: string;
     icon?: string;
-    type?:
-        | 'hide'
-        | 'text'
-        | 'input'
-        | 'autocomplete'
-        | 'textarea'
-        | 'number'
-        | 'checkbox'
-        | 'checkbox-button'
-        | 'radio'
-        | 'date'
-        | 'dates'
-        | 'week'
-        | 'month'
-        | 'year'
-        | 'daterange'
-        | 'time'
-        | 'datetime'
-        | 'datetimerange'
-        | 'switch'
-        | 'yesno'
-        | 'slider'
-        | 'password'
-        | 'color'
-        | 'select'
-        | 'cascader'
-        | 'transfer'
-        | 'rate'
-        | 'tag'
-        | 'image'
-        | 'button'
-        | 'json-editor'
-        | 'upload-file'
-        | 'image-uploader'
-        | 'tree-select'
-        | 'video-uploader'
-        | 'quill-editor'
-        | 'markdown-editor'
-        | 'bmap'
-        | 'codemirror'
-        | 'gallery';
+    type?: 'hide' | 'text' | 'input' | 'autocomplete' | 'textarea' | 'number' | 'checkbox' | 'checkbox-button' | 'radio' | 'date' | 'dates' | 'week' | 'month' | 'year' | 'daterange' | 'time' | 'datetime' | 'datetimerange' | 'switch' | 'yesno' | 'slider' | 'password' | 'color' | 'select' | 'cascader' | 'transfer' | 'rate' | 'tag' | 'image' | 'button' | 'json-editor' | 'upload-file' | 'image-uploader' | 'tree-select' | 'video-uploader' | 'quill-editor' | 'markdown-editor' | 'bmap' | 'codemirror' | 'gallery';
     listable?: boolean;
     editable?: boolean;
     attrs?: any;
@@ -92,9 +53,7 @@ export interface Field {
     class?: string | string[];
     style?: any;
     width?: string | number;
-
     [key: string]: any;
-
     column?: Field[];
 }
 export interface Fields {
@@ -186,14 +145,11 @@ export interface AvueCrudOption {
 }
 export interface AvueCrudConfig {
     option?: AvueCrudOption;
-
     [key: string]: any;
 }
 export interface CrudOptionsWithModel extends CrudOptions {
     name?: string | string[];
     model: any;
     fields?: Fields;
-    config?:
-        | ((instance?: any) => AvueCrudConfig | Promise<AvueCrudConfig>)
-        | AvueCrudConfig;
+    config?: ((instance?: any) => AvueCrudConfig | Promise<AvueCrudConfig>) | AvueCrudConfig;
 }

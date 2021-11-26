@@ -18,7 +18,6 @@ const swagger_1 = require("@nestjs/swagger");
 const crud_query_decorator_1 = require("./crud-query.decorator");
 const crud_config_1 = require("./crud-config");
 const lodash_1 = require("lodash");
-const passport_1 = require("@nestjs/passport");
 class CrudPlaceholderDto {
 }
 exports.CrudPlaceholderDto = CrudPlaceholderDto;
@@ -35,14 +34,11 @@ class CrudController {
         return config;
     }
     find(query = {}) {
-        let { where = lodash_1.get(this.crudOptions, "routes.find.where", {}), limit = lodash_1.get(this.crudOptions, "routes.find.limit", 20), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, "routes.find.populate", undefined), sort = lodash_1.get(this.crudOptions, "routes.find.sort", undefined) } = query;
-        // console.log(where);
-        // console.log(query);
+        let { where = lodash_1.get(this.crudOptions, "routes.find.where", {}), limit = lodash_1.get(this.crudOptions, "routes.find.limit", 10), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, "routes.find.populate", undefined), sort = lodash_1.get(this.crudOptions, "routes.find.sort", undefined), collation = undefined } = query;
         if (skip < 1) {
             skip = (page - 1) * limit;
         }
         const paginateKeys = lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate);
-        // console.log(lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate));
         const find = async () => {
             const data = await this.model
                 .find()
@@ -50,7 +46,8 @@ class CrudController {
                 .skip(skip)
                 .limit(limit)
                 .sort(sort)
-                .populate(populate);
+                .populate(populate)
+                .collation(collation);
             if (paginateKeys !== false) {
                 const total = await this.model.countDocuments(where);
                 return {
@@ -126,8 +123,6 @@ __decorate([
 ], CrudController.prototype, "findOne", null);
 __decorate([
     common_1.Post(),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    swagger_1.ApiBearerAuth(),
     swagger_1.ApiOperation({ summary: "Create a record" }),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -136,8 +131,6 @@ __decorate([
 ], CrudController.prototype, "create", null);
 __decorate([
     common_1.Put(":id"),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    swagger_1.ApiBearerAuth(),
     swagger_1.ApiOperation({ summary: "Update a record" }),
     __param(0, common_1.Param("id")), __param(1, common_1.Body()),
     __metadata("design:type", Function),
@@ -146,8 +139,6 @@ __decorate([
 ], CrudController.prototype, "update", null);
 __decorate([
     common_1.Delete(":id"),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    swagger_1.ApiBearerAuth(),
     swagger_1.ApiOperation({ summary: "Delete a record" }),
     __param(0, common_1.Param("id")),
     __metadata("design:type", Function),

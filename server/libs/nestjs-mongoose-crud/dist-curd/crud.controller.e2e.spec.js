@@ -19,13 +19,14 @@ mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
 });
 const UserModel = mongoose.model("User", new mongoose.Schema({
     username: String,
-    age: Number
+    name: String,
+    age: Number,
 }, {
-    timestamps: true
+    timestamps: true,
 }));
 describe("CrudController e2e", () => {
     let UserController = class UserController {
@@ -35,37 +36,50 @@ describe("CrudController e2e", () => {
     };
     UserController = __decorate([
         crud_decorator_1.Crud({
-            model: UserModel
+            model: UserModel,
         }),
-        common_1.Controller('/users'),
+        common_1.Controller("/users"),
         __metadata("design:paramtypes", [])
     ], UserController);
     let app;
-    let totalUsers = 57;
+    let server;
+    let totalUsers = 15;
     beforeAll(async () => {
         await UserModel.deleteMany({});
+        const lastNames = `阿赵钱孙李周吴郑王`;
         const users = Array(totalUsers)
             .fill(1)
             .map((v, i) => ({
             username: `user${i}`,
-            age: Math.floor(Math.random() * 100)
+            name: lastNames[i % lastNames.length],
+            age: Math.floor(Math.random() * 100),
         }));
         await UserModel.insertMany(users);
         const moduleRef = await testing_1.Test.createTestingModule({
-            controllers: [UserController]
+            controllers: [UserController],
         }).compile();
         app = moduleRef.createNestApplication();
         await app.init();
+        server = app.getHttpServer();
     });
     afterAll(() => {
         mongoose.disconnect();
     });
     describe("create", () => {
-        it("should return paginated users", async () => {
-            return request(app.getHttpServer())
-                .get(`/users?query={"limit":8}`)
+        it("should create a user", async () => {
+            return request(server)
+                .post("/users")
+                .send({ username: `test1` })
+                .expect((res) => expect(res.body).toHaveProperty("_id"));
+        });
+        it("should sort chinese name", async () => {
+            return request(server)
+                .get(`/users?query={"limit":8,"sort":"name","collation":{"locale":"zh"}}`)
                 .expect(200)
-                .expect(res => expect(res.body.data.length).toBe(8));
+                .expect((res) => {
+                expect(res.body.data).toHaveLength(8);
+                expect(res.body.data[1]).toMatchObject({ name: "阿" });
+            });
         });
         // end of it()
     });

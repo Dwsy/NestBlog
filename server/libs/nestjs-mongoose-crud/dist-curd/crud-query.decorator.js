@@ -6,10 +6,9 @@ class ICrudQuery {
 }
 exports.ICrudQuery = ICrudQuery;
 exports.CrudQuery = common_1.createParamDecorator((name = 'query', ctx) => {
-    // const req = ctx.switchToHttp().getRequest();
+    const req = ctx.switchToHttp().getRequest();
     try {
-        console.log(req.query[name]);
-        return JSON.parse(req.query[name]);
+        return JSON.parse(String(req.query[name] || ''));
     }
     catch (e) {
         return {};
