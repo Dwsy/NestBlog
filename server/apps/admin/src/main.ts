@@ -8,7 +8,8 @@ import { logger } from './middleware/logger.middleware';
 import * as fs from 'fs';
 import * as http from 'http';
 import * as https from 'https';
-import { ValidationPipe } from '@nestjs/common';
+// import { ValidationPipe } from '@nestjs/common';
+import * as bodyParser from 'body-parser';
 import {
   NestExpressApplication,
   ExpressAdapter,
@@ -26,6 +27,8 @@ async function bootstrap() {
 
   // const app = await NestFactory.create(AdminModule);
   app.enableCors();
+  app.use(bodyParser.json({limit: '50mb'})); 
+  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
   const options = new DocumentBuilder()
     .setTitle('NestJs博客API')
     .setDescription('博客后台管理API')
@@ -52,7 +55,7 @@ async function bootstrap() {
 
   // await app.listen(PORT);
   // console.log(JSON.parse(process.env.npm_config_argv)['original'][-1]);
-  
+
   console.log(`http://localhost:${HTTP_PORT}/api-docs`)
   console.log("-----------------------------------------");
   console.log(`https://localhost:${HTTPS_PORT}/api-docs`)
