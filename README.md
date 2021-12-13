@@ -16,7 +16,7 @@ Server-Swagger UI在线地址：http://nestapi.dwsy.link/
 
 ---
 
-Run
+Run Server
 
 ```bash
 git clone https://github.com/Dwsy/blog.git
