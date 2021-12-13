@@ -37,13 +37,15 @@ DB=mongodb://127.0.0.1:27017/myblog MongoDB连接
 ADMIN_PORT=3000 API_URL
 SECRET
 ```
-> 本地测试注释server\apps\admin\src\main.ts中https代码
 Blog前端
-
+> 本地测试注释server\apps\admin\src\main.ts中https代码
 ```shell
 cd blog-web
 yarn/npm i
 yarn run dev/npm run dev
+
+spa 加入参数 -s
+yarn generate -s
 ```
 
 ```
