@@ -27,7 +27,7 @@
     "markdown-it-attrs": "^4.1.0",
     "markdown-it-div": "^1.1.0",
     "markdown-loader": "^6.0.0",
-    "nuxt": "^2.15.6",
+    "nuxt": "^2.15.8",
     "prismjs": "^1.25.0",
     "valine": "^1.4.14",
     "vditor": "^3.8.5"

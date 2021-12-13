@@ -174,6 +174,10 @@ export default {
     'cs': resolve(__dirname, './components'),
     'style': resolve(__dirname, './assets/style'),
     'data': resolve(__dirname, './assets/other/data')
-  }
+  },
+    generate: {
+      fallback: 'index.html'
+    }
+  
 
 }
