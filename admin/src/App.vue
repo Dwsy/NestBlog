@@ -7,9 +7,11 @@
 
 export default {
     updated() {
+        
         const dom = document.getElementById('loading');
         if (dom) {
             dom.remove();
+            console.log("加载完成");
         }
     },
     created() {

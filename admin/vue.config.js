@@ -16,7 +16,9 @@ const IsProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
     lintOnSave: false,
-    publicPath: "./",
+    publicPath: process.env.CDN_URL,
+    // publicPath: "./",
+    // publicPath: "https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/blog-admin/",
     pages: {
         // title:"后台管理平台"
         index: {

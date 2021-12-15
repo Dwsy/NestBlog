@@ -24,7 +24,7 @@ export class AdminController {
     @InjectModel(Browsedata)
     private BrowsedataModel: ReturnModelType<typeof Browsedata>,
   ) { }
-  @Get("/ipvvvvvv")
+  @Get("/ip11111")
   async ip() {
     let data = await this.BrowsedataModel.find({});
     data.forEach(async e => {
@@ -50,11 +50,18 @@ export class AdminController {
   @Redirect()
   async Redirect(@Ip() ip: string, @Req() req: Request) {
     let IP
-    if (ip === '::1') {
-      IP = '0.0.0.0'
-    } else {
-      IP = (ip.split(':'))[3]
+    let proxyIp = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
+    // console.log(ipStr);
+    if (proxyIp==undefined) {
+      if (ip === '::1') {
+        IP = '0.0.0.0'
+      } else {
+        IP = (ip.split(':'))[3]
+      }
+    }else{
+      ip=proxyIp
     }
+
     let get
     if ((get = this.cache.get(ip)) === undefined) {
 

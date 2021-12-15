@@ -21,18 +21,18 @@ Vue.use(Toast, {
   newestOnTop: true
 });
 
-Vue.use(VCharts);
-Vue.use(VueAMap);
-Vue.use(VueApexCharts);
+// Vue.use(VCharts);
+// Vue.use(VueAMap);
+// Vue.use(VueApexCharts);
 
-Vue.component('apexchart', VueApexCharts);
+// Vue.component('apexchart', VueApexCharts);
 Vue.filter(formatDate)
 
-VueAMap.initAMapApiLoader({
-    key: '527a03c5d37f26c924d83b3c68f9ac5c',
-    mapStyle: 'amap://styles/3822977fb93c74793f501b1f6cc7bf9b',
-    plugin: ['MarkerClusterer', 'AMap.ControlBar']
-});
+// VueAMap.initAMapApiLoader({
+//     key: '527a03c5d37f26c924d83b3c68f9ac5c',
+//     mapStyle: 'amap://styles/3822977fb93c74793f501b1f6cc7bf9b',
+//     plugin: ['MarkerClusterer', 'AMap.ControlBar']
+// });
 
 Vue.config.productionTip = false;
 new Vue({
