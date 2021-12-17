@@ -130,9 +130,9 @@
             <v-btn icon>
                 <v-icon>mdi-bell-circle</v-icon>
             </v-btn>
-            <v-btn icon>
+            <!-- <v-btn icon>
                 <v-icon>mdi-account-key</v-icon>
-            </v-btn>
+            </v-btn> -->
         </v-app-bar>
 
         <v-footer color=" lighten-1" padless>
