@@ -93,9 +93,11 @@ export class FieldsController {
     @Get('user')
     async ip(@Ip() ip, @Req() req: Request) {
         // console.log(req);
-        let ret = {ip, ua: req.headers['user-agent']};
-        this.BrowsedataModel.create(ret);
-        return ret;
+        // let ret = {ip, ua: req.headers['user-agent']};
+        // this.BrowsedataModel.create(ret);
+        // return ret;
+        let UserInfo = 'blog'
+        this.fieldsService.saveUserInfo(ip,req,UserInfo)
     }
 
     @UseGuards(AuthGuard('jwt'))

@@ -1,3 +1,4 @@
+import { FieldsService } from './module/fields/fields.service';
 import { Controller, Get, Ip, Redirect, Req, Res } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Browsedata } from 'libs/db/models/browsedata.model';
@@ -21,6 +22,7 @@ export class AdminController {
   private cache = memCache;
   constructor(
     private readonly adminService: AdminService,
+    private readonly fieldsService: FieldsService,
     @InjectModel(Browsedata)
     private BrowsedataModel: ReturnModelType<typeof Browsedata>,
   ) { }
@@ -49,34 +51,7 @@ export class AdminController {
   @Get()
   @Redirect()
   async Redirect(@Ip() ip: string, @Req() req: Request) {
-    let IP
-    let proxyIp = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
-    // console.log(ipStr);
-    if (proxyIp==undefined) {
-      if (ip === '::1') {
-        IP = '0.0.0.0'
-      } else {
-        IP = (ip.split(':'))[3]
-      }
-    }else{
-      ip=proxyIp
-    }
-
-    let get
-    if ((get = this.cache.get(ip)) === undefined) {
-
-      let ipinfo = qqwry.searchIP(IP); //查询IP信息
-      let ret = {
-        ip: IP,
-        ua: req.headers['user-agent'] + ' API',
-        info: ipinfo,
-        view: 1
-      };
-      var data = await this.BrowsedataModel.create(ret);
-      this.cache.set(ip, { id: data._id }, 60*15);
-    } else {
-      await this.BrowsedataModel.findOneAndUpdate({ _id: get.id }, { $inc: { view: 1 } })
-    }
+    this.fieldsService.saveUserInfo(ip,req,"swagger")
     return {
       "url": 'api-docs',
       "statusCode": 302

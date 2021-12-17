@@ -16,6 +16,7 @@ import {ThemeModule} from './module/theme/theme.module';
 import {UpfileModule} from './module/upfile/upfile.module';
 
 import {CommonModule} from '@app/common';
+import { FieldsService } from './module/fields/fields.service';
 // import {timeout} from "rxjs/operators";
 // import { APP_INTERCEPTOR } from "@nestjs/core";
 // import { MorganModule, MorganInterceptor } from "nest-morgan";
@@ -54,7 +55,7 @@ import {CommonModule} from '@app/common';
 
   ],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService,FieldsService],
   // CacheModule,
 //    RedisModule.register({
 //       host: process.env.REDIS_HOST,

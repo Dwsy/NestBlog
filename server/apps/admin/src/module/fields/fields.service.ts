@@ -14,7 +14,10 @@ import { PaginateKeys } from 'libs/nestjs-mongoose-crud/src/crud.interface';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'libs/db/models/user.model';
 import memCache from 'libs/utils/memCache';
-
+import { Browsedata } from 'libs/db/models/browsedata.model';
+let libqqwry = require('lib-qqwry');
+let qqwry = libqqwry() //初始化IP库解析器
+qqwry.speed(); //启用急速模式;
 // import {CacheService} from '../../cache/cache.service';
 
 @Injectable()
@@ -29,14 +32,12 @@ export class FieldsService {
         @InjectModel(Comments)
         private CommentModel: ReturnModelType<typeof Comments>,
         private jwtService: JwtService,
+        @InjectModel(Browsedata)
+        private BrowsedataModel: ReturnModelType<typeof Browsedata>,
     ) {
     }
 
     async getDraftList(query) {
-
-
-
-
         let populate = undefined;
         let page = 1;
         let skip = 0;
@@ -237,4 +238,36 @@ export class FieldsService {
 
         // return data;
     }
+
+    async saveUserInfo(@Ip() ip: string, @Req() req: Request,origin:string) {
+        let IP
+        let proxyIp = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
+        // console.log(ipStr);
+        if (proxyIp==undefined) {
+          if (ip === '::1') {
+            IP = '0.0.0.0'
+          } else {
+            IP = (ip.split(':'))[3]
+          }
+        }else{
+          ip=proxyIp
+        }
+        let get
+        if ((get = this.cache.get(ip)) === undefined) {
+    
+          let ipinfo = qqwry.searchIP(IP); //查询IP信息
+          let ret = {
+            ip: IP,
+            ua: req.headers['user-agent'] + origin,
+            info: ipinfo,
+            view: 1
+          };
+          var data = await this.BrowsedataModel.create(ret);
+          this.cache.set(ip, { id: data._id }, 60*15);
+        } else {
+          await this.BrowsedataModel.findOneAndUpdate({ _id: get.id }, { $inc: { view: 1 } })
+        }
+        return null
+      }
+
 }
