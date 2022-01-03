@@ -117,10 +117,11 @@ export default {
                 isPublish: true,
                 allowComment: false
             };
-            const Content = await this.$http.createContent(ContentData);
+            const Content = await this.$http.createContent(ContentData)
+            let ContentId=Content[0]._id
             let FieldData = {
                 title: this.title,
-                contentsId: Content[0]._id,
+                contentsId: ContentId,
                 tag: this.selectTag.map(value => value._id),
                 classification: this.selectClass._id,
                 cover: this.cover,
@@ -131,15 +132,15 @@ export default {
             };
             const Field = await this.$http.createField(FieldData);
             // console.log(Field[0].contentsId);
-            // console.log(Content[0]._id);
+            // console.log(ContentId);
             let addData = {
                 fieldsId: Field[0]._id,
-                ContentTd: Content[0]._id
+                ContentId: ContentId
             };
-            const add = await this.$http.addField(addData);
-            const toc = await this.$http.createdToc(Content[0]._id);
+            this.$http.addField(addData);
+            this.$http.createdToc(ContentId);
             // console.log(add);
-            if (Field[0].contentsId === Content[0]._id) {
+            if (Field[0].contentsId === ContentId) {
                 // console.log("保存成功");
                 this.success("保存成功");
                 this.$router.push("/write/draft");
@@ -155,10 +156,11 @@ export default {
                 isPublish: true,
                 allowComment: false
             };
-            const Content = await this.$http.createContent(ContentData);
+            const Content = await this.$http.createContent(ContentData)
+            let ContentId=ContentId
             let FieldData = {
                 title: this.title,
-                contentsId: Content[0]._id,
+                contentsId: ContentId,
                 // tag: this.selectTag.map(value => value._id),
                 tag: this.selectTag,
                 classification: this.selectClass._id,
@@ -174,15 +176,15 @@ export default {
             await this.$http.TagContentsNum(this.selectTag.map(val=>val._id),1);
             
             // console.log(Field[0].contentsId);
-            // console.log(Content[0]._id);
+            // console.log(ContentId);
             let addData = {
                 fieldsId: Field[0]._id,
-                ContentTd: Content[0]._id
+                ContentId: ContentId
             };
-            const add = await this.$http.addField(addData);
-            const toc = await this.$http.createdToc(Content[0]._id);
+            await this.$http.addField(addData);
+            await this.$http.createdToc(ContentId);
             console.log(toc);
-            if (Field[0].contentsId === Content[0]._id) {
+            if (Field[0].contentsId === ContentId) {
                 // console.log("发送成功");
                 this.success("发送成功");
                 this.$router.push("/manage/manageArticles");

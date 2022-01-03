@@ -28,7 +28,7 @@ git clone https://github.com/Dwsy/blog.git
 ```shell
 cd server
 yarn/npm i
-nest start admin
+nest start server
 ```
 
 ```

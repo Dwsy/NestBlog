@@ -1,4 +1,4 @@
-import {Controller, Get, Param, Put, Res, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Param, Put, Post, Res, UseGuards} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud';
 import {InjectModel} from 'nestjs-typegoose';
 import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
@@ -57,5 +57,25 @@ export class ContentsController {
     @Get('search/s/:s')
     async search(@Param('s') s: string) {
         return this.contentsService.search(s);
+    }
+
+    @Post('/create')
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
+    async createContent(@Body() body: Contents) {
+        let ret = await this.model.create(body);
+        return {'_id': ret._id, 'status': 200}
+    }
+
+    @Put('/put/:id')
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
+    async addField(@Param("id") id: string, @Body() body: Contents) {
+        let ret= await this.model.findOneAndUpdate({_id: id}, body, {
+            new: true,
+            upsert: false,
+            runValidators: true
+        });
+        return {'_id': ret._id, 'status': 200}
     }
 }

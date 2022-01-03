@@ -3,7 +3,7 @@ import { Controller, Get, Ip, Redirect, Req, Res } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Browsedata } from 'libs/db/models/browsedata.model';
 import { InjectModel } from 'nestjs-typegoose';
-import { AdminService } from './admin.service';
+import { ServerService } from './server.service';
 import memCache from 'libs/utils/memCache';
 let libqqwry = require('lib-qqwry');
 let qqwry = libqqwry() //初始化IP库解析器
@@ -18,10 +18,10 @@ qqwry.speed(); //启用急速模式;
 // ipStream.pipe(process.stdout)
 
 @Controller()
-export class AdminController {
+export class ServerController {
   private cache = memCache;
   constructor(
-    private readonly adminService: AdminService,
+    private readonly serverService: ServerService,
     private readonly fieldsService: FieldsService,
     @InjectModel(Browsedata)
     private BrowsedataModel: ReturnModelType<typeof Browsedata>,

@@ -172,9 +172,10 @@ export default {
                 this.fieldsId,
                 FieldData
             );
+            let ContentId=Content[0]._id
             let addData = {
                 fieldsId: Field[0]._id,
-                ContentTd: Content[0]._id
+                ContentId: ContentId
             };
             if (this.isDraft == true) {
                 // await this.$http.ClassificationContentsNum(
@@ -194,8 +195,8 @@ export default {
                 console.log("originalTag", originalTag);
                 let add = newTag.filter(item => !_arr2Set.has(item));
                 let rm = originalTag.filter(item => !_arr1Set.has(item));
-                console.log("add", add);
-                console.log("rm", rm);
+                // console.log("add", add);
+                // console.log("rm", rm);
                 // await this.$http.TagContentsNum(add, 1);
                 await this.$http.TagContentsNum(rm, -1);
                 await this.$http.ClassificationContentsNum(
@@ -205,8 +206,8 @@ export default {
             }
 
             const add = await this.$http.addField(addData);
-            const toc = await this.$http.createdToc(Content[0]._id);
-            if (Field[0].contentsId === Content[0]._id) {
+            const toc = await this.$http.createdToc(ContentId);
+            if (Field[0].contentsId === ContentId) {
                 // console.log("保存成功");
                 this.success("保存成功");
                 this.$router.push("/write/draft");
@@ -252,11 +253,11 @@ export default {
 
                 const _arr1Set = new Set(newTag),
                     _arr2Set = new Set(originalTag);
-                console.log("originalTag", originalTag);
+                // console.log("originalTag", originalTag);
                 let add = newTag.filter(item => !_arr2Set.has(item));
                 let rm = originalTag.filter(item => !_arr1Set.has(item));
-                console.log("add", add);
-                console.log("rm", rm);
+                // console.log("add", add);
+                // console.log("rm", rm);
                 await this.$http.TagContentsNum(add, 1);
                 await this.$http.TagContentsNum(rm, -1);
             }
@@ -265,14 +266,15 @@ export default {
                 this.fieldsId,
                 FieldData
             );
+            let ContentId= Content[0]._id
             let addData = {
                 fieldsId: Field[0]._id,
-                ContentTd: Content[0]._id
+                ContentId: ContentId
             };
             const add = await this.$http.addField(addData);
-            const toc = await this.$http.createdToc(Content[0]._id);
-            console.log(toc);
-            if (Field[0].contentsId === Content[0]._id) {
+            const toc = await this.$http.createdToc(ContentId);
+            // console.log(toc);
+            if (Field[0].contentsId === ContentId) {
                 // console.log("保存成功");
                 this.success("发送成功");
                 this.$router.push("/manage/manageArticles");

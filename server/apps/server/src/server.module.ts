@@ -1,7 +1,7 @@
 import {HttpModule, Module} from '@nestjs/common';
 // import { DbModule } from 'libs/db';
-import {AdminController} from './admin.controller';
-import {AdminService} from './admin.service';
+import {ServerController} from './server.controller';
+import {ServerService} from './server.service';
 
 // import { UsersModule } from './users/users.module';
 import {AuthModule} from './module/auth/auth.module';
@@ -54,8 +54,8 @@ import { FieldsService } from './module/fields/fields.service';
 
 
   ],
-  controllers: [AdminController],
-  providers: [AdminService,FieldsService],
+  controllers: [ServerController],
+  providers: [ServerService,FieldsService],
   // CacheModule,
 //    RedisModule.register({
 //       host: process.env.REDIS_HOST,
@@ -64,9 +64,9 @@ import { FieldsService } from './module/fields/fields.service';
 //       password: process.env.REDIS_PASSWORD,
 //       keyPrefix: process.env.REDIS_PRIFIX,
 //     }),
-  // providers: [AdminService, {
+  // providers: [ServerService, {
   //             provide: APP_INTERCEPTOR,
   //             useClass: MorganInterceptor("combined"),}],
 })
-export class AdminModule {
+export class ServerModule {
 }

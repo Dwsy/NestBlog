@@ -95,7 +95,7 @@
                 <template v-slot:[`item.title`]="{ item }">
                     <a
                         :href="
-                            'http://dwsy.link:5000/article/' + item.contentsId
+                            'https://nestblog.dwsy.link/article/' + item.contentsId
                         "
                         target="_blank"
                         style="text-decoration:none"

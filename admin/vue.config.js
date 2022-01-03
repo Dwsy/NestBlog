@@ -1,5 +1,6 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const IsProduction = process.env.NODE_ENV === "production";
+const Path=process.env.NODE_ENV === 'development' ? './' : process.env.CDN_URL
 // if (process.env.NODE_ENV !== 'development') {
 //     var fs = require('fs');
 //     var version = new Date().getTime();
@@ -16,7 +17,8 @@ const IsProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
     lintOnSave: false,
-    publicPath: process.env.CDN_URL,
+    
+    publicPath: Path,
     // publicPath: "./",
     // publicPath: "https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/blog-admin/",
     pages: {
