@@ -15,25 +15,25 @@ const CRUD_ROUTES = {
 };
 const allMethods = Object.values(CRUD_ROUTES);
 function cloneDecorators(from, to) {
-    Reflect.getMetadataKeys(from).forEach(key => {
+    Reflect.getMetadataKeys(from).forEach((key) => {
         const value = Reflect.getMetadata(key, from);
         Reflect.defineMetadata(key, value, to);
     });
 }
 function clonePropDecorators(from, to, name) {
-    Reflect.getMetadataKeys(from, name).forEach(key => {
+    Reflect.getMetadataKeys(from, name).forEach((key) => {
         const value = Reflect.getMetadata(key, from, name);
         Reflect.defineMetadata(key, value, to, name);
     });
 }
-const Crud = (options) => {
+exports.Crud = (options) => {
     options = lodash_1.merge({}, crud_config_1.CrudConfig.options, options);
-    return target => {
+    return (target) => {
         const Controller = target;
         const controller = target.prototype;
         const crudController = new crud_controller_1.CrudController(options.model);
         controller.crudOptions = options;
-        const methods = allMethods.filter(v => lodash_1.get(options, `routes.${v}`) !== false);
+        const methods = allMethods.filter((v) => lodash_1.get(options, `routes.${v}`) !== false);
         for (let method of methods) {
             if (controller[method]) {
                 continue;
@@ -45,7 +45,7 @@ const Crud = (options) => {
                 return crudController[method].apply(this, args);
             };
             Object.defineProperty(controller[method], 'name', {
-                value: method
+                value: method,
             });
             // clone instance decorators
             cloneDecorators(crudController, controller);
@@ -64,9 +64,8 @@ const Crud = (options) => {
                     }
                     return v;
                 })),
-                ...lodash_1.get(options, `routes.${method}.decorators`, [])
+                ...lodash_1.get(options, `routes.${method}.decorators`, []),
             ], controller, method, Object.getOwnPropertyDescriptor(controller, method));
         }
     };
 };
-exports.Crud = Crud;

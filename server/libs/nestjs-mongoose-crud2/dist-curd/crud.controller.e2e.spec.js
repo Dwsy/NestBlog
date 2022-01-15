@@ -14,20 +14,20 @@ const mongoose = require("mongoose");
 const common_1 = require("@nestjs/common");
 const request = require("supertest");
 const crud_decorator_1 = require("./crud.decorator");
-const DB = process.env.DB || "mongodb://localhost/nestjs-mongoose-crud-test-e2e";
+const DB = process.env.DB || 'mongodb://localhost/nestjs-mongoose-crud-test-e2e';
 mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
 });
-const UserModel = mongoose.model("User", new mongoose.Schema({
+const UserModel = mongoose.model('User', new mongoose.Schema({
     username: String,
-    age: Number
+    age: Number,
 }, {
-    timestamps: true
+    timestamps: true,
 }));
-describe("CrudController e2e", () => {
+describe('CrudController e2e', () => {
     let UserController = class UserController {
         constructor() {
             this.model = UserModel;
@@ -35,7 +35,7 @@ describe("CrudController e2e", () => {
     };
     UserController = __decorate([
         crud_decorator_1.Crud({
-            model: UserModel
+            model: UserModel,
         }),
         common_1.Controller('/users'),
         __metadata("design:paramtypes", [])
@@ -48,11 +48,11 @@ describe("CrudController e2e", () => {
             .fill(1)
             .map((v, i) => ({
             username: `user${i}`,
-            age: Math.floor(Math.random() * 100)
+            age: Math.floor(Math.random() * 100),
         }));
         await UserModel.insertMany(users);
         const moduleRef = await testing_1.Test.createTestingModule({
-            controllers: [UserController]
+            controllers: [UserController],
         }).compile();
         app = moduleRef.createNestApplication();
         await app.init();
@@ -60,12 +60,12 @@ describe("CrudController e2e", () => {
     afterAll(() => {
         mongoose.disconnect();
     });
-    describe("create", () => {
-        it("should return paginated users", async () => {
+    describe('create', () => {
+        it('should return paginated users', async () => {
             return request(app.getHttpServer())
                 .get(`/users?query={"limit":8}`)
                 .expect(200)
-                .expect(res => expect(res.body.data.length).toBe(8));
+                .expect((res) => expect(res.body.data.length).toBe(8));
         });
         // end of it()
     });

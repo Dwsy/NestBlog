@@ -13,8 +13,8 @@ export declare class CrudController {
     find(query?: ICrudQuery): Promise<any[] | {
         [x: string]: number | any[];
     }>;
-    findOne(id: string, query?: ICrudQuery): import("mongoose").Query<any, any>;
+    findOne(id: string, query?: ICrudQuery): import("mongoose").Query<any, any, {}, any>;
     create(body: CrudPlaceholderDto): Promise<any>;
-    update(id: string, body: CrudPlaceholderDto): import("mongoose").Query<any, any>;
-    delete(id: string): import("mongoose").Query<any, any>;
+    update(id: string, body: CrudPlaceholderDto): import("mongoose").Query<any, any, {}, any>;
+    delete(id: string): import("mongoose").Query<any, any, {}, any>;
 }

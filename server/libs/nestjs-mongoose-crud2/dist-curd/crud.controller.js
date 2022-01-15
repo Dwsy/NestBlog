@@ -29,20 +29,24 @@ class CrudController {
     }
     async config(req) {
         const { config } = this.crudOptions;
-        if (typeof config === "function") {
+        if (typeof config === 'function') {
             return config.call(this, req);
         }
         return config;
     }
     find(query = {}) {
-        let { where = lodash_1.get(this.crudOptions, "routes.find.where", {}), limit = lodash_1.get(this.crudOptions, "routes.find.limit", 20), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, "routes.find.populate", undefined), sort = lodash_1.get(this.crudOptions, "routes.find.sort", undefined) } = query;
-        // console.log(where);
+        let { where = lodash_1.get(this.crudOptions, 'routes.find.where', {}), limit = lodash_1.get(this.crudOptions, 'routes.find.limit', 20), page = 1, skip = 0, populate = lodash_1.get(this.crudOptions, 'routes.find.populate', undefined), sort = lodash_1.get(this.crudOptions, 'routes.find.sort', undefined), } = query;
+        // console.log(get(this.crudOptions, "routes.find.where", {}));
         // console.log(query);
         if (skip < 1) {
             skip = (page - 1) * limit;
         }
-        const paginateKeys = lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate);
-        // console.log(lodash_1.get(this.crudOptions, "routes.find.paginate", crud_config_1.defaultPaginate));
+        const paginateKeys = lodash_1.get(this.crudOptions, 'routes.find.paginate', crud_config_1.defaultPaginate);
+        // console.log(get(
+        //   this.crudOptions,
+        //   "routes.find.paginate",
+        //   defaultPaginate
+        // ));
         const find = async () => {
             const data = await this.model
                 .find()
@@ -57,7 +61,7 @@ class CrudController {
                     [paginateKeys.total]: total,
                     [paginateKeys.data]: data,
                     [paginateKeys.lastPage]: Math.ceil(total / limit),
-                    [paginateKeys.currentPage]: page
+                    [paginateKeys.currentPage]: page,
                 };
             }
             return data;
@@ -65,7 +69,7 @@ class CrudController {
         return find();
     }
     findOne(id, query = {}) {
-        let { where = lodash_1.get(this.crudOptions, "routes.findOne.where", {}), populate = lodash_1.get(this.crudOptions, "routes.findOne.populate", undefined), select = lodash_1.get(this.crudOptions, "routes.findOne.select", null) } = query;
+        let { where = lodash_1.get(this.crudOptions, 'routes.findOne.where', {}), populate = lodash_1.get(this.crudOptions, 'routes.findOne.populate', undefined), select = lodash_1.get(this.crudOptions, 'routes.findOne.select', null), } = query;
         return this.model
             .findById(id)
             .populate(populate)
@@ -73,21 +77,21 @@ class CrudController {
             .where(where);
     }
     create(body) {
-        const transform = lodash_1.get(this.crudOptions, "routes.create.transform");
+        const transform = lodash_1.get(this.crudOptions, 'routes.create.transform');
         if (transform) {
             body = transform(body);
         }
         return this.model.create(body);
     }
     update(id, body) {
-        const transform = lodash_1.get(this.crudOptions, "routes.update.transform");
+        const transform = lodash_1.get(this.crudOptions, 'routes.update.transform');
         if (transform) {
             body = transform(body);
         }
         return this.model.findOneAndUpdate({ _id: id }, body, {
             new: true,
             upsert: false,
-            runValidators: true
+            runValidators: true,
         });
     }
     delete(id) {
@@ -95,8 +99,8 @@ class CrudController {
     }
 }
 __decorate([
-    common_1.Get("config"),
-    swagger_1.ApiOperation({ summary: "API Config", operationId: "config" }),
+    common_1.Get('config'),
+    swagger_1.ApiOperation({ summary: 'API Config', operationId: 'config' }),
     __param(0, common_1.Req()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -104,22 +108,22 @@ __decorate([
 ], CrudController.prototype, "config", null);
 __decorate([
     common_1.Get(),
-    swagger_1.ApiOperation({ summary: "Find all records", operationId: "list" }),
+    swagger_1.ApiOperation({ summary: 'Find all records', operationId: 'list' }),
     swagger_1.ApiQuery({
-        name: "query",
+        name: 'query',
         type: String,
         required: false,
-        description: "Query options"
+        description: 'Query options',
     }),
-    __param(0, crud_query_decorator_1.CrudQuery("query")),
+    __param(0, crud_query_decorator_1.CrudQuery('query')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [crud_query_decorator_1.ICrudQuery]),
     __metadata("design:returntype", void 0)
 ], CrudController.prototype, "find", null);
 __decorate([
-    common_1.Get(":id"),
-    swagger_1.ApiOperation({ summary: "Find a record" }),
-    __param(0, common_1.Param("id")), __param(1, crud_query_decorator_1.CrudQuery("query")),
+    common_1.Get(':id'),
+    swagger_1.ApiOperation({ summary: 'Find a record' }),
+    __param(0, common_1.Param('id')), __param(1, crud_query_decorator_1.CrudQuery('query')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, crud_query_decorator_1.ICrudQuery]),
     __metadata("design:returntype", void 0)
@@ -128,28 +132,28 @@ __decorate([
     common_1.Post(),
     common_1.UseGuards(passport_1.AuthGuard('jwt')),
     swagger_1.ApiBearerAuth(),
-    swagger_1.ApiOperation({ summary: "Create a record" }),
+    swagger_1.ApiOperation({ summary: 'Create a record' }),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CrudPlaceholderDto]),
     __metadata("design:returntype", void 0)
 ], CrudController.prototype, "create", null);
 __decorate([
-    common_1.Put(":id"),
+    common_1.Put(':id'),
     common_1.UseGuards(passport_1.AuthGuard('jwt')),
     swagger_1.ApiBearerAuth(),
-    swagger_1.ApiOperation({ summary: "Update a record" }),
-    __param(0, common_1.Param("id")), __param(1, common_1.Body()),
+    swagger_1.ApiOperation({ summary: 'Update a record' }),
+    __param(0, common_1.Param('id')), __param(1, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, CrudPlaceholderDto]),
     __metadata("design:returntype", void 0)
 ], CrudController.prototype, "update", null);
 __decorate([
-    common_1.Delete(":id"),
+    common_1.Delete(':id'),
     common_1.UseGuards(passport_1.AuthGuard('jwt')),
     swagger_1.ApiBearerAuth(),
-    swagger_1.ApiOperation({ summary: "Delete a record" }),
-    __param(0, common_1.Param("id")),
+    swagger_1.ApiOperation({ summary: 'Delete a record' }),
+    __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

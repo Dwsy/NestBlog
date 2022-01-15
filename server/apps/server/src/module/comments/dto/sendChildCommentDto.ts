@@ -39,7 +39,6 @@ export class sendChildCommentDto {
     @ApiProperty({description: 'childId', example: 'childId'})
     @prop({type: MongooseSchema.Types.ObjectId, ref: Comments})
     childId: Array<MongooseSchema.Types.ObjectId>;
-
     @ApiProperty({description: '父评论id'})
     fatherId: string;
 }

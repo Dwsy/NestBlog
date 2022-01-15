@@ -292,7 +292,7 @@ export default {
             links: [
                 {
                     name: "Home",
-                    url: "http://www.dwsy.link:5000"
+                    url: "https://nestblog.dwsy.link"
                 },
                 {
                     name: "About Us",
@@ -300,7 +300,7 @@ export default {
                 },
                 {
                     name: "Admin",
-                    url: "http://www.dwsy.link:4000/"
+                    url: "https://nestadmin.dwsy.link/"
                 },
                 {
                     name: "Github",
@@ -308,7 +308,7 @@ export default {
                 },
                 {
                     name: "Blog",
-                    url: "http://www.dwsy.link:88"
+                    url: "https://www.dwsy.link"
                 },
                 {
                     name: "Contact Us",

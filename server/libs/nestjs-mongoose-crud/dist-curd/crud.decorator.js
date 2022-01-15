@@ -27,13 +27,13 @@ function clonePropDecorators(from, to, name) {
     });
 }
 const Crud = (options) => {
-    options = lodash_1.merge({}, crud_config_1.CrudConfig.options, options);
+    options = (0, lodash_1.merge)({}, crud_config_1.CrudConfig.options, options);
     return target => {
         const Controller = target;
         const controller = target.prototype;
         const crudController = new crud_controller_1.CrudController(options.model);
         controller.crudOptions = options;
-        const methods = allMethods.filter(v => lodash_1.get(options, `routes.${v}`) !== false);
+        const methods = allMethods.filter(v => (0, lodash_1.get)(options, `routes.${v}`) !== false);
         for (let method of methods) {
             if (controller[method]) {
                 continue;
@@ -59,12 +59,12 @@ const Crud = (options) => {
             Reflect.decorate([
                 // replace fake dto to real dto
                 Reflect.metadata(constants_1.PARAMTYPES_METADATA, types.map((v) => {
-                    if (lodash_1.get(v, 'name') === crud_controller_1.CrudPlaceholderDto.name) {
-                        return lodash_1.get(options, `routes.${method}.dto`, options.model);
+                    if ((0, lodash_1.get)(v, 'name') === crud_controller_1.CrudPlaceholderDto.name) {
+                        return (0, lodash_1.get)(options, `routes.${method}.dto`, options.model);
                     }
                     return v;
                 })),
-                ...lodash_1.get(options, `routes.${method}.decorators`, [])
+                ...(0, lodash_1.get)(options, `routes.${method}.decorators`, [])
             ], controller, method, Object.getOwnPropertyDescriptor(controller, method));
         }
     };

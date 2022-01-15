@@ -18,11 +18,7 @@
                         ref="search"
                     ></v-text-field>
                 </template>
-                <v-list
-                    v-if="text.length > 0"
-                    class="border-list"
-                    fill-height
-                >
+                <v-list v-if="text.length > 0" class="border-list" fill-height>
                     <!-- 标题 -->
                     <v-list-item
                         v-for="item in title.slice(0, 7)"
@@ -34,7 +30,7 @@
                             <v-icon>{{ "mdi-access-point" }}</v-icon>
                             标题:<span v-html="item._highlights"></span>
                         </v-list-item-title>
-                         <v-divider></v-divider>
+                        <v-divider></v-divider>
                     </v-list-item>
                     <!-- 内容 -->
                     <v-list-item
@@ -42,20 +38,19 @@
                         v-show="content.length !== 0"
                         :key="item._id"
                         :to="'/article/' + item._id"
-
                     >
                         <v-icon>{{ "mdi-text" }}</v-icon>
                         <v-list-item-title class="font-weight-normal">
                             <!--                            <a :href="'/article/' + item._id">-->
-<!--                            内容:<span v-html="item._highlights.substr(item._highlights.indsexOf(this.search),20)"></span>-->
+                            <!--                            内容:<span v-html="item._highlights.substr(item._highlights.indsexOf(this.search),20)"></span>-->
                             内容:<span v-html="item._highlights"></span>
                             <!--                            </a>-->
                         </v-list-item-title>
-                         <v-divider></v-divider>
+                        <v-divider></v-divider>
                     </v-list-item>
                     <!-- Tag -->
                     <v-sheet v-show="tag.length !== 0">
-                        <Tag v-bind:tags="tag"/>
+                        <Tag v-bind:tags="tag" />
                     </v-sheet>
 
                     <!-- 分类 -->
@@ -64,7 +59,6 @@
                         v-show="classification.length !== 0"
                         :key="item._id"
                         :to="'/classification/' + item._id"
-
                     >
                         <v-list-item-title class="font-weight-normal">
                             <v-icon>{{ "mdi-book-variant" }}</v-icon>
@@ -72,9 +66,9 @@
                             分类:<span v-html="item._highlights"></span>
                             <!--                            </a>-->
                         </v-list-item-title>
-                         <v-divider></v-divider>
+                        <v-divider></v-divider>
                     </v-list-item>
-                     <v-divider></v-divider>
+                    <v-divider></v-divider>
                     <v-list
                         v-show="
                             tag.length === 0 &&
@@ -83,12 +77,9 @@
                                 title.length === 0
                         "
                     >
-                        <v-toolbar-title
-                            class="font-weight-normal"
-                        >
+                        <v-toolbar-title class="font-weight-normal">
                             ❌无搜索结果❌
-                        </v-toolbar-title
-                        >
+                        </v-toolbar-title>
                     </v-list>
                 </v-list>
             </v-menu>
@@ -150,7 +141,7 @@ export default {
                 this.classification = Sdata.S_classification;
                 this.title = Sdata.S_title;
             }
-            this.highlights()
+            this.highlights();
         },
         search() {
             this.$refs.search.blur();
@@ -158,52 +149,67 @@ export default {
             // this.$router.push()
         },
         highlights() {
-            const search = this.text
+            const search = this.text;
             this.title = this.title.map(item => {
                 for (let key in item) {
-                    if (key === 'title') {
-                        console.log(key)
-                        let replaceReg = new RegExp(search, 'g')// 匹配关键字正则
-                        let replaceString = '<span class="highlights-text">' + search + '</span>' // 高亮替换v-html值
-                        item['_highlights'] = item[key].replace(replaceReg, replaceString) // 开始替换
+                    if (key === "title") {
+                        console.log(key);
+                        let replaceReg = new RegExp(search, "g"); // 匹配关键字正则
+                        let replaceString =
+                            '<span class="highlights-text">' +
+                            search +
+                            "</span>"; // 高亮替换v-html值
+                        item["_highlights"] = item[key].replace(
+                            replaceReg,
+                            replaceString
+                        ); // 开始替换
                     }
                 }
-                return item
-            })
+                return item;
+            });
 
             this.classification = this.classification.map(item => {
                 for (let key in item) {
-                    if (key === 'name') {
-                        console.log(key)
-                        let replaceReg = new RegExp(search, 'g')// 匹配关键字正则
-                        let replaceString = '<span class="highlights-text">' + search + '</span>' // 高亮替换v-html值
-                        item['_highlights'] = item[key].replace(replaceReg, replaceString) // 开始替换
+                    if (key === "name") {
+                        console.log(key);
+                        let replaceReg = new RegExp(search, "g"); // 匹配关键字正则
+                        let replaceString =
+                            '<span class="highlights-text">' +
+                            search +
+                            "</span>"; // 高亮替换v-html值
+                        item["_highlights"] = item[key].replace(
+                            replaceReg,
+                            replaceString
+                        ); // 开始替换
                     }
                 }
-                return item
-            })
-
-
+                return item;
+            });
 
             this.content = this.content.map(item => {
                 for (let key in item) {
-                    if (key === 'text') {
+                    if (key === "text") {
                         // console.log(key)
-                        let replaceReg = new RegExp(search, 'g')// 匹配关键字正则
-                        let replaceString = '<span class="highlights-text">' + search + '</span>' // 高亮替换v-html值
-                        let len = item[key].length
-                        let index = item[key].indexOf(this.text)
-                        if (len>162) {
-                            item[key]=item[key].substr(index-10,152)
+                        let replaceReg = new RegExp(search, "g"); // 匹配关键字正则
+                        let replaceString =
+                            '<span class="highlights-text">' +
+                            search +
+                            "</span>"; // 高亮替换v-html值
+                        let len = item[key].length;
+                        let index = item[key].indexOf(this.text);
+                        if (len > 162) {
+                            item[key] = item[key].substr(index - 10, 152);
                         }
                         // item[key]=item[key].substr(index-10,152)
-                        item['_highlights'] = item[key].replace(replaceReg, replaceString) // 开始替换
+                        item["_highlights"] = item[key].replace(
+                            replaceReg,
+                            replaceString
+                        ); // 开始替换
                     }
                 }
-                return item
-            })
+                return item;
+            });
         }
-
     },
     filters: {
         ellipsis(value) {
@@ -243,7 +249,6 @@ a {
 /*    box-shadow: none !important;*/
 /*}*/
 .border-list {
-
     border: 0px solid #eee !important;
 }
 </style>

@@ -20,7 +20,7 @@ exports.CrudConfig = CrudConfig;
 CrudConfig.options = {
     routes: {
         find: {
-            paginate: { ...exports.defaultPaginate }
-        }
-    }
+            paginate: { ...exports.defaultPaginate },
+        },
+    },
 };

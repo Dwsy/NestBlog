@@ -18,7 +18,6 @@ import {
 // const httpsOptions = {
 //   key: fs.readFileSync('/root/SSL/key'),
 //   cert: fs.readFileSync('/root/SSL/pem'),
-
 // };
 // // https
 async function bootstrap() {

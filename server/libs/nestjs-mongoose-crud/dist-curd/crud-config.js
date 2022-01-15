@@ -10,10 +10,10 @@ exports.defaultPaginate = {
 };
 class CrudConfig {
     static setup(options) {
-        this.options = lodash_1.merge({}, this.options, options);
+        this.options = (0, lodash_1.merge)({}, this.options, options);
     }
     static get(key, defaultValue = undefined) {
-        return lodash_1.get(this.options, key, defaultValue);
+        return (0, lodash_1.get)(this.options, key, defaultValue);
     }
 }
 exports.CrudConfig = CrudConfig;

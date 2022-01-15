@@ -35,10 +35,10 @@ describe("CrudController e2e", () => {
         }
     };
     UserController = __decorate([
-        crud_decorator_1.Crud({
+        (0, crud_decorator_1.Crud)({
             model: UserModel,
         }),
-        common_1.Controller("/users"),
+        (0, common_1.Controller)("/users"),
         __metadata("design:paramtypes", [])
     ], UserController);
     let app;
