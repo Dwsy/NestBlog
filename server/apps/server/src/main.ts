@@ -14,12 +14,12 @@ import {
   NestExpressApplication,
   ExpressAdapter,
 } from '@nestjs/platform-express';
-// // https
+// https
 // const httpsOptions = {
 //   key: fs.readFileSync('/root/SSL/key'),
 //   cert: fs.readFileSync('/root/SSL/pem'),
 // };
-// // https
+// https
 async function bootstrap() {
   const server = express();
   const app = await NestFactory.create(ServerModule, new ExpressAdapter(server));
@@ -57,6 +57,6 @@ async function bootstrap() {
 
   console.log(`http://localhost:${HTTP_PORT}/api-docs`)
   console.log("-----------------------------------------");
-  console.log(`https://localhost:${HTTPS_PORT}/api-docs`)
+  console.log(`https://localhost:${HTTPS_PORT}/api-docs默认关闭打开需注释main.ts中https配置`)
 }
 bootstrap();

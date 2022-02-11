@@ -19,6 +19,12 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // { rel: "stylesheet", type: "text/css", href: "http://www.bootcdn.cn/animate.css" }
+      // { rel: "materialdesignicons-webfont", type: "text/css", href: "https://cdn.jsdelivr.net/npm/@mdi/font@latest/fonts/materialdesignicons-webfont.woff2?v=6.5.95" },
+      // { rel: "stylesheet", type: "text/css", href: "https://npm.elemecdn.com/@mdi/font@latest/css/materialdesignicons.min.css" }
+      //     <link data-n-head="ssr" rel="stylesheet" type="text/css"
+      //     href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap">
+      // <link data-n-head="ssr" rel="stylesheet" type="text/css"
+      //     href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
     ],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
     // script: [{ src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js' }],
@@ -27,11 +33,33 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css  script src="//unpkg.com/valine/dist/Valine.min.js
   css: ['assets/main.css'],
 
+  webfontloader: {
+    // add Google Fonts as "custom" | workaround required
+    custom: {
+        families: [
+            // 'Open Sans:n3,n4',
+            // 'Roboto:n3,n7'
+        ],
+        urls: [
+            // for each Google Fonts add url + options you want
+            // here add font-display option
+            // 'https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap',
+            'https://npm.elemecdn.com/roboto-font/css/fonts.css'
+        ]
+    }
+},
+  // webfontloader: {
+  //   google: {
+  //     families: ['Roboto:100,300,400,500,700,900&display=swap'] //Loads Lato font with weights 400 and 700
+  //   }
+  // },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  
+
   plugins: [
     { src: '~/plugins/filters.js' },
     // { src:'@/plugins/vue-highlight', ssr: false }
+    // { src:'@/plugins/', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,6 +83,8 @@ export default {
     // '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    'nuxt-webfontloader',
+    'nuxt-ssr-cache'
     // Simple Usage
     // 'nuxt-highlightjs',
     // '@nuxtjs/markdownit',
@@ -175,9 +205,30 @@ export default {
     'style': resolve(__dirname, './assets/style'),
     'data': resolve(__dirname, './assets/other/data')
   },
-    generate: {
-      fallback: 'index.html'
-    }
-  
+  generate: {
+    fallback: 'index.html'
+  },
+  cache: {
+    useHostPrefix: false, //是否使用主机前缀 如果提供了多个主机名 可以设置为true
+    pages: [ //将要缓存的页面
+    //root
+    /^\/$/
+    ],
+    
+    key(route, context) {
+      return route //return 的route是想要设置缓存的路由 可通过函数来设置想要缓存的路由 如果想跳过缓存可以返回假值
+    },
+ 
+    store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
+      type: 'memory',
+ 
+      //缓存的最大的页面
+      max: 5,
+ 
+      // 缓存的时间 到期将过期
+      ttl: 600,
+    },
+  },
+
 
 }

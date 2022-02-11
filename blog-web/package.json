@@ -29,9 +29,12 @@
     "markdown-it-div": "^1.1.0",
     "markdown-loader": "^6.0.0",
     "nuxt": "^2.15.8",
+    "nuxt-ssr-cache": "^1.5.2",
+    "nuxt-webfontloader": "^1.1.0",
     "prismjs": "^1.25.0",
     "valine": "^1.4.14",
-    "vditor": "^3.8.5"
+    "vditor": "^3.8.5",
+    "workbox-cdn": "^5.1.4"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.6",

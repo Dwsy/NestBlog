@@ -23,21 +23,20 @@
                 class="content"
                 :codeStyle="$vuetify.theme.dark ? 'prism-coy' : 'prism-mac'"
             ></div>
-
-            <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/clipboard.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/prism/prism.js"></script>
+            <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+            <script src="https://npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/prism/prism.js"></script>
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/prism/prism.css"/> -->
             <!-- <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/prism.js"></script> -->
             <p v-if="this.$vuetify.theme.dark">
                 <link
                     rel="stylesheet"
-                    href="//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-tomorrow1.css"
+                    href="//npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/css/prism-tomorrow1.css"
                 />
             </p>
             <p v-else>
                 <link
                     rel="stylesheet"
-                    href="//cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/css/prism-coy.css"
+                    href="//npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/css/prism-coy.css"
                 />
             </p>
 
@@ -55,6 +54,7 @@
 </template>
 
 <script>
+// import '../../assets/prism (1)'
 // import Prism from "prismjs";
 let link = "";
 export default {
