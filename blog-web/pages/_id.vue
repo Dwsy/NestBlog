@@ -1,8 +1,14 @@
 <template>
     <div>
-        <div>
-            <PPT v-bind:ppts="ppt" />
-        </div>
+        <v-row>
+            <v-col cols="12" xl="9" lg="9" md="9" sm="12" xs="12">
+                <PPT v-bind:ppts="ppt" />
+            </v-col>
+            <v-col class="pl" cols="12" xl="3" lg="3" md="3" sm="12" xs="12">
+                <Recently v-bind:recently="recently" />
+            </v-col>
+        </v-row>
+
         <v-row>
             <v-col cols="12" xl="9" lg="9" md="9" sm="12" xs="12">
                 <div>
@@ -26,11 +32,11 @@
             <v-col cols="12" xl="3" lg="3" md="3" sm="12" xs="12">
                 <div>
                     <br />
-
-                    <Recently v-bind:recently="recently" />
-                    <Top-50 v-bind:pixivTop="pixivTop" />
                     <p class="text-h6 pb-4">标签</p>
                     <Tag v-if="tag !== {}" v-bind:tags="tag" />
+                    <br>
+                    <p class="text-h6 pb-4">Pixiv每日排行榜Top50</p>
+                    <Top-50 v-bind:pixivTop="pixivTop" />
                 </div>
             </v-col>
         </v-row>
@@ -72,8 +78,29 @@ export default {
         // const recentlyData = await $axios.$get("comments/recently");
         // 并载
         const recentlyData = fieldsData.recently;
+        let fields = fieldsData.data;
+
+        if (fields == false) {
+            fields = [
+                {
+                    contentsId: "603e76d2700bde471cfe5f25",
+                    title: "你发现了新大陆",
+                    cover:
+                        "http://tva1.sinaimg.cn/large/005NWBIgly1gnz4ieffuxj30i00prhdt.jpg",
+                    coverSmall:
+                        "http://fp1.fghrsh.net/2021/02/11/5c71db2ce6bdc10cf95a9c0a4df9e237.png",
+                    classification: {},
+                    createdAt: "2021-02-27T05:30:00.000Z",
+                    updatedAt: "2022-02-04T19:38:34.155Z",
+                    __v: 0,
+                    commentsNum: 123,
+                    isDraft: false,
+                    view: 60
+                }
+            ];
+        }
         return {
-            fields: fieldsData.data,
+            fields: fields,
             // ppt: pptData.data,
             recently: recentlyData,
             // tag: tagData.data,
@@ -106,7 +133,7 @@ export default {
             //         }
             //     }
             // })).data
-            console.log(this.ppt);
+            // console.log(this.ppt);
             let data = JSON.parse(localStorage.getItem("ppt"));
             if (data === null) {
                 console.log("if");
@@ -114,7 +141,7 @@ export default {
                     await this.$axios.$get("ppt", {
                         params: {
                             query: {
-                                sort: "rank",
+                                sort: "rank"
                             }
                         }
                     })
@@ -240,4 +267,15 @@ export default {
 };
 </script>
 <style scoped>
+@media (max-height: 600px) {
+    .fas {
+        display: none !important;
+    }
+}
+
+@media (max-width: 960px) {
+    .pl {
+        display: none !important;
+    }
+}
 </style>

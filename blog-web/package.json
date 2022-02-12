@@ -17,6 +17,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/workbox": "^3.0.0-beta.16",
     "animejs": "^3.2.1",
     "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.12.1",

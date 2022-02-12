@@ -6,7 +6,7 @@
     hide-delimiter-background
     show-arrows-on-hover
     hide-delimiters
-    :interval="5000"
+    :interval="6000"
     :height="carouselHeight"
   >
     <v-carousel-item
@@ -36,7 +36,7 @@ export default {
   mounted() {
     let innerWidth=window.innerWidth
     if (innerWidth>660){
-      this.carouselHeight='320px'
+      this.carouselHeight='500px'
     }else {
       this.carouselHeight='200px'
     }
