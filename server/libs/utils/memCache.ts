@@ -8,7 +8,7 @@ export class memCache {
      * @return: Promise<any>
      */
     set(key: string, value: any, seconds?: number) {
-        console.log(`set key：${key}`);
+        console.log(`set key：${key},${new Date()}`);
 
         if (!seconds) {
             cacheMap.set(key, {
@@ -35,8 +35,19 @@ export class memCache {
         }
         return undefined;
     }
-    map(number: Number) {
-        let ret:Array<Object> =[]
+    /**
+     * @Description: 清空缓存
+     * @param action {String} 操作来源
+     */
+    refresh(action: String) {
+        cacheMap.clear()
+        if(action=''){
+            console.log(`清空缓存成功，操作来源:default,${new Date()}`);
+        }
+        console.log(`清空缓存成功，操作来源:${action},${new Date()}`);
+    }
+    map() {
+        let ret: Array<Object> = []
         cacheMap.forEach(function (value, key) {
             ret.push({
                 value,

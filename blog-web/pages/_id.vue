@@ -1,16 +1,17 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="12" xl="9" lg="9" md="9" sm="12" xs="12">
+            <v-col cols="12" xl="10" lg="10" md="9" sm="12" xs="12">
                 <PPT v-bind:ppts="ppt" />
             </v-col>
-            <v-col class="pl" cols="12" xl="3" lg="3" md="3" sm="12" xs="12">
+
+            <v-col class="pl" cols="12" xl="2" lg="2" md="2" sm="12" xs="12">
                 <Recently v-bind:recently="recently" />
             </v-col>
         </v-row>
 
         <v-row>
-            <v-col cols="12" xl="9" lg="9" md="9" sm="12" xs="12">
+            <v-col cols="12" xl="10" lg="10" md="9" sm="12" xs="12">
                 <div>
                     <br />
                     <!-- <h2 class="font-weight-bold pb-4">文章列表</h2> -->
@@ -29,14 +30,21 @@
                 </div>
             </v-col>
 
-            <v-col cols="12" xl="3" lg="3" md="3" sm="12" xs="12">
+            <v-col cols="12" xl="2" lg="2" md="2" sm="12" xs="12">
                 <div>
                     <br />
-                    <p class="text-h6 pb-4">标签</p>
+                    <!-- <p class="text-h6 pb-4">标签</p> -->
+                    
+                    <v-subheader class="text-h6 pb-5">标签</v-subheader>
+
                     <Tag v-if="tag !== {}" v-bind:tags="tag" />
-                    <br>
-                    <p class="text-h6 pb-4">Pixiv每日排行榜Top50</p>
+                    <br />
+                    
+                    <v-subheader class="text-h6 pb-5">Pixiv每日排行榜Top50</v-subheader>
+                    
+                    <!-- <p class="text-h6 pb-4">Pixiv每日排行榜Top50</p> -->
                     <Top-50 v-bind:pixivTop="pixivTop" />
+                    
                 </div>
             </v-col>
         </v-row>

@@ -8,6 +8,7 @@ import { ReturnModelType } from '@typegoose/typegoose';
 import { Classification } from 'libs/db/models/classification.model';
 import { Comments } from 'libs/db/models/comments.model';
 import { Tag } from 'libs/db/models/tag.model';
+import { fieldsIndexSummaryDto } from './dto/fieldsIndexSummaryDto';
 import { PaginateKeys } from 'libs/nestjs-mongoose-crud/src/crud.interface';
 // import {AuthGuard} from '@nestjs/passport';
 // import {Schema} from "mongoose";
@@ -60,7 +61,7 @@ export class FieldsService {
         const data = await this.model
             .find()
             // .where(where)
-            .where({isDraft: true})
+            .where({ isDraft: true })
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -130,25 +131,25 @@ export class FieldsService {
         let limit = 20;
         let where = {};
         let sort = undefined;
-        if (query) {
-            populate = query.populate;
-            page = query.page;
-            skip = 0;
-            limit = query.limit;
-            where = query.where;
-            sort = query.sort;
-        }
+        populate = query.populate;
+        page = query.page;
+        skip = 0;
+        limit = query.limit;
+        where = query.where;
+        sort = query.sort;
+
 
         if (skip < 1) {
             skip = (page - 1) * limit;
         }
-        const data = await this.model
+        let data = await this.model
             .find()
             // .where(where)
             .where({ isDraft: false })
             .skip(skip)
             .limit(limit)
             .sort(sort)
+            .populate({ path: 'contentsId', select: 'menus.summary' })
             .populate(populate);
         const paginateKeys: PaginateKeys | false = {
             data: 'data',
@@ -197,14 +198,14 @@ export class FieldsService {
         if ('1' === query.page || 1 === query.page) {
             return this.cacheIndex(query, recently);
         }
-        if (query) {
-            populate = query.populate;
-            page = query.page;
-            skip = 0;
-            limit = query.limit;
-            where = query.where;
-            sort = query.sort;
-        }
+
+        populate = query.populate;
+        page = query.page;
+        skip = 0;
+        limit = query.limit;
+        where = query.where;
+        sort = query.sort;
+
 
         if (skip < 1) {
             skip = (page - 1) * limit;
@@ -216,7 +217,8 @@ export class FieldsService {
             .skip(skip)
             .limit(limit)
             .sort(sort)
-            .populate(populate);
+            .populate({ path: 'contentsId', select: 'menus.summary' })
+            .populate(populate)
         const paginateKeys: PaginateKeys | false = {
             data: 'data',
             total: 'total',
@@ -239,35 +241,35 @@ export class FieldsService {
         // return data;
     }
 
-    async saveUserInfo(@Ip() ip: string, @Req() req: Request,origin:string) {
+    async saveUserInfo(@Ip() ip: string, @Req() req: Request, origin: string) {
         let IP
-        let proxyIp = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
+        let proxyIp = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
         // console.log(ipStr);
-        if (proxyIp==undefined) {
-          if (ip === '::1') {
-            IP = '0.0.0.0'
-          } else {
-            IP = (ip.split(':'))[3]
-          }
-        }else{
-          ip=proxyIp
+        if (proxyIp == undefined) {
+            if (ip === '::1') {
+                IP = '0.0.0.0'
+            } else {
+                IP = (ip.split(':'))[3]
+            }
+        } else {
+            ip = proxyIp
         }
         let get
         if ((get = this.cache.get(ip)) === undefined) {
-    
-          let ipinfo = qqwry.searchIP(IP); //查询IP信息
-          let ret = {
-            ip: IP,
-            ua: req.headers['user-agent'] + origin,
-            info: ipinfo,
-            view: 1
-          };
-          var data = await this.BrowsedataModel.create(ret);
-          this.cache.set(ip, { id: data._id }, 60*15);
+
+            let ipinfo = qqwry.searchIP(IP); //查询IP信息
+            let ret = {
+                ip: IP,
+                ua: req.headers['user-agent'] + origin,
+                info: ipinfo,
+                view: 1
+            };
+            var data = await this.BrowsedataModel.create(ret);
+            this.cache.set(ip, { id: data._id }, 60 * 15);
         } else {
-          await this.BrowsedataModel.findOneAndUpdate({ _id: get.id }, { $inc: { view: 1 } })
+            await this.BrowsedataModel.findOneAndUpdate({ _id: get.id }, { $inc: { view: 1 } })
         }
         return null
-      }
+    }
 
 }

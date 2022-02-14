@@ -1,5 +1,5 @@
 import { FieldsService } from './module/fields/fields.service';
-import { Controller, Get, Ip, Redirect, Req, Res } from '@nestjs/common';
+import { Controller, Get, Ip, Param, Redirect, Req, Res } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Browsedata } from 'libs/db/models/browsedata.model';
 import { InjectModel } from 'nestjs-typegoose';
@@ -16,7 +16,7 @@ qqwry.speed(); //启用急速模式;
 // var ipStream = qqwry.searchIPScopeStream('0.0.0.0','1.0.0.0',{format:'json'});
 // // s.pipe(fs.readFileSync(outFile))
 // ipStream.pipe(process.stdout)
-
+let authkey = process.env.authkey
 @Controller()
 export class ServerController {
   private cache = memCache;
@@ -26,6 +26,7 @@ export class ServerController {
     @InjectModel(Browsedata)
     private BrowsedataModel: ReturnModelType<typeof Browsedata>,
   ) { }
+
   @Get("/ip11111")
   async ip() {
     let data = await this.BrowsedataModel.find({});
@@ -48,10 +49,20 @@ export class ServerController {
     return data
 
   }
+  @Get(`refresh/:${authkey}`)
+  async refreshaCache(@Param('authkey') ak: String) {
+    if (ak=authkey) {
+      this.cache.refresh('手动操作')
+      return "手动清除缓存成功"+new Date()
+    }else{
+      return "权限不足⛔"
+    }
+    
+  }
   @Get()
   @Redirect()
   async Redirect(@Ip() ip: string, @Req() req: Request) {
-    this.fieldsService.saveUserInfo(ip,req,"swagger")
+    this.fieldsService.saveUserInfo(ip, req, "swagger")
     return {
       "url": 'api-docs',
       "statusCode": 302

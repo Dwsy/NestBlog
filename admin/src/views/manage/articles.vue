@@ -95,7 +95,7 @@
                 <template v-slot:[`item.title`]="{ item }">
                     <a
                         :href="
-                            'https://nestblog.dwsy.link/article/' + item.contentsId
+                            'https://nestblog.dwsy.link/article/' + item.contentsId._id
                         "
                         target="_blank"
                         style="text-decoration:none"
@@ -203,17 +203,19 @@ export default {
         //     this.desserts = ;
         // },
 
-        editItem(item) {
-            // console.log(item);
-            this.editedIndex = this.tags.indexOf(item);
-            this.editedItem = Object.assign({}, item);
-            this.dialog = true;
-        },
+        // editItem(item) {
+        //     // console.log(item);
+        //     console.log("aaaaa")
+        //     this.editedIndex = this.tags.indexOf(item);
+        //     this.editedItem = Object.assign({}, item);
+        //     this.dialog = true;
+        // },
 
         editItem(item) {
             // console.log(item);
             let id = item._id;
-            let contentsId = item.contentsId;
+            console.log("eeeeee");
+            // let contentsId = item.contentsId;
 
             // this.$router.push({ name: '/write/edit/', params: { id: id }})
             this.$router.push(`/edit/${id}`);
@@ -225,7 +227,7 @@ export default {
         async deleteItem(item) {
             const index = this.tags.indexOf(item);
             if (confirm("你确定要删除这篇文章吗？")) {
-                await this.$http.delContent(item.contentsId);
+                await this.$http.delContent(item.contentsId._id);
                 await this.$http.delField(item._id);
                 await this.$http.ClassificationContentsNum(
                     item.classification._id,

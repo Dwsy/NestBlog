@@ -85,6 +85,7 @@ export class FieldsController {
             .find()
             .populate('tag')
             .populate('classification')
+            .populate('contentsId','menus')
             .limit(8)
             .skip(parseInt(page) * 8 - 8)
             .sort({_id: -1});

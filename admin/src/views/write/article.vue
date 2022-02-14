@@ -157,7 +157,7 @@ export default {
                 allowComment: false
             };
             const Content = await this.$http.createContent(ContentData)
-            let ContentId=ContentId
+            let ContentId=Content[0]._id
             let FieldData = {
                 title: this.title,
                 contentsId: ContentId,
@@ -183,7 +183,6 @@ export default {
             };
             await this.$http.addField(addData);
             await this.$http.createdToc(ContentId);
-            console.log(toc);
             if (Field[0].contentsId === ContentId) {
                 // console.log("发送成功");
                 this.success("发送成功");

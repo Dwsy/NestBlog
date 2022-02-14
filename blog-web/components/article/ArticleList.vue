@@ -6,17 +6,16 @@
           <v-hover v-slot:default="{ hover }" close-delay="50">
 
             <v-card
-              :to="'/article/' + item.contentsId"
+              :to="'/article/' + item.contentsId['_id']"
               :elevation="hover ? 4 : 1"
               class="animate__animated animate__bounce"
             >
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-container>
-                  <v-card-title
-
-                    class="headline"
+                  <p
+                    class=" text-darken-1 mb-2"
                     v-text="item.title"
-                  ></v-card-title>
+                  ></p>
                   <div>
                     <v-img
                       :src="item.cover"
@@ -27,6 +26,8 @@
                       class="d-sm-none imgbig"
                     ></v-img>
                   </div>
+                  
+                  <p class="summary" v-if="item.contentsId['menus']">{{item.contentsId.menus.summary}}</p>
 
                   <v-chip class="ma-1" color="light-blue darken-1" outlined small>
                     <v-avatar center >
@@ -85,6 +86,7 @@
 
 export default {
   // components: { Tag },
+  
   props: {
     fields: {}
   },
@@ -95,4 +97,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.summary {
+    line-height: 2em;
+    color: #a3a3a3;
+    display: block;
+    font-size: 0.4cm;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+</style>
