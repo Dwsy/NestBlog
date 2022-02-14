@@ -52,7 +52,7 @@ export class CommentsController {
     @ApiOperation({summary: '请求最近5条评论'})
     async getRecentlyComments() {
         // this.CommentsModel.
-        return this.CommentsModel.find({}, '-email').limit(5).sort({_id: -1});
+        return this.CommentsModel.find({}, '-email -ip').limit(5).sort({_id: -1});
     }
 
     @Post()
@@ -104,9 +104,11 @@ export class CommentsController {
 
     @Get(':id')
     async get(@Param('id') id: string) {
-        let a = this.CommentsModel.find({contentsId: id, isChild: false})
-            .populate('childId')
+        let a = this.CommentsModel.find({contentsId: id, isChild: false}, '-ip -email')
+            .populate('childId', '-ip -email')
             .sort({_id: -1});
+            console.log(a);
+            
         // return this.CommentsModel.find(contentsId:id);
         return a;
     }

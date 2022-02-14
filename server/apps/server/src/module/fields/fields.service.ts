@@ -183,7 +183,7 @@ export class FieldsService {
         // console.log(recently)
         if (recently === undefined) {
             // console.log("recently = await this.CommentModel.find({}, '-email').limit(5).sort({'_id': -1})")
-            recently = await this.CommentModel.find({}, '-email')
+            recently = await this.CommentModel.find({}, '-ip -email')
                 .limit(5)
                 .sort({ _id: -1 });
             this.cache.set('recently', recently, 10 * 60);
