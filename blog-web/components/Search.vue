@@ -145,7 +145,7 @@ export default {
         },
         search() {
             this.$refs.search.blur();
-            console.log(this.text);
+            // console.log(this.text);
             // this.$router.push()
         },
         highlights() {
@@ -153,7 +153,7 @@ export default {
             this.title = this.title.map(item => {
                 for (let key in item) {
                     if (key === "title") {
-                        console.log(key);
+                        // console.log(key);
                         let replaceReg = new RegExp(search, "g"); // 匹配关键字正则
                         let replaceString =
                             '<span class="highlights-text">' +
@@ -171,7 +171,7 @@ export default {
             this.classification = this.classification.map(item => {
                 for (let key in item) {
                     if (key === "name") {
-                        console.log(key);
+                        // console.log(key);
                         let replaceReg = new RegExp(search, "g"); // 匹配关键字正则
                         let replaceString =
                             '<span class="highlights-text">' +

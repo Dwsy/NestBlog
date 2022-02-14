@@ -68,7 +68,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
+    // '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
 
@@ -223,7 +223,7 @@ export default {
       type: 'memory',
  
       //缓存的最大的页面
-      max: 5,
+      max: 6,
  
       // 缓存的时间 到期将过期
       ttl: 600,

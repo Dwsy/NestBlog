@@ -144,7 +144,7 @@ export default {
             // console.log(this.ppt);
             let data = JSON.parse(localStorage.getItem("ppt"));
             if (data === null) {
-                console.log("if");
+                // console.log("if");
                 this.ppt = (
                     await this.$axios.$get("ppt", {
                         params: {
@@ -162,13 +162,13 @@ export default {
                     })
                 );
             } else {
-                console.log("else");
+                // console.log("else");
 
                 if (data.date + 22200000 > new Date().getTime()) {
                     this.ppt = data.data;
-                    console.log("使用缓存");
+                    // console.log("使用缓存");
                 } else {
-                    console.log("更新缓存");
+                    // console.log("更新缓存");
                     this.ppt = (
                         await this.$axios.$get("ppt", {
                             params: {

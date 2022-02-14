@@ -33,15 +33,15 @@ export default {
     },
     methods: {
         handleGoToScroll(target) {
-            console.log(target);
+            // console.log(target);
             const el = document.getElementById(target.substring(1));
-            console.log(el);
+            // console.log(el);
             if (!el) return;
             // location.href = target;
 
             const topSize = this.getElementToPageTop(el);
-            console.log(topSize);
-            console.log(target);
+            // console.log(topSize);
+            // console.log(target);
             this.$vuetify.goTo(topSize - 4150);
         },
         getElementToPageTop(el) {

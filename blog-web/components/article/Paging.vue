@@ -16,7 +16,7 @@ export default {
   },
   created() {
     // console.log("test")
-    console.log(this.page)
+    // console.log(this.page)
   },
   watch:{
 			page: {

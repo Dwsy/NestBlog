@@ -39,11 +39,13 @@ import Toc from "../../components/article/Toc";
 
 // import Ccomment from '../../components/article/Ccomment';
 export default {
-    async asyncData({ $axios, params }) {
+    async asyncData({ $axios, params}) {
         let id = params.id;
-        if (id === undefined) {
-            id = "603e751045d89d46e830734a"; //直接通过前缀访问跳转
-        }
+        // console.log(params);
+        // if (id === undefined) {
+        //     // $router.push('/');
+        //     id = "603e751045d89d46e830734a"; //直接通过前缀访问跳转
+        // }
         const content = await $axios.$get(`contents/${id}`);
         if (content.key == 0) {
             return {
@@ -75,7 +77,7 @@ export default {
         };
     },
     mounted() {
-        setTimeout(() => this.getComments(), 2000);
+        setTimeout(() => this.getComments(), 1000);
     },
     methods: {
         async getComments() {
