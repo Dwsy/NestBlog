@@ -85,10 +85,10 @@ export class ContentsService {
         let title = {
             title: {$regex: reg},
         };
-        let S_content = await this.model.find(content, 'text');
-        let S_tag = await this.tag.find(Tag);
+        let S_content = await this.model.find(content, 'text').where({ isPublish: false });
+        let S_tag = await this.tag.find(Tag).where({ isDraft: false });
         let S_classification = await this.classification.find(classification);
-        let S_title = await this.field.find(title, 'title contentsId');
+        let S_title = await this.field.find(title, 'title contentsId').where({ isDraft: false });
         return {
             S_title,
             S_content,

@@ -27,10 +27,23 @@ export function logger(req: Request, res: Response, next: () => any) {
   const code = res.statusCode; // 响应状态码
   next();
   // 组装日志信息
+  let IP
+  let ip = req.ip
+  let proxyIp:any = req.headers['X-Real-IP'] || req.headers['x-forwarded-for'];
+  // console.log(ipStr);
+  if (proxyIp == undefined) {
+      if (ip === '::1') {
+          IP = '0.0.0.0'
+      } else {
+          IP = (ip.split(':'))[3]
+      }
+  } else {
+      ip = proxyIp
+  }
   const logFormat = ` >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     Request original url: ${req.originalUrl}
     Method: ${req.method}
-    IP: ${req.ip}
+    IP: ${IP}
     Status code: ${code}
     Parmas: ${JSON.stringify(req.params)}
     Query: ${JSON.stringify(req.query)}

@@ -28,6 +28,10 @@
                   </div>
                   
                   <p class="summary" v-if="item.contentsId['menus']">{{item.contentsId.menus.summary}}</p>
+                  <!-- <div v-else>
+                    <br>
+                    <br>
+                  </div> -->
 
                   <v-chip class="ma-1" color="light-blue darken-1" outlined small>
                     <v-avatar center >

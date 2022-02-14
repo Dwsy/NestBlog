@@ -1,5 +1,5 @@
 # Blog
-https://github.dev/Dwsy/Blog
+
 Blog前端:`Nuxt.js + Vuetify.js`
 
 Server:`Nest.js + MongoDB`
@@ -12,7 +12,7 @@ Blog在线预览地址：https://nestblog.dwsy.link/   static:https://cf.dwsy.li
 
 `由于jsdelivr节点更换故替换所有CDN资源引入资源详见` => [Blog-web](./blog-web/README.md) 
 
-Admin在线预览地址:https://nestadmin.dwsy.link/   https://admin.dwsy.link/     (cloudflare自动部署)
+Admin在线预览地址:https://nestadmin.dwsy.link/   https://admin.dwsy.link/    (cloudflare自动部署)
 
 Server-Swagger UI在线地址：https://nestapi.dwsy.link/
 
