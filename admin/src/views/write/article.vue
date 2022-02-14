@@ -157,7 +157,7 @@ export default {
                 allowComment: false
             };
             const Content = await this.$http.createContent(ContentData)
-            let ContentId=ContentId
+            let ContentId=Content[0]._id
             let FieldData = {
                 title: this.title,
                 contentsId: ContentId,
