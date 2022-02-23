@@ -1,7 +1,14 @@
 <template>
     <v-app id="inspire">
         <!-- 加载动画 -->
-
+        <div id="Loading">
+            <div data-loader="ball-scale" v-show="loader">
+                <div></div>
+                <!-- <div></div>
+                <div></div> -->
+                <div></div>
+            </div>
+        </div>
         <!-- 侧边导航栏 -->
         <v-navigation-drawer
             v-model="drawer"
@@ -22,8 +29,10 @@
                     <div @click="upyy">
                         <sub>{{ yy.hitokoto }}</sub
                         ><br />
-                        <sub style="left: 120px">--{{ yy.from }}</sub>
+                        <sub style="left: 120px;">--{{ yy.from }}</sub>
                     </div>
+
+                    
                 </v-col>
 
                 <template v-for="item in items">
@@ -137,27 +146,17 @@
                 >
                     <a
                         :href="link.url"
-                        style="text-decoration: none"
+                        style="text-decoration:none"
                         target="_blank"
                     >
                         {{ link.name }}
                     </a>
                 </v-btn>
-                <v-col class="lighten-2 py-4 text-center" cols="12">
+                <v-col class=" lighten-2 py-4 text-center " cols="12">
                     {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
                 </v-col>
             </v-row>
         </v-footer>
-        <div class="example">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-            </div>
-        </div>
         <ScrollToTop />
     </v-app>
 </template>
@@ -171,7 +170,7 @@ export default {
     components: {
         ScrollToTop,
         Navigation,
-        Search,
+        Search
     },
 
     // async created() {
@@ -219,7 +218,7 @@ export default {
     //     //         );
     //     //         }
     //     //     }
-
+        
     //     // // if (this.classificationData === null) {
     //     // //     this.classificationData = await this.$axios.$get("classification");
     //     // // }
@@ -299,13 +298,9 @@ export default {
                 {
                     icon: "mdi-flag-variant-outline",
                     text: "文章归档",
-                    link: "/archives",
+                    link: "/archives"
                 },
-                {
-                    icon: "mdi-timeline-clock-outline ",
-                    text: "时光机",
-                    link: "/cross",
-                },
+                { icon: "mdi-timeline-clock-outline ", text: "时光机", link: "/cross" },
                 { icon: "mdi-image", text: "相册", link: "/image" },
                 { icon: "mdi-tag-multiple-outline", text: "Tag", link: "/tag" },
                 {
@@ -313,61 +308,61 @@ export default {
                     "icon-alt": "mdi-chevron-down",
                     text: "文章分类",
                     model: false,
-                    children: [],
+                    children: []
                 },
                 {
                     icon: "mdi-account-multiple-outline",
                     text: "友情链接",
-                    link: "/firend",
+                    link: "/firend"
                 },
                 {
                     icon: "mdi-infinity",
                     text: "infinitynewtab",
-                    link: "/infinitynewtab",
+                    link: "/infinitynewtab"
                 },
                 {
                     icon: "mdi-information-variant",
                     text: "关于",
-                    link: "/about",
-                },
+                    link: "/about"
+                }
             ],
             links: [
                 {
                     name: "Home",
-                    url: "https://nestblog.dwsy.link",
+                    url: "https://nestblog.dwsy.link"
                 },
                 {
                     name: "About Us",
-                    url: "1",
+                    url: "1"
                 },
                 {
                     name: "Admin",
-                    url: "https://nestadmin.dwsy.link/",
+                    url: "https://nestadmin.dwsy.link/"
                 },
                 {
                     name: "Github",
-                    url: "https://github.com/Dwsy",
+                    url: "https://github.com/Dwsy"
                 },
                 {
                     name: "Blog",
-                    url: "https://www.dwsy.link",
+                    url: "https://www.dwsy.link"
                 },
                 {
                     name: "Contact Us",
-                    url: "1",
-                },
+                    url: "1"
+                }
             ],
 
             miniVariant: false,
             right: true,
             rightDrawer: false,
             themeDark: "",
-            themeLight: "",
+            themeLight: ""
         };
     },
     async mounted() {
         console.log("123");
-        this.$vuetify.theme.dark = true;
+         this.$vuetify.theme.dark = true;
         // const classificationData = await this.$axios.$get("classification");
         // const themeData = await this.$axios.$get("theme");
 
@@ -376,44 +371,42 @@ export default {
         // console.log(this.classificationData);
         // console.log(this.themeData);
 
-        let CAT = JSON.parse(localStorage.getItem("classAndTheme"));
-        if (CAT === null) {
-            this.classificationData = await this.$axios.$get("classification");
-            this.themeData = await this.$axios.$get("theme");
-            localStorage.setItem(
-                "classAndTheme",
-                JSON.stringify({
-                    data: {
-                        class: this.classificationData,
-                        theme: this.themeData,
-                    },
-                    date: new Date().getTime(),
-                })
-            );
-        } else {
-            if (CAT.date + 22200000 > new Date().getTime()) {
-                this.classificationData = CAT.data.class;
-                this.themeData = CAT.data.theme;
-                // console.log("使用缓存");
-            } else {
-                // console.log("更新缓存");
-                this.classificationData = await this.$axios.$get(
-                    "classification"
-                );
+            let CAT = JSON.parse(localStorage.getItem("classAndTheme"));
+            if (CAT === null) {
+                this.classificationData = await this.$axios.$get("classification");
                 this.themeData = await this.$axios.$get("theme");
                 localStorage.setItem(
                     "classAndTheme",
                     JSON.stringify({
                         data: {
-                            class: this.classificationData,
-                            theme: this.themeData,
+                            class:this.classificationData,
+                            theme:this.themeData
                         },
-                        date: new Date().getTime(),
+                        date: new Date().getTime()
                     })
                 );
+            } else {
+                if (CAT.date + 22200000 > new Date().getTime()) {
+                    this.classificationData = CAT.data.class;
+                    this.themeData = CAT.data.theme;
+                    // console.log("使用缓存");
+                } else {
+                    // console.log("更新缓存");
+                this.classificationData = await this.$axios.$get("classification");
+                this.themeData = await this.$axios.$get("theme");
+                localStorage.setItem(
+                    "classAndTheme",
+                    JSON.stringify({
+                        data: {
+                            class:this.classificationData,
+                            theme:this.themeData
+                        },
+                        date: new Date().getTime()
+                    })
+                );
+                }
             }
-        }
-
+        
         // if (this.classificationData === null) {
         //     this.classificationData = await this.$axios.$get("classification");
         // }
@@ -430,7 +423,7 @@ export default {
             warning: this.themeDark.warning,
             success: this.themeDark.success,
             secondary: this.themeDark.secondary,
-            info: this.themeDark.info,
+            info: this.themeDark.info
         };
         let light = {
             accent: this.themeLight.accent,
@@ -439,7 +432,7 @@ export default {
             warning: this.themeLight.warning,
             success: this.themeLight.success,
             secondary: this.themeLight.secondary,
-            info: this.themeLight.info,
+            info: this.themeLight.info
         };
         this.$vuetify.theme.themes.light = light;
         this.$vuetify.theme.themes.dark = dark;
@@ -506,8 +499,8 @@ export default {
             // console.log(retSearch);
             // console.log(url);
             return retSearch;
-        },
-    },
+        }
+    }
 };
 </script>
 
@@ -571,5 +564,7 @@ pre {
     cursor: pointer;
     transition: all 0.8s;
 }
+
 </style>
 
+   
