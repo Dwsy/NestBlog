@@ -1,8 +1,10 @@
 <template>
   <v-card elevation="0">
     <v-container>
-      <v-row dense>
+      <v-row >
         <v-col v-for="item in fields" :key="item._id" cols="12">
+
+          
           <v-hover v-slot:default="{ hover }" close-delay="50">
 
             <v-card
@@ -79,6 +81,7 @@
               </div>
             </v-card>
           </v-hover>
+
         </v-col>
       </v-row>
     </v-container>

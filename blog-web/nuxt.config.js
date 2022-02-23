@@ -1,6 +1,7 @@
 // import colors from 'vuetify/es5/util/colors'
 import { resolve } from 'path'
 import dotenv from 'dotenv'
+import { log } from 'console'
 dotenv.config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -212,23 +213,42 @@ export default {
     useHostPrefix: false, //是否使用主机前缀 如果提供了多个主机名 可以设置为true
     pages: [ //将要缓存的页面
     //root
-    /^\/$/
+    // /^\/$/,
+    /^\/\d$/,
+    /^\/article\/\S+/,
+    /^\/archives\/\S+/,
+    /^\/classification\/\S+/,
+    // '/archives',
+    // '/classification'
     ],
     
     key(route, context) {
+
       return route //return 的route是想要设置缓存的路由 可通过函数来设置想要缓存的路由 如果想跳过缓存可以返回假值
     },
- 
-    store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
-      type: 'memory',
- 
-      //缓存的最大的页面
-      max: 6,
- 
-      // 缓存的时间 到期将过期
-      ttl: 600,
+    store: {
+      type: 'redis',
+      host: 'localhost',
+      port: 16379,
+      ttl: 10 * 60,
+      max: 10,
+      configure: [
+        // these values are configured
+        // on redis upon initialization
+        ['maxmemory', '50mb'],
+      ],
     },
   },
+    // store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
+    //   type: 'memory',
+ 
+    //   //缓存的最大的页面
+    //   max: 6,
+ 
+    //   // 缓存的时间 到期将过期
+    //   ttl: 600,
+    // },
+  // }
 
 
 }
