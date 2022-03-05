@@ -55,6 +55,7 @@ export class memCache {
             })
         });
         return ret
+        // return cacheMap
     }
 }
 export default new memCache();

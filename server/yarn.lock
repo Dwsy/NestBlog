@@ -4673,6 +4673,11 @@ minimist@1.2.5, minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
 
+mint-filter@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/mint-filter/-/mint-filter-3.0.1.tgz#1e85785e50a7c16c47567d3add339388965de062"
+  integrity sha512-mBMrNggwa5JtMvBWx0hC4t04iGwHChovV7gg+43CQg+vHYxPiHCwEc3DYHC0Wdq+Hxt2HBP0HdsT0QKmSxE9tA==
+
 mixin-deep@^1.2.0:
   version "1.3.2"
   resolved "https://registry.npm.taobao.org/mixin-deep/download/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"

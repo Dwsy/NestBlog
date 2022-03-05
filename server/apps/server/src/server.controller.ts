@@ -59,6 +59,14 @@ export class ServerController {
     }
     
   }
+  @Get(`test`)
+  async test(@Param('authkey') ak: String) {    
+    return this.cache.map()
+  }
+  @Get(`test1`)
+  async test1(@Param('authkey') ak: String) {
+    return this.cache.set('a',"dwsy")
+  }
   @Get()
   @Redirect()
   async Redirect(@Ip() ip: string, @Req() req: Request) {

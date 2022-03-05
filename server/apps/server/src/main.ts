@@ -14,6 +14,8 @@ import {
   NestExpressApplication,
   ExpressAdapter,
 } from '@nestjs/platform-express';
+
+import swf from 'libs/utils/sensitiveWordFilter';
 // https
 // const httpsOptions = {
 //   key: fs.readFileSync('/root/SSL/key'),
@@ -26,8 +28,8 @@ async function bootstrap() {
 
   // const app = await NestFactory.create(ServerModule);
   app.enableCors();
-  app.use(bodyParser.json({limit: '50mb'})); 
-  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
   const options = new DocumentBuilder()
     .setTitle('NestJs博客API')
     .setDescription('博客后台管理API')
@@ -45,7 +47,8 @@ async function bootstrap() {
   await app.init();
   const HTTP_PORT = process.env.ADMIN_PORT || 2999;
   const HTTPS_PORT = 3030;
-
+  // swf.setWords(fs.readFile(''))
+  swf.setWordsOfurl('http://dwsy.link/Sensitive5213.txt')
   http.createServer(server).listen(HTTP_PORT);
 
   // https
