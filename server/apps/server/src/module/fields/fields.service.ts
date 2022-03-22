@@ -252,10 +252,10 @@ export class FieldsService {
                 IP = (ip.split(':'))[3]
             }
         } else {
-            ip = proxyIp
+            IP = proxyIp
         }
-        let get
-        if ((get = this.cache.get(ip)) === undefined) {
+        let get= this.cache.get(IP)
+        if ( get === undefined) {
 
             let ipinfo = qqwry.searchIP(IP); //查询IP信息
             let ret = {
@@ -264,8 +264,9 @@ export class FieldsService {
                 info: ipinfo,
                 view: 1
             };
+            
             var data = await this.BrowsedataModel.create(ret);
-            this.cache.set(ip, { id: data._id }, 60 * 15);
+            this.cache.set(IP, { id: data._id }, 60 * 15);
         } else {
             await this.BrowsedataModel.findOneAndUpdate({ _id: get.id }, { $inc: { view: 1 } })
         }

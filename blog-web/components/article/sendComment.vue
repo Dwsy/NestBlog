@@ -71,7 +71,8 @@ import md5 from "md5";
 export default {
   props: {
     id: "",
-    IP: ""
+    IP: "",
+    getComments:Function
   },
   data() {
     return {
@@ -123,6 +124,7 @@ export default {
           this.icon = "mdi-send";
         }, 5000);
         this.content = null;
+        this.getComments()
       } else {
         // console.log("内容为空，请输入。");
         this.messagetext = "内容为空，请输入。";

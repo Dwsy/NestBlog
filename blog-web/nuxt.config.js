@@ -2,6 +2,7 @@
 import { resolve } from 'path'
 import dotenv from 'dotenv'
 dotenv.config()
+console.log('env', process.env)
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -36,18 +37,18 @@ export default {
   webfontloader: {
     // add Google Fonts as "custom" | workaround required
     custom: {
-        families: [
-            // 'Open Sans:n3,n4',
-            // 'Roboto:n3,n7'
-        ],
-        urls: [
-            // for each Google Fonts add url + options you want
-            // here add font-display option
-            // 'https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap',
-            'https://npm.elemecdn.com/roboto-font/css/fonts.css'
-        ]
+      families: [
+        // 'Open Sans:n3,n4',
+        // 'Roboto:n3,n7'
+      ],
+      urls: [
+        // for each Google Fonts add url + options you want
+        // here add font-display option
+        // 'https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap',
+        'https://npm.elemecdn.com/roboto-font/css/fonts.css'
+      ]
     }
-},
+  },
   // webfontloader: {
   //   google: {
   //     families: ['Roboto:100,300,400,500,700,900&display=swap'] //Loads Lato font with weights 400 and 700
@@ -85,30 +86,14 @@ export default {
     '@nuxtjs/dotenv',
     'nuxt-webfontloader',
     'nuxt-ssr-cache'
-    // Simple Usage
-    // 'nuxt-highlightjs',
-    // '@nuxtjs/markdownit',
-    // With Options
-    // ['nuxt-highlightjs', {
-    //   style: 'obsidian'
-    //   // Module Options
-    // }]
+
   ],
 
-  // [optional] markdownit options
-  // See https://github.com/markdown-it/markdown-it
-  // markdownit: {
-  //   preset: 'default',
-  //   linkify: true,
-  //   breaks: true,
-  //   use: [
-  //     'markdown-it-div',
-  //     'markdown-it-attrs'
-  //   ],
-  //   runtime: true
-  // },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  // axios: {
+  //   baseURL: process.env.NUXT_ENV_API_URL, // Used as fallback if no runtime config is provided
+  // },
+
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -208,27 +193,27 @@ export default {
   generate: {
     fallback: 'index.html'
   },
-  cache: {
-    useHostPrefix: false, //是否使用主机前缀 如果提供了多个主机名 可以设置为true
-    pages: [ //将要缓存的页面
-    //root
-    /^\/$/
-    ],
-    
-    key(route, context) {
-      return route //return 的route是想要设置缓存的路由 可通过函数来设置想要缓存的路由 如果想跳过缓存可以返回假值
-    },
- 
-    store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
-      type: 'memory',
- 
-      //缓存的最大的页面
-      max: 6,
- 
-      // 缓存的时间 到期将过期
-      ttl: 600,
-    },
-  },
+  // cache: {
+  //   useHostPrefix: false, //是否使用主机前缀 如果提供了多个主机名 可以设置为true
+  //   pages: [ //将要缓存的页面
+  //   //root
+  //   /^\/$/
+  //   ],
+
+  //   key(route, context) {
+  //     return route //return 的route是想要设置缓存的路由 可通过函数来设置想要缓存的路由 如果想跳过缓存可以返回假值
+  //   },
+
+  //   store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
+  //     type: 'memory',
+
+  //     //缓存的最大的页面
+  //     max: 6,
+
+  //     // 缓存的时间 到期将过期
+  //     ttl: 600,
+  //   },
+  // },
 
 
 }

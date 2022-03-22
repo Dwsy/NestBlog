@@ -38,7 +38,7 @@ export function logger(req: Request, res: Response, next: () => any) {
           IP = (ip.split(':'))[3]
       }
   } else {
-      ip = proxyIp
+    IP = proxyIp
   }
   const logFormat = ` >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     Request original url: ${req.originalUrl}
