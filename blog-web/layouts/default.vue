@@ -128,7 +128,7 @@
             <v-btn icon>
                 <v-icon>mdi-bell-circle</v-icon>
             </v-btn>
-            <v-btn v-show="toc&&!pc"
+            <v-btn v-show="toc&&!pc" class="tocbtn"
             @click="showToc" icon>
                 <v-icon>mdi-table-of-contents</v-icon>
             </v-btn>
@@ -260,11 +260,11 @@ export default {
     async mounted() {
         // console.log("123");
                 let innerWidth = window.innerWidth;
-        if (innerWidth > 660) {
+        if (innerWidth > 959) {
             this.pc = true;
+            console.log("pc");
         } else {
             this.pc = false;
-            setTimeout(() => this.createToc(), 500);
         }
         let path = this.$route.path;
         let t = path.split("/");
@@ -395,8 +395,6 @@ export default {
                 this.show=!this.show
                 a[0].style.right="-1px"
             }
-            
-            
         },
         handleChangeTheme() {
             this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
@@ -430,6 +428,9 @@ export default {
 </script>
 
 <style>
+.tocbtn{
+    display:none;
+}
 pre {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;

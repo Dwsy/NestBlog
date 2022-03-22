@@ -26,7 +26,7 @@
             </v-col>
             <v-col v-if="pc" cols="2" xl="2" lg="2" md="2" sm="11" xs="11">
                 <br />
-                <Toc :toc="toc"/>
+                <Toc :toc="toc" />
             </v-col>
             <div v-else class="toc">
                 <ol class="js-toc"></ol>
@@ -86,15 +86,53 @@ export default {
     },
     mounted() {
         let innerWidth = window.innerWidth;
-        if (innerWidth > 660) {
+        if (innerWidth > 960&&!this.isMobile()) {
             this.pc = true;
+            let a= document.getElementsByClassName("tocbtn")
+            a[0].style.display="none"
         } else {
             this.pc = false;
+            console.log("this.pc = false;");
+            let a= document.getElementsByClassName("tocbtn")
+            
             setTimeout(() => this.createToc(), 500);
+            setTimeout(() => a[0].style.display="block", 500);
         }
         setTimeout(() => this.getComments(), 1000);
     },
     methods: {
+        isMobile() {
+            var userAgentInfo = navigator.userAgent;
+
+            var mobileAgents = [
+                "Android",
+                "iPhone",
+                "SymbianOS",
+                "Windows Phone",
+                "iPad",
+                "iPod",
+            ];
+
+            var mobile_flag = false;
+
+            //根据userAgent判断是否是手机
+            for (var v = 0; v < mobileAgents.length; v++) {
+                if (userAgentInfo.indexOf(mobileAgents[v]) > 0) {
+                    mobile_flag = true;
+                    break;
+                }
+            }
+
+            var screen_width = window.screen.width;
+            var screen_height = window.screen.height;
+
+            //根据屏幕分辨率判断是否是手机
+            if (screen_width < 500 && screen_height < 800) {
+                mobile_flag = true;
+            }
+
+            return mobile_flag;
+        },
         async getComments() {
             const comments = await this.$axios.$get(`comments/${this.id}`);
             // const comments = await this.$axios.$get(`comments/603e751045d89d46e830734a`);
