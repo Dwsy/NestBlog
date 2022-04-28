@@ -17,7 +17,7 @@ export default {
         //     this.x = false;
         // }
         // const TOCBOT_OPTIONS = {};
-        console.log(tocbot);
+        // console.log(tocbot);
         tocbot.init({
             // Where to render the table of contents.
             tocSelector: ".js-tocc",
@@ -28,7 +28,7 @@ export default {
             // For headings inside relative or absolute positioned containers within content.
             hasInnerContainers: true,
             includeHtml: true,
-            includeTitleTags: false,
+            includeTitleTags: true,
             scrollSmoothOffset: -80,
         });
     },

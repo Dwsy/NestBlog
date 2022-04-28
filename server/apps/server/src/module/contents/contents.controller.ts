@@ -1,7 +1,7 @@
-import {Body, Controller, Get, Param, Put, Post, Res, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Param, Put, Post, Query, UseGuards} from '@nestjs/common';
 import {Crud} from 'libs/nestjs-mongoose-crud';
 import {InjectModel} from 'nestjs-typegoose';
-import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
 import {Contents} from 'libs/db/models/contents.model';
 import {Fields} from 'libs/db/models/fields.model';
 import {ReturnModelType} from '@typegoose/typegoose';
@@ -14,6 +14,7 @@ import {JwtService} from '@nestjs/jwt';
 import {User} from 'libs/db/models/user.model';
 // import { CacheService } from '../../cache/cache.service';
 import {ContentsService} from './contents.service';
+import {FieldsService} from '../fields/fields.service'
 
 @Crud({
     model: Contents,
@@ -38,6 +39,7 @@ export class ContentsController {
         private readonly classification: ReturnModelType<typeof Comments>,
         // private readonly cache: CacheService,
         private readonly contentsService: ContentsService,
+        private readonly fieldsService: FieldsService
     ) {
     }
 
@@ -49,8 +51,32 @@ export class ContentsController {
     }
 
     @Get('/:id')
-    async getContentById(@Param('id') id: string, @Req() request: Request) {
-        return this.contentsService.getContentById(id, request);
+    async getContentById(@Param('id') id: string,@Req() request: Request,@Query('query') query,) {
+        let content = await this.contentsService.getContentById(id, request);
+
+        return content;
+    }
+    @Get('/all/:id')
+    @ApiOperation({ summary: '页面文章请求整合' })
+    async getContentById_all(@Param('id') id: string,@Req() request: Request,@Query('query') query,) {
+        // console.log("todo")
+        let content = await this.contentsService.getContentById(id, request);
+        let view = await this.field.findByIdAndUpdate(content.fieldsId, {$inc: {view: 1}});
+        let Q={
+            populate: "tag classification"
+        }
+        let fieled = await this.fieldsService.findOneById(content.fieldsId,request,Q)
+        // console.log(conten['view'])
+        console.log(view)
+        let ret = {
+            content,
+
+            fieled,
+
+            view:view.view,
+        }
+
+        return ret;
     }
 
     //搜索2021-5-10 21:31:23
@@ -71,7 +97,7 @@ export class ContentsController {
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()
     async addField(@Param("id") id: string, @Body() body: Contents) {
-        let ret= await this.model.findOneAndUpdate({_id: id}, body, {
+        let ret = await this.model.findOneAndUpdate({_id: id}, body, {
             new: true,
             upsert: false,
             runValidators: true

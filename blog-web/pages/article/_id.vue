@@ -1,8 +1,8 @@
 <template>
     <v-container v-if="content.key !== 0">
-        <div>
-            <HeadImage :cover="field.cover" />
-        </div>
+<!--        <div>-->
+<!--            <HeadImage :cover="field.cover" />-->
+<!--        </div>-->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script> -->
         <link
             rel="stylesheet"
@@ -12,13 +12,12 @@
             <v-col cols="12" xl="10" lg="10" md="10" sm="12" xs="12">
                 <div>
                     <br />
-
-                    <p>浏览量:{{ view.view }}</p>
                     <Content
                         class="js-toc-content"
                         :content="content"
                         :field="field"
                     />
+                    <p>浏览量:{{ view }}</p>
                     <ContentTag :tags="field.tag" />
                     <CommentList :comments="comments" :id="id" :IP="IP" />
                     <SendComment :id="id" :IP="IP" :getComments="getComments" />
@@ -26,12 +25,13 @@
             </v-col>
             <v-col v-if="pc" cols="2" xl="2" lg="2" md="2" sm="11" xs="11">
                 <br />
-                <Toc :toc="toc" />
+                <Toc />
             </v-col>
             <div v-else class="toc">
                 <ol class="js-toc"></ol>
             </div>
         </v-row>
+
     </v-container>
     <h2 v-else>⭕没有权限访问此文章</h2>
 </template>
@@ -53,25 +53,18 @@ export default {
         //     // $router.push('/');
         //     id = "603e751045d89d46e830734a"; //直接通过前缀访问跳转
         // }
-        const content = await $axios.$get(`contents/${id}`);
-        if (content.key == 0) {
+        const data = await $axios.$get(`contents/all/${id}`);
+        console.log(data)
+        const content = data.content
+        const view = data.view
+        // alert(view)
+        const field =data.fieled
+        if (content.key === 0) {
             return {
                 content: content,
             };
         }
-        const view = await $axios.$get(`/fields/view/${content.fieldsId}`);
-        const field = await $axios.$get(`fields/${content.fieldsId}`, {
-            params: {
-                query: {
-                    populate: "tag classification",
-                },
-            },
-        });
 
-        // const ipData = await $axios.$get(`http://ip-api.com/json/`);
-        // const comments = await $axios.$get(`comments/${id}`);
-        // const ipData = await $axios.$get(`fields/ip`);
-        // console.log(ipData.query);
         return {
             comments: {},
             IP: "",
@@ -80,7 +73,7 @@ export default {
             // IP: ipData.query,
             field: field,
             view: view,
-            toc: content.menus.menus,
+            // toc: content.menus.menus,
             pc: true,
         };
     },
@@ -94,7 +87,7 @@ export default {
             this.pc = false;
             console.log("this.pc = false;");
             let a= document.getElementsByClassName("tocbtn")
-            
+
             setTimeout(() => this.createToc(), 500);
             setTimeout(() => a[0].style.display="block", 500);
         }
@@ -136,7 +129,7 @@ export default {
         async getComments() {
             const comments = await this.$axios.$get(`comments/${this.id}`);
             // const comments = await this.$axios.$get(`comments/603e751045d89d46e830734a`);
-            console.log(comments);
+            // console.log(comments);
             const userData = await this.$axios.$get(`fields/user`);
             this.comments = comments;
             this.IP = userData.ip;

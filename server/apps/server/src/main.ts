@@ -37,6 +37,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
+  fs.writeFileSync("./swagger-spec.json", JSON.stringify(document));
   SwaggerModule.setup('api-docs', app, document);
   app.enableCors();
   app.use(express.json()); // For parsing application/json

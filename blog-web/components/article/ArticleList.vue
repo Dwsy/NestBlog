@@ -13,10 +13,10 @@
               <div class="d-flex flex-no-wrap justify-space-between">
                 <v-container>
                   <p
-                    class=" text-darken-1 mb-2"
+                    class=" text-darken-1 mb-2 underline"
                     v-text="item.title"
                   ></p>
-                  <div>
+                  <!-- <div>
                     <v-img
                       :src="item.cover"
                       max-height="400"
@@ -25,7 +25,7 @@
                       transition="slide-y-reverse-transition"
                       class="d-sm-none imgbig"
                     ></v-img>
-                  </div>
+                  </div> -->
                   
                   <p class="summary" v-if="item.contentsId['menus']">{{item.contentsId.menus.summary}}</p>
                   <!-- <div v-else>
@@ -101,7 +101,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .summary {
     line-height: 2em;
     color: #a3a3a3;

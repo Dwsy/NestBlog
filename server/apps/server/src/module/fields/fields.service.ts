@@ -88,10 +88,15 @@ export class FieldsService {
 
     async findOneById(id: string, request: Request, @Query('query') query) {
         let populate = undefined;
-        if (query) {
+
+        if (typeof (query)!=="object") {
+            // console.log(typeof (query))
             query = JSON.parse(query);
             populate = query.populate;
+        }else {
+            populate = query.populate;
         }
+
         // console.log(populate);
         let ret = await this.model.findById(id).populate(populate);
         let Authorization = new Object(request.headers)['authorization']?.split(

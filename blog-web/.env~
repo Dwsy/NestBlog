@@ -1,0 +1,6 @@
+HOST=0.0.0.0
+PORT=5050
+1API_URL=https://dwsy.link:3030/api
+1API_URL=https://nestapi.dwsy.link/api
+API_URL=http://localhost:3000/api
+//上线API_URL因修改为远程地址
