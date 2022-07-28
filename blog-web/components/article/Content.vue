@@ -24,19 +24,19 @@
                 :codeStyle="$vuetify.theme.dark ? 'prism-coy' : 'prism-mac'"
             ></div>
             <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-            <script src="https://npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/prism/prism.js"></script>
+            <script src="https://qiniu.dwsy.link/ns/hl/prism.js"></script>
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dwsy/jsdelivr_cdn@master/nestblog/prism/prism.css"/> -->
             <!-- <script src="//cdn.jsdelivr.net/gh/Xcnte/Code-Prettify-for-typecho@master/static/prism.js"></script> -->
             <p v-if="this.$vuetify.theme.dark">
                 <link
                     rel="stylesheet"
-                    href="//npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/css/prism-tomorrow1.css"
+                    href="https://qiniu.dwsy.link/ns/hl/prism-tomorrow1.css"
                 />
             </p>
             <p v-else>
                 <link
                     rel="stylesheet"
-                    href="//npm.elemecdn.com/dcis@1.0.0/src/cdn/nestblog/css/prism-coy.css"
+                    href="https://qiniu.dwsy.link/ns/hl/prism-coy.css"
                 />
             </p>
 

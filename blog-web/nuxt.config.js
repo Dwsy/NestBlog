@@ -3,7 +3,35 @@ import { resolve } from 'path'
 import dotenv from 'dotenv'
 dotenv.config()
 export default {
+  // 自定义配置路由
+  // generate: {
+  //   dir: './dist',
+    
+  // },
+  router: {
+    // mode: 'hash', // 使用 'hash' 主要是为了适配以相对路径打开的静态站点， 必须使用 'hash' 否则路由跳转不生效
+  //   // base: '/moli/',
+    // base: './',
+  //   // base: process.env.NODE_ENV === 'production' ? './' : '/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
+  //   extendRoutes(routes, resolve) {
+  //     routes.push({
+  //       path: '/',
+  //       redirect: {
+  //         name: 'home'
+  //       }
+  //     })
+  //   }
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
+  // build: {//配置 Nuxt.js 项目的构建规则，即 Webpack 的构建配置
+  //   publicPath: './_nuxt/',
+  //   parallel: false,//区分发布环境，部署cdn
+  //   extractCSS: {
+  //     allChunks: true//不想让css和html代码浑在一起，想提高SEO，想把nuxt.js 的css分离出来
+  //   },
+  //   extend(config) { }
+  // },
+
   head: {
     titleTemplate: '%s - myblog',
     title: 'Blog',
@@ -36,18 +64,18 @@ export default {
   webfontloader: {
     // add Google Fonts as "custom" | workaround required
     custom: {
-        families: [
-            // 'Open Sans:n3,n4',
-            // 'Roboto:n3,n7'
-        ],
-        urls: [
-            // for each Google Fonts add url + options you want
-            // here add font-display option
-            // 'https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap',
-            'https://npm.elemecdn.com/roboto-font/css/fonts.css'
-        ]
+      families: [
+        // 'Open Sans:n3,n4',
+        // 'Roboto:n3,n7'
+      ],
+      urls: [
+        // for each Google Fonts add url + options you want
+        // here add font-display option
+        // 'https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap',
+        'https://npm.elemecdn.com/roboto-font/css/fonts.css'
+      ]
     }
-},
+  },
   // webfontloader: {
   //   google: {
   //     families: ['Roboto:100,300,400,500,700,900&display=swap'] //Loads Lato font with weights 400 and 700
@@ -211,20 +239,20 @@ export default {
   cache: {
     useHostPrefix: false, //是否使用主机前缀 如果提供了多个主机名 可以设置为true
     pages: [ //将要缓存的页面
-    //root
-    /^\/$/
+      //root
+      /^\/$/
     ],
-    
+
     key(route, context) {
       return route //return 的route是想要设置缓存的路由 可通过函数来设置想要缓存的路由 如果想跳过缓存可以返回假值
     },
- 
+
     store: { //store 有其他type存储的方式 具体可查看 https://github.com/arash16/nuxt-ssr-cache#readme
       type: 'memory',
- 
+
       //缓存的最大的页面
       max: 6,
- 
+
       // 缓存的时间 到期将过期
       ttl: 600,
     },

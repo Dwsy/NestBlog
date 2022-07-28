@@ -6,6 +6,7 @@ import {
     Delete,
     Put,
     UseGuards,
+    HttpCode,
 } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import {
@@ -130,7 +131,20 @@ export class CommentsController {
     @ApiBearerAuth()
     @Delete(':id/:isChild')
     async del(@Param('id') id: string, @Param('isChild') isChild: String) {
-        return this.del(id, isChild);
+        // return this.del(id, isChild);
+        if (isChild === "true") {
+            // @ts-ignore
+            await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -1}})
+            await this.CommentsModel.findByIdAndDelete(id)
+            return HttpCode(200)
+
+        } else {
+            // @ts-ignore
+            await this.fieldsModel.findByIdAndUpdate((await this.contentsModel.findById((await this.CommentsModel.findById(id, 'contentsId')).contentsId, 'fieldsId')).fieldsId, {$inc: {"commentsNum": -((await this.CommentsModel.findById(id,'childId')).childId).length}})
+            await this.CommentsModel.findByIdAndDelete(id)
+            await this.CommentsModel.deleteMany({fatherId: id})
+            return HttpCode(200)
+        }
     }
 
     // @Post()

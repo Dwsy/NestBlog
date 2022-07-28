@@ -29,27 +29,27 @@ export class ServerController {
 
   @Get("/ip11111")
   async ip() {
-    let data = await this.BrowsedataModel.find({});
-    data.forEach(async e => {
-      let IP
-      if (e.ip === '::1') {
-        IP = '0'
-      } else {
-        IP = (e.ip.split(':'))[3]
-      }
-      let ipinfo = qqwry.searchIP(IP); //查询IP信息
-      let ret = {
-        ip: IP,
-        info: ipinfo
-      };
-      console.log(await this.BrowsedataModel.findByIdAndUpdate(e._id, ret));
-    });
+    // let data = await this.BrowsedataModel.find({});
+    // data.forEach(async e => {
+    //   let IP
+    //   if (e.ip === '::1') {
+    //     IP = '0'
+    //   } else {
+    //     IP = (e.ip.split(':'))[3]
+    //   }
+    //   let ipinfo = qqwry.searchIP(IP); //查询IP信息
+    //   let ret = {
+    //     ip: IP,
+    //     info: ipinfo
+    //   };
+    //   console.log(await this.BrowsedataModel.findByIdAndUpdate(e._id, ret));
+    // });
 
-    // this.BrowsedataModel.findByIdAndUpdate
-    return data
+    // // this.BrowsedataModel.findByIdAndUpdate
+    // return data
 
   }
-  @Get(`refresh/:${authkey}`)
+  @Get(`refresh/`)
   async refreshaCache(@Param('authkey') ak: String) {
     if (ak=authkey) {
       this.cache.refresh('手动操作')

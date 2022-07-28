@@ -54,7 +54,7 @@ export default {
         //     id = "603e751045d89d46e830734a"; //直接通过前缀访问跳转
         // }
         const data = await $axios.$get(`contents/all/${id}`);
-        console.log(data)
+        // console.log(data)
         const content = data.content
         const view = data.view
         // alert(view)
@@ -85,7 +85,7 @@ export default {
             a[0].style.display="none"
         } else {
             this.pc = false;
-            console.log("this.pc = false;");
+            // console.log("this.pc = false;");
             let a= document.getElementsByClassName("tocbtn")
 
             setTimeout(() => this.createToc(), 500);
