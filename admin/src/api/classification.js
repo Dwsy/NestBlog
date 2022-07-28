@@ -21,6 +21,3 @@ export const getClassification = () => {
 export const ClassificationContentsNum = (id,num) => {
     return $get(`/classification/contentsNum/${id}/${num}`);
 }
-let a = 1
-if (typeof a !== "undefined")
-}
